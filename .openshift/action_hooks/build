@@ -5,34 +5,6 @@
 # could be python, php, ruby, etc.
 
 
-set +e
-rm -rf tmp/redis
-mkdir tmp
-set -e
-
-version=${REDIS_BRANCH:-3.0}
-binaries="../../versions/$version/bin"
-
-pushd tmp
-
-git clone https://github.com/antirez/redis -b $version
-
-cd redis
-make
-
-mkdir -p $binaries
-
-echo $(git rev-parse HEAD) > $binaries/.gitcommit
-for file in src/redis-cli src/redis-server; do
-  cp -f $file $binaries
-done
-
-popd
-rm -rf tmp/redis
-
-
-
-
 #  Source utility functions.
 source "$OPENSHIFT_REPO_DIR/.openshift/lib/utils"
 
