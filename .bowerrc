@@ -1,0 +1,17 @@
+{
+  "analytics": false,                                 "//": "(Enviar estadisticas a bower)",
+  "cwd": "./",                                        "//": "(Establecer la ruta del fichero bower.json)",
+  "directory": "app/client/lib",                      "//": "(directorio donde se instalaran los paquetes bower)",
+  "timeout": 120000,                                  "//": "timeout para las busquedas",
+  "color": true,                                      "//": "(Permitir colorcitos en la salida de la consola)",
+  "interactive": false,                                "//": "(Establecer la interactividad con el usuario en la consola)",
+  "tmp": "~/.bower/tmp",                              "//": "(Ruta para los ficheros temporales)",
+  "strict-ssl": false,                                "//": "(Forzar solo conexiones https)",
+
+
+  "//": "proxy: http://<host>:<port>",                "//": "(Establecer el proxy por el que se accede a internet)",
+  "//": "https-proxy: http://<host>:<port>",          "//": "(Establecer el proxy https por el que se accede a internet)",
+  "//": "user-agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
+  "//": "ca: /etc/ssl/cert.pem",                      "//": "(Establecer el certificado)",
+  "//": "storage: { packages : ~/.bower/packages, registry : ~/.bower/registry }"
+}

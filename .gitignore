@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+.logs
+node_modules
+app/client/lib
+cordova/hooks
+cordova/lib
+cordova/platforms
+cordova/plugins
