@@ -5,9 +5,6 @@
 # could be python, php, ruby, etc.
 
 
-# Actualizo npm a la ultima version antes de instalar los paquetes
-# npm update -g npm
-
 #  Source utility functions.
 source "$OPENSHIFT_REPO_DIR/.openshift/lib/utils"
 
