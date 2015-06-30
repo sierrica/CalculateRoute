@@ -8,10 +8,6 @@ var config = require('./config/config'),
 
 
 
-
-
-
-
 var database = mongoose.connect(config.url_mongo, function (err) {
     if (err) {
         logger.ERROR('Imposible conectarse a la Base de datos: ' + config.url_mongo);
