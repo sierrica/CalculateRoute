@@ -65,7 +65,10 @@ module.exports.initMiddleware = function (app) {
     app.use (favicon('files/favicon.png'));                                     // favicon
     app.set ('showStackError', true);
     app.enable ('jsonp callback');
+
+
     app.use (compression());
+
     app.use (bodyParser.json());                                                // for parsing application/json
     app.use (bodyParser.urlencoded({ extended: true }));                        // for parsing application/x-www-form-urlencoded
     app.use (multer());                                                         // for parsing multipart/form-data

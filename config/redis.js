@@ -3,10 +3,14 @@ var redis =     require ('redis'),
     logger =        require ('./logger');
 
 
-var redisClient = redis.createClient (config.redis.port, config.redis.ip);
+var opciones_redis = {
+    auth_pass: "tauste"
+};
+
+var redisClient = redis.createClient (config.redis.port, config.redis.ip, opciones_redis);
 
 redisClient.on ('connect', function () {
-    logger.info ('Conectado al servidor Redis: ' + config.redis.host + ':' + config.redis.port);
+    logger.info ('Conectado al servidor Redis: ' + config.redis.ip + ':' + config.redis.port);
 });
 
 redisClient.on ('error', function (err) {

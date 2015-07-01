@@ -58,7 +58,6 @@
     "body-parser": "1.13.1",
     "multer": "0.1.8",
     "redis": "0.12.1"
-
   },
   "devDependencies": {
     "cordova": "5.1.1",
