@@ -49,8 +49,8 @@ if (process.env.PLATFORM == "openshift"  ||  process.env.PLATFORM == "heroku") {
     logger.add (logger.transports.Papertrail, {
         level: "info",
         json: true,
-        host: "logs3.papertrailapp.com",
-        hostname: "windows",
+        host: "ptv.sierrica.com",
+        hostname: process.env.PLATFORM,
         program: "calculateroute",
         port: 15605,
         colorize: true,
