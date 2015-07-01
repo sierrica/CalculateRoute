@@ -70,9 +70,9 @@ module.exports.initMiddleware = function (app) {
     app.use (bodyParser.urlencoded({ extended: true }));                        // for parsing application/x-www-form-urlencoded
     app.use (multer());                                                         // for parsing multipart/form-data
 
-    if (process.env.NODE_ENV === 'development') {
-        app.use (require('morgan')('dev', { stream: logger.stream }));          // Habilitar Morgan a traves de winston.
-        app.set('view cache', false);                                           // Disable views cache
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
+        app.use (morgan('dev', { stream: { write: function(str) { logger.debug(str); } }}));          // Habilitar Morgan a traves de winston.
+        app.set('view cache', false);                                                                   // Disable views cache
     }
     else if (process.env.NODE_ENV === 'production')
         app.locals.cache = 'memory';
@@ -98,6 +98,12 @@ module.exports.initModulesClientRoutes = function (app) {
 
 };
 
+/* Configure the modules server routes */
+module.exports.initModulesServerRoutes = function (app) {
+    config.files.server.routes.forEach (function (routePath) {
+        require (path.resolve(routePath))(app);                                 // Globbing routing files
+    });
+};
 
 
 module.exports.init = function () {
@@ -108,7 +114,7 @@ module.exports.init = function () {
     this.initCrossDomain(app);
     this.initHelmetHeaders(app);
     this.initModulesClientRoutes(app);
-    this.initModulesClientRoutes(app);
+    this.initModulesServerRoutes(app);
 
 
     var userSchema = new mongoose.Schema({

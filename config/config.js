@@ -57,10 +57,10 @@ var initGlobalConfigFiles = function(config) {
  //   config.files.server.models = getGlobbedPaths(assets.server.models);
 
     // Setting Globbed route files
-    //   config.files.server.routes = getGlobbedPaths(assets.server.routes);
+    config.files.server.routes = getGlobbedPaths(config.assets.server.routes);
 
     // Setting Globbed config files
-    //   config.files.server.configs = getGlobbedPaths(assets.server.config);
+    config.files.server.configs = getGlobbedPaths(config.assets.server.config);
 
     // Setting Globbed css files
     config.files.client.css = getGlobbedPaths(config.assets.client.lib.css, 'app/client/').concat(getGlobbedPaths(config.assets.client.css, 'app/client/'));

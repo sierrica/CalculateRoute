@@ -17,8 +17,8 @@ module.exports = {
              "mongodb://calculateroute:tauste@127.0.0.1:27017/calculateroute"
     },
     redis: {
-        ip: process.env.OPENSHIFT_REDIS_HOST || "",
-        port: process.env.OPENSHIFT_PORT || ""
+        ip: process.env.OPENSHIFT_REDIS_HOST || "pub-redis-18884.us-east-1-2.4.ec2.garantiadata.com",
+        port: process.env.OPENSHIFT_REDIS_PORT || "18884"
     },
     token: {
         secret: process.env.TOKEN_SECRET || 'tauste',

@@ -4,14 +4,7 @@ var logger = require ('winston'),
 
 /* NIVELES PERSONALIZADOS */
 logger.setLevels ({ debug: 0, info: 1, warn: 2, error: 3 });
-logger.addColors ({ debug: "blue", info: "green", warn: "yellow", error: "red" });
-
-/* INTEGRAR CON MORGAN */
-logger.stream = {
-    write: function (message, encoding) {
-        logger.debug (message);
-    }
-};
+logger.addColors ({ debug: 'blue', info: 'green', warn: 'yellow', error: 'red' });
 
 /* NO SALIR DEL PROGRAMA ANTE UN ERROR AL MANEJAR CON WINSTON LAS EXCEPCIONES (handleExceptions: true) */
 logger.exitOnError = false;
@@ -51,18 +44,20 @@ logger.add (logger.transports.Loggly, {
     },
     handleExceptions: true
 });
-
-logger.add (logger.transports.Papertrail, {
-    level: "info",
-    json: true,
-    host: "logs3.papertrailapp.com",
-    hostname: "windows",
-    program: "calculateroute",
-    port: 15605,
-    colorize: true,
-    handleExceptions: true
-});
  */
+if (process.env.PLATFORM == "openshift"  ||  process.env.PLATFORM == "heroku") {
+    logger.add (logger.transports.Papertrail, {
+        level: "info",
+        json: true,
+        host: "logs3.papertrailapp.com",
+        hostname: "windows",
+        program: "calculateroute",
+        port: 15605,
+        colorize: true,
+        handleExceptions: true
+    });
+}
+
 
 
 /* NO FUNCIONA, MIRAR

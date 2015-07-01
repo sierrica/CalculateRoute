@@ -4,7 +4,7 @@ var mongoose =  require ('mongoose'),
 
 module.exports.createMongooseConnection = function (callback) {
 
-    var database = mongoose.connect (config.mongodb.url);
+    mongoose.connect (config.mongodb.url);
 
     mongoose.connection.on ('connected', function () {
         logger.info ('Conectado a la base de datos: ' + config.url_mongo);
@@ -16,7 +16,7 @@ module.exports.createMongooseConnection = function (callback) {
 
     mongoose.connection.once ('open', function () {
         if(callback && typeof(callback) === 'function') {
-            callback (database);
+            callback ();
         }
     });
 
