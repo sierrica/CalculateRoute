@@ -3,13 +3,13 @@ var logger = require ('winston'),
     Papertrail = require('winston-papertrail').Papertrail;
 
 /* NIVELES PERSONALIZADOS */
-logger.setLevels ({ DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3 });
-logger.addColors ({ DEBUG: "blue", INFO: "green", WARN: "yellow", ERROR: "red" });
+logger.setLevels ({ debug: 0, info: 1, warn: 2, error: 3 });
+logger.addColors ({ debug: "blue", info: "green", warn: "yellow", error: "red" });
 
 /* INTEGRAR CON MORGAN */
 logger.stream = {
     write: function (message, encoding) {
-        logger.DEBUG (message);
+        logger.debug (message);
     }
 };
 
@@ -21,15 +21,16 @@ logger.remove (logger.transports.Console);
 
 /* TRANSPORT Console*/
 logger.add (logger.transports.Console, {
-    level: "DEBUG",
+    level: "debug",
     colorize: true,
     handleExceptions: true
 });
 
 /* SOLO EN DESARROLLO O RASPBIAN */
+/*
 if (process.env.PLATFORM == "raspberry"  ||  process.env.NODE_ENV == "development") {
     logger.add (logger.transports.DailyRotateFile, {
-        level: "INFO",
+        level: "info",
         filename: "logs/calculateroute.log",
         maxsize: 1024 * 1024 * 10,
         maxFiles: 7,
@@ -37,10 +38,10 @@ if (process.env.PLATFORM == "raspberry"  ||  process.env.NODE_ENV == "developmen
         handleExceptions: true
     });
 };
-
+*/
 /*
 logger.add (logger.transports.Loggly, {
-    level: "INFO",
+    level: "info",
     json: true,
     subdomain: "sierrica",
     inputToken: "0839fb77-3b27-410d-93b8-9b71ba2f4d1d",
@@ -52,7 +53,7 @@ logger.add (logger.transports.Loggly, {
 });
 
 logger.add (logger.transports.Papertrail, {
-    level: "INFO",
+    level: "info",
     json: true,
     host: "logs3.papertrailapp.com",
     hostname: "windows",

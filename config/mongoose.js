@@ -1,38 +1,36 @@
-var mongoose = require('mongoose');
-var config   = require('./config');
+var mongoose =  require ('mongoose'),
+    config =    require ('./config'),
+    logger =    require ('./logger');
 
-module.exports.createMongooseConnection = function(callback) {
-    // create the database connection
-    mongoose.connect(config.mongodb.dbURI, config.mongodb.dbOptions);
+module.exports.createMongooseConnection = function (callback) {
 
-    // when successfully connected
-    mongoose.connection.on('connected', function () {
-        logger.info('Mongoose connected to ' + config.mongodb.dbURI);
+    var database = mongoose.connect (config.mongodb.url);
+
+    mongoose.connection.on ('connected', function () {
+        logger.info ('Conectado a la base de datos: ' + config.url_mongo);
     });
 
-    // if the connection throws an error
-    mongoose.connection.on('error', function (err) {
-        logger.error('Mongoose connection error: ' + err);
+    mongoose.connection.on ('disconnected', function () {
+        logger.warn ('Desconectado de la base de datos: ' + config.url_mongo);
     });
 
-    // when the connection is disconnected
-    mongoose.connection.on('disconnected', function () {
-        logger.info('Mongoose disconnected');
-    });
-
-    // when the connection is open , callback
-    mongoose.connection.once('open', function () {
+    mongoose.connection.once ('open', function () {
         if(callback && typeof(callback) === 'function') {
-            callback();
+            callback (database);
         }
     });
 
+    mongoose.connection.on ('error', function (err) {
+        logger.error ('Imposible conectarse a la Base de datos: ' + config.url_mongo);
+        logger.error (err);
+        process.exit (1);
+    });
+
     // if the Node process ends, close the Mongoose connection
-    process.on('SIGINT', function() {
-        mongoose.connection.close(function () {
-            logger.info('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
-            process.exit(0);
+    process.on ('SIGINT', function() {
+        mongoose.connection.close (function () {
+            logger.info ('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
+            process.exit (0);
         });
     });
 };
-

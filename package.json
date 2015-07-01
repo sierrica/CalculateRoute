@@ -40,7 +40,7 @@
     "consolidate": "0.13.1",
     "cors": "2.7.1",
     "express": "4.13.0",
-    "glob": "5.0.10",
+    "glob": "5.0.12",
     "grunt-cli": "0.1.13",
     "helmet": "0.9.1",
     "latest-version": "^1.0.1",
@@ -51,10 +51,13 @@
     "replace": "0.3.0",
     "swig": "1.4.2",
     "tunnel-ssh": "1.0.2",
-    "winston": "1.0.0",
+    "winston": "1.0.1",
     "winston-loggly": "1.1.0",
     "winston-papertrail": "1.0.1",
-    "serve-favicon": "2.3.0"
+    "serve-favicon": "2.3.0",
+    "body-parser": "1.13.1",
+    "multer": "0.1.8"
+
   },
   "devDependencies": {
     "cordova": "5.1.1",
