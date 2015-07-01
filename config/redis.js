@@ -4,7 +4,7 @@ var redis =     require ('redis'),
 
 
 var opciones_redis = {
-    auth_pass: "tauste"
+    auth_pass: 'tauste'
 };
 
 var redisClient = redis.createClient (config.redis.port, config.redis.ip, opciones_redis);
