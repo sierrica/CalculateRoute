@@ -14,5 +14,5 @@ module.exports = function(app) {
     // Add passport's middleware
     app.use (passport.initialize());
 
-
+    logger.debug ("DENTRO");
 };
