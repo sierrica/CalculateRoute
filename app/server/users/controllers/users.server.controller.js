@@ -1,8 +1,8 @@
 var path        = require ('path'),
     passport    = require ('passport'),
-    token       = require (path.resolve('./app/server/users/config/user.server.token')),
-    User        = require (path.resolve('./app/server/users/models/user.server.model')),
-    logger      = require (path.resolve('./config/logger'));
+    token       = require ('../config/user.server.token'),
+    User        = require ('../models/user.server.model'),
+    logger      = require ('../../../../config/logger');
 
 
 function signin(req, res, next) {
