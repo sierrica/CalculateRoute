@@ -13,22 +13,6 @@ var config =        require ('./config'),
     morgan =        require ('morgan'),
     compression =   require ('compression');
 
-/*
- var config_ssh_tunnel = {
- username: '557f303d4382eca9d20000ad',
- host: 'calculateroute-sierrica.rhcloud.com',
- privateKey: require('fs').readFileSync('id_rsa'),
- port: 22,
- srcHost: '127.0.0.1',
- dstPort: 27017,
- srcPort: 27017,
- dstHost: '127.2.24.2'
- };
- var server = tunnel(config_ssh_tunnel, function (error, result) {
- });
-*/
-
-
 
 /* Cabeceras Helmet (Seguridad cabeceras) */
 module.exports.initHelmetHeaders = function (app) {
@@ -38,7 +22,6 @@ module.exports.initHelmetHeaders = function (app) {
     app.use (helmet.ienoopen());
     app.set ('x-powered-by', false);                // Disable header 'X-Powered-By ? Express'
 };
-
 
 /* Habilitar CORS */
 module.exports.initCrossDomain = function(app) {
@@ -118,35 +101,21 @@ module.exports.init = function () {
     this.initHelmetHeaders(app);
     this.initModulesClientRoutes(app);
     this.initModulesServerRoutes(app);
-
-
-    var userSchema = new mongoose.Schema({
-        name: {
-            first: String,
-            last: { type: String, trim: true }
-        },
-        age: {
-            type: Number,
-            min: 0
-        }
-    });
-
-    var PUser = mongoose.model('PowerUsers', userSchema);
-
-    var johndoe = new PUser ({
-        name: {
-            first: 'John',
-            last: '  Doe   '
-        },
-        age: 25
-    });
-
-    johndoe.save(function (err) {
-        if (err)
-            console.log ('Error on save!')
-    });
-
-
-
     return app;
 };
+
+
+/*
+ var config_ssh_tunnel = {
+ username: '557f303d4382eca9d20000ad',
+ host: 'calculateroute-sierrica.rhcloud.com',
+ privateKey: require('fs').readFileSync('id_rsa'),
+ port: 22,
+ srcHost: '127.0.0.1',
+ dstPort: 27017,
+ srcPort: 27017,
+ dstHost: '127.2.24.2'
+ };
+ var server = tunnel(config_ssh_tunnel, function (error, result) {
+ });
+ */

@@ -105,6 +105,12 @@ var initGlobalConfig = function() {
     initGlobalConfigFolders(config);
 
 
+    // Expose configuration utilities
+    config.utils = {
+        getGlobbedPaths: getGlobbedPaths
+    };
+
+
     return config;
 };
 

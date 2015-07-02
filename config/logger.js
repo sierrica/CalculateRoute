@@ -16,7 +16,7 @@ logger.remove (logger.transports.Console);
 logger.add (logger.transports.Console, {
     level: "debug",
     colorize: true,
-    handleExceptions: true
+    handleExceptions: false
 });
 
 /* SOLO EN DESARROLLO O RASPBIAN */

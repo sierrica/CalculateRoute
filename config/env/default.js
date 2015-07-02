@@ -38,8 +38,8 @@ module.exports = {
                 'app/client/*/css/*.css'
             ],
             js: [
-                'app/client/config/config.js',
-                'app/client/config/application.js',
+                'app/client/config.js',
+                'app/client/application.js',
                 'app/client/*[!lib]*/*.js',
                 'app/client/*[!lib]*/**/*.js'
             ],
