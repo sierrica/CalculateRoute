@@ -59,6 +59,7 @@ module.exports = {
             ]
         },
         server: {
+            models: 'server/*[!core]/models/**/*.js',
             routes: [
                 'app/server/*[!core]/routes/**/*.js',
                 'app/server/core/routes/**/*.js'
