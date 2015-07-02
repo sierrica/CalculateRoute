@@ -45,6 +45,9 @@ function getGlobbedPaths(globPatterns, excludes) {
     return output;
 }
 
+
+
+
 var initGlobalConfigFiles = function(config) {
 
     // Appending files
@@ -54,7 +57,7 @@ var initGlobalConfigFiles = function(config) {
     };
 
     // Setting Globbed model files
- //   config.files.server.models = getGlobbedPaths(assets.server.models);
+    config.files.server.models = getGlobbedPaths(assets.server.models);
 
     // Setting Globbed route files
     config.files.server.routes = getGlobbedPaths(config.assets.server.routes);

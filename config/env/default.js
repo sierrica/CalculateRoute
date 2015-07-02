@@ -59,12 +59,6 @@ module.exports = {
             ]
         },
         server: {
-            allJS: [
-                'gruntfile.js',
-                'server.js',
-                'config/**/*.js',
-                'app/*/server/**/*.js'
-            ],
             routes: [
                 'app/server/*[!core]/routes/**/*.js',
                 'app/server/core/routes/**/*.js'

@@ -14,6 +14,14 @@ var config =        require ('./config'),
     compression =   require ('compression');
 
 
+/* Invoke modules server configuration */
+module.exports.initModulesConfiguration = function (app, db) {
+    config.files.server.configs.forEach(function (configPath) {
+        require(path.resolve(configPath))(app, db);
+    });
+};
+
+
 /* Cabeceras Helmet (Seguridad cabeceras) */
 module.exports.initHelmetHeaders = function (app) {
     app.use (helmet.xframe());
@@ -87,7 +95,7 @@ module.exports.initModulesClientRoutes = function (app) {
 /* Configure the modules server routes */
 module.exports.initModulesServerRoutes = function (app) {
     config.files.server.routes.forEach (function (routePath) {
-        require (path.resolve(routePath))(app);                                 // Globbing routing files
+        require (path.resolve(routePath))(app);                                     // Globbing routing files
     });
 };
 
