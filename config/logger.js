@@ -45,16 +45,16 @@ logger.add (logger.transports.Loggly, {
     handleExceptions: true
 });
  */
-if (process.env.PLATFORM == "openshift"  ||  process.env.PLATFORM == "heroku") {
+if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
     logger.add (logger.transports.Papertrail, {
-        level: "info",
+        level: 'info',
         json: true,
         hostname: process.env.PLATFORM,
-        program: "calculateroute",
-        host: "logs3.papertrailapp.com",
+        program: 'calculateroute',
+        host: 'logs3.papertrailapp.com',
         port: 15605,
         colorize: true,
-        handleExceptions: true
+        handleExceptions: false
     });
 }
 
