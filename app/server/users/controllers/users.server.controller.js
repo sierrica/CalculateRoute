@@ -1,7 +1,7 @@
 var path        = require ('path'),
     passport    = require ('passport'),
 //    token       = require (path.resolve('./app/server/users/config/user.server.token')),
-//    User        = require (path.resolve('./app/server/users/models/user.server.model')),
+    User        = require (path.resolve('./app/server/users/models/user.server.model')),
     logger      = require (path.resolve('./config/logger'));
 
 /*
