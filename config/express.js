@@ -48,7 +48,9 @@ module.exports.initLocalVariables = function (app) {
     app.locals.description = config.app.description;
     app.locals.keywords = config.app.keywords;
     app.locals.cssFiles = config.files.client.css;
+
     app.locals.jsFiles = config.files.client.js;
+
 };
 
 /* Initialize application middleware */
@@ -68,8 +70,9 @@ module.exports.initMiddleware = function (app) {
         app.use (morgan('dev', { stream: { write: function(str) { logger.debug(str); } }}));          // Habilitar Morgan a traves de winston.
         app.set('view cache', false);                                                                   // Disable views cache
     }
-    else if (process.env.NODE_ENV === 'production')
+    else if (process.env.NODE_ENV === 'production') {
         app.locals.cache = 'memory';
+    }
 };
 
 /* Establecer las vistas de express */
@@ -109,7 +112,16 @@ module.exports.init = function () {
     this.initHelmetHeaders(app);
     this.initModulesClientRoutes(app);
     this.initModulesServerRoutes(app);
+
+
+
+
+
+
+
     return app;
+
+
 };
 
 

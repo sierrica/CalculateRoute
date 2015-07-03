@@ -1,7 +1,7 @@
 var sys = require('sys'),
-    exec = require('child_process').exec,
-    replace = require("replace")
-    mv = require ('mv');
+    exec = require('child_process').exec;
+//    replace = require("replace")
+//    mv = require ('mv');
 
 
 function puts(error, stdout, stderr) { sys.puts(stdout) };
@@ -14,6 +14,10 @@ else
     exec("bower install", puts);
 
 
+
+
+
+/* YA NO ES NECESARIO */
 // 1º opcion: instalar mongooseinstaller que instala bson y mongoose y realiza por dentro la 2º opcion
 
 // 2º opcion: Instalar bson y mover el directorio de bson a donde lo tiene especificado en el fich index.js

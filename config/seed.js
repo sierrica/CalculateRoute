@@ -1,6 +1,6 @@
 
 var mongoose = require ('mongoose'),
-    User     = require ('../app/server/users/models/user.server.model');
+    User     = require ('../app/server/user/models/server.user.model');
 
 
 var testUserId = mongoose.Types.ObjectId();

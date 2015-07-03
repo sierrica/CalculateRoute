@@ -1,7 +1,7 @@
 
 var path        = require ('path'),
     passport    = require ('passport'),
-    User        = require (path.resolve('./app/server/users/models/user.server.model')),
+    User        = require (path.resolve('./app/server/user/models/server.user.model')),
     config      = require (path.resolve('./config/config'));
 
 module.exports = function(app) {

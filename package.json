@@ -40,13 +40,11 @@
     "consolidate": "0.13.1",
     "cors": "2.7.1",
     "express": "4.13.0",
-    "glob": "5.0.12",
+    "glob": "5.0.13",
     "helmet": "0.9.1",
     "lodash": "3.10.0",
     "mongoose": "4.0.6",
     "morgan": "1.6.0",
-    "mv": "2.1.1",
-    "replace": "0.3.0",
     "swig": "1.4.2",
     "tunnel-ssh": "1.0.2",
     "winston": "1.0.1",
@@ -59,7 +57,9 @@
     "jsonwebtoken": "5.0.2",
     "passport": "0.2.2",
     "passport-local": "1.0.0",
-    "bcryptjs": "2.1.0"
+    "bcryptjs": "2.1.0",
+    "uglify-js": "2.4.23",
+    "uglifycss": "0.0.15"
   },
   "devDependencies": {
     "grunt-cli": "0.1.13",
@@ -72,7 +72,7 @@
     "grunt-express-server": "0.5.1",
     "gulp": "3.9.0",
     "gulp-cordova-build-android": "1.1.0",
-    "gulp-live-server": "0.0.21",
+    "gulp-live-server": "0.0.22",
     "gulp-rename": "1.2.2",
     "gulp-watch": "4.2.4"
   }
