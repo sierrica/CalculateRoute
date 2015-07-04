@@ -39,7 +39,7 @@ module.exports = {
             ],
             js: [
                 'app/client/config.js',
-                'app/client/application.js',
+                'app/client/init.js',
                 'app/client/*[!lib]*/*.js',
                 'app/client/*[!lib]*/**/*.js'
             ],

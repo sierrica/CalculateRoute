@@ -1,6 +1,6 @@
 
-
 var ApplicationConfiguration = (function() {
+
 	// Init module configuration options
 	var applicationModuleName = 'calculateRoute';
 	var applicationModuleVendorDependencies = ['ui.router'];

@@ -47,12 +47,12 @@ module.exports = function(grunt) {
 		express: {
 			desarrollo: {
 				options: {
-					script: 'server.js'
+					script: 'server.js --color'
 				}
 			},
 			produccion: {
 				options: {
-					script: 'server.js',
+					script: 'server.js --color',
 					node_env: 'production'
 				}
 			},

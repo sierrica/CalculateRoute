@@ -5,7 +5,8 @@ var _           = require ('lodash'),
     chalk       = require ('chalk'),
     fs          = require ('fs'),
     UglifyJS    = require ("uglify-js"),
-    uglifycss   = require ('uglifycss');
+    uglifycss   = require ('uglifycss')
+    logger      = require ('./logger');
 
 
 
