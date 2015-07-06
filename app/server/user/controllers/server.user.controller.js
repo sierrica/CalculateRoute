@@ -5,99 +5,62 @@ var path        = require ('path'),
     logger      = require (path.resolve('./config/logger'));
 
 
-function signin(req, res, next) {
-    passport.authenticate('local', function (err, user, info) {
-        var error = err || info;
-        if (error) return res.status(401).send(error);
-
-        // Remove sensitive data before login
-        user.password = undefined;
-        user.salt = undefined;
-
-        token.createToken(user, function(res, err, token) {
-            if(err) {
-                logger.error(err);
-                return res.status(400).send(err);
-            }
-
-            res.status(201).json({token: token});
-        }.bind(null, res));
-    })(req, res, next)
-};
-
-
-function signout(req, res) {
-    token.expireToken(req.headers, function(err, success) {
-        if (err) {
-            logger.error(err.message);
-            return res.status(401).send(err.message);
-        }
-
-        if(success) {
-            delete req.user;
-            res.sendStatus(200);
-        }
-        else {
-            res.sendStatus(401);
-        }
-    });
-};
-
-
-
 function signup(req, res) {
-    var email = req.body.email || '';
-    var password = req.body.password || '';
-
-    if (email == '' || password == '') {
-        return res.sendStatus(400);
-    }
-
-    // Init Variables
-    var user = new User(req.body);
-    // Add missing user fields
-    user.provider = 'local';
-
-    // Then save the user
-    user.save(function(err, user) {
-        if (err) {
-            logger.error(err.message);
-            return res.status(400).send(err);
+    User.findOne({ email: req.body.email }, function(err, existingUser) {
+        if (existingUser) {
+            return res.status(409).send({ message: 'Email is already taken' });
         }
-        else {
-            // Remove sensitive data before login
-            user.password = undefined;
-            user.salt = undefined;
-
-            token.createToken(user, function(res, err, token) {
+        var user = new User({
+            email: req.body.email,
+            password: req.body.password
+        });
+        user.save(function() {
+            token.createToken ({
+                email: req.body.email
+            }, function(res, err, token) {
                 if (err) {
-                    logger.error(err.message);
+                    logger.error (err.message);
                     return res.status(400).send(err);
                 }
-                res.status(201).json({token: token});
+                res.status(201).json ({token: token});
             }.bind(null, res));
-        }
+        });
     });
 };
 
+function signin (req, res) {
 
-function isAuthenticated(req, res, next) {
-    token.verifyToken(req.headers, function(next, err, data) {
-        if (err) {
-            logger.error(err.message);
-            return res.status(401).send(err.message);
+    User.findOne ({ email: req.body.email }, '+password', function(err, user) {
+        if (!user) {
+            return res.status(401).send({ message: 'Wrong email and/or password' });
         }
-
-        req.user = data;
-
-        next();
-    }.bind(null, next));
+        user.comparePassword(req.body.password, function(err, isMatch) {
+            if (!isMatch) {
+                return res.status(401).send({ message: 'Wrong email and/or password' });
+            }
+            token.createToken ({
+                email: req.body.email
+            }, function(res, err, token) {
+                if (err) {
+                    logger.error (err.message);
+                    return res.status(400).send(err);
+                }
+                res.status(201).json ({token: token});
+            }.bind(null, res));
+        });
+    });
 };
 
+module.exports = {
+    signup: signup,
+    signin: signin
+};
 
+/*
 module.exports = {
     signin: signin,
     signout: signout,
     signup: signup,
     isAuthenticated: isAuthenticated
 };
+*/

@@ -6,13 +6,17 @@ var path   = require ('path'),
 
 
 function extractTokenFromHeader(headers) {
+
     if (headers == null)
         throw new Error ('Header is null');
+
     if (headers.authorization == null)
         throw new Error ('Authorization header is null');
 
     var authorization = headers.authorization;
+
     var authArr = authorization.split(' ');
+
     if (authArr.length !== 2)
         throw new Error('Authorization header value is not of length 2');
 
@@ -30,14 +34,13 @@ function extractTokenFromHeader(headers) {
 function createToken(payload, cb) {
     var ttl = config.token.expiration;
 
-    if (payload != null && typeof payload !== 'object') {
-        return cb(new Error('payload is not an Object'))
-    }
-    if (ttl != null && typeof ttl !== 'number') {
-        return cb(new Error('ttl is not a valid Number'))
-    }
+    if (payload != null && typeof payload !== 'object')
+        return cb (new Error('payload is not an Object'));
 
-    var token = jwt.sign(payload, config.token.secret, { expiresInMinutes: config.token.expiration });
+    if (ttl != null && typeof ttl !== 'number')
+        return cb (new Error('ttl is not a valid Number'));
+
+    var token = jwt.sign (payload, config.token.secret, { expiresInMinutes: config.token.expiration });
 
     // stores a token with payload data for a ttl period of time
     redis.setex(token, ttl, JSON.stringify(payload), function(token, err, reply) {
@@ -83,7 +86,9 @@ function verifyToken(headers, cb) {
     try {
         var token = extractTokenFromHeader(headers);
 
-        if(token == null) {return cb(new Error('Token is null'));}
+        if (token == null) {
+            return cb (new Error('Token is null'));
+        }
 
         // gets the associated data of the token
         redis.get(token, function(err, userData) {
@@ -92,10 +97,10 @@ function verifyToken(headers, cb) {
             }
 
             if(!userData) {
-                return cb(new Error('Token not found'));
+                return cb (new Error('Token not found'));
             }
 
-            return cb(null, JSON.parse(userData));
+            return cb (null, JSON.parse(userData));
         });
     }
     catch (err) {

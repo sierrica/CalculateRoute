@@ -38,8 +38,8 @@ module.exports = {
                 'app/client/*/css/*.css'
             ],
             js: [
-                'app/client/config.js',
-                'app/client/init.js',
+                'app/client/client.config.js',
+                'app/client/client.init.js',
                 'app/client/*[!lib]*/*.js',
                 'app/client/*[!lib]*/**/*.js'
             ],
@@ -52,7 +52,11 @@ module.exports = {
                     'app/client/lib/jquery/dist/jquery.js',
                     'app/client/lib/bootstrap/dist/js/bootstrap.js',
                     'app/client/lib/angular/angular.js',
-                    'app/client/lib/angular-ui-router/release/angular-ui-router.js'
+                    'app/client/lib/angular-resource/angular-resource.js',
+                    'app/client/lib/angular-touch/angular-touch.js',
+                    'app/client/lib/angular-ui-router/release/angular-ui-router.js',
+                    'app/client/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+                    'app/client/lib/satellizer/satellizer.js'
                 ]
             },
             tests: [
@@ -60,10 +64,7 @@ module.exports = {
         },
         server: {
             models: 'server/*[!core]/models/**/*.js',
-            routes: [
-                'app/server/*[!core]/routes/**/*.js',
-                'app/server/core/routes/**/*.js'
-            ],
+            routes: 'app/server/**/routes/**/*.js',
             config: 'app/server/*/config/*.js',
             views: 'modules/server/*/views/**/*.html'
         }

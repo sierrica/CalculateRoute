@@ -17,7 +17,7 @@ var config =        require ('./config'),
 /* Invoke modules server configuration */
 module.exports.initModulesConfiguration = function (app, db) {
     config.files.server.configs.forEach(function (configPath) {
-        require(path.resolve(configPath))(app, db);
+        require (path.resolve(configPath))(app, db);
     });
 };
 
@@ -48,9 +48,7 @@ module.exports.initLocalVariables = function (app) {
     app.locals.description = config.app.description;
     app.locals.keywords = config.app.keywords;
     app.locals.cssFiles = config.files.client.css;
-
     app.locals.jsFiles = config.files.client.js;
-
 };
 
 /* Initialize application middleware */
@@ -58,7 +56,6 @@ module.exports.initMiddleware = function (app) {
     app.use (favicon('files/favicon.png'));                                     // favicon
     app.set ('showStackError', true);
     app.enable ('jsonp callback');
-
 
     app.use (compression());
 
@@ -77,8 +74,8 @@ module.exports.initMiddleware = function (app) {
 
 /* Establecer las vistas de express */
 module.exports.initViewEngine = function (app) {
-    app.engine ('server.view.html', consolidate.swig);
-    app.set ('view engine', 'server.view.html');
+    app.engine ('view.html', consolidate.swig);
+    app.set ('view engine', 'view.html');
     app.set ('views', 'app/server/core/views');
 };
 
@@ -98,7 +95,7 @@ module.exports.initModulesClientRoutes = function (app) {
 /* Configure the modules server routes */
 module.exports.initModulesServerRoutes = function (app) {
     config.files.server.routes.forEach (function (routePath) {
-        require (path.resolve(routePath))(app);                                     // Globbing routing files
+        require (path.resolve(routePath))(app);                                         // Globbing routing files
     });
 };
 
@@ -112,16 +109,7 @@ module.exports.init = function () {
     this.initHelmetHeaders(app);
     this.initModulesClientRoutes(app);
     this.initModulesServerRoutes(app);
-
-
-
-
-
-
-
     return app;
-
-
 };
 
 

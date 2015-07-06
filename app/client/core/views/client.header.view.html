@@ -8,5 +8,12 @@
             </button>
             <a class="navbar-brand" href="#">CalculateRoute</a>
         </div>
+        <ul class="nav navbar-nav pull-right" ng-if="!isAuthenticated()">
+            <li><a ui-sref="auth.signin">Login</a></li>
+            <li><a ui-sref="auth.signup">Sign up</a></li>
+        </ul>
+        <ul class="nav navbar-nav pull-right" ng-if="isAuthenticated()">
+            <li><a ui-sref="auth.logout">Logout</a></li>
+        </ul>
     </div>
 </div>
