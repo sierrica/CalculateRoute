@@ -46,7 +46,8 @@ module.exports = {
             lib: {
                 css: [
                     'app/client/lib/bootstrap/dist/css/bootstrap.css',
-                    'app/client/lib/bootstrap/dist/css/bootstrap-theme.css'
+                    'app/client/lib/bootstrap/dist/css/bootstrap-theme.css',
+                    'app/client/lib/jasny-bootstrap/dist/css/jasny-bootstrap.css'
                 ],
                 js: [
                     'app/client/lib/jquery/dist/jquery.js',
@@ -56,7 +57,8 @@ module.exports = {
                     'app/client/lib/angular-touch/angular-touch.js',
                     'app/client/lib/angular-ui-router/release/angular-ui-router.js',
                     'app/client/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-                    'app/client/lib/satellizer/satellizer.js'
+                    'app/client/lib/satellizer/satellizer.js',
+                    'app/client/lib/jasny-bootstrap/dist/js/jasny-bootstrap.js'
                 ]
             },
             tests: [

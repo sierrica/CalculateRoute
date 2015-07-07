@@ -4,10 +4,6 @@ angular.module('core').controller('HomeController', ['$scope', '$location', '$au
 
 
 
-        //$auth.removeToken();
-
-
-
 
         console.log ($auth.getToken());
         console.log ($auth.getPayload());

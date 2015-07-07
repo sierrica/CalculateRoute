@@ -60,51 +60,37 @@ function createToken(payload, cb) {
 
 function expireToken(headers, cb) {
     try {
-        var token = extractTokenFromHeader(headers);
-
-        if(token == null) {return cb(new Error('Token is null'));}
-
-        // delete token from redis
-        redis.del(token, function(err, reply) {
-            if(err) {
-                return cb(err);
-            }
-
-            if(!reply) {
-                return cb(new Error('Token not found'));
-            }
-
-            return cb(null, true);
+        var token = extractTokenFromHeader (headers);
+        if (token == null)
+            return cb (new Error('Token is null'));
+        redis.del (token, function(err, reply) {                 // delete token from redis. reply -> OK
+            if (err)
+                return cb (err);
+            if ( ! reply)
+                return cb (new Error('Token not found'));
+            return cb (null, true);
         });
     }
     catch (err) {
-        return cb(err);
+        return cb (err);
     }
 };
 
 function verifyToken(headers, cb) {
     try {
-        var token = extractTokenFromHeader(headers);
-
-        if (token == null) {
+        var token = extractTokenFromHeader (headers);
+        if (token == null)
             return cb (new Error('Token is null'));
-        }
-
-        // gets the associated data of the token
-        redis.get(token, function(err, userData) {
-            if(err) {
-                return cb(err);
-            }
-
-            if(!userData) {
+        redis.get (token, function(err, userData) {               // gets the associated data of the token
+            if (err)
+                return cb (err);
+            if ( ! userData)
                 return cb (new Error('Token not found'));
-            }
-
             return cb (null, JSON.parse(userData));
         });
     }
     catch (err) {
-        return cb(err);
+        return cb (err);
     }
 };
 
