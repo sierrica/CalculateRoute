@@ -3,8 +3,9 @@
     <a class="navmenu-brand visible-md visible-lg" href="#">Calculateroute</a>
 
     <ul id="primer_menu" class="nav navmenu-nav">
-        <li><a ui-sref="auth.signin">Signin</a></li>
-        <li><a ui-sref="auth.signup">Signup</a></li>
+        <li ng-if="!isAuthenticated()"><a ui-sref="auth.signin">Signin</a></li>
+        <li ng-if="!isAuthenticated()"><a ui-sref="auth.signup">Signup</a></li>
+        <li ng-if="isAuthenticated()"><a ui-sref="auth.logout">Logut</a></li>
     </ul>
 
 </div>
