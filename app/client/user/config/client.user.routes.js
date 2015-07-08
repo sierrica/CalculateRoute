@@ -8,6 +8,7 @@ angular.module('user').config(['$authProvider', '$stateProvider',
         $authProvider.loginRedirect = '/';
         $authProvider.signupUrl = "/auth/signup";
         $authProvider.signupRedirect = '/';
+        $authProvider.logoutRedirect = '/';
 
         $authProvider.tokenName = "token";
         $authProvider.tokenPrefix = "calculateroute",
@@ -26,6 +27,11 @@ angular.module('user').config(['$authProvider', '$stateProvider',
             state('auth.signin', {
                 url: '/signin',
                 templateUrl: 'user/views/authentication/client.user.signin.view.html'
-            });
+            }).
+            state('auth.logout', {
+                url: '/logout',
+                template: null,
+                controller: 'AuthenticationController'
+            });;
     }
 ]);

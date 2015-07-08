@@ -3,7 +3,7 @@ var ApplicationConfiguration = (function() {
 
 	// Init module configuration options
 	var applicationModuleName = 'calculateRoute';
-	var applicationModuleVendorDependencies = ['ui.router', 'satellizer'];
+	var applicationModuleVendorDependencies = ['ui.router', 'ngMaterial', 'satellizer'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

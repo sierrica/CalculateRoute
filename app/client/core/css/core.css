@@ -1,52 +1,9 @@
-/* Styles go here */
-
-
-body {
-    padding-top: 51px;
-}
-/*
-.navmenu {
-    margin-top: 51px;
-}
-*/
-
-.navbar {
-    display: block;
-    text-align: center;
-}
-
-.navbar-brand {
-    display: inline-block;
-    float: none;
-}
-
-
-.container {
-    max-width: 100%;
-}
-
-
-@media (max-width: 991px) {
-    #primer_menu {
-        padding-top: 51px;
+@media (max-width: 1200px) {
+    md-sidenav, md-backdrop {
+        position: fixed !important;
     }
 }
 
-@media (min-width: 1px) {
-    .navbar-toggle {
-        display: block !important;
-    }
+md-toolbar h2 {
+    margin: auto;
 }
-
-@media (min-width: 992px) {
-    body {
-        padding: 0 0 0 300px;
-    }
-    .navmenu {
-        padding-top: 0;
-    }
-    .navbar {
-        display: none !important;
-    }
-}
-

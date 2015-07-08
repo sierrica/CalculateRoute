@@ -45,20 +45,17 @@ module.exports = {
             ],
             lib: {
                 css: [
-                    'app/client/lib/bootstrap/dist/css/bootstrap.css',
-                    'app/client/lib/bootstrap/dist/css/bootstrap-theme.css',
-                    'app/client/lib/jasny-bootstrap/dist/css/jasny-bootstrap.css'
+                    'app/client/lib/angular-material/angular-material.css'
                 ],
                 js: [
                     'app/client/lib/jquery/dist/jquery.js',
-                    'app/client/lib/bootstrap/dist/js/bootstrap.js',
                     'app/client/lib/angular/angular.js',
                     'app/client/lib/angular-resource/angular-resource.js',
-                    'app/client/lib/angular-touch/angular-touch.js',
                     'app/client/lib/angular-ui-router/release/angular-ui-router.js',
-                    'app/client/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-                    'app/client/lib/satellizer/satellizer.js',
-                    'app/client/lib/jasny-bootstrap/dist/js/jasny-bootstrap.js'
+                    'app/client/lib/angular-animate/angular-animate.js',
+                    'app/client/lib/angular-aria/angular-aria.js',
+                    'app/client/lib/angular-material/angular-material.js',
+                    'app/client/lib/satellizer/satellizer.js'
                 ]
             },
             tests: [

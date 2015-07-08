@@ -37,15 +37,19 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body>
 
-    <!-- Fixed navbar -->
-    <header data-ng-include="'core/views/client.header.view.html'"></header>
 
-    <div class="container-fluid">
-        {% block content %}{% endblock %}
-    </div>
 
+
+
+<body flex layout-fill layout="column">
+    {% include 'server.header.view.html' %}
+    <section flex layout="column">
+          <div flex layout="row">
+              {% include 'server.sidenav.view.html' %}
+              {% block content %}{% endblock %}
+          </div>
+    </section>
 
 </body>
 </html>
