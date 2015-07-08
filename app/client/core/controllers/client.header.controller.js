@@ -1,6 +1,6 @@
 angular.module('core').controller('HeaderController', ['$scope', '$state', '$auth', '$mdSidenav',
 	function($scope, $state, $auth, $mdSidenav) {
-		console.log ("DENTRO CONTROLADOR HEADER");
+		console.log ("DENTRO CONTROLADOR MENU");
 
 
         $scope.sidenav = function() {
