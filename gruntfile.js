@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 				options: {
 					command: ['platform', 'build'],
 					platforms: ['android'],
+					plugins: ['cordova-plugin-crosswalk-webview'],
 					path: 'cordova'
 				}
 			}
@@ -19,8 +20,8 @@ module.exports = function(grunt) {
 		copy: {
 			main: {
 				files: [
-					{src: ['cordova/platforms/android/build/outputs/apk/android-debug.apk'], dest: 'C:\\Users\\Javier\\Desktop\\Shared_Folder\\calculateRoute.apk'},
-					{src: ['cordova/platforms/android/build/outputs/apk/android-debug.apk'], dest: 'C:\\Users\\Javier\\Dropbox\\calculateRoute.apk'}
+					{src: ['cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk'], dest: 'C:\\Users\\Javier\\Desktop\\Shared_Folder\\calculateRoute.apk'},
+					{src: ['cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk'], dest: 'C:\\Users\\Javier\\Dropbox\\calculateRoute.apk'}
 				],
 			},
 		},

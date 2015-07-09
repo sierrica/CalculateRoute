@@ -1,12 +1,6 @@
-angular.module('core').controller('HeaderController', ['$scope', '$state', '$auth', '$mdSidenav',
-	function($scope, $state, $auth, $mdSidenav) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', '$auth',
+	function($scope, $state, $auth) {
 		console.log ("DENTRO CONTROLADOR MENU");
-
-
-        $scope.sidenav = function() {
-            console.log ("DENTRO")
-            $mdSidenav('left').toggle();
-        }
 
 
 		$scope.isAuthenticated = function() {

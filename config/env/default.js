@@ -45,16 +45,14 @@ module.exports = {
             ],
             lib: {
                 css: [
-                    'app/client/lib/angular-material/angular-material.css'
+                    'app/client/lib/materialize/dist/css/materialize.css'
                 ],
                 js: [
                     'app/client/lib/jquery/dist/jquery.js',
                     'app/client/lib/angular/angular.js',
                     'app/client/lib/angular-resource/angular-resource.js',
                     'app/client/lib/angular-ui-router/release/angular-ui-router.js',
-                    'app/client/lib/angular-animate/angular-animate.js',
-                    'app/client/lib/angular-aria/angular-aria.js',
-                    'app/client/lib/angular-material/angular-material.js',
+                    'app/client/lib/materialize/dist/js/materialize.js',
                     'app/client/lib/satellizer/satellizer.js'
                 ]
             },

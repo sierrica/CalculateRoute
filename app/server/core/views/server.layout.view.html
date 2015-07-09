@@ -39,17 +39,42 @@
 </head>
 
 
+<body>
 
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
 
+    <header id="header" class="page-topbar">
+        <div class="navbar-fixed" data-ng-controller="HeaderController">
+            <nav class="cyan">
+                <div class="nav-wrapper">
+                    <h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1">Calculateroute</a> <span class="logo-text">Materialize</span></h1>
+                    <ul class="right hide-on-med-and-down">
+                        <li class="search-out"><input type="text" class="search-out-text"></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-<body flex layout-fill layout="column">
-    {% include 'server.header.view.html' %}
-    <section flex layout="column">
-          <div flex layout="row">
-              {% include 'server.sidenav.view.html' %}
-              {% block content %}{% endblock %}
-          </div>
-    </section>
+    <div id="main">
+        <div class="wrapper">
+            <!-- START LEFT SIDEBAR NAV-->
+            <aside id="left-sidebar-nav">
+                <ul id="slide-out" class="side-nav fixed leftside-navigation">
+                    <li><a href="css-color.html"><i class="mdi-editor-format-color-fill"></i> Color</a>
+                </ul>
+                <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only darken-2"><i class="mdi-navigation-menu" ></i></a>
+            </aside>
+            <!-- START CONTENT -->
+            <section id="content">
+                {% block content %}{% endblock %}
+            </section>
+        </div>
+    </div>
 
 </body>
 </html>
