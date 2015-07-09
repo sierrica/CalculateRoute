@@ -1,8 +1,15 @@
 
 
-#main {
-    padding-left: 240px;
+nav {
+    height: 64px !important;
 }
+
+.navbar-fixed {
+    height: 64px !important;
+    line-height: 64px !important;
+}
+
+
 
 /* Cuando sale el menu no se oscurece el resto de la pantalla */
 #sidenav-overlay {
@@ -16,6 +23,13 @@
     width: 98%;
 }
 
+#main {
+    padding-left: 240px;
+}
+
+main, footer {
+    padding-left: 240px;
+}
 
 
 @media only screen and (max-width: 993px) {
@@ -26,16 +40,10 @@
 
 
 
-h4.logo-wrapper{
-    margin: 0px 0px;
-}
 
 @media only screen and (max-width: 992px) {
     nav .nav-wrapper {
         text-align: center;
-    }
-    nav .nav-wrapper a.page-title {
-        font-size: 36px;
     }
 }
 
@@ -43,11 +51,7 @@ h4.logo-wrapper{
 ul.side-nav.fixed {
     top: 64px;
 }
-@media only screen and (max-width: 992px) {
-    ul.side-nav.fixed {
-        top: 56px;
-    }
-}
+
 
 
 #left-sidebar-nav {
@@ -62,5 +66,5 @@ ul.side-nav.fixed {
 .sidebar-collapse {
     position: absolute;
     left: -170px;
-    top: -45px;
+    top: -50px;
 }
