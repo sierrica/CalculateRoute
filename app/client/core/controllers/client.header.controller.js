@@ -2,18 +2,13 @@ angular.module('core').controller('HeaderController', ['$rootScope','$scope', '$
 	function($rootScope, $scope, $state, $auth) {
 		console.log ("DENTRO CONTROLADOR HEADER");
 
-
-
-
-        $rootScope.$on('$stateChangeSuccess',
-            function(event, toState, toParams, fromState, fromParams){
-            console.log ("DENTRO FUNCION")
-            $('.button-collapse').sideNav({
-                menuWidth: 300,
-                edge: 'left',
-                closeOnClick: true
-            });
+        $('.button-collapse').sideNav({
+            menuWidth: 300,
+            edge: 'left',
+            closeOnClick: true
         });
+
+
 
 
 

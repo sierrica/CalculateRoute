@@ -2,6 +2,10 @@ angular.module('core').controller('HomeController', ['$scope', '$location', '$au
     function($scope, $location, $auth) {
         console.log ("DENTRO HOME CONTROLLER");
 
+
+
+
+
         setTimeout(function() {
             $('body').addClass('loaded');
         }, 1700);

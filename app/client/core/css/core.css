@@ -9,6 +9,10 @@ main, footer {
 }
 
 /* NAV */
+.navbar-fixed {
+    height: 50px !important;
+    line-height: 50px !important;
+}
 nav {
     height: 50px !important;
     line-height: 50px !important;

@@ -10,16 +10,8 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider', '$authPro
 		$stateProvider.
 			state ('home', {
 				url: '/',
-                views: {
-                    header: {
-                        templateUrl: 'core/views/client.header.view.html',
-                        controller: 'HeaderController'
-                    },
-                    content: {
-                        templateUrl: 'core/views/client.home.view.html',
-                        controller: 'HomeController'
-                    }
-                }
+                templateUrl: 'core/views/client.home.view.html',
+                controller: 'HomeController'
 			});
 	}
 ]);
