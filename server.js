@@ -35,10 +35,13 @@ else {
                 logger.info ('Escuchando Nodejs ' + process.version + ' en la interfaz: ' + config.ip_node + ':' + config.port_node);
                 logger.info ('Plataforma: ' + process.env.PLATFORM + '; Entorno: ' + process.env.NODE_ENV + '; Ruta desde la que se ejecuta: ' + process.cwd());
             });
-        });
+
+        }
+);
 /*
 }
 */
+
 
 
 
