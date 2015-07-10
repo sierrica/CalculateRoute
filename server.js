@@ -1,6 +1,6 @@
 var cluster     = require ('cluster');
 
-
+/*
 if (cluster.isMaster) {
     // Fork workers.
     var numCPUs = require('os').cpus().length;
@@ -21,6 +21,7 @@ if (cluster.isMaster) {
     });
 }
 else {
+*/
     var config      = require ('./config/config'),
         express     = require ('./config/express'),
         mongoose    = require ('./config/mongoose'),
@@ -35,7 +36,9 @@ else {
                 logger.info ('Plataforma: ' + process.env.PLATFORM + '; Entorno: ' + process.env.NODE_ENV + '; Ruta desde la que se ejecuta: ' + process.cwd());
             });
         });
+/*
 }
+*/
 
 
 
