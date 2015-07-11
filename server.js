@@ -1,10 +1,11 @@
-var cluster     = require ('cluster');
+var cluster     = require ('cluster'),
+    config      = require ('./config/config');
 
 
 if (cluster.isMaster) {
     // Fork workers.
     var numCPUs = require('os').cpus().length;
-    for (var i = 0; i < numCPUs; i++) {
+    for (var i = 0; i < 2; i++) {
         cluster.fork();
     }
 

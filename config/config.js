@@ -1,12 +1,12 @@
-
 var _           = require ('lodash'),
     path        = require ('path'),
     glob        = require ('glob'),
     chalk       = require ('chalk'),
     fs          = require ('fs'),
     UglifyJS    = require ("uglify-js"),
-    uglifycss   = require ('uglifycss')
-    logger      = require ('./logger');
+    uglifycss   = require ('uglifycss'),
+    logger      = require ('./logger'),
+    cluster     = require ('cluster');
 
 
 
@@ -70,7 +70,7 @@ var initGlobalConfigFiles = function(config) {
     config.files.server.configs = getGlobbedPaths(config.assets.server.config);
 
 
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production'  &&  cluster.isMaster) {
         var css_min = uglifycss.processFiles (getGlobbedPaths(config.assets.client.lib.css).concat(getGlobbedPaths(config.assets.client.css)), {
             maxLineLen: 500,
             expandVars: true
