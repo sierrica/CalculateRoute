@@ -5,7 +5,7 @@ var cluster     = require ('cluster'),
 if (cluster.isMaster) {
     // Fork workers.
     var numCPUs = require('os').cpus().length;
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < numCPUs; i++) {
         cluster.fork();
     }
 
@@ -22,8 +22,6 @@ if (cluster.isMaster) {
     });
 }
 else {
-
-    var config      = require ('./config/config'),
         express     = require ('./config/express'),
         mongoose    = require ('./config/mongoose'),
         logger      = require ('./config/logger'),
