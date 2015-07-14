@@ -38,7 +38,7 @@ function node() {
 
 
 function pm2() {
-   $OPENSHIFT_REPO_DIR/node_modules/.bin/pm2 $@
+   $OPENSHIFT_REPO_DIR/node_modules/.bin/pm2 "$@"
 }
 export PM2_BIND_ADDR=$OPENSHIFT_NODEJS_IP
 export PM2_HOME=$OPENSHIFT_DATA_DIR
