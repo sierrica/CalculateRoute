@@ -29,7 +29,7 @@
   },
   "main": "server.js --color",
   "scripts": {
-    "start": "node server.js --color",
+    "start": "pm2 start server.js -i 0 --no-daemon -f -n calculateroute -l logs/calculateroute.log",
     "postinstall": "node config/postinstall.js"
   },
   "dependencies": {
