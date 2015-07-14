@@ -29,7 +29,7 @@
   },
   "main": "server.js --color",
   "scripts": {
-    "start": "HOME=$OPENSHIFT_DATA_DIR pm2 start server.js -i 0 --no-daemon -f -n calculateroute",
+    "start": "pm2 start server.js -i 0 --no-daemon -f -n calculateroute",
     "postinstall": "node config/postinstall.js"
   },
   "dependencies": {
