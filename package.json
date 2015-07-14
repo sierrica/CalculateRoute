@@ -29,7 +29,7 @@
   },
   "main": "server.js --color",
   "scripts": {
-    "start": "node server.js --color",
+    "start": "node server2.js --color",
     "postinstall": "node config/postinstall.js"
   },
   "dependencies": {
