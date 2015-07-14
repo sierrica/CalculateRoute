@@ -1,0 +1,6 @@
+{
+  "win": {
+    "NODE_ENV": "development",
+    "PLATFORM": "windows"
+  }
+}

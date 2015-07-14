@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "license": "MIT",
+  "color": true,
   "homepage": "https://github.com/sierrica/calculateroute",
   "description": "Calculador de Rutas",
   "keywords": [
@@ -24,8 +25,7 @@
     }
   ],
   "engines": {
-    "node": "0.12.7",
-    "npm": "2.13.0"
+    "node": "0.12.7"
   },
   "main": "server.js --color",
   "scripts": {
@@ -59,7 +59,8 @@
     "passport-local": "1.0.0",
     "bcryptjs": "2.2.0",
     "uglify-js": "2.4.23",
-    "uglifycss": "0.0.15"
+    "uglifycss": "0.0.15",
+    "pm2": "0.14.3"
   },
   "devDependencies": {
     "grunt-cli": "0.1.13",

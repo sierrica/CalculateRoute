@@ -10,7 +10,9 @@ var options = {
 var redisClient = redis.createClient (config.redis.port, config.redis.ip, options);
 
 redisClient.on ('connect', function () {
-    logger.info ('Conectado al servidor Redis: ' + config.redis.ip + ':' + config.redis.port);
+    setTimeout (function() {
+        logger.info ('Conectado al servidor Redis: ' + config.redis.ip + ':' + config.redis.port);
+    }, 2000);
 });
 
 redisClient.on ('error', function (err) {

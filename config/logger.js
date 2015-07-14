@@ -7,7 +7,7 @@ logger.setLevels ({ debug: 0, info: 1, warn: 2, error: 3 });
 logger.addColors ({ debug: 'blue', info: 'green', warn: 'yellow', error: 'red' });
 
 /* NO SALIR DEL PROGRAMA ANTE UN ERROR AL MANEJAR CON WINSTON LAS EXCEPCIONES (handleExceptions: true) */
-logger.exitOnError = true;
+logger.exitOnError = false;
 
 /* BORRAR EL TRANSPORT Console QUE EXISTE POR DEFECTO */
 logger.remove (logger.transports.Console);
@@ -16,7 +16,7 @@ logger.remove (logger.transports.Console);
 logger.add (logger.transports.Console, {
     level: "debug",
     colorize: true,
-    handleExceptions: false
+    handleExceptions: true
 });
 
 /* SOLO EN DESARROLLO O RASPBIAN */

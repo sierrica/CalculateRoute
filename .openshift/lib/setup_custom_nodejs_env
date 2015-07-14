@@ -33,8 +33,4 @@ function node() {
    _setup_path_and_remove_wrappers
    node "$@"
 
-}  #  End of function  node.
-
-
-#
-# EOF
+}

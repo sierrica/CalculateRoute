@@ -7,7 +7,9 @@ module.exports.createMongooseConnection = function (callback) {
     mongoose.connect (config.mongodb.url, { server: { poolSize: 1 }});
 
     mongoose.connection.on ('connected', function () {
-        logger.info ('Conectado a la base de datos: ' + config.mongodb.url);
+        setTimeout (function() {
+            logger.info ('Conectado a la base de datos: ' + config.mongodb.url);
+        }, 2000);
     });
 
     mongoose.connection.on ('disconnected', function () {
