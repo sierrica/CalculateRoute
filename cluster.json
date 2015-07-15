@@ -4,7 +4,7 @@
   "name": "calculateroute",
   "script": "server.js",
   "exec_mode": "cluster",
-  "instances": 1,
+  "instances": 0,
   "args": ["--color"],
   "env": {
     "NODE_ENV": "production",
