@@ -6,7 +6,7 @@
   "args": ["--color"],
   "env": {
     "NODE_ENV": "production",
-    "PLATFORM": "openshift"
+    "PLATFORM": "heroku"
   },
   "env_production" : {                  // Used if --env prod
     "NODE_ENV": "production"
