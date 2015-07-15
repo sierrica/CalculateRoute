@@ -1,4 +1,5 @@
-var logger = require ('winston'),
+var cluster = require('cluster'),
+    logger = require ('winston'),
     Loggly = require('winston-loggly').Loggly,
     Papertrail = require('winston-papertrail').Papertrail;
 
@@ -52,7 +53,7 @@ if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
         level: 'info',
         json: true,
         hostname: process.env.PLATFORM,
-        program: 'calculateroute',
+        program: 'calculateroute-' + (cluster.worker.id - 1),
         host: 'logs3.papertrailapp.com',
         port: 15605,
         colorize: true,
