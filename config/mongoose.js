@@ -9,7 +9,7 @@ module.exports.createMongooseConnection = function (callback) {
     mongoose.connection.on ('connected', function () {
         setTimeout (function(){
             logger.info ('Conectado a la base de datos: ' + config.mongodb.url);
-        }, 3000);
+        }, 1000);
     });
 
     mongoose.connection.on ('disconnected', function () {

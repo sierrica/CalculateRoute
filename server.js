@@ -12,9 +12,8 @@ var config      = require ('./config/config'),
     var app = express.init();
     app.listen(config.server.port, config.server.ip, function () {
         setTimeout (function(){
-            logger.info('Nodejs ' + process.version + ' en la interfaz: ' + config.ip_node + ':' + config.port_node);
-            logger.info('Plataforma: ' + process.env.PLATFORM + '; Entorno: ' + process.env.NODE_ENV + '; Ruta desde la que se ejecuta: ' + process.cwd());
-        }, 3000);
+            logger.info('PLATFORM: ' + process.env.PLATFORM + '; NODE_ENV: ' + process.env.NODE_ENV + '; NODEJS -V: ' + process.version + '; INTERFACE: ' + config.ip_node + ':' + config.port_node + '; CWD: ' + process.cwd());
+        }, 1000);
     });
 
 //});
