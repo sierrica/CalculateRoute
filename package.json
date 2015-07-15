@@ -29,7 +29,7 @@
   },
   "main": "server.js --color",
   "scripts": {
-    "start": "node server.js --color",
+    "start": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/runtime/data/node-v0.12.7-linux-x64/bin/node server.js --color",
     "postinstall": "node config/postinstall.js"
   },
   "dependencies": {
