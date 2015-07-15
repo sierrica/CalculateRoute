@@ -1,7 +1,9 @@
 {
   "name": "calculateroute",
   "script": "server.js",
-  "exec_mode": "fork",
+  "exec_mode": "cluster",
+  "instances": 0,
+  "args": ["--color"],
   "env": {
     "NODE_ENV": "development",
     "PLATFORM": "windows"
