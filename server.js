@@ -1,9 +1,15 @@
-var config      = require ('./config/config'),
+var cluster = require('cluster'),
+    config      = require ('./config/config'),
     express     = require ('./config/express'),
 //    mongoose    = require ('./config/mongoose'),
     logger      = require ('./config/logger'),
     redis       = require ('./config/redis');
     //seed        = require('./config/seed');
+
+setTimeout (function(){
+    console.log ("PRUEBA: " + cluster.worker.id);
+}, 3000);
+
 
 //mongoose.createMongooseConnection(function () {
     var app = express.init();

@@ -4,7 +4,10 @@
 #
 
 
+
+# ANADIDO POR MI -> CUIDADADO
 export HOME=$OPENSHIFT_DATA_DIR
+
 
 
 #  Returns the configured Node version - defaults to 0.8.24.
