@@ -1,4 +1,6 @@
 {
+  "error_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/pm2.log",
+  "out_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/pm2.log",
   "name": "calculateroute",
   "script": "server.js",
   "exec_mode": "cluster",
