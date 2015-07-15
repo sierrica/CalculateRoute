@@ -3,8 +3,8 @@
   "out_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log",
   "name": "calculateroute",
   "script": "server.js",
-  "exec_mode": "cluster",
-  "instances": 0,
+  "exec_mode": "fork",
+  "instances": 3,
   "args": ["--color"],
   "env": {
     "NODE_ENV": "development",
