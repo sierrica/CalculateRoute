@@ -30,7 +30,7 @@
   },
   "main": "server.js --color",
   "scripts": {
-    "start": "node_modules/.bin/pm2 start cluster.json --no-daemon -f --env prod",
+    "start": "HOME=$OPENSHIFT_DATA_DIR node_modules/.bin/pm2 start cluster.json --no-daemon -f --env prod",
     "postinstall": "node config/postinstall.js"
   },
   "dependencies": {
