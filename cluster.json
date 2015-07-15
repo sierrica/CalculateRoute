@@ -7,8 +7,8 @@
   "instances": 1,
   "args": ["--color"],
   "env": {
-    "NODE_ENV": "development",
-    "PLATFORM": "windows"
+    "NODE_ENV": "production",
+    "PLATFORM": "openshift"
   },
   "env_production" : {                  // Used if --env prod
     "NODE_ENV": "production"
