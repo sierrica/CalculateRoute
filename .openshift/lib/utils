@@ -4,6 +4,9 @@
 #
 
 
+export HOME=$OPENSHIFT_DATA_DIR
+
+
 #  Returns the configured Node version - defaults to 0.8.24.
 function get_node_version() {
    marker="$OPENSHIFT_REPO_DIR/.openshift/markers/NODEJS_VERSION"
@@ -170,6 +173,17 @@ function setup_path_for_custom_node_version() {
 
 }  #  End of function  setup_path_for_custom_node_version.
 
+
+
+
+
+function pm2() {
+  _checkNode
+  $OPENSHIFT_REPO_DIR/node_modules/.bin/pm2 $@
+}
+
+export PM2_BIND_ADDR=$OPENSHIFT_NODEJS_IP
+export PM2_HOME=$OPENSHIFT_DATA_DIR
 
 
 #
