@@ -1,5 +1,4 @@
-var cluster = require ('cluster'),
-    logger = require ('winston'),
+var logger = require ('winston'),
     Loggly = require('winston-loggly').Loggly,
     Papertrail = require('winston-papertrail').Papertrail;
 
@@ -18,8 +17,7 @@ logger.remove (logger.transports.Console);
 logger.add (logger.transports.Console, {
     level: "debug",
     colorize: true,
-    handleExceptions: false,
-    label: "calculateroute"
+    handleExceptions: false
 
 });
 

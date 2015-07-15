@@ -69,7 +69,7 @@ var initGlobalConfigFiles = function(config) {
     // Setting Globbed config files
     config.files.server.configs = getGlobbedPaths(config.assets.server.config);
 
-
+/*
    if (process.env.NODE_ENV === 'production'  &&  cluster.isMaster) {
         var css_min = uglifycss.processFiles (getGlobbedPaths(config.assets.client.lib.css).concat(getGlobbedPaths(config.assets.client.css)), {
             maxLineLen: 500,
@@ -85,9 +85,10 @@ var initGlobalConfigFiles = function(config) {
         config.files.client.js = getGlobbedPaths('app/client/lib/calculateroute.js', 'app/client/');
     }
     else {
+    */
         config.files.client.css = getGlobbedPaths(config.assets.client.lib.css, 'app/client/').concat(getGlobbedPaths(config.assets.client.css, 'app/client/'));
         config.files.client.js = getGlobbedPaths(config.assets.client.lib.js, 'app/client/').concat(getGlobbedPaths(config.assets.client.js, 'app/client/'));
-    }
+ //   }
 };
 
 /* Initialize global configuration files */
