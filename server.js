@@ -1,8 +1,8 @@
 var config      = require ('./config/config'),
     express     = require ('./config/express'),
 //    mongoose    = require ('./config/mongoose'),
-    logger      = require ('./config/logger');
-//    redis       = require ('./config/redis')
+    logger      = require ('./config/logger'),
+    redis       = require ('./config/redis');
     //seed        = require('./config/seed');
 
 //mongoose.createMongooseConnection(function () {
