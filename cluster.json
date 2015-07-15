@@ -1,6 +1,14 @@
 {
-  "win": {
+  "name": "calculateroute",
+  "script": "server.js",
+  "exec_mode": "cluster",
+  "instances": 0,
+  "args": ["--color"],
+  "env": {
     "NODE_ENV": "development",
     "PLATFORM": "windows"
+  },
+  "env_production" : {                  // Used if --env prod
+    "NODE_ENV": "production"
   }
 }
