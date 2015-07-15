@@ -5,12 +5,5 @@
   "script": "server.js",
   "exec_mode": "cluster",
   "instances": 0,
-  "args": ["--color"],
-  "env": {
-    "NODE_ENV": "production",
-    "PLATFORM": "openshift"
-  },
-  "env_production" : {                  // Used if --env prod
-    "NODE_ENV": "production"
-  }
+  "args": ["--color"]
 }
