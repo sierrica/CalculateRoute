@@ -185,7 +185,7 @@ function pm2() {
 }
 
 export PM2_BIND_ADDR=$OPENSHIFT_NODEJS_IP
-export PM2_HOME=$OPENSHIFT_DATA_DIR
+export PM2_HOME=$OPENSHIFT_DATA_DIR/.pm2
 
 
 #
