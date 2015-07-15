@@ -1,13 +1,8 @@
 var cluster     = require ('cluster'),
-    config      = require ('./config/config'),
-    express     = require ('./config/express'),
-    mongoose    = require ('./config/mongoose'),
-    logger      = require ('./config/logger'),
-    redis       = require ('./config/redis');
-//seed        = require('./config/seed');
-
+    config      = require ('./config/config');
 
 if (cluster.isMaster) {
+
     var numCPUs = require('os').cpus().length;
 
     for (var i = 0; i < numCPUs; i++) {
@@ -20,6 +15,15 @@ if (cluster.isMaster) {
     });
 }
 else {
+    var express     = require ('./config/express'),
+        mongoose    = require ('./config/mongoose'),
+        logger      = require ('./config/logger'),
+        redis       = require ('./config/redis');
+        //seed        = require('./config/seed');
+
+
+
+
     mongoose.createMongooseConnection(function () {
         var app = express.init();
         app.listen(config.server.port, config.server.ip, function () {

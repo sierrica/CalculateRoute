@@ -1,4 +1,5 @@
-var logger = require ('winston'),
+var cluster = require ('cluster'),
+    logger = require ('winston'),
     Loggly = require('winston-loggly').Loggly,
     Papertrail = require('winston-papertrail').Papertrail;
 
@@ -7,16 +8,19 @@ logger.setLevels ({ debug: 0, info: 1, warn: 2, error: 3 });
 logger.addColors ({ debug: 'blue', info: 'green', warn: 'yellow', error: 'red' });
 
 /* NO SALIR DEL PROGRAMA ANTE UN ERROR AL MANEJAR CON WINSTON LAS EXCEPCIONES (handleExceptions: true) */
-logger.exitOnError = false;
+logger.exitOnError = true;
 
 /* BORRAR EL TRANSPORT Console QUE EXISTE POR DEFECTO */
 logger.remove (logger.transports.Console);
+
 
 /* TRANSPORT Console*/
 logger.add (logger.transports.Console, {
     level: "debug",
     colorize: true,
-    handleExceptions: true
+    handleExceptions: false,
+    label: "calculateroute"
+
 });
 
 /* SOLO EN DESARROLLO O RASPBIAN */
