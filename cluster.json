@@ -1,4 +1,6 @@
 {
+  "error_file": "/dev/null",
+  "out_file": "/dev/null",
   "name": "calculateroute",
   "script": "server.js",
   "exec_mode": "cluster",
@@ -6,7 +8,7 @@
   "args": ["--color"],
   "env": {
     "NODE_ENV": "production",
-    "PLATFORM": "heroku"
+    "PLATFORM": "openshift"
   },
   "env_production" : {                  // Used if --env prod
     "NODE_ENV": "production"
