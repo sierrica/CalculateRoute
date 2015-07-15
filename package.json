@@ -30,7 +30,7 @@
   },
   "main": "server.js --color",
   "scripts": {
-    "start": "pm2 start server.js",
+    "start": "node_modules/.bin/pm2 start server.js",
     "postinstall": "node config/postinstall.js"
   },
   "dependencies": {
