@@ -31,7 +31,7 @@
   "main": "server.js --color",
   "scripts": {
     "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f --env prod",
-    "postinstall": "./node_modules/.bin/bower install && node config/postinstall.js"
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp"
   },
   "dependencies": {
     "bower": "1.4.1",
@@ -61,7 +61,13 @@
     "bcryptjs": "2.2.0",
     "uglify-js": "2.4.23",
     "uglifycss": "0.0.15",
-    "pm2": "0.14.3"
+    "pm2": "0.14.3",
+    "gulp": "3.9.0",
+    "gulp-uglify": "1.2.0",
+    "gulp-cssmin": "0.1.7",
+    "gulp-concat": "2.6.0",
+    "gulp-ng-annotate": "1.0.0",
+    "gulp-load-plugins": "1.0.0-rc.1"
   },
   "devDependencies": {
     "grunt-cli": "0.1.13",
@@ -72,7 +78,6 @@
     "grunt-contrib-watch": "0.6.1",
     "grunt-cordovacli": "0.8.2",
     "grunt-express-server": "0.5.1",
-    "gulp": "3.9.0",
     "gulp-cordova-build-android": "1.1.0",
     "gulp-live-server": "0.0.23",
     "gulp-rename": "1.2.2",
