@@ -1,7 +1,8 @@
-var fs          = require ('fs'),
+var path        = require ('path'),
+    fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss'),
-    configu     = require ('config/config');
+    configu     = require (path.join(process.cwd(), '/config/config'));
 
 
 
