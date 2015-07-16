@@ -1,15 +1,9 @@
-var path        = require ('path'),
-    config      = require ('./config'),
-    sys         = require('sys'),
-    exec        = require('child_process').exec,
+var config      = require ('config'),
     fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss');
 
-/*
-function puts(error, stdout, stderr) { sys.puts(stdout) };
-exec("bower install", puts);
-*/
+
 
 
 if (process.env.NODE_ENV === 'production') {
