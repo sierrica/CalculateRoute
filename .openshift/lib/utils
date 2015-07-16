@@ -179,7 +179,7 @@ function setup_path_for_custom_node_version() {
 
 
 function gulp() {
-  HOME=$OPENSHIFT_DATA_DIR/.gulp $OPENSHIFT_REPO_DIR/node_modules/.bin/gulp $@
+  $OPENSHIFT_REPO_DIR/node_modules/.bin/gulp $@
 }
 
 function bower() {
