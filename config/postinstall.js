@@ -1,4 +1,4 @@
-var config      = require ('./config/config'),
+var //config      = require ('./config/config'),
     sys         = require('sys'),
     exec        = require('child_process').exec,
     fs          = require ('fs'),
@@ -10,7 +10,7 @@ function puts(error, stdout, stderr) { sys.puts(stdout) };
 exec("bower install", puts);
 
 
-
+/*
 if (process.env.NODE_ENV === 'production') {
     var css_min = uglifycss.processFiles (getGlobbedPaths(config.assets.client.lib.css).concat(getGlobbedPaths(config.assets.client.css)), {
         maxLineLen: 500,
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
     });
     fs.writeFileSync ('../app/client/lib/calculateroute.js', js_min.code);
 }
-
+*/
 
 
 
