@@ -44,11 +44,7 @@ gulp.task('pm2', function (cb) {
 // JS minifying task
 gulp.task('uglify', function () {
     return gulp.src(config.assets.client.js.concat(config.assets.client.lib.js))
-        .pipe(plugins.ngAnnotate({
-            remove: true,
-            add: true,
-            single_quotes: true
-        }))
+
         .pipe(plugins.uglify({
             mangle: false
         }))
