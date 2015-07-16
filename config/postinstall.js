@@ -1,7 +1,15 @@
 var config      = require ('./config/config'),
+    sys = require('sys'),
+    exec = require('child_process').exec,
     fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss');
+
+
+function puts(error, stdout, stderr) { sys.puts(stdout) };
+exec("bower install", puts);
+
+
 
 if (process.env.NODE_ENV === 'production') {
     var css_min = uglifycss.processFiles (getGlobbedPaths(config.assets.client.lib.css).concat(getGlobbedPaths(config.assets.client.css)), {
@@ -23,20 +31,13 @@ if (process.env.NODE_ENV === 'production') {
 
 
 
-/*var sys = require('sys'),
-    exec = require('child_process').exec;
+
 //    replace = require("replace")
 //    mv = require ('mv');
 
 
-function puts(error, stdout, stderr) { sys.puts(stdout) };
 
 
-// Instalar Bower dependiendo de la plataforma
-if (process.env.PLATFORM == "openshift")
-    exec("HOME=$OPENSHIFT_DATA_DIR bower install", puts);
-else
-    exec("bower install", puts);
 
 
 
