@@ -1,4 +1,4 @@
-var config      = require ('./config'),
+var config      = require ('./config/config'),
     fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss');
