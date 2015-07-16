@@ -1,4 +1,5 @@
-var fs          = require ('fs'),
+var config      = require ('./config/config'),
+    fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss');
 
@@ -9,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
     });
     fs.writeFileSync ('../app/client/lib/calculateroute.css', css_min);
 
-    var js_min = UglifyJS.minify (getGlobbedPaths(config.assets.client.lib.js).concat(getGlobbedPaths(config.assets.client.js)), {
+    var js_min = uglifyjs.minify (getGlobbedPaths(config.assets.client.lib.js).concat(getGlobbedPaths(config.assets.client.js)), {
         mangle: false
     });
     fs.writeFileSync ('../app/client/lib/calculateroute.js', js_min.code);
