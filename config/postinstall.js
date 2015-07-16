@@ -2,8 +2,20 @@ var path        = require ('path'),
     fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss'),
-    config     = require (path.join(process.cwd(), '/config/config'));
+    config     = require (path.join(process.cwd(), '/config/config'))
+    sys = require('sys'),
+    exec = require('child_process').exec;
 
+
+
+function puts(error, stdout, stderr) { sys.puts(stdout) };
+
+
+// Instalar Bower dependiendo de la plataforma
+if (process.env.PLATFORM == "openshift")
+    exec("HOME=$OPENSHIFT_DATA_DIR bower install", puts);
+else
+    exec("bower install", puts);
 
 
 
