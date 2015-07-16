@@ -1,7 +1,7 @@
-var config      = require ('./config/config'),
-    fs          = require ('fs'),
+var fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
-    uglifycss   = require ('uglifycss');
+    uglifycss   = require ('uglifycss'),
+    configu     = require ('./config/config');
 
 
 
