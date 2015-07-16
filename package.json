@@ -31,7 +31,7 @@
   "main": "server.js --color",
   "scripts": {
     "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f --env prod",
-    "postinstall": "./node_modules/.bin/bower install"
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp"
   },
   "dependencies": {
     "bower": "1.4.1",
