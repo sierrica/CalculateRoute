@@ -7,13 +7,13 @@ var config      = require ('config'),
 
 
 if (process.env.NODE_ENV === 'production') {
-    var css_min = uglifycss.processFiles (getGlobbedPaths(config.assets.client.lib.css).concat(getGlobbedPaths(config.assets.client.css)), {
+    var css_min = uglifycss.processFiles (config.utils.getGlobbedPaths(config.assets.client.lib.css).concat(config.utils.getGlobbedPaths(config.assets.client.css)), {
         maxLineLen: 500,
         expandVars: true
     });
     fs.writeFileSync ('../app/client/lib/calculateroute.css', css_min);
 
-    var js_min = uglifyjs.minify (getGlobbedPaths(config.assets.client.lib.js).concat(getGlobbedPaths(config.assets.client.js)), {
+    var js_min = uglifyjs.minify (config.utils.getGlobbedPaths(config.assets.client.lib.js).concat(config.utils.getGlobbedPaths(config.assets.client.js)), {
         mangle: false
     });
     fs.writeFileSync ('../app/client/lib/calculateroute.js', js_min.code);
