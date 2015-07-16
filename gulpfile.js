@@ -45,9 +45,7 @@ gulp.task('pm2', function (cb) {
 gulp.task('uglify', function () {
     return gulp.src(config.assets.client.js.concat(config.assets.client.lib.js))
 
-        .pipe(plugins.uglify({
-            mangle: false
-        }))
+
         .pipe(plugins.concat('calculateroute.min.js'))
         .pipe(gulp.dest('app/client/lib'));
 });
