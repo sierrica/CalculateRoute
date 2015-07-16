@@ -1,6 +1,6 @@
 var config      = require ('./config/config'),
-    sys = require('sys'),
-    exec = require('child_process').exec,
+    sys         = require('sys'),
+    exec        = require('child_process').exec,
     fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss');
