@@ -2,11 +2,7 @@ var _           = require ('lodash'),
     path        = require ('path'),
     glob        = require ('glob'),
     chalk       = require ('chalk'),
-    fs          = require ('fs'),
-    UglifyJS    = require ("uglify-js"),
-    uglifycss   = require ('uglifycss'),
-    logger      = require ('./logger'),
-    cluster     = require ('cluster');
+    logger      = require ('./logger');
 
 
 
@@ -69,26 +65,15 @@ var initGlobalConfigFiles = function(config) {
     // Setting Globbed config files
     config.files.server.configs = getGlobbedPaths(config.assets.server.config);
 
-/*
-   if (process.env.NODE_ENV === 'production'  &&  cluster.isMaster) {
-        var css_min = uglifycss.processFiles (getGlobbedPaths(config.assets.client.lib.css).concat(getGlobbedPaths(config.assets.client.css)), {
-            maxLineLen: 500,
-            expandVars: true
-        });
-        fs.writeFileSync ('app/client/lib/calculateroute.css', css_min);
-        config.files.client.css = getGlobbedPaths('app/client/lib/calculateroute.css', 'app/client/');
 
-        var js_min = UglifyJS.minify (getGlobbedPaths(config.assets.client.lib.js).concat(getGlobbedPaths(config.assets.client.js)), {
-            mangle: false
-        });
-        fs.writeFileSync ('app/client/lib/calculateroute.js', js_min.code);
+   if (process.env.NODE_ENV === 'production') {
+        config.files.client.css = getGlobbedPaths('app/client/lib/calculateroute.css', 'app/client/');
         config.files.client.js = getGlobbedPaths('app/client/lib/calculateroute.js', 'app/client/');
-    }
-    else {
-    */
+   }
+   else {
         config.files.client.css = getGlobbedPaths(config.assets.client.lib.css, 'app/client/').concat(getGlobbedPaths(config.assets.client.css, 'app/client/'));
         config.files.client.js = getGlobbedPaths(config.assets.client.lib.js, 'app/client/').concat(getGlobbedPaths(config.assets.client.js, 'app/client/'));
- //   }
+   }
 };
 
 /* Initialize global configuration files */
