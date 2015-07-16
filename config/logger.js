@@ -1,6 +1,6 @@
 var cluster = require('cluster'),
     logger = require ('winston'),
-    Loggly = require('winston-loggly').Loggly,
+    //Loggly = require('winston-loggly').Loggly,
     Papertrail = require('winston-papertrail').Papertrail;
 
 /* NIVELES PERSONALIZADOS */
