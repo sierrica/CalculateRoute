@@ -30,8 +30,9 @@
   },
   "main": "server.js --color",
   "scripts": {
-    "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f --env prod",
-    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp"
+    "postinstall": "./node_modules/.bin/bower install",
+    "prestart": "./node_modules/.bin/gulp",
+    "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f --env prod"
   },
   "dependencies": {
     "bower": "1.4.1",
