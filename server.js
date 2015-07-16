@@ -12,7 +12,7 @@ var config      = require ('./config/config'),
     var app = express.init();
     app.listen(config.server.port, config.server.ip, function () {
         setTimeout (function(){
-            logger.info('PLATFORM: ' + process.env.PLATFORM + '; NODE_ENV: ' + process.env.NODE_ENV + '; NODEJS -V: ' + process.version + '; INTERFACE: ' + config.ip_node + ':' + config.port_node + '; CWD: ' + process.cwd());
+            logger.info('PLATFORM: ' + process.env.PLATFORM + '; NODE_ENV: ' + process.env.NODE_ENV + '; INTERFACE: ' + config.ip_node + ':' + config.port_node + '; NODEJS -V: ' + process.version);
         }, 1000);
     });
 

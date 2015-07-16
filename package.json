@@ -76,6 +76,9 @@
     "gulp-cordova-build-android": "1.1.0",
     "gulp-live-server": "0.0.23",
     "gulp-rename": "1.2.2",
-    "gulp-watch": "4.3.2"
+    "gulp-watch": "4.3.2",
+    "gulp-run": "1.6.8",
+    "gulp-exec": "2.1.1",
+    "gulp-connect-pm2": "0.0.2"
   }
 }

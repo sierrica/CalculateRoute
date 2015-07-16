@@ -1,15 +1,11 @@
-
-var gulp = require('gulp');
-var android = require('gulp-cordova-build-android');
-var rename = require("gulp-rename");
-
-var gls = require('gulp-live-server');
-var watch = require('gulp-watch');
+var gulp = require('gulp'),
+    connect = require('gulp-connect-pm2'),
+    android = require('gulp-cordova-build-android'),
+    rename = require("gulp-rename"),
+    exec = require('child_process').exec;
 
 
-
-
-gulp.task('build', function() {
+gulp.task('cordova-debug', function() {
     return gulp
         .src('public')
         .pipe(android())
@@ -20,16 +16,34 @@ gulp.task('build', function() {
 });
 
 
-gulp.task('express', ['build'],  function() {
-    var server = gls.new('../server.js');
-    server.start();
+gulp.task('pm2_bis', function () {
 
-    gulp.watch(['server/**/*', 'public/**/*'], function () {
-        server.notify.apply(server, arguments);
+    var pm2 = require('pm2');
+
+    pm2.connect(function() {
+        pm2.start({
+            error_file: "/dev/null",
+            out_file: "/dev/null",
+            script: 'server.js --no-daemon',
+            exec_mode: 'cluster',
+            instances: 0
+        }, function(err, apps) {
+            pm2.disconnect();
+        });
     });
-    gulp.watch('../server.js', server.start);
-
 });
 
 
-gulp.task('default', ['build', 'express']);
+
+
+gulp.task('pm2', function (cb) {
+    exec('node_modules\\.bin\\pm2 start cluster.json --no-daemon -f --env prod', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+})
+
+
+
+gulp.task('default', ['pm2']);
