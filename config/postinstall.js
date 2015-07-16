@@ -1,4 +1,4 @@
-var config      = require ('./config'),
+var
     fs          = require ('fs'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss');
@@ -9,7 +9,7 @@ var config      = require ('./config'),
 
 
 
-
+/*
 if (process.env.NODE_ENV === 'production') {
     var css_min = uglifycss.processFiles (config.utils.getGlobbedPaths(config.assets.client.lib.css).concat(config.utils.getGlobbedPaths(config.assets.client.css)), {
         maxLineLen: 500,
@@ -22,4 +22,4 @@ if (process.env.NODE_ENV === 'production') {
     });
     fs.writeFileSync ('../app/client/lib/calculateroute.js', js_min.code);
 }
-
+*/
