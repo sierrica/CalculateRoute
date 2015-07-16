@@ -22,7 +22,7 @@ function _setup_path_and_remove_wrappers() {
 function npm() {
    #  Setup path, remove wrappers and reinvoke npm.
    _setup_path_and_remove_wrappers
-   npm "$@"
+   npm "$@" > $OPENSHIFT_REPO_DIR/npm.log
 
 }  #  End of function  npm.
 
