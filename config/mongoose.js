@@ -4,7 +4,8 @@ var mongoose =  require ('mongoose'),
 
 module.exports.createMongooseConnection = function (callback) {
 
-    mongoose.connect (config.mongodb.url, { server: { poolSize: 1 }});
+//  mongoose.connect (config.mongodb.url, { server: { poolSize: 1 }});
+    mongoose.connect (config.mongodb.url);
 
     mongoose.connection.on ('connected', function () {
         setTimeout (function(){
