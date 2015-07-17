@@ -8,7 +8,7 @@ var config      = require ('./config/config'),
 
 
 
-//mongoose.createMongooseConnection(function () {
+mongoose.createMongooseConnection(function () {
     var app = express.init();
     app.listen(config.server.port, config.server.ip, function () {
         setTimeout (function(){
@@ -16,4 +16,4 @@ var config      = require ('./config/config'),
         }, 1000);
     });
 
-//});
+});
