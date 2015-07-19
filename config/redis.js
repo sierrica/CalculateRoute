@@ -1,6 +1,6 @@
-var redis =     require ('redis'),
-    config =    require ('./config')
-    logger =        require ('./logger');
+var redis   = require ('redis'),
+    config  = require ('./config'),
+    logger  = require ('./logger');
 
 
 var options = {

@@ -1,16 +1,17 @@
-var config =        require ('./config'),
-    logger =        require ('./logger'),
-    express =       require ('express'),
-    path =          require ("path"),
-    consolidate =   require ('consolidate'),
-    helmet =        require ('helmet'),
-    cors =          require ('cors'),
-    bodyParser =    require ('body-parser'),
-    multer =        require ('multer'),
-    favicon =       require ('serve-favicon'),
-    mongoose =      require ("mongoose"),
-    morgan =        require ('morgan'),
-    compression =   require ('compression');
+var config          = require ('./config'),
+    logger          = require ('./logger'),
+    express         = require ('express'),
+    path            = require ('path'),
+    consolidate     = require ('consolidate'),
+    helmet          = require ('helmet'),
+    cors            = require ('cors'),
+    bodyParser      = require ('body-parser'),
+    multer          = require ('multer'),
+    favicon         = require ('serve-favicon'),
+    mongoose        = require ("mongoose"),
+    morgan          = require ('morgan'),
+    compression     = require ('compression'),
+    errorHandler    = require ('errorhandler');
 
 
 /* Invoke modules server configuration */
@@ -65,6 +66,7 @@ module.exports.initMiddleware = function (app) {
     if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
         app.use (morgan('dev', { stream: { write: function(str) { logger.debug(str); } }}));          // Habilitar Morgan a traves de winston.
         app.set('view cache', false);                                                                   // Disable views cache
+        app.use(errorHandler()); // Error handler - has to be last
     }
     else if (process.env.NODE_ENV === 'production') {
         app.locals.cache = 'memory';

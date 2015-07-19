@@ -32,7 +32,7 @@
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install",
     "prestart": "./node_modules/.bin/gulp",
-    "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f --env prod"
+    "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f --env prod --color"
   },
   "dependencies": {
     "bower": "1.4.1",
@@ -63,7 +63,8 @@
     "gulp-uglify": "1.2.0",
     "gulp-cssmin": "0.1.7",
     "gulp-concat": "2.6.0",
-    "gulp-load-plugins": "1.0.0-rc.1"
+    "gulp-load-plugins": "1.0.0-rc.1",
+    "errorhandler": "1.4.1"
   },
   "devDependencies": {
     "grunt-cli": "0.1.13",
