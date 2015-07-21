@@ -36,29 +36,18 @@
 
 <body>
 
-    <div id="loader-wrapper">
-        <div id="loader"></div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-
     <!-- HEADER -->
-    <header>
-        {% include 'server.header.view.html' %}
-    <header>
+    <header data-ng-include="'core/views/client.header.view.html'"></header>
 
     <!-- MAIN -->
     <main>
         <!-- LEFT SIDEBAR NAV -->
-        <sidenav>
-            {% include 'server.sidenav.view.html' %}
-        </sidenav>
+        <sidenav data-ng-include="'core/views/client.sidenav.view.html'"></sidenav>
         <!-- CONTENT -->
-        <content>
-            {% block content %}{% endblock %}
-        </content>
+        <content>{% block content %}{% endblock %}</content>
     </main>
 
     <!-- FOOTER -->
+    <footer></footer>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <author email="sierrica@hotmail.com" href="http://sierrica.com">
         Hnos Sierra
     </author>
-    <content src="http://ptv.sierrica.com" />
+    <content src="http://192.168.1.103" />
     <plugin name="cordova-plugin-whitelist" version="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

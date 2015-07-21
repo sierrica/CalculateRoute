@@ -1,16 +1,6 @@
-angular.module('core').controller('HeaderController', ['$rootScope','$scope', '$state', '$auth',
-	function($rootScope, $scope, $state, $auth) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', '$auth',
+	function($scope, $state, $auth) {
 		console.log ("DENTRO CONTROLADOR HEADER");
-
-        $('.button-collapse').sideNav({
-            menuWidth: 300,
-            edge: 'left',
-            closeOnClick: true
-        });
-
-
-
-
 
 
 		$scope.isAuthenticated = function() {

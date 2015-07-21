@@ -1,9 +1,9 @@
 /* MAIN FOOTER */
-main, footer {
+main {
     padding-left: 300px;
 }
 @media only screen and (max-width: 992px) {
-    main, footer {
+    main {
         padding-left: 0px;
     }
 }
@@ -12,6 +12,7 @@ main, footer {
 .navbar-fixed {
     height: 50px !important;
     line-height: 50px !important;
+
 }
 nav {
     height: 50px !important;
@@ -25,9 +26,14 @@ nav i {
 /* SIDENAV */
 .side-nav.fixed {
     top: 50px;
+    /*height: calc(100% - 100px);   */          /* Para poner el footer toda la pantalla*/
 }
 /* Cuando sale el sidenav que no se oscurezca el resto del content de la pantalla
 #sidenav-overlay {
     background-color: transparent;
 }*/
 
+footer {
+    position: absolute;
+    bottom: 0px;
+}

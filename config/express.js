@@ -61,7 +61,7 @@ module.exports.initMiddleware = function (app) {
 
     app.use (bodyParser.json());                                                // for parsing application/json
     app.use (bodyParser.urlencoded({ extended: true }));                        // for parsing application/x-www-form-urlencoded
-    app.use (multer());                                                         // for parsing multipart/form-data
+//    app.use (multer());                                                         // for parsing multipart/form-data
 
     if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
         app.use (morgan('dev', { stream: { write: function(str) { logger.debug(str); } }}));          // Habilitar Morgan a traves de winston.
