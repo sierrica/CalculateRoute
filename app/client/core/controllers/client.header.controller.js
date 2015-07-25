@@ -3,7 +3,10 @@ angular.module('calculateRoute').controller('HeaderController', ['$scope', '$sta
 		console.log ("DENTRO CONTROLADOR HEADER");
 
 
-
+		$scope.close_sidenav = function (event) {
+			if ($(".button-collapse").is(":visible"))
+				$('.button-collapse').sideNav('hide');
+		};
 
 
 		$scope.isAuthenticated = function() {
