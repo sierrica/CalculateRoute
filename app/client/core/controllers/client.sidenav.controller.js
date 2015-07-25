@@ -7,11 +7,7 @@ angular.module('calculateRoute').controller('SidenavController', ['$scope', '$st
         };
 
 
-        $('.button-collapse').sideNav({
-            menuWidth: 300,
-            edge: 'left',
-            closeOnClick: false
-        });
+
 
         console.log ("DENTRO CONTROLADOR SIDENAV");
     }
