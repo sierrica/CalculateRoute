@@ -1,6 +1,4 @@
-var _ = require ('lodash'),
-    glob        = require ('glob'),
-    config = require ('./config/env/default'),
+var config = require ('./config/env/default'),
     gulp = require ('gulp'),
     gulpLoadPlugins = require ('gulp-load-plugins'),
     plugins = gulpLoadPlugins ();
@@ -21,7 +19,9 @@ gulp.task('cordova-debug', function() {
 // JS minifying task
 gulp.task('uglify', function () {
     return gulp.src(config.assets.client.lib.js.concat(config.assets.client.js))
-        .pipe(plugins.uglify())
+        .pipe(plugins.uglify({
+            mangle: false
+        }))
         .pipe(plugins.concat('calculateroute.min.js'))
         .pipe(gulp.dest('app/client/lib'));
 });
@@ -37,4 +37,4 @@ gulp.task('cssmin', function () {
 
 
 
-gulp.task('default', ['uglify', 'cssmin']);
+gulp.task('default', ['cssmin']);

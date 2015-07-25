@@ -8,6 +8,7 @@
     "angular-resource": "1.4.3",
     "angular-ui-router": "0.2.15",
     "materialize": "0.97.0",
-    "satellizer": "0.11.3"
+    "satellizer": "0.11.3",
+    "uglify-js": "~1.3.5"
   }
 }

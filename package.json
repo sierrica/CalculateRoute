@@ -31,7 +31,7 @@
   "main": "server.js --color",
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install",
-    "prestart": "./node_modules/.bin/gulp",
+    "prestart": "node ./config/prestart.js",
     "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f"
   },
   "dependencies": {
@@ -45,7 +45,7 @@
     "glob": "5.0.14",
     "helmet": "0.10.0",
     "lodash": "3.10.0",
-    "mongoose": "4.0.8",
+    "mongoose": "4.1.0",
     "morgan": "1.6.1",
     "swig": "1.4.2",
     "winston": "1.0.1",
@@ -58,13 +58,10 @@
     "passport": "0.2.2",
     "passport-local": "1.0.0",
     "bcryptjs": "2.2.0",
-    "pm2": "0.14.3",
-    "gulp": "3.9.0",
-    "gulp-uglify": "1.2.0",
-    "gulp-cssmin": "0.1.7",
-    "gulp-concat": "2.6.0",
-    "gulp-load-plugins": "1.0.0-rc.1",
-    "errorhandler": "1.4.1"
+    "pm2": "0.14.5",
+    "errorhandler": "1.4.1",
+    "uglify-js": "2.4.24",
+    "uglifycss": "0.0.15"
   },
   "devDependencies": {
     "cordova": "5.1.1",
