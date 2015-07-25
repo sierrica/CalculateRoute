@@ -1,7 +1,6 @@
-
-angular.module('user').config(['$authProvider', '$stateProvider',
-    function ($authProvider, $stateProvider) {
-
+angular.module('calculateRoute')
+    .config (['$stateProvider', '$authProvider',
+    function ($stateProvider, $authProvider) {
         // Parametros de configuración
         $authProvider.httpInterceptor = true;               // Add Authorization header to HTTP request
         $authProvider.loginOnSignup = true;
@@ -23,16 +22,7 @@ angular.module('user').config(['$authProvider', '$stateProvider',
         $authProvider.withCredentials = true;
         $authProvider.platform = 'browser';                 // or 'mobile'
         $authProvider.storage = 'localStorage';             // or 'sessionStorage'
-/*
-        $authProvider.loginUrl = "/auth/signin";
-        $authProvider.loginRedirect = '/';
-        $authProvider.signupUrl = "/auth/signup";
-        $authProvider.signupRedirect = '/';
-        $authProvider.logoutRedirect = '/';
 
-        $authProvider.tokenName = "token";
-        $authProvider.tokenPrefix = "calculateroute",
-*/
         // Users state routing
         $stateProvider.
             state('signup', {

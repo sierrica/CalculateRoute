@@ -1,11 +1,10 @@
 
-angular.module('user').controller('AuthenticationController', ['$scope', '$auth', '$location',
+angular.module('calculateRoute').controller('AuthenticationController', ['$scope', '$auth', '$location',
 	function($scope, $auth, $location) {
 
 		console.log ("DENTRO AUTHENTICATION CONTROLLER");
 
-        if ($auth.isAuthenticated())
-            $location.path('/');
+
 
         $scope.signup = function() {
             $auth.signup ({

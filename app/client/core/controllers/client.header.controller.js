@@ -1,6 +1,9 @@
-angular.module('core').controller('HeaderController', ['$scope', '$state', '$auth',
+angular.module('calculateRoute').controller('HeaderController', ['$scope', '$state', '$auth',
 	function($scope, $state, $auth) {
 		console.log ("DENTRO CONTROLADOR HEADER");
+
+
+
 
 
 		$scope.isAuthenticated = function() {
@@ -8,7 +11,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$aut
         };
 
 		$scope.logut = function() {
-            console.log ("DENTRO")
+            console.log ("DENTRO");
 			$scope.logut = function() {
 				if (!$auth.isAuthenticated()) {
                     console.log ("FALLO");
@@ -20,6 +23,5 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$aut
 				});
 			};
 		};
-;
 	}
 ]);

@@ -38,8 +38,7 @@ module.exports = {
                 'app/client/*/css/*.css'
             ],
             js: [
-                'app/client/client.config.js',
-                'app/client/client.init.js',
+                'app/client/app.js',
                 'app/client/*[!lib]*/*.js',
                 'app/client/*[!lib]*/**/*.js'
             ],
@@ -53,7 +52,8 @@ module.exports = {
                     'app/client/lib/angular-resource/angular-resource.js',
                     'app/client/lib/angular-ui-router/release/angular-ui-router.js',
                     'app/client/lib/materialize/dist/js/materialize.js',
-                    'app/client/lib/satellizer/satellizer.js'
+                    'app/client/lib/satellizer/satellizer.js',
+
                 ]
             },
             tests: [

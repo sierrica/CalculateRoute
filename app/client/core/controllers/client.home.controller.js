@@ -1,32 +1,23 @@
-angular.module('core').controller('HomeController', ['$scope', '$location', '$auth',
-    function($scope, $location, $auth) {
+angular.module('calculateRoute').controller('HomeController', ['$scope', '$location', '$auth', 'Map',
+    function($scope, $location, $auth, Map) {
         console.log ("DENTRO HOME CONTROLLER");
 
-        $('.button-collapse').sideNav({
-            menuWidth: 300,
-            edge: 'left',
-            closeOnClick: false
-        });
 
 
 
-        setTimeout(function() {
-            $('body').addClass('loaded');
-            navigator.geolocation.getCurrentPosition ($scope.mostrar_posicion, $scope.error_posicion, opciones_localizacion);
-        }, 1700);
+        if ( ! $auth.isAuthenticated())
+            $location.path('/signup');
+
+
+        $scope.mapa = function () {
+            Map.getMap("mapContainer");
+        }
 
 
 
 
         console.log ($auth.getToken());
         console.log ($auth.getPayload());
-
-        $scope.isAuthenticated = function() {
-            return $auth.isAuthenticated();
-        };
-
-
-
 
 
 
@@ -58,7 +49,7 @@ angular.module('core').controller('HomeController', ['$scope', '$location', '$au
         }
 
         var opciones_localizacion = { enableHighAccuracy: true };
-
+        navigator.geolocation.getCurrentPosition ($scope.mostrar_posicion, $scope.error_posicion, opciones_localizacion);
 
 
 

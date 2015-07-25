@@ -1,2 +1,0 @@
-
-ApplicationConfiguration.registerModule ('user');
