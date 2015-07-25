@@ -37,4 +37,4 @@ gulp.task('cssmin', function () {
 
 
 
-gulp.task('default', ['cssmin']);
+gulp.task('default', ['cssmin', 'uglify']);

@@ -43,7 +43,7 @@ function getGlobbedPaths(globPatterns, excludes) {
 }
 
 
-console.log ("COMPRIMING CSS/JS...");
+console.log ("COMPRIMING CSS/JS................");
 var css_min = uglifycss.processFiles (getGlobbedPaths(config.assets.client.lib.css).concat(getGlobbedPaths(config.assets.client.css)), {
     maxLineLen: 500,
     expandVars: true
