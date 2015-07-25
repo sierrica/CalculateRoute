@@ -11,7 +11,7 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
 
         $scope.mapa = function () {
             Map.getMap("mapContainer");
-        }
+        };
 
 
 
