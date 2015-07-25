@@ -44,7 +44,8 @@ module.exports = {
             ],
             lib: {
                 css: [
-                    'app/client/lib/materialize/dist/css/materialize.css'
+                    'app/client/lib/materialize/dist/css/materialize.css',
+                    'http://fonts.googleapis.com/css?family=Roboto:500,300,700,100,400'
                 ],
                 js: [
                     'app/client/lib/jquery/dist/jquery.js',
