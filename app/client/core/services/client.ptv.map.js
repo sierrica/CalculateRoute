@@ -17,20 +17,22 @@ angular.module('calculateRoute').factory('Map', function() {
             getMap: function(container, container_hide) {
                 if (first) {
                     angular.element(document).ready(function () {
-                        $("#mapContainer").css ("width", $("#mapContainer").parent().width());
-                        $("#mapContainer").css ("height", window.innerHeight - 50);
-                        map = new com.ptvag.webcomponent.map.Map (document.getElementById("mapContainer"));
-                        window.onresize = function() {
-                            $("#mapContainer").css ("width", $("#mapContainer").parent().width());
-                            $("#mapContainer").css ("height", window.innerHeight - 50);
-                            map.updateSize();
-                        };
-                        map.setEnableKeyboardControl (true);
-                        map.removeLayer("compass");
-                        map.removeLayer("scale");
+                        setTimeout(function() {
+                            $("#mapContainer").css("width", $("#mapContainer").parent().width());
+                            $("#mapContainer").css("height", window.innerHeight - 50);
+                            map = new com.ptvag.webcomponent.map.Map(document.getElementById("mapContainer"));
+                            window.onresize = function () {
+                                $("#mapContainer").css("width", $("#mapContainer").parent().width());
+                                $("#mapContainer").css("height", window.innerHeight - 50);
+                                map.updateSize();
+                            };
+                            map.setEnableKeyboardControl(true);
+                            map.removeLayer("compass");
+                            map.removeLayer("scale");
 
-                        first = false;
-                        return map;
+                            first = false;
+                            return map;
+                        }, 1000);
                     });
                 }
                 else {

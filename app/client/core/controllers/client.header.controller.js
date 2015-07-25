@@ -9,6 +9,8 @@ angular.module('calculateRoute').controller('HeaderController', ['$scope', '$sta
 		};
 
 
+
+
 		$scope.isAuthenticated = function() {
             return $auth.isAuthenticated();
         };
