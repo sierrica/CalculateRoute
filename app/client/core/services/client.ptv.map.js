@@ -1,18 +1,15 @@
 
 angular.module('calculateRoute').factory('Map', function() {
-        com.ptvag.webcomponent.map.Map.USE_TOOLBAR = false;
-        com.ptvag.webcomponent.map.Map.USE_ZOOM_SLIDER = false;
-        com.ptvag.webcomponent.map.MapController.DEFAULT_ACTION_MODE = com.ptvag.webcomponent.map.MapController.ACTION_MODE_MOVE;
         var first = true;
         var map;
-        var html_map;
-
-
-
 
         return {
             getMap: function(container, container_hide) {
                 if (first) {
+                    com.ptvag.webcomponent.map.RequestBuilder.X_TOKEN = 204109275126088;
+                    com.ptvag.webcomponent.map.Map.USE_TOOLBAR = false;
+                    com.ptvag.webcomponent.map.Map.USE_ZOOM_SLIDER = false;
+                    com.ptvag.webcomponent.map.MapController.DEFAULT_ACTION_MODE = com.ptvag.webcomponent.map.MapController.ACTION_MODE_MOVE;
                     $("#mapContainer").css("width", $("#mapContainer").parent().width());
                     $("#mapContainer").css("height", window.innerHeight - 50);
                     map = new com.ptvag.webcomponent.map.Map(document.getElementById("mapContainer"));
