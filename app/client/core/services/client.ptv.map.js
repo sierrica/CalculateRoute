@@ -13,24 +13,20 @@ angular.module('calculateRoute').factory('Map', function() {
         return {
             getMap: function(container, container_hide) {
                 if (first) {
-                    angular.element(document).ready(function () {
-                        setTimeout(function() {
-                            $("#mapContainer").css("width", $("#mapContainer").parent().width());
-                            $("#mapContainer").css("height", window.innerHeight - 50);
-                            map = new com.ptvag.webcomponent.map.Map(document.getElementById("mapContainer"));
-                            window.onresize = function () {
-                                $("#mapContainer").css("width", $("#mapContainer").parent().width());
-                                $("#mapContainer").css("height", window.innerHeight - 50);
-                                map.updateSize();
-                            };
-                            map.setEnableKeyboardControl(true);
-                            map.removeLayer("compass");
-                            map.removeLayer("scale");
+                    $("#mapContainer").css("width", $("#mapContainer").parent().width());
+                    $("#mapContainer").css("height", window.innerHeight - 50);
+                    map = new com.ptvag.webcomponent.map.Map(document.getElementById("mapContainer"));
+                    window.onresize = function () {
+                        $("#mapContainer").css("width", $("#mapContainer").parent().width());
+                        $("#mapContainer").css("height", window.innerHeight - 50);
+                        map.updateSize();
+                    };
+                    map.setEnableKeyboardControl(true);
+                    map.removeLayer("compass");
+                    map.removeLayer("scale");
 
-                            first = false;
-                            return map;
-                        }, 1500);
-                    });
+                    first = false;
+                    return map;
                 }
                 else {
                     $("#mapContainerHide").children().first().appendTo ("#mapContainer");
