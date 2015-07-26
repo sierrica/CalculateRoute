@@ -2,15 +2,13 @@ angular.module('calculateRoute').controller('SidenavController', ['$scope', '$st
     function($scope, $state, $auth) {
 
         $scope.close_sidenav = function (event) {
-            if ($(".button-collapse").is(":visible"))
+            if ($('.button-collapse').is(':visible'))
                 $('.button-collapse').sideNav('hide');
         };
 
         angular.element(document).ready(function () {
             $('.button-collapse').sideNav({
-                menuWidth: 300,
-                edge: 'left',
-                closeOnClick: false
+                menuWidth: 300
             });
         });
 
