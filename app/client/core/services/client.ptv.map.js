@@ -7,10 +7,7 @@ angular.module('calculateRoute').factory('Map', function() {
         var map;
         var html_map;
 
-        function newMap (container) {
 
-
-        }
 
 
         return {
@@ -32,7 +29,7 @@ angular.module('calculateRoute').factory('Map', function() {
 
                             first = false;
                             return map;
-                        }, 1000);
+                        }, 1500);
                     });
                 }
                 else {

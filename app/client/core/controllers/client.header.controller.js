@@ -1,5 +1,5 @@
-angular.module('calculateRoute').controller('HeaderController', ['$scope', '$state', '$auth',
-	function($scope, $state, $auth) {
+angular.module('calculateRoute').controller('HeaderController', ['$rootScope', '$scope', '$state', '$auth',
+	function($rootScope, $scope, $state, $auth) {
 		console.log ("DENTRO CONTROLADOR HEADER");
 
 
