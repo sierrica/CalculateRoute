@@ -37,14 +37,3 @@ if [ "$zcode" -eq 200 ]; then
    echo "  - Version from test URI = $(curl -s $app_uri | grep 'Version')"
    echo ""
 fi
-
-
-# POR MI
-echo
-   (echo "BORRANDO APP-DEPLOYMENT............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_HOMEDIR}"; rm -r app-deployments/*; echo "APP-DEPLOYMENT BORRADO" >> "$OPENSHIFT_LOG_DIR/npm.log")
-   (echo "BORRANDO FOLDERS APP_ROOT/DATA............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_DATA_DIR}"; rm -r .config .local .nodejs.tmp .nodewatch; echo "FOLDERS APP_ROOT/DATA BORRADOS" >> "$OPENSHIFT_LOG_DIR/npm.log")
-
-
-
-
-
