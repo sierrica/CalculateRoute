@@ -67,12 +67,12 @@ var initGlobalConfigFiles = function(config) {
 
 
    if (process.env.NODE_ENV === 'production') {
-        config.files.client.css = getGlobbedPaths('app/client/lib/calculateroute.min.css', 'app/client/');
-        config.files.client.js = getGlobbedPaths('app/client/lib/calculateroute.min.js', 'app/client/');
+        config.files.client.css = getGlobbedPaths('files/lib/calculateroute.min.css', 'files/');
+        config.files.client.js = getGlobbedPaths('files/lib/calculateroute.min.js', 'files/');
    }
    else {
-        config.files.client.css = getGlobbedPaths(config.assets.client.lib.css, 'app/client/').concat(getGlobbedPaths(config.assets.client.css, 'app/client/'));
-        config.files.client.js = getGlobbedPaths(config.assets.client.lib.js, 'app/client/').concat(getGlobbedPaths(config.assets.client.js, 'app/client/'));
+        config.files.client.css = getGlobbedPaths(config.assets.client.lib.css, 'files/').concat(getGlobbedPaths(config.assets.client.css, 'files/'));
+        config.files.client.js = getGlobbedPaths(config.assets.client.lib.js, 'files/').concat(getGlobbedPaths(config.assets.client.js, 'files/'));
    }
 };
 
@@ -85,7 +85,8 @@ var initGlobalConfigFolders = function(config) {
     };
 
     // Setting globbed client paths
-    config.folders.client = getGlobbedPaths(path.join(process.cwd(), 'app/client/'), process.cwd().replace(new RegExp(/\\/g),'/'));
+    config.folders.client = getGlobbedPaths(path.join(process.cwd(), 'app/client/'), process.cwd().replace(new RegExp(/\\/g),'/'))
+                    .concat(getGlobbedPaths(path.join(process.cwd(), 'files/'), process.cwd().replace(new RegExp(/\\/g),'/')));
 };
 
 

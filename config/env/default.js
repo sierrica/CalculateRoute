@@ -44,15 +44,17 @@ module.exports = {
             ],
             lib: {
                 css: [
-                    'app/client/lib/materialize/dist/css/materialize.css',
+                    'files/lib/materialize/dist/css/materialize.css',
+                    'files/lib/perfect-scrollbar/css/perfect-scrollbar.css'
                 ],
                 js: [
-                    'app/client/lib/jquery/dist/jquery.js',
-                    'app/client/lib/angular/angular.js',
-                    'app/client/lib/angular-resource/angular-resource.js',
-                    'app/client/lib/angular-ui-router/release/angular-ui-router.js',
-                    'app/client/lib/materialize/dist/js/materialize.js',
-                    'app/client/lib/satellizer/satellizer.js',
+                    'files/lib/jquery/dist/jquery.js',
+                    'files/lib/angular/angular.js',
+                    'files/lib/angular-resource/angular-resource.js',
+                    'files/lib/angular-ui-router/release/angular-ui-router.js',
+                    'files/lib/materialize/dist/js/materialize.js',
+                    'files/lib/satellizer/satellizer.js',
+                    'files/lib/perfect-scrollbar/js/perfect-scrollbar.js'
 
                 ]
             },

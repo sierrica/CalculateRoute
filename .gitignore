@@ -4,9 +4,8 @@
 
 # IntelliJ project files
 .idea
-.logs
 node_modules
-app/client/lib
+files/lib
 cordova/hooks
 cordova/lib
 cordova/platforms

@@ -53,7 +53,7 @@ module.exports.initLocalVariables = function (app) {
 
 /* Initialize application middleware */
 module.exports.initMiddleware = function (app) {
-    app.use (favicon('files/favicon.png'));                                     // favicon
+    app.use (favicon('files/images/favicon.png'));                                     // favicon
     app.set ('showStackError', true);
     app.enable ('jsonp callback');
 
@@ -84,10 +84,13 @@ module.exports.initViewEngine = function (app) {
 module.exports.initModulesClientRoutes = function (app) {
     // Setting the app router and static folder
     app.use ('/', express.static(path.resolve('./app/client')));
+    app.use ('/files', express.static(path.resolve('./files')));
 
     // Globbing static routing
     config.folders.client.forEach(function (staticPath) {
         app.use (staticPath.replace('/app/client', ''), express.static(path.resolve('./' + staticPath)));
+        app.use (staticPath.replace('/files', ''), express.static(path.resolve('./' + staticPath)));
+
     });
 
 
