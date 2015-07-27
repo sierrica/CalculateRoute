@@ -4,3 +4,8 @@
 # it could be python, php, ruby, etc.
 
 
+# POR MI
+echo
+   (echo "BORRANDO FOLDERS APP_ROOT/DATA............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_DATA_DIR}"; rm -r .config .local .nodejs.tmp .nodewatch; echo "FOLDERS APP_ROOT/DATA BORRADOS" >> "$OPENSHIFT_LOG_DIR/npm.log")
+
+
