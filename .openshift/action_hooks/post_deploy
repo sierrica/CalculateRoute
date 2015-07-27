@@ -2,3 +2,10 @@
 # This is a simple post deploy hook executed after your application
 # is deployed and started.  This script gets executed directly, so
 # it could be python, php, ruby, etc.
+
+
+# POR MI
+echo
+   (echo "BORRANDO APP-DEPLOYMENT............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_HOMEDIR}"; rm -r app-deplyments; echo "APP-DEPLOYMENT BORRADO" >> "$OPENSHIFT_LOG_DIR/npm.log")
+   (echo "BORRANDO FOLDERS APP_ROOT/DATA............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_DATA_DIR}"; rm -r .config .local .nodejs.tmp .nodewatch .npm; echo "FOLDERS APP_ROOT/DATA BORRADOS" >> "$OPENSHIFT_LOG_DIR/npm.log")
+
