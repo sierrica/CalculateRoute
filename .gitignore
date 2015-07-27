@@ -5,6 +5,7 @@
 # IntelliJ project files
 .idea
 node_modules
+.bower
 files/lib
 cordova/hooks
 cordova/lib

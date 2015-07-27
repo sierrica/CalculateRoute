@@ -12,7 +12,7 @@ mongoose.createMongooseConnection(function () {
     var app = express.init();
     app.listen(config.server.port, config.server.ip, function () {
         setTimeout (function(){
-            logger.info('PLATFORM: ' + process.env.PLATFORM + '; NODE_ENV: ' + process.env.NODE_ENV + '; INTERFACE: ' + config.ip_node + ':' + config.port_node + '; NODEJS -V: ' + process.version);
+            logger.info('PLATFORM: ' + process.env.PLATFORM + '; NODE_ENV: ' + process.env.NODE_ENV + '; INTERFACE: ' + config.ip_node + ':' + config.port_node + '; NODEJS -V: ' + process.version + '; RUTA: ' + process.cwd());
         }, 1000);
     });
 
