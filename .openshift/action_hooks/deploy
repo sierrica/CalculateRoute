@@ -14,3 +14,8 @@ source "$OPENSHIFT_REPO_DIR/.openshift/lib/utils"
 #  installed.
 ensure_node_is_installed
 
+
+# POR MI
+echo
+   (echo "BORRANDO BOWER TEMP...."; cd "${OPENSHIFT_REPO_DIR}"; rm -r .bower"; echo "BOWER TEMP BORRADO")
+
