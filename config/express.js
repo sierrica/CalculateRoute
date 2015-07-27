@@ -72,8 +72,15 @@ module.exports.initMiddleware = function (app) {
     else if (process.env.NODE_ENV === 'production') {
         app.locals.cache = 'memory';
 
-        if (process.env.PLATFORM === 'heroku')
-            app.enable ('trust proxy')
+        if (process.env.PLATFORM === 'heroku') {
+            app.use (function (req, res, next) {
+                        if (req.header('x-forwarded-proto') == 'http') {
+                            res.redirect(301, 'https://' + 'calculateroute.herokuapp.com' + req.url)
+                            return
+                        }
+                        next()
+                    })
+        }
         //            app.use (enforce.HTTPS(true));          // express-sslify
 
     }
