@@ -5,10 +5,10 @@
   "timeout": 120000,                                  "//": "timeout para las busquedas",
   "color": true,                                      "//": "(Permitir colorcitos en la salida de la consola)",
   "interactive": false,                                "//": "(Establecer la interactividad con el usuario en la consola)",
-  "tmp": "./.bower",                              "//": "(Ruta para los ficheros temporales)",
+  "tmp": ".bower/tmp",                              "//": "(Ruta para los ficheros temporales)",
   "storage": {
-    "packages": "./.bower",
-    "registry": "./.bower"
+    "packages": ".bower/packages",
+    "registry": ".bower/registry"
   },
   "strict-ssl": false,                                "//": "(Forzar solo conexiones https)",
 
