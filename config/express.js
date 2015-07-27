@@ -1,6 +1,6 @@
 var config          = require ('./config'),
     logger          = require ('./logger'),
-    sslRedirect     = require ('heroku-ssl-redirect'),
+
     express         = require ('express'),
     path            = require ('path'),
     consolidate     = require ('consolidate'),
@@ -12,8 +12,7 @@ var config          = require ('./config'),
     mongoose        = require ("mongoose"),
     morgan          = require ('morgan'),
     compression     = require ('compression'),
-    errorHandler    = require ('errorhandler'),
-    enforce         = require ('express-sslify');
+    errorHandler    = require ('errorhandler');
 
 
 /* Invoke modules server configuration */
@@ -72,22 +71,6 @@ module.exports.initMiddleware = function (app) {
     }
     else if (process.env.NODE_ENV === 'production') {
         app.locals.cache = 'memory';
-
-        if (process.env.PLATFORM === 'heroku') {
-            app.use (sslRedirect());
-/*            app.use (function (req, res, next) {
-                        if (req.header('x-forwarded-proto') == 'http') {
-                            res.redirect(301, 'https://' + 'calculateroute.herokuapp.com' + req.url)
-                            return
-                        }
-                        next()
-                    })
-                */
-        }
-
-
-        //            app.use (enforce.HTTPS(true));          // express-sslify
-
     }
 };
 
