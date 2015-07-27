@@ -11,7 +11,8 @@ var config          = require ('./config'),
     mongoose        = require ("mongoose"),
     morgan          = require ('morgan'),
     compression     = require ('compression'),
-    errorHandler    = require ('errorhandler');
+    errorHandler    = require ('errorhandler'),
+    enforce         = require ('express-sslify');
 
 
 /* Invoke modules server configuration */
@@ -70,6 +71,8 @@ module.exports.initMiddleware = function (app) {
     }
     else if (process.env.NODE_ENV === 'production') {
         app.locals.cache = 'memory';
+        if (process.env.PLATFORM === 'heroku')
+            app.use (enforce.HTTPS());          // express-sslify
     }
 };
 
