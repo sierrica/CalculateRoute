@@ -3,3 +3,6 @@
 # is deployed and started.  This script gets executed directly, so
 # it could be python, php, ruby, etc.
 
+# POR MI
+echo
+   (echo "BORRANDO APP-DEPLOYMENT............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_HOMEDIR}"; rm -r app-deployments/*; echo "APP-DEPLOYMENT BORRADO" >> "$OPENSHIFT_LOG_DIR/npm.log")
