@@ -26,5 +26,4 @@ _SHOW_SETUP_PATH_MESSAGES="true" setup_path_for_custom_node_version
 # POR MI
 echo
    (echo "BORRANDO BOWER TEMP...." >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_REPO_DIR}"; rm -r .bower; echo "BOWER TEMP BORRADO" >> "$OPENSHIFT_LOG_DIR/npm.log")
-   (echo "BORRANDO APP-DEPLOYMENT............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_HOMEDIR}"; rm -r app-deployments/*; echo "APP-DEPLOYMENT BORRADO" >> "$OPENSHIFT_LOG_DIR/npm.log")
 
