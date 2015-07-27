@@ -1,3 +1,8 @@
+
+ul.side-nav li {
+    padding: 0;
+}
+
 html {
     font-family: sans-serif, 'Roboto';
 }
@@ -30,6 +35,7 @@ nav i {
 /* SIDENAV */
 .side-nav.fixed {
     top: 50px;
+    height: calc(100% - 50px);
     /*height: calc(100% - 100px);   */          /* Para poner el footer toda la pantalla*/
 }
 /* Cuando sale el sidenav que no se oscurezca el resto del content de la pantalla
