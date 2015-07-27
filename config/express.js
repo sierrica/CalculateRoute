@@ -71,8 +71,11 @@ module.exports.initMiddleware = function (app) {
     }
     else if (process.env.NODE_ENV === 'production') {
         app.locals.cache = 'memory';
+
         if (process.env.PLATFORM === 'heroku')
-            app.use (enforce.HTTPS(true));          // express-sslify
+            app.enable ('trust proxy')
+        //            app.use (enforce.HTTPS(true));          // express-sslify
+
     }
 };
 
