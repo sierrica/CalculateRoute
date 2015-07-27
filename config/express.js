@@ -1,5 +1,6 @@
 var config          = require ('./config'),
     logger          = require ('./logger'),
+    sslRedirect     = require ('heroku-ssl-redirect'),
     express         = require ('express'),
     path            = require ('path'),
     consolidate     = require ('consolidate'),
@@ -73,14 +74,18 @@ module.exports.initMiddleware = function (app) {
         app.locals.cache = 'memory';
 
         if (process.env.PLATFORM === 'heroku') {
-            app.use (function (req, res, next) {
+            app.use (sslRedirect());
+/*            app.use (function (req, res, next) {
                         if (req.header('x-forwarded-proto') == 'http') {
                             res.redirect(301, 'https://' + 'calculateroute.herokuapp.com' + req.url)
                             return
                         }
                         next()
                     })
+                */
         }
+
+
         //            app.use (enforce.HTTPS(true));          // express-sslify
 
     }
