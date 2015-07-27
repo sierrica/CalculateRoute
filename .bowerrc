@@ -7,8 +7,8 @@
   "interactive": false,                                "//": "(Establecer la interactividad con el usuario en la consola)",
   "tmp": "./.bower",                              "//": "(Ruta para los ficheros temporales)",
   "storage": {
-    "packages": "/dev/null",
-    "registry": "/dev/null"
+    "packages": "./.bower",
+    "registry": "./.bower"
   },
   "strict-ssl": false,                                "//": "(Forzar solo conexiones https)",
 
