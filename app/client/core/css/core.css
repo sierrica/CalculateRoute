@@ -32,6 +32,11 @@ nav i {
     padding: 0;
 }
 
+#button-collapse {
+    z-index: 1000;
+}
+
+
 /* Cuando sale el sidenav que no se oscurezca el resto del content de la pantalla
 #sidenav-overlay {
     background-color: transparent;
@@ -45,9 +50,13 @@ footer {
 
 
 /* ANADIDOS PARA PROBAR */
-
-ul.side-nav li {
-    padding: 0;
+nav .button-collapse i {
+    font-size: 3.5rem;
 }
 
+nav .btn-floating.btn-large {
+    left: 5px;
+    height: 50px;
+    width: 50px;
+}
 

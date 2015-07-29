@@ -1,5 +1,6 @@
 angular.module('calculateRoute', [
     'ui.router',
+    'ngTouch',
     'satellizer'
 ])
 .config(function ($urlRouterProvider, $locationProvider) {

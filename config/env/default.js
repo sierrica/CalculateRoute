@@ -50,6 +50,7 @@ module.exports = {
                 js: [
                     'files/lib/jquery/dist/jquery.js',
                     'files/lib/angular/angular.js',
+                    'files/lib/angular-touch/angular-touch.js',
                     'files/lib/angular-resource/angular-resource.js',
                     'files/lib/angular-ui-router/release/angular-ui-router.js',
                     'files/lib/materialize/dist/js/materialize.js',

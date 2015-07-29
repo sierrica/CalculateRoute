@@ -1,6 +1,5 @@
 var config          = require ('./config'),
     logger          = require ('./logger'),
-
     express         = require ('express'),
     path            = require ('path'),
     consolidate     = require ('consolidate'),
