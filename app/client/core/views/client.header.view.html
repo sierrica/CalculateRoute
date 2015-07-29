@@ -1,9 +1,9 @@
 <div class="navbar-fixed" ng-controller="HeaderController">
     <nav>
         <div class="nav-wrapper">
-            <a href="/" class="btn-floating btn-large pink" ng-show="collapsing"></a>
+            <a class="btn-floating btn-large pink" ng-show="collapsing"></a>
             <a href="/" class="button-collapse btn-floating btn-large pink" data-activates="slide-out" ng-show="!collapsing" ng-click="button_collapse()"><i class="material-icons" ng-click="button_collapse()">menu</i></a>
-            <a href="/" class="brand-logo" ng-click="sidenav()">Calculateroute</a>
+            <a href="/" class="brand-logo" ng-click="close_sidenav()">Calculateroute</a>
             <ul class="right">
                 <li><a><i class="large material-icons">person</i></a></li>
             </ul>

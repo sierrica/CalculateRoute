@@ -3,10 +3,16 @@ angular.module('calculateRoute').controller('HeaderController', ['$rootScope', '
 		console.log ("DENTRO CONTROLADOR HEADER");
 
 
-		$scope.sidenav = function (event) {
-			if (window.innerWidth <= 992)
+		$scope.close_sidenav = function (event) {
+			if (window.innerWidth <= 992) {
 				$('.button-collapse').sideNav('hide');
+                $(".button-collapse i").text("menu");
+            }
 		};
+
+
+
+
 
 
         $( window ).resize(function() {
@@ -19,6 +25,8 @@ angular.module('calculateRoute').controller('HeaderController', ['$rootScope', '
         });
 
 
+
+
         $scope.collapsing = false;
 		$scope.button_collapse = function () {
 
@@ -26,14 +34,21 @@ angular.module('calculateRoute').controller('HeaderController', ['$rootScope', '
                 console.log ($("#slide-out").css("left"));
                 var anchura_menu_inicial = parseFloat ($("#slide-out").css("left"));
                 console.log (anchura_menu_inicial);
+
+
+
                 $scope.collapsing = true;
                 that = $scope;
                 setTimeout (function() {
                     var anchura_menu_actual = parseFloat ($("#slide-out").css("left"));
-                    if (anchura_menu_inicial < anchura_menu_actual)
+                    if (anchura_menu_inicial < anchura_menu_actual) {
                         $(".button-collapse i").text("arrow_back");
-                    else
+                        $('.drag-target').css("width", "calc(100% - 300px)");
+                    }
+                    else {
                         $(".button-collapse i").text("menu");
+                        $('.drag-target').css("width", "1px");
+                    }
                     that.collapsing = false;
                     that.$apply();
                     //$('#sidenav-overlay').trigger('click');       // provocar cerrar el menu

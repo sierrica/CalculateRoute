@@ -4,18 +4,22 @@ angular.module('calculateRoute').controller('SidenavController', ['$rootScope', 
         console.log ("DENTRO CONTROLADOR SIDENAV");
 
         $scope.close_sidenav = function (event) {
-            if ($('.button-collapse').is(':visible'))
+            if (window.innerWidth <= 992) {
                 $('.button-collapse').sideNav('hide');
+                $(".button-collapse i").text("menu");
+            }
         };
 
         $rootScope.$on('$includeContentLoaded', function() {
+            // SideNav
             $('.button-collapse').sideNav({
                 menuWidth: 300,
                 closeOnClick: false
             });
+            $('.drag-target').css("width", "1px");
 
 
-            // Materialize Dropdown
+            // SideNav Dropdown
             $('.dropdown-button').dropdown({
                     activationWidth: 70,
                     inDuration: 300,
@@ -27,11 +31,29 @@ angular.module('calculateRoute').controller('SidenavController', ['$rootScope', 
                 }
             );
 
-
             // Perfect Scrollbar
             Ps.initialize (document.getElementById('slide-out'));
 
         });
+
+
+        $rootScope.$on('$includeContentLoaded', function() {
+            $('.drag-target').on('click', function() {
+                setTimeout (function() {
+                    $(".button-collapse i").text("menu");
+                }, 350);
+            });
+            $('.drag-target').on('panend', function(){
+                setTimeout (function() {
+                    if ($("#slide-out").css("left") == "-310px")
+                        $(".button-collapse i").text("menu");
+                }, 350);
+            });
+
+        });
+
+
+
 
 /*
         $('body').on('click', '.button-collapse', function() {
