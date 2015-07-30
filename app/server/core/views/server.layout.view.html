@@ -28,8 +28,6 @@
     <!--  Google Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script type="text/javascript" src="https://ajaxmaps-eu-n-test.cloud.ptvgroup.com/ajaxmaps/.qxrpc"></script>
-
     <!--Application JavaScript Files-->
     {% for jsFile in jsFiles %}
         <script type="text/javascript" src="{{jsFile}}"></script>
@@ -38,13 +36,8 @@
 </head>
 
 <body ng-app="calculateRoute">
-
-
-    <div id="mapContainerHide" style="display:none"></div>
-
     <!-- HEADER -->
     <header data-ng-include="'core/views/client.header.view.html'"></header>
-
     <!-- MAIN -->
     <main>
         <!-- LEFT SIDEBAR NAV -->
@@ -52,8 +45,9 @@
         <!-- CONTENT -->
         <content>{% block content %}{% endblock %}</content>
     </main>
-
     <!-- FOOTER -->
     <footer></footer>
 </body>
+<!-- CONTAINER MAP HIDE -->
+<div id="mapContainerHide" style="height:0.01px"></div>
 </html>

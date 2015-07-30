@@ -45,7 +45,8 @@ module.exports = {
             lib: {
                 css: [
                     'files/lib/materialize/dist/css/materialize.css',
-                    'files/lib/perfect-scrollbar/css/perfect-scrollbar.css'
+                    'files/lib/perfect-scrollbar/css/perfect-scrollbar.css',
+                    'files/lib/leaflet/dist/leaflet.css'
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
@@ -55,7 +56,9 @@ module.exports = {
                     'files/lib/angular-ui-router/release/angular-ui-router.js',
                     'files/lib/materialize/dist/js/materialize.js',
                     'files/lib/satellizer/satellizer.js',
-                    'files/lib/perfect-scrollbar/js/perfect-scrollbar.js'
+                    'files/lib/perfect-scrollbar/js/perfect-scrollbar.js',
+                    'files/lib/leaflet/dist/leaflet.js',
+                    'files/lib/angular-leaflet-directive/dist/angular-leaflet-directive.js'
 
                 ]
             },

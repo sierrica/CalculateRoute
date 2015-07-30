@@ -1,4 +1,5 @@
-<ul id="slide-out" class="side-nav fixed ps-container ps-active-y" ng-controller="SidenavController">
+<!--<ul id="slide-out" class="side-nav fixed ps-container ps-active-y" ng-controller="SidenavController">-->
+<ul id="slide-out" class="side-nav fixed" ng-controller="SidenavController">
 
     <li class="pink">
         <div class="row">
@@ -14,16 +15,16 @@
                     <li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a></li>
                     <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a></li>
                 </ul>
-                <a ng-click="user_dropdown()" class="dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                <a ng-mouseup="user_dropdown()" class="dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
                 <p>Administrator</p>
             </div>
         </div>
     </li>
 
-    <li><a ui-sref="signup" class="waves-effect" ng-click="close_sidenav()">Signup</a></li>
-    <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav()">Home</a></li>
-    <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav()">Vehiculo1</a></li>
-    <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav()">Vehiculo2</a></li>
+    <li><a ui-sref="signup" class="waves-effect" ng-click="close_sidenav($event)">Signup</a></li>
+    <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav($event)">Home</a></li>
+    <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav($event)">Vehiculo1</a></li>
+    <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav($event)">Vehiculo2</a></li>
     <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav()">Vehiculo3</a></li>
     <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav()">Vehiculo4</a></li>
     <li><a ui-sref="home" class="waves-effect" ng-click="close_sidenav()">Vehiculo5</a></li>

@@ -3,14 +3,25 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
         console.log ("DENTRO HOME CONTROLLER");
 
 
-
-
         if ( ! $auth.isAuthenticated())
             $location.path('/signup');
 
 
-        $scope.mapa = function () {
-            Map.getMap("mapContainer");
+/*
+        $scope.init_map = function () {
+            var map = L.map('map').setView([51.505, -0.09], 13);
+        };
+*/
+        window.onresize = function () {
+            $(".angular-leaflet-map").css("width", $("#mapContainer").parent().width());
+            $(".angular-leaflet-map").css("height", window.innerHeight - 50);
+            map.updateSize();
+        };
+
+
+        $scope.map = function () {
+            $(".angular-leaflet-map").css ("width", $("#mapContainer").parent().width());
+            $(".angular-leaflet-map").css ("height", window.innerHeight - 50);
         };
 
 

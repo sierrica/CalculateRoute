@@ -55,7 +55,7 @@ nav .button-collapse i {
 }
 
 nav .btn-floating.btn-large {
-    left: 5px;
+    right: 5px;
     height: 50px;
     width: 50px;
 }

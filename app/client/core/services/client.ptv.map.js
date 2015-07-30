@@ -1,11 +1,12 @@
 
-angular.module('calculateRoute').factory('Map', function() {
+angular.module('calculateRoute').factory('PTV', function() {
         var first = true;
         var map;
 
         return {
             getMap: function(container, container_hide) {
                 if (first) {
+                    first = false;
                     com.ptvag.webcomponent.map.RequestBuilder.X_TOKEN = 204109275126088;
                     com.ptvag.webcomponent.map.Map.USE_TOOLBAR = false;
                     com.ptvag.webcomponent.map.Map.USE_ZOOM_SLIDER = false;
@@ -22,7 +23,7 @@ angular.module('calculateRoute').factory('Map', function() {
                     map.removeLayer("compass");
                     map.removeLayer("scale");
 
-                    first = false;
+
                     return map;
                 }
                 else {

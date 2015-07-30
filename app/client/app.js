@@ -1,7 +1,8 @@
 angular.module('calculateRoute', [
     'ui.router',
     'ngTouch',
-    'satellizer'
+    'satellizer',
+    'leaflet-directive'
 ])
 .config(function ($urlRouterProvider, $locationProvider) {
 
