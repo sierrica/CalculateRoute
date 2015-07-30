@@ -7,6 +7,26 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
             $location.path('/signup');
 
 
+        angular.extend($scope, {
+            tauste: {
+                lat: 41.55,
+                lng: -1.15,
+                zoom: 10
+            },
+            defaults: {
+                zoomControlPosition: false,
+                tileLayerOptions: {
+                    opacity: 0.9,
+                    detectRetina: true,
+                    reuseTiles: true,
+                },
+                scrollWheelZoom: true,
+                attributionControl: false
+            }
+        });
+
+
+
 /*
         $scope.init_map = function () {
             var map = L.map('map').setView([51.505, -0.09], 13);

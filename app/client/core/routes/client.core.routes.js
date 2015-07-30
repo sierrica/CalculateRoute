@@ -3,6 +3,6 @@ angular.module('calculateRoute')
     $stateProvider.
         state ('home', {
         url: '/',
-        templateUrl: 'core/views/client.home.view.html'
+        templateUrl: 'core/views/client.home.view.html',
     });
 }]);
