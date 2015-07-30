@@ -65,16 +65,15 @@ var initGlobalConfigFiles = function(config) {
     // Setting Globbed config files
     config.files.server.configs = getGlobbedPaths(config.assets.server.config);
 
-/*
+
    if (process.env.NODE_ENV === 'production') {
         config.files.client.css = getGlobbedPaths('files/lib/calculateroute.min.css', 'files/');
         config.files.client.js = getGlobbedPaths('files/lib/calculateroute.min.js', 'files/');
    }
-
    else {
- */        config.files.client.css = getGlobbedPaths(config.assets.client.lib.css, 'files/').concat(getGlobbedPaths(config.assets.client.css, 'files/'));
+        config.files.client.css = getGlobbedPaths(config.assets.client.lib.css, 'files/').concat(getGlobbedPaths(config.assets.client.css, 'files/'));
         config.files.client.js = getGlobbedPaths(config.assets.client.lib.js, 'files/').concat(getGlobbedPaths(config.assets.client.js, 'files/'));
-//   }
+   }
 };
 
 /* Initialize global configuration files */

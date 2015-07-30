@@ -8,13 +8,13 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
 
 
         angular.extend($scope, {
-            tauste: {
-                lat: 41.55,
-                lng: -1.15,
-                zoom: 10
+            london: {
+                lat: 51.505,
+                lng: -0.09,
+                zoom: 8
             },
             defaults: {
-                zoomControlPosition: false,
+                zoomControlPosition: 'topright',
                 tileLayerOptions: {
                     opacity: 0.9,
                     detectRetina: true,
