@@ -62,9 +62,7 @@ module.exports = {
 
                     'files/ptv/ajax-maps/NonTiledLayer.js',
                     'files/ptv/ajax-maps/NonTiledLayer.WMS.js',
-                    'files/ptv/ajax-maps/Leaflet.PtvLayer.js',
-
-                    'files/lib/angular-leaflet-directive/dist/angular-leaflet-directive.js',
+                    'files/ptv/ajax-maps/Leaflet.PtvLayer.js'
                 ]
             },
             tests: [
