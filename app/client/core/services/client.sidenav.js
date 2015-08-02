@@ -23,7 +23,9 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
             $('.drag-target').css("width", "1px");
 
             // SideNav Dropdown
-            $('.dropdown-button').dropdown();
+            $('.dropdown-button').dropdown({
+                belowOrigin: true
+            });
 
             // Perfect Scrollbar
             Ps.initialize (document.getElementById('slide-out'));
@@ -39,6 +41,8 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
                 setTimeout (function() {
                     if ($("#slide-out").css("left") == "-310px")
                         $(".button-collapse i").text("menu");
+                    else
+                        $(".button-collapse i").text("arrow_back");
                 }, 350);
             });
         },
@@ -51,12 +55,15 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
             else
                 $event.stopPropagation();
         },
+
         // Permitir cerrar el dropdown con click
-        user_dropdown: function(mostrado) {
-            setTimeout (function() {
-                if (mostrado)
+        dropdown: function($event) {
+            var origin = "#" + $($event.currentTarget).attr("data-activates");
+            if ($(origin).hasClass("active")) {
+                setTimeout (function() {
                     $(".side-nav").trigger("click");
-            }, 50);
+                }, 25);
+            }
         }
     }
 

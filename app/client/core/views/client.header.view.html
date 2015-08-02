@@ -1,16 +1,16 @@
 <div class="navbar-fixed" ng-controller="HeaderController">
     <nav>
         <div class="nav-wrapper">
-            <ul class="left">
-                <li><a><i class="large material-icons">more_vert</i></a></li>
-            </ul>
-
+            <a class="btn-floating btn-large pink" ng-show="collapsing"></a>
+            <a href="/" class="button-collapse btn-floating btn-large pink" data-activates="slide-out" ng-show="!collapsing" ng-click="button_collapse()"><i class="material-icons" ng-click="button_collapse()">menu</i></a>
             <a class="brand-logo" ui-sref="home" ng-click="close_sidenav($event)">Calculateroute</a>
-
             <ul class="right">
-                <a class="btn-floating btn-large pink" ng-show="collapsing"></a>
-                <a href="/" class="button-collapse btn-floating btn-large pink" data-activates="slide-out" ng-show="!collapsing" ng-click="button_collapse()"><i class="material-icons" ng-click="button_collapse()">menu</i></a>
-
+                <a ng-mouseup="dropdown($event)" class='dropdown-button' href='#' data-activates='dropdown_layers'><i class="large material-icons">more_vert</i></a>
+                <ul id='dropdown_layers' class='dropdown-content'>
+                    <li><a href="/" ng-click="change_layer()">PTV</a></li>
+                    <li><a href="/" ng-click="change_layer()">Mapnik</a></li>
+                    <li><a href="/" ng-click="change_layer()">Road</a></li>
+                </ul>
             </ul>
         </div>
     </nav>

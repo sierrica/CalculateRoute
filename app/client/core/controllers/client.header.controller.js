@@ -11,6 +11,18 @@ angular.module('calculateRoute').controller('HeaderController', ['$rootScope', '
             Sidenav.close_sidenav ($event)
 		};
 
+
+
+        $scope.dropdown = function ($event) {
+            Sidenav.dropdown($event);
+        };
+
+        $scope.change_layer = function () {
+
+        };
+
+
+
         $scope.collapsing = false;
 		$scope.button_collapse = function () {
             if (! $scope.collapsing) {

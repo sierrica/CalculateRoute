@@ -12,12 +12,8 @@ angular.module('calculateRoute').controller('SidenavController', ['$rootScope', 
             Sidenav.close_sidenav ($event)
         };
 
-        $scope.user_dropdown_hide = true;
-        $scope.user_dropdown = function () {
-            $scope.user_dropdown_hide = !$scope.user_dropdown_hide;
-            Sidenav.user_dropdown($scope.user_dropdown_hide);
-
-
+        $scope.dropdown = function ($event) {
+            Sidenav.dropdown($event);
         };
 
         $scope.logut = function() {

@@ -55,7 +55,7 @@ nav .button-collapse i {
 }
 
 nav .btn-floating.btn-large {
-    right: 5px;
+    left: 5px;
     height: 50px;
     width: 50px;
 }
@@ -68,5 +68,26 @@ nav {
     -ms-user-select: none;
     user-select: none;
 }
+
+
+
+
+
+/* LEAFLET */
+.leaflet-top {
+    z-index: 900;
+}
+
+.leaflet-control-layers label {
+    cursor: pointer;
+    font-size: 1.0rem;
+}
+
+input[type="radio"].leaflet-control-layers-selector {
+    position: relative;
+    left: 0px;
+    visibility: visible;
+}
+
 
 
