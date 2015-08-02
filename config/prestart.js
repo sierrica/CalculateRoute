@@ -63,7 +63,7 @@ fse.copy(path.join(process.cwd(),'/files/lib/laflet/dist/images/layers.png'), pa
     if (err) return console.error(err)
     console.log("success!")
 });
-fse.copy(path.join(process.cwd(),'/files/lib/laflet/dist/images/layers.png'), path.join(process.cwd(),'/files/lib/layers.png'), function (err) {
+fse.copy(path.join(process.cwd(),'/files/lib/laflet/dist/images/layers-2x.png'), path.join(process.cwd(),'/files/lib/layers-2x.png'), function (err) {
     if (err) return console.error(err)
     console.log("success!")
 });
