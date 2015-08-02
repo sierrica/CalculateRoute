@@ -49,12 +49,12 @@ var css_min = uglifycss.processFiles (getGlobbedPaths(config.assets.client.lib.c
     maxLineLen: 500,
     expandVars: true
 });
-fs.writeFileSync (path.join(process.cwd(), '/files/lib/calculateroute.min.css'), css_min);
+fs.writeFileSync (path.join(process.cwd(), '/files/calculateroute.min.css'), css_min);
 
 var js_min = uglifyjs.minify (getGlobbedPaths(config.assets.client.lib.js).concat(getGlobbedPaths(config.assets.client.js)), {
     mangle: false
 });
-fs.writeFileSync (path.join(process.cwd(), '/files/lib/calculateroute.min.js'), js_min.code);
+fs.writeFileSync (path.join(process.cwd(), '/files/calculateroute.min.js'), js_min.code);
 
 console.log ("CSS/JS COMPRESSED");
 

@@ -67,8 +67,8 @@ var initGlobalConfigFiles = function(config) {
 
 
    if (process.env.NODE_ENV === 'production') {
-        config.files.client.css = getGlobbedPaths('files/lib/calculateroute.min.css', 'files/');
-        config.files.client.js = getGlobbedPaths('files/lib/calculateroute.min.js', 'files/');
+        config.files.client.css = getGlobbedPaths('files/calculateroute.min.css', 'files/');
+        config.files.client.js = getGlobbedPaths('files/calculateroute.min.js', 'files/');
    }
    else {
         config.files.client.css = getGlobbedPaths(config.assets.client.lib.css, 'files/').concat(getGlobbedPaths(config.assets.client.css, 'files/'));
