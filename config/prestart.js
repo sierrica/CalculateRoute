@@ -58,6 +58,7 @@ fs.writeFileSync (path.join(process.cwd(), '/files/calculateroute.min.js'), js_m
 
 console.log ("CSS/JS COMPRESSED");
 
+/*
 console.log ("MOVING IMAGES................");
 fse.copy(path.join(process.cwd(),'/files/lib/leaflet/dist/images/layers.png'), path.join(process.cwd(),'/files/lib/layers.png'), function (err) {
     if (err) return console.error(err)
@@ -68,3 +69,4 @@ fse.copy(path.join(process.cwd(),'/files/lib/leaflet/dist/images/layers-2x.png')
     console.log("success!")
 });
 console.log ("IMAGES MOVED................");
+*/

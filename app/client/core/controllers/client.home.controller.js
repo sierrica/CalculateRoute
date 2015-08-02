@@ -15,7 +15,11 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
             $("#map").css ("height", window.innerHeight - 50);
 
             // Tile Open Street Maps
-            var open_maps = L.tileLayer ('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}', {
+            var open_maps_mapnik = L.tileLayer ('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                minZoom: 3
+            });
+
+            var open_maps_road = L.tileLayer ('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}', {
                 minZoom: 3
             });
 
@@ -42,7 +46,7 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
                 zoomControl: false,
                 attributionControl: false,
                 maxBounds: ([[31.952,-18.808],[72.607,44.472]]),
-                layers: [open_maps],
+                layers: [ptv_maps],
                 doubleClickZoom: false
             });
 
@@ -50,7 +54,8 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
 
             // Añadir un boton con los tiles disponibles
             var baseLayers = {
-                "OPEN": open_maps,
+                "MAPNIK": open_maps_mapnik,
+                "ROAD": open_maps_road,
                 "PTV": ptv_maps
             };
             L.control.layers(baseLayers).addTo (map);
