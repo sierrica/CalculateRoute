@@ -15,7 +15,7 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
             $("#map").css ("height", window.innerHeight - 50);
 
             // Tile Open Street Maps
-            var open_maps = L.tileLayer ('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}', {
+            var open_maps = L.tileLayer ('https://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}', {
                 minZoom: 3
             });
 
