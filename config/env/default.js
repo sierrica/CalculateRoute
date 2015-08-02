@@ -57,9 +57,14 @@ module.exports = {
                     'files/lib/materialize/dist/js/materialize.js',
                     'files/lib/satellizer/satellizer.js',
                     'files/lib/perfect-scrollbar/js/perfect-scrollbar.js',
-                    'files/lib/leaflet/dist/leaflet.js',
-                    'files/lib/angular-leaflet-directive/dist/angular-leaflet-directive.js'
 
+                    'files/lib/leaflet/dist/leaflet.js',
+
+                    'files/ptv/ajax-maps/NonTiledLayer.js',
+                    'files/ptv/ajax-maps/NonTiledLayer.WMS.js',
+                    'files/ptv/ajax-maps/Leaflet.PtvLayer.js',
+
+                    'files/lib/angular-leaflet-directive/dist/angular-leaflet-directive.js',
                 ]
             },
             tests: [

@@ -7,14 +7,56 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
             $location.path('/signup');
 
         window.onresize = function () {
-            $(".angular-leaflet-map").css ("width", $("#mapContainer").parent().width());
-            $(".angular-leaflet-map").css ("height", window.innerHeight - 50);
+            $("#map").css ("width", $("#mapContainer").parent().width());
+            $("#map").css ("height", window.innerHeight - 50);
         };
         $scope.map = function () {
-            $(".angular-leaflet-map").css ("width", $("#mapContainer").parent().width());
-            $(".angular-leaflet-map").css ("height", window.innerHeight - 50);
-        };
+            $("#map").css ("width", $("#mapContainer").parent().width());
+            $("#map").css ("height", window.innerHeight - 50);
 
+            // Tile Open Street Maps
+            var open_maps = L.tileLayer ('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}', {
+                minZoom: 3
+            });
+
+            // Tile PTV Maps
+            var ptv_maps_bg = L.tileLayer ('https://ajaxbg{s}-eu-n-test.cloud.ptvgroup.com/WMS/GetTile/xmap-ajaxbg/{x}/{y}/{z}.png', {
+                subdomains: '1234',
+                minZoom: 3
+            });
+            var ptv_maps_fg = new L.NonTiledLayer.WMS('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=204109275126088', {
+                minZoom: 3,
+                opacity: 1.0,
+                layers: 'xmap-ajaxfg',
+                format: 'image/png',
+                transparent: true,
+                attribution: false,
+                zIndex: 100
+            });
+
+            var ptv_maps = L.layerGroup([ptv_maps_bg, ptv_maps_fg]);
+
+
+            // Crear el mapa con unos parametros por defecto
+            var map = L.map ('map', {
+                zoomControl: false,
+                attributionControl: false,
+                maxBounds: ([[31.952,-18.808],[72.607,44.472]]),
+                layers: [open_maps],
+                doubleClickZoom: false
+            });
+
+            map.setView ([41.505, -0.09], 13);
+
+            // Añadir un boton con los tiles disponibles
+            var baseLayers = {
+                "OPEN": open_maps,
+                "PTV": ptv_maps
+            };
+            L.control.layers(baseLayers).addTo (map);
+
+        };
+/*
         angular.extend($scope, {
             maxbounds: {
                 northEast: {
@@ -31,20 +73,47 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
                 lng: -0.09,
                 zoom: 10
             },
-            defaults: {
-                tileLayer: "http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}",
+            layers: {
+                baselayers: {
+                    ptvbg: {
+                        name: "PTV background",
+                        type: 'xyz',
+                        url: "https://ajaxbg1-eu-n-test.cloud.ptvgroup.com/WMS/GetTile/xmap-ajaxbg/{x}/{y}/{z}.png"
+                    }
+                },
+                overlays: {
+                    ptvfg: {
+                        name: "PTV foreground",
+                        type: 'xyz',
+                        url: "https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=204109275126088",
+                        layerOptions: {
+                            layers: 'xmap-ajaxfg',
+                            opacity: 1.0,
+                            format: 'image/png',
+                            transparent: true,
+                            zIndex: 100,
+                        }
+                    }
+                }
+            }
+                       defaults: {
+                tileLayer: 'https://ajaxbg1-eu-n-test.cloud.ptvgroup.com/WMS/GetTile/xmap-ajaxbg/{x}/{y}/{z}.png',
+
+
+
+                //tileLayer: "http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}",
                 tileLayerOptions: {
                     opacity: 0.9,
-                    detectRetina: true,
-                    reuseTiles: true,
+                    //detectRetina: true,
+                    //reuseTiles: true
                 },
                 //noWrap: true,
-                //layers
+                layers
                 minZoom: 3,
                 //maxZoom
                 //crs
                 //########### Interaction Options ###########
-                dragging: true,                             // herramienta de mano para moverte por el mapa
+                                dragging: true,                             // herramienta de mano para moverte por el mapa
                 touchZoom: true,                            // permitir hacer zoom con los 2 dedos (touch - pantallas tactiles)
                 scrollWheelZoom: true,                      // permitir con la rutela del raton zoom + y zoom -
                 doubleClickZoom: false,                     // docle click boton izq para hacer zoom +
@@ -74,16 +143,11 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
                 zoomAnimation: 'depends',                   // habilitar efecto CSS3 en los cambios de zoom en todos los browser que lo soporten
                 zoomAnimationThreshold: 4,
                 markerZoomAnimation: 'depends'
-            }
-        });
+
+        }
+    });*/
 
 
-
-/*
-        $scope.init_map = function () {
-            var map = L.map('map').setView([51.505, -0.09], 13);
-        };
-*/
 
 
 
