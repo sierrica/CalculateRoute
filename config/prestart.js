@@ -2,6 +2,7 @@ var _           = require ('lodash'),
     path        = require ('path'),
     glob        = require ('glob'),
     fs          = require ('fs'),
+    fse         = require ('fs-extra'),
     uglifyjs    = require ("uglify-js"),
     uglifycss   = require ('uglifycss'),
     config      = require ('./env/default');
@@ -57,3 +58,13 @@ fs.writeFileSync (path.join(process.cwd(), '/files/lib/calculateroute.min.js'), 
 
 console.log ("CSS/JS COMPRESSED");
 
+console.log ("MOVING IMAGES................");
+fse.copy(path.join(process.cwd(),'/files/lib/laflet/dist/images/layers.png'), path.join(process.cwd(),'/files/lib/layers.png'), function (err) {
+    if (err) return console.error(err)
+    console.log("success!")
+});
+fse.copy(path.join(process.cwd(),'/files/lib/laflet/dist/images/layers.png'), path.join(process.cwd(),'/files/lib/layers.png'), function (err) {
+    if (err) return console.error(err)
+    console.log("success!")
+});
+console.log ("IMAGES MOVED................");
