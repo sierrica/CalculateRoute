@@ -1,5 +1,5 @@
-angular.module('calculateRoute').controller('HomeController', ['$scope', '$location', '$auth', 'Map',
-    function($scope, $location, $auth, Map) {
+angular.module('calculateRoute').controller('HomeController', ['$scope', '$location', '$auth', 'Map', '$translate',
+    function($scope, $location, $auth, Map, $translate) {
         console.log ("DENTRO HOME CONTROLLER");
 
 
@@ -10,6 +10,12 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
         $scope.map = function () {
             Map.initMap();
         };
+
+        //$translate.use("en");
+
+
+
+
 /*
         angular.extend($scope, {
             maxbounds: {

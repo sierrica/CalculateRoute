@@ -1,8 +1,12 @@
+var language_parser = require('accept-language-parser');
+
 
 /* Render the main applicaion page */
 exports.renderIndex = function(req, res) {
+    //console.log ("user-agent: " + req.headers["user-agent"]);
+    var languages_req = language_parser.parse (req.headers["accept-language"]);
     res.render ('index', {
-        user: req.user || null
+        lang: languages_req[0].code
     });
 };
 

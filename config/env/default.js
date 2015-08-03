@@ -54,6 +54,8 @@ module.exports = {
                     'files/lib/angular-touch/angular-touch.js',
                     'files/lib/angular-resource/angular-resource.js',
                     'files/lib/angular-ui-router/release/angular-ui-router.js',
+                    'files/lib/angular-translate/angular-translate.js',
+
                     'files/lib/materialize/dist/js/materialize.js',
                     'files/lib/satellizer/satellizer.js',
                     'files/lib/perfect-scrollbar/js/perfect-scrollbar.js',

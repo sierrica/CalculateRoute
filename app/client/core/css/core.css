@@ -74,13 +74,24 @@ nav {
 
 
 /* LEAFLET */
+
+
+.navbar-fixed {
+
+}
+
 .leaflet-top {
     z-index: 900;
 }
 
+.leaflet-control-layers {
+
+}
+
 .leaflet-control-layers label {
     cursor: pointer;
-    font-size: 1.0rem;
+    font-size: 1.3rem;
+    font-weight: bold;
 }
 
 input[type="radio"].leaflet-control-layers-selector {
@@ -88,6 +99,5 @@ input[type="radio"].leaflet-control-layers-selector {
     left: 0px;
     visibility: visible;
 }
-
 
 
