@@ -1,8 +1,9 @@
-angular.module('calculateRoute', [
+var app = angular.module('calculateRoute', [
     'ui.router',
     'ngTouch',
     'satellizer',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'tmh.dynamicLocale'
 ])
 .config(function ($urlRouterProvider, $locationProvider) {
 
@@ -15,6 +16,10 @@ angular.module('calculateRoute', [
 .config(['$translateProvider', function ($translateProvider) {
 
 
+        //tmhDynamicLocaleProvider.localeLocationPattern('lib/angular-i18n/angular-locale_{{locale}}.js');
+
+
+/*
     $translateProvider.translations('en', {
         'home': 'home'
     });
@@ -22,7 +27,7 @@ angular.module('calculateRoute', [
     $translateProvider.translations('es', {
         'home': 'inicio'
     });
-
+*/
     //$translateProvider.preferredLanguage('en');
        /* console.log (navigator);
         console.log (navigator.languages[0]);                 // ERROR EN IE y no muestra nada
@@ -37,12 +42,26 @@ angular.module('calculateRoute', [
         //$translateProvider.determinePreferredLanguage();
         //$translateProvider.uniformLanguageTag('bcp47').determinePreferredLanguage();
 
+        $translateProvider.useMissingTranslationHandlerLog();
+        $translateProvider.useSanitizeValueStrategy('escaped');
+
+
+
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'i18n/',
+            suffix: '.json'
+        });
+
         $translateProvider.preferredLanguage(document.documentElement.lang);
 
 
-        // $translateProvider.useLocalStorage();
-        //$translateProvider.preferredLanguage(document.documentElement.lang);
-        //$translateProvider.fallbackLanguage('en');
 
-}]);
+}])
+.config(function (tmhDynamicLocaleProvider) {
+    tmhDynamicLocaleProvider.localeLocationPattern('lib/angular-i18n/angular-locale_{{locale}}.js');
+})
+.run(function (tmhDynamicLocale) {
+    tmhDynamicLocale.set(document.documentElement.lang);
+});
 

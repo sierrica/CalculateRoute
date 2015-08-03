@@ -1,5 +1,5 @@
-angular.module('calculateRoute').controller('HomeController', ['$scope', '$location', '$auth', 'Map', '$translate',
-    function($scope, $location, $auth, Map, $translate) {
+angular.module('calculateRoute').controller('HomeController', ['$scope', '$location', '$auth', 'Map', '$translate', 'tmhDynamicLocale',
+    function($scope, $location, $auth, Map, $translate, tmhDynamicLocale) {
         console.log ("DENTRO HOME CONTROLLER");
 
 
@@ -11,7 +11,8 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
             Map.initMap();
         };
 
-        //$translate.use("en");
+        //$translate.use("es");
+
 
 
 

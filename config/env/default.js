@@ -55,6 +55,11 @@ module.exports = {
                     'files/lib/angular-resource/angular-resource.js',
                     'files/lib/angular-ui-router/release/angular-ui-router.js',
                     'files/lib/angular-translate/angular-translate.js',
+                    'files/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+                    'files/lib/angular-translate-handler-log/angular-translate-handler-log.js',
+                    'files/lib/angular-dynamic-locale/dist/tmhDynamicLocale.js',
+
+
 
                     'files/lib/materialize/dist/js/materialize.js',
                     'files/lib/satellizer/satellizer.js',
