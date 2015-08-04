@@ -59,9 +59,9 @@ var app = angular.module('calculateRoute', [
 
 }])
 .config(function (tmhDynamicLocaleProvider) {
-    tmhDynamicLocaleProvider.localeLocationPattern('lib/angular-i18n/angular-locale_{{locale}}.js');
+    tmhDynamicLocaleProvider.localeLocationPattern ('lib/angular-i18n/angular-locale_{{locale}}.js');
 })
 .run(function (tmhDynamicLocale) {
-    tmhDynamicLocale.set(document.documentElement.lang.toLowerCase().replace(/_/g, '-'));
+    tmhDynamicLocale.set (document.documentElement.lang.toLowerCase().replace(/_/g, '-'));
 });
 

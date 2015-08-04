@@ -15,5 +15,4 @@ mongoose.createMongooseConnection(function () {
             logger.info('PLATFORM: ' + process.env.PLATFORM + '; NODE_ENV: ' + process.env.NODE_ENV + '; INTERFACE: ' + config.ip_node + ':' + config.port_node + '; NODEJS -V: ' + process.version + '; RUTA: ' + process.cwd());
         }, 1000);
     });
-
 });

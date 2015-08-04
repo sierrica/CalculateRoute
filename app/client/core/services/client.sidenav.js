@@ -1,6 +1,6 @@
 angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($rootScope) {
 
-    console.log ("FACTORRIA SIDENAV");
+    //console.log ("FACTORRIA SIDENAV");
 
     // Comprobar si el menu esta abierto y se redimensiona la pantalla > 992 -> Se cierra el menu pero es necesario colocar el icono
     $(window).resize(function() {

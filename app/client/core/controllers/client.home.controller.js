@@ -1,5 +1,5 @@
-angular.module('calculateRoute').controller('HomeController', ['$scope', '$location', '$auth', 'Map', '$translate', 'tmhDynamicLocale',
-    function($scope, $location, $auth, Map, $translate, tmhDynamicLocale) {
+angular.module('calculateRoute').controller('HomeController', ['$scope', '$location', '$auth', 'Map', '$http',
+    function($scope, $location, $auth, Map, $http) {
         console.log ("DENTRO HOME CONTROLLER");
 
 
@@ -10,6 +10,19 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
         $scope.map = function () {
             Map.initMap();
         };
+
+        $scope.calculateroute = function () {
+            $http.post ('/ptv/calculateroute', $scope.credentials)
+                 .success(function(response) {
+                    console.log ("EXITO");
+                    console.log (response);
+                })
+                .error(function(response) {
+                console.log ("FRACASO");
+                console.log (response);
+            });
+        }
+
 
         //$translate.use("es");
 
@@ -114,17 +127,17 @@ angular.module('calculateRoute').controller('HomeController', ['$scope', '$locat
 
 
 
-        console.log ($auth.getToken());
-        console.log ($auth.getPayload());
+        //console.log ($auth.getToken());
+        //console.log ($auth.getPayload());
 
 
 
         $scope.mostrar_posicion = function (posicion) {
-            console.log ("LATITUD");
-            console.log (posicion.coords.latitude);
+            //console.log ("LATITUD");
+            //console.log (posicion.coords.latitude);
             $scope.latitud = posicion.coords.latitude;
-            console.log ("LONGITUD");
-            console.log (posicion.coords.longitude);
+            //console.log ("LONGITUD");
+            //console.log (posicion.coords.longitude);
             $scope.$apply();
         };
 
