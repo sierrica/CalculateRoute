@@ -3,7 +3,7 @@ exports.renderIndex = function(req, res) {
     //console.log ("user-agent: " + req.headers["user-agent"]);
 
     console.log (req.headers["accept-language"]);
-    logger.info (req.headers["accept-language"]);
+    //logger.info (req.headers["accept-language"]);
     if (req.headers["accept-language"]) {
         console.log (req.headers["accept-language"])
         var language_prefered = req.headers["accept-language"].split(",")[0];
