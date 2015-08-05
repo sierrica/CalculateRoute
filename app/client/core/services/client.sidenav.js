@@ -48,12 +48,14 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
         },
         // Cerrar el menu si estamos en ventana Desktop
         close_sidenav: function($event) {
-            if (window.innerWidth <= 992) {
-                $('.button-collapse').sideNav ('hide');
-                $(".button-collapse i").text ("menu");
-            }
-            else
-                $event.stopPropagation();
+            setTimeout (function() {
+                if (window.innerWidth <= 992) {
+                    $('.button-collapse').sideNav ('hide');
+                    $(".button-collapse i").text ("menu");
+                }
+                else
+                    $event.stopPropagation();
+            }, 400);
         },
 
         // Permitir cerrar el dropdown con click

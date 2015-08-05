@@ -28,9 +28,57 @@ nav i {
     height: calc(100% - 50px);
     /*height: calc(100% - 100px);   */          /* Para poner el footer toda la pantalla*/
 }
-.side-nav li {
-    padding: 0;
+
+.side-nav > li > a {
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
 }
+
+.side-nav > li > a > i.material-icons {
+    font-size: 3rem;
+    margin-right: 20px;
+    display: inline;
+    float: left;
+}
+
+
+#profile-dropdown i {
+    margin-top: -2px;
+    font-size: 20px;
+    display: inline-block;
+    float: left;
+    margin-right: 5px;
+}
+
+#profile-dropdown a {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+
+}
+
+
+/* IMPORTANTISIMO */
+.container {
+    width: calc(100% - 40px);
+    padding-top: 15px;
+}
+
+
+
+span.form_error, span.form_success {
+    position: relative;
+    top: -10px;
+    color: #F44336;
+}
+span.form_error {
+    color: #F44336;
+}
+span.form_success {
+    color: #4CAF50;
+}
+
 
 #button-collapse {
     z-index: 1000;
@@ -99,5 +147,6 @@ input[type="radio"].leaflet-control-layers-selector {
     left: 0px;
     visibility: visible;
 }
+
 
 

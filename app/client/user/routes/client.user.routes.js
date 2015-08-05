@@ -30,8 +30,8 @@ angular.module('calculateRoute')
                 templateUrl: 'user/views/client.user.signup.view.html'
             }).
             state('signin', {
-                url: '/signin',
-                templateUrl: 'user/views/client.user.signin.view.html'
+                url: '/login',
+                templateUrl: 'user/views/client.user.login.view.html'
             }).
             state('logout', {
                 url: '/logout',

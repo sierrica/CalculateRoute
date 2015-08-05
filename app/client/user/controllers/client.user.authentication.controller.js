@@ -7,13 +7,15 @@ angular.module('calculateRoute').controller('AuthenticationController', ['$scope
 
 
         $scope.signup = function() {
+            console.log ("EMAIL");
+            console.log ($scope.signup.email);
             $auth.signup ({
-                email: $scope.email,
-                password: $scope.password
+                email: $scope.signup.email,
+                password: $scope.signup.password
             }).then (function() {
                 console.log ("REGISTRADO CORRECTAMENTE");
             }).catch (function(response) {
-                // Si ha habido errores, llegaremos a esta función
+                // Si ha habido errores, llegaremos a esta funciÃ³n
                 if (typeof response.data.message === 'object') {
                     angular.forEach(response.data.message, function(message) {
                         console.log ("ERROR OBJETO");
