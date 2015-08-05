@@ -11,7 +11,7 @@ exports.renderIndex = function(req, res) {
         language_prefered.region = "ES";
     else if (language_prefered.code == "en"  &&  !language_prefered.region)
         language_prefered.region = "UK";
-    console.log (languages_req);
+    //console.log (languages_req);
 
     res.render ('index', {
         lang: language_prefered.code + "-" + language_prefered.region
