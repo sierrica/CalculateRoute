@@ -37,7 +37,7 @@ angular.module('calculateRoute').controller('HeaderController', ['$rootScope', '
                     }
                     else {
                         $(".button-collapse i").text ("menu");
-                        $('.drag-target').css ("width", "1px");
+                        $('.drag-target').css ("width", "10px");
                     }
                     that.collapsing = false;
                     that.$apply();
