@@ -65,7 +65,8 @@
     "winston-papertrail": "1.0.1",
     "fs-extra": "0.22.1",
     "request": "2.60.0",
-    "btoa": "1.1.2"
+    "btoa": "1.1.2",
+    "accept-language": "2.0.16"
   },
   "devDependencies": {
     "cordova": "5.1.1",
