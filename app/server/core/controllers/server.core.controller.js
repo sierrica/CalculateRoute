@@ -3,13 +3,18 @@ exports.renderIndex = function(req, res) {
     //console.log ("user-agent: " + req.headers["user-agent"]);
 
     console.log (req.headers["accept-language"].split(",")[0]);
-    var language_prefered = req.headers["accept-language"].split(",")[0];
-    var lang = language_prefered.split("-")[0];
-    var region = language_prefered.split("-")[1];
-    if (lang == "es"  &&  (!region || region != "ES"))
-        region = "ES";
-    else if (lang == "en"  &&  (!region || region != "GB"))
-        region = "GB";
+    if (req.headers["accept-language"]) {
+        var language_prefered = req.headers["accept-language"].split(",")[0];
+        var lang = language_prefered.split("-")[0];
+        var region = language_prefered.split("-")[1];
+        if (lang == "es"  &&  (!region || region != "ES"))
+            region = "ES";
+        else if (lang == "en"  &&  (!region || region != "GB"))
+            region = "GB";
+        }
+    else {
+        lang = "es"; region = "ES";
+    }
 
     res.render ('index', {
         lang: lang + "-" + region
