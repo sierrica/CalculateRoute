@@ -1,20 +1,20 @@
-var language_parser = require('accept-language-parser');
+//var language_parser = require('accept-language-parser');
 
 
 /* Render the main applicaion page */
 exports.renderIndex = function(req, res) {
     //console.log ("user-agent: " + req.headers["user-agent"]);
     //console.log ("user-agent: " + req.headers["accept-language"]);
-    var languages_req = language_parser.parse (req.headers["accept-language"]);
+/*    var languages_req = language_parser.parse (req.headers["accept-language"]);
     var language_prefered = languages_req[0];
     if (language_prefered.code == "es"  &&  !language_prefered.region)
         language_prefered.region = "ES";
     else if (language_prefered.code == "en"  &&  !language_prefered.region)
         language_prefered.region = "UK";
     //console.log (languages_req);
-
+*/
     res.render ('index', {
-        lang: language_prefered.code + "-" + language_prefered.region
+        /*lang: language_prefered.code + "-" + language_prefered.region */
     });
 };
 
