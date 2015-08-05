@@ -1,20 +1,18 @@
-var acceptLanguage = require('accept-language');
-
-
 /* Render the main applicaion page */
 exports.renderIndex = function(req, res) {
     //console.log ("user-agent: " + req.headers["user-agent"]);
-    //console.log ("user-agent: " + req.headers["accept-language"]);
-    var languages_req = acceptLanguage.parse (req.headers["accept-language"]);
-    var language_prefered = languages_req[0];
-    if (language_prefered.language == "es"  &&  !language_prefered.region)
-        language_prefered.region = "ES";
-    else if (language_prefered.language == "en"  &&  !language_prefered.region)
-        language_prefered.region = "UK";
-    //console.log (languages_req);
+
+    console.log (req.headers["accept-language"].split(",")[0]);
+    var language_prefered = req.headers["accept-language"].split(",")[0];
+    var lang = language_prefered.split("-")[0];
+    var region = language_prefered.split("-")[1];
+    if (lang == "es"  &&  (!region || region != "ES"))
+        region = "ES";
+    else if (lang == "en"  &&  (!region || region != "GB"))
+        region = "GB";
 
     res.render ('index', {
-        lang: language_prefered.language + "-" + language_prefered.region
+        lang: lang + "-" + region
     });
 };
 
