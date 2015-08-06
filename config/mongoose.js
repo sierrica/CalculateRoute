@@ -30,7 +30,7 @@ module.exports.createMongooseConnection = function (callback) {
     });
 
     // if the Node process ends, close the Mongoose connection
-    process.on ('SIGINT', function() {
+    process.on ('SIGTERM', function() {
         mongoose.connection.close (function () {
             /*  */
             logger.info ('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
