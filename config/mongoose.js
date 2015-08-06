@@ -39,11 +39,11 @@ module.exports.createMongooseConnection = function (callback) {
         });
     });
     process.on ('SIGINT', function() {                          //ESRCH
-        mongoose.connection.close (function () {
+        //mongoose.connection.close (function () {
             setTimeout (function() {
                 logger.info ('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
                 process.exit (1);
-            }, 1000);
+        //    }, 1000);
         });
     });
 };
