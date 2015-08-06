@@ -41,6 +41,7 @@ module.exports = {
                 'app/client/app.js',
                 'app/client/*[!lib]*/*.js',
                 'app/client/*[!lib]*/**/*.js'
+
             ],
             lib: {
                 css: [

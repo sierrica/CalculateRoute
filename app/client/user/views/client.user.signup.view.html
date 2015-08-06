@@ -1,7 +1,7 @@
 <div class="container" ng-controller="AuthenticationController">
     <div class="row">
         <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <form name="signupForm" novalidate>
+            <form name="signupForm" ng-submit="signup()" novalidate>
                 <div class="row">
                     <div class="input-field col s12">
                         <label for="email">Email</label>
@@ -20,7 +20,7 @@
                         <span class="form_success" ng-show="(signupForm.password.$dirty  &&  signupForm.password.$valid)">formato correto</span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-large pink" ng-click="signup()" ng-disabled="signupForm.email.$invalid  ||  signupForm.password.$invalid">Sign up</button>
+                <button type="submit" class="btn btn-large pink" ng-disabled="signupForm.email.$invalid  ||  signupForm.password.$invalid">Sign up</button>
             </form>
         </div>
     </div>

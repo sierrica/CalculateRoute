@@ -6,7 +6,6 @@ var app = angular.module('calculateRoute', [
     'tmh.dynamicLocale'
 ])
 .config(function ($urlRouterProvider, $locationProvider) {
-
     // Redirect to home view when route not found
     $urlRouterProvider.otherwise ('/');
 
@@ -14,54 +13,54 @@ var app = angular.module('calculateRoute', [
 })
 
 .config(['$translateProvider', function ($translateProvider) {
-
-
-        //tmhDynamicLocaleProvider.localeLocationPattern('lib/angular-i18n/angular-locale_{{locale}}.js');
-
-
-/*
-    $translateProvider.translations('en', {
-        'home': 'home'
-    });
-
-    $translateProvider.translations('es', {
-        'home': 'inicio'
-    });
-*/
-    //$translateProvider.preferredLanguage('en');
-       /* console.log (navigator);
-        console.log (navigator.languages[0]);                 // ERROR EN IE y no muestra nada
-        console.log (navigator.language);
-        console.log (navigator.browserLanguage);
-        console.log (navigator.systemLanguage);
-        console.log (navigator.userLanguage);
-*/
-
-
-
         //$translateProvider.determinePreferredLanguage();
         //$translateProvider.uniformLanguageTag('bcp47').determinePreferredLanguage();
 
         $translateProvider.useMissingTranslationHandlerLog();
-        $translateProvider.useSanitizeValueStrategy('escaped');
-
-
-
+        $translateProvider.useSanitizeValueStrategy ('escaped');
 
         $translateProvider.useStaticFilesLoader({
             prefix: 'i18n/',
             suffix: '.json'
         });
 
-        $translateProvider.preferredLanguage(document.documentElement.lang);
-
-
-
+        $translateProvider.preferredLanguage (document.documentElement.lang);
 }])
 .config(function (tmhDynamicLocaleProvider) {
     tmhDynamicLocaleProvider.localeLocationPattern ('lib/angular-i18n/angular-locale_{{locale}}.js');
 })
-.run(function (tmhDynamicLocale) {
-    tmhDynamicLocale.set (document.documentElement.lang.toLowerCase().replace(/_/g, '-'));
-});
+.factory('satellizer.interceptor', ['$q', 'satellizer.config', 'satellizer.storage', 'satellizer.shared', function($q, config, storage, shared) {
+    return {
+        request: function(request) {
+            if (request.skipAuthorization)
+                return request;
+            if (shared.isAuthenticated() && config.httpInterceptor) {
+                var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
+                var token = storage.get(tokenName);
+                if (config.authHeader && config.authToken)
+                    token = config.authToken + ' ' + token;
+                request.headers[config.authHeader] = token;
+            }
+            return request;
+        },
+        responseError: function(response) {
+            return $q.reject(response);
+        }
+    };
+}])
+.run(function ($rootScope, tmhDynamicLocale, $auth, $state, $location) {
 
+    tmhDynamicLocale.set (document.documentElement.lang.toLowerCase().replace(/_/g, '-'));
+
+    $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        console.log (toState.private);
+        console.log ($auth.isAuthenticated());
+        if (toState.private   &&  !$auth.isAuthenticated()) {
+            console.log ("CAMBIO ESTADO");
+            event.preventDefault();
+            $state.transitionTo ("signup");
+            //$state.go('signup');
+            //$location.path ('/signup');
+        }
+    });
+});

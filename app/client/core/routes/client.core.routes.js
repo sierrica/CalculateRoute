@@ -4,5 +4,6 @@ angular.module('calculateRoute')
         state ('home', {
         url: '/',
         templateUrl: 'core/views/client.home.view.html',
+        private: true
     });
 }]);

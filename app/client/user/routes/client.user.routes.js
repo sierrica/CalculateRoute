@@ -1,7 +1,7 @@
 angular.module('calculateRoute')
     .config (['$stateProvider', '$authProvider',
     function ($stateProvider, $authProvider) {
-        // Parametros de configuración
+        // Parametros de configuraciÃ³n
         $authProvider.httpInterceptor = true;               // Add Authorization header to HTTP request
         $authProvider.loginOnSignup = true;
         $authProvider.baseUrl = '/'                         // API Base URL for the paths below.
@@ -10,7 +10,7 @@ angular.module('calculateRoute')
         $authProvider.signupRedirect = '/';
         $authProvider.loginUrl = '/auth/signin';
         $authProvider.signupUrl = '/auth/signup';
-        $authProvider.loginRoute = '/signin';
+        $authProvider.loginRoute = '/login';
         $authProvider.signupRoute = '/signup';
         $authProvider.tokenRoot = false;                    // set the token parent element if the token is not the JSON root
         $authProvider.tokenName = 'token';
@@ -27,15 +27,18 @@ angular.module('calculateRoute')
         $stateProvider.
             state('signup', {
                 url: '/signup',
-                templateUrl: 'user/views/client.user.signup.view.html'
+                templateUrl: 'user/views/client.user.signup.view.html',
+                private: false
             }).
             state('signin', {
                 url: '/login',
-                templateUrl: 'user/views/client.user.login.view.html'
+                templateUrl: 'user/views/client.user.login.view.html',
+                private: false
             }).
             state('logout', {
                 url: '/logout',
-                template: null
+                template: null,
+                private: false
             });;
     }
 ]);
