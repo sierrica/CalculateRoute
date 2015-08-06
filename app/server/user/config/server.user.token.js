@@ -1,4 +1,3 @@
-
 var path   = require ('path'),
     jwt    = require ('jsonwebtoken'),
     redis  = require (path.resolve('./config/redis')),
@@ -32,29 +31,26 @@ function extractTokenFromHeader(headers) {
 
 
 function createToken(payload, cb) {
-    var ttl = config.token.expiration;
+    var ttl = config.token.ttl;
 
     if (payload != null && typeof payload !== 'object')
         return cb (new Error('payload is not an Object'));
 
-    if (ttl != null && typeof ttl !== 'number')
+    if (ttl != null  &&  typeof ttl !== 'number')
         return cb (new Error('ttl is not a valid Number'));
 
-    var token = jwt.sign (payload, config.token.secret, { expiresInMinutes: config.token.expiration });
+    var token = jwt.sign (payload, config.token.secret, { expiresInMinutes: ttl });
 
     // stores a token with payload data for a ttl period of time
-    redis.setex(token, ttl, JSON.stringify(payload), function(token, err, reply) {
-        if (err) {
-            return cb(err);
-        }
-
-        if (reply) {
-            cb(null, token);
-        }
+    redis.setex (token, ttl, JSON.stringify(payload), function(token, err, reply) {
+        if (err)
+            return cb (err);
+        if (reply)
+            cb (null, token);
         else {
-            cb(new Error('Token not set in Redis'));
+            cb (new Error('Token not set in Redis'));
         }
-    }.bind(null, token));
+    }.bind (null, token));
 };
 
 

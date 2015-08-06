@@ -8,6 +8,8 @@ app.controller ('AuthenticationController', ['$scope', '$auth', '$location', fun
             password: $scope.password
         }).then (function() {
             console.log ("REGISTRADO CORRECTAMENTE");
+            console.log ($auth.getToken());
+            console.log ($auth.getPayload());
         }).catch (function(response) {
             console.log ("ERROR EN EL REGISTRO");
             // Si ha habido errores, llegaremos a esta función

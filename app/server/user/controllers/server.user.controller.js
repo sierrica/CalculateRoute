@@ -6,23 +6,21 @@ var path        = require ('path'),
 
 
 function signup(req, res) {
-    User.findOne({ email: req.body.email }, function(err, existingUser) {
-        if (existingUser) {
-            return res.status(409).send({ message: 'Email is already taken' });
-        }
-        var user = new User({
+    User.findOne ({ email: req.body.email }, function(err, existingUser) {
+        if (existingUser)
+            return res.status(409).send ({ message: 'Email is already taken' });
+
+        var user = new User ({
             email: req.body.email,
             password: req.body.password
         });
-        user.save(function() {
-            token.createToken ({
-                email: req.body.email
-            }, function(res, err, token) {
+        user.save (function() {
+            token.createToken ({ email: req.body.email }, function(res, err, token) {
                 if (err) {
                     logger.error (err.message);
-                    return res.status(400).send(err);
+                    return res.status(400).send (err);
                 }
-                res.status(201).json ({token: token});
+                res.status(201).json ({ token: token });
             }.bind(null, res));
         });
     });

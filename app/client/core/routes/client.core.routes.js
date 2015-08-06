@@ -6,8 +6,10 @@ angular.module('calculateRoute')
         templateUrl: 'core/views/client.home.view.html',
         private: true,
         onEnter: function () {
+            console.log ("ENTRANDO EN HOME CONTROLLER");
         },
         onExit: function() {
+            console.log ("SALIENDO EN HOME CONTROLLER");
         }
     });
 }]);

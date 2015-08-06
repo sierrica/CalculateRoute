@@ -22,7 +22,7 @@ module.exports = {
     },
     token: {
         secret: process.env.TOKEN_SECRET || 'tauste',
-        expiration: process.env.TOKEN_EXPIRATION || 60*60*24            //24 hours
+        ttl: process.env.TOKEN_EXPIRATION || 60*60//*24            //24 hours
     },
     ip_node: process.env.OPENSHIFT_NODEJS_IP ||"0.0.0.0",
     port_node: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT  || 80,
