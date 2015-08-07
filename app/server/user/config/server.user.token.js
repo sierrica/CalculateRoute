@@ -30,7 +30,7 @@ function extractTokenFromHeader(headers) {
 };
 
 
-function createToken(payload, cb) {
+function createToken (user, payload, cb) {
     var ttl = config.token.ttl;
 
     if (payload != null && typeof payload !== 'object')
@@ -42,14 +42,13 @@ function createToken(payload, cb) {
     var token = jwt.sign (payload, config.token.secret, { expiresInMinutes: ttl });
 
     // stores a token with payload data for a ttl period of time
-    redis.setex (token, ttl, JSON.stringify(payload), function(token, err, reply) {
+    redis.setex (token, ttl, JSON.stringify(user), function(token, err, reply) {
         if (err)
             return cb (err);
-        if (reply)
+        else if (reply)
             cb (null, token);
-        else {
+        else
             cb (new Error('Token not set in Redis'));
-        }
     }.bind (null, token));
 };
 

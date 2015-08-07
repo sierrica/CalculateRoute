@@ -20,8 +20,8 @@ var UserSchema = new mongoose.Schema({
 });
 
 
-/* Controlar en los insert/updates si se ha modificado la contraseña para encriptar la nueva contraseña */
-UserSchema.pre('save', function(next) {
+/* Controlar en los insert/updates si se ha modificado la contraseÃ±a para encriptar la nueva contraseÃ±a */
+UserSchema.pre ('save', function(next) {
 	var user = this;
 
 	// only hash the password if it has been modified (or is new)
@@ -46,7 +46,7 @@ UserSchema.pre('save', function(next) {
 	});
 });
 
-/* Comparar contraseñas */
+/* Comparar contraseÃ±as */
 UserSchema.methods.comparePassword = function(password, cb) {
 	bcrypt.compare(password, this.password, function(err, isMatch) {
 		cb (err, isMatch);

@@ -15,8 +15,9 @@ function signup(req, res) {
             password: req.body.password
         });
         user.save (function() {
-            token.createToken ({ email: req.body.email }, function(res, err, token) {
+            token.createToken (user, { id: user.email }, function(res, err, token) {
                 if (err) {
+                    //user.delete();
                     logger.error (err.message);
                     return res.status(400).send (err);
                 }
