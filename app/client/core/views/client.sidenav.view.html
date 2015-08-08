@@ -8,36 +8,36 @@
             </div>
             <div class="col s8">
                 <ul id="profile-dropdown" class="dropdown-content">
-                    <li class="no-padding">
-                        <a href="#">
+                    <li class="no-padding" ng-show="isAuthenticated()">
+                        <a href="#" ng-click="close_sidenav($event)">
                             <i class="material-icons">face</i> Perfil
                         </a>
                     </li>
-                    <li class="no-padding">
+                    <!--<li class="no-padding">
                         <a href="#">
                             <i class="material-icons">settings</i> Configuracion
                         </a>
-                    </li>
+                    </li>-->
                     <li class="no-padding">
-                        <a href="#">
+                        <a href="#" ng-click="close_sidenav($event)">
                             <i class="mdi-communication-live-help"></i> Help
                         </a>
                     </li>
 
                     <li class="divider"></li>
 
-                    <li class="no-padding">
-                        <a ui-sref="signup">
+                    <li class="no-padding" ng-show=" ! isAuthenticated()">
+                        <a ui-sref="signup" ng-click="close_sidenav($event)">
                             <i class="material-icons">input</i> Registrarse
                         </a>
                     </li>
-                    <li class="no-padding">
-                        <a ui-sref="login">
+                    <li class="no-padding" ng-show=" ! isAuthenticated()">
+                        <a ui-sref="login" ng-click="close_sidenav($event)">
                             <i class="material-icons">lock_open</i> Entrar
                         </a>
                     </li>
-                    <li class="no-padding">
-                        <a ui-sref="logut">
+                    <li class="no-padding" ng-show="isAuthenticated()">
+                        <a ui-sref="logout" ng-click="close_sidenav($event)">
                             <i class="material-icons">lock</i> Salir
                         </a>
                     </li>
@@ -54,7 +54,7 @@
         </a>
     </li>
     <li class="no-padding">
-        <a ui-sref="home" class="waves-effect waves-light" ng-click="close_sidenav($event)">
+        <a ui-sref="home2" class="waves-effect waves-light" ng-click="close_sidenav($event)">
             <i class="small material-icons">confirmation_number</i> Trayecto
         </a>
     </li>

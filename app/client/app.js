@@ -58,9 +58,13 @@ var app = angular.module('calculateRoute', [
         if (toState.private   &&  !$auth.isAuthenticated()) {
             console.log ("CAMBIO ESTADO");
             event.preventDefault();
-            $state.transitionTo ("signup");
-            //$state.go('signup');
-            //$location.path ('/signup');
+            $state.transitionTo ("login");
         }
+
+        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+            $(".side-nav li").removeClass("active");
+            $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
+        });
+
     });
 });

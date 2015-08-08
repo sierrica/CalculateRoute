@@ -18,12 +18,10 @@
     "name": "Javier Sierra Martinez",
     "email": "sierrica@hotmail.com"
   },
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Elena Lorente Bermejo",
       "email": "elena_lb1990@hotmail.com"
-    }
-  ],
+  }],
   "engines": {
     "node": "0.12.7",
     "npm": "2.11.3"
@@ -53,8 +51,6 @@
     "mongoose": "4.1.1",
     "morgan": "1.6.1",
     "multer": "1.0.1",
-    "passport": "0.2.2",
-    "passport-local": "1.0.0",
     "pm2": "0.14.6",
     "redis": "0.12.1",
     "serve-favicon": "2.3.0",

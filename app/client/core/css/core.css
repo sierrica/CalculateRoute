@@ -1,14 +1,4 @@
-/* MAIN FOOTER */
-main {
-    padding-left: 300px;
-}
-@media only screen and (max-width: 992px) {
-    main {
-        padding-left: 0px;
-    }
-}
-
-/* NAV */
+/* HEADER */
 .navbar-fixed {
     height: 50px !important;
     line-height: 50px !important;
@@ -22,27 +12,56 @@ nav i {
     line-height: 50px !important;
 }
 
+
+nav .btn-floating.btn-large {
+    left: 5px;
+    height: 55px;
+    width: 55px;
+    z-index: 999;
+}
+nav .button-collapse i {
+    margin-top: 2px;
+    font-size: 3.5rem;
+}
+
+nav { /* No permitir la seleccion en toda nav */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 /* SIDENAV */
 .side-nav.fixed {
     top: 50px;
     height: calc(100% - 50px);
+    z-index: 800;
     /*height: calc(100% - 100px);   */          /* Para poner el footer toda la pantalla*/
 }
+.drag-target {
+    z-index: 900;
+}
+#sidenav-overlay {
+    z-index: 700;
+}
 
+.leaflet-top {
+    z-index: 650;
+}
 .side-nav > li > a {
     height: 50px;
     line-height: 50px;
     font-size: 20px;
 }
-
 .side-nav > li > a > i.material-icons {
     font-size: 3rem;
     margin-right: 20px;
     display: inline;
     float: left;
 }
-
-
 #profile-dropdown i {
     margin-top: -2px;
     font-size: 20px;
@@ -50,20 +69,60 @@ nav i {
     float: left;
     margin-right: 5px;
 }
-
 #profile-dropdown a {
     height: 50px;
     line-height: 50px;
     font-size: 18px;
-
 }
 
 
-/* IMPORTANTISIMO */
-.container {
+
+/* MAIN*/
+main {
+    padding-left: 300px;
+}
+@media only screen and (max-width: 992px) {
+    main {
+        padding-left: 0px;
+    }
+}
+.container {    /* IMPORTANTISIMO */
     width: calc(100% - 48px);
-    padding-top: 15px;
+    margin-top: 10px;
 }
+
+.breadcumb {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    /*text-align: center; */
+}
+.breadcumb .divider {
+    background-color: pink;
+    height: 5px;
+    margin-top: 0px;
+    border-radius: 50%;
+    margin: 0px;
+}
+
+/*input[type=email]:focus:not([readonly]):not(.invalid):not(.valid),*/
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid darkblue;
+    box-shadow: 0 1px 0 0 darkblue;
+}
+
+
+
 
 
 
@@ -80,9 +139,7 @@ span.form_success {
 }
 
 
-#button-collapse {
-    z-index: 1000;
-}
+
 
 /*sdsdds */
 /* Cuando sale el sidenav que no se oscurezca el resto del content de la pantalla
@@ -97,25 +154,7 @@ footer {
 
 
 
-/* ANADIDOS PARA PROBAR */
-nav .button-collapse i {
-    font-size: 3.5rem;
-}
 
-nav .btn-floating.btn-large {
-    left: 5px;
-    height: 50px;
-    width: 50px;
-}
-/* No permitir la seleccion en toda nav */
-nav {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 
 
 
@@ -123,14 +162,6 @@ nav {
 
 /* LEAFLET */
 
-
-.navbar-fixed {
-
-}
-
-.leaflet-top {
-    z-index: 900;
-}
 
 .leaflet-control-layers {
 

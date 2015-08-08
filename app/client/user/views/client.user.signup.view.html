@@ -1,6 +1,10 @@
+
 <div class="container" ng-controller="AuthenticationController">
+
+    <div class="breadcumb">Signup<li class="divider"></li></div>
     <div class="row">
         <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <span class="flag-icon flag-icon-gr flag-icon-squared"></span>
             <form name="signupForm" ng-submit="signup()" novalidate>
                 <div class="row">
                     <div class="input-field col s12">
@@ -20,7 +24,19 @@
                         <span class="form_success" ng-show="(signupForm.password.$dirty  &&  signupForm.password.$valid)">formato correto</span>
                     </div>
                 </div>
+                <div class="row">
+                    <span class="flag-icon flag-icon-gr"></span>
+                    <div class="input-field col s12">
+                        <select id="lang" name="lang" ng-model="lang">
+                            <option value="es" selected>Spanish</option>
+                            <option value="en">English</option>
+                        </select>
+                        <label for="lang">language</label>
+                    </div>
+                    <script>$("#lang").material_select();</script>
+                </div>
                 <button type="submit" class="btn btn-large pink" ng-disabled="signupForm.email.$invalid  ||  signupForm.password.$invalid">Sign up</button>
+                &nbsp;&nbsp;&nbsp; or &nbsp;<a ui-sref="login">Login</a>
             </form>
         </div>
     </div>

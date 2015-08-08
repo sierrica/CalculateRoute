@@ -1,18 +1,29 @@
 <div class="container" ng-controller="AuthenticationController">
-    <div class="row" >
-        <div class="col s12 m8 offset-m2 l10 offset-l1">
-            <form name="userForm" data-ng-submit="signin()" class="form-horizontal">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" data-ng-model="email">
+    <div class="breadcumb">Login<li class="divider"></li></div>
+    <div class="row">
+        <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <form name="loginForm" ng-submit="login()" novalidate>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required ng-class="loginForm.email.$invalid && loginForm.email.$dirty ? 'invalid' : loginForm.email.$valid && loginForm.email.$dirty ? 'valid' : ''" ng-model="email">
+                        <span class="form_error" ng-show="loginForm.email.$dirty  &&  loginForm.email.$error.required">es requerido</span>
+                        <span class="form_error" ng-show="loginForm.email.$dirty  &&  loginForm.email.$invalid  &&  !loginForm.email.$error.required">formato incorreto</span>
+                        <span class="form_success" ng-show="loginForm.email.$dirty  &&  loginForm.email.$valid">formato correto</span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" data-ng-model="password">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required ng-minlength="6" ng-class="loginForm.password.$invalid && loginForm.password.$dirty ? 'invalid' : loginForm.password.$valid && loginForm.password.$dirty ? 'valid' : ''" ng-model="password">
+                        <span class="form_error" ng-show="loginForm.password.$dirty  &&  loginForm.password.$error.required">es requerido</span>
+                        <span class="form_error" ng-show="loginForm.password.$dirty  &&  loginForm.password.$invalid  &&  !loginForm.password.$error.required ">minimo 6 caracteres</span>
+                        <span class="form_success" ng-show="loginForm.password.$dirty  &&  loginForm.password.$valid">formato correto</span>
+                    </div>
                 </div>
-                <div class="text-center form-group">
-                    <button type="submit" class="btn btn-large btn-primary">Sign in</button>
-                </div>
+                <button type="submit" class="btn btn-large pink" ng-disabled="loginForm.email.$invalid  ||  loginForm.password.$invalid">Login</button>
+                &nbsp;&nbsp;&nbsp; or &nbsp;<a ui-sref="signup">Signup</a>
+                <a ui-sref="home" style="display:block;margin-top:10px;">Forgot your Password?</a>
             </form>
         </div>
     </div>

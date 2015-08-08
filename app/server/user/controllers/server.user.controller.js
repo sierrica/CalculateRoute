@@ -1,21 +1,19 @@
 var path        = require ('path'),
-    passport    = require ('passport'),
     token       = require (path.resolve('./app/server/user/config/server.user.token')),
     User        = require (path.resolve('./app/server/user/models/server.user.model')),
     logger      = require (path.resolve('./config/logger'));
 
 
-function signup(req, res) {
+function signup (req, res) {
     User.findOne ({ email: req.body.email }, function(err, existingUser) {
         if (existingUser)
             return res.status(409).send ({ message: 'Email is already taken' });
-
         var user = new User ({
             email: req.body.email,
             password: req.body.password
         });
         user.save (function() {
-            token.createToken (user, { id: user.email }, function(res, err, token) {
+            token.createToken (user, function(res, err, token) {
                 if (err) {
                     //user.delete();
                     logger.error (err.message);
@@ -27,12 +25,10 @@ function signup(req, res) {
     });
 };
 
-function signin (req, res) {
-
+function login (req, res) {
     User.findOne ({ email: req.body.email }, '+password', function(err, user) {
-        if (!user) {
-            return res.status(401).send({ message: 'Wrong email and/or password' });
-        }
+        if (! user)
+            return res.status(401).send ({ message: 'Wrong email and/or password' });
         user.comparePassword(req.body.password, function(err, isMatch) {
             if (!isMatch) {
                 return res.status(401).send({ message: 'Wrong email and/or password' });
@@ -50,9 +46,10 @@ function signin (req, res) {
     });
 };
 
+
 module.exports = {
     signup: signup,
-    signin: signin
+    login: login
 };
 
 /*
