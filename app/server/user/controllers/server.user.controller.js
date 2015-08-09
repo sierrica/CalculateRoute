@@ -4,6 +4,10 @@ var path        = require ('path'),
     logger      = require (path.resolve('./config/logger'));
 
 
+
+
+
+
 function signup (req, res) {
     User.findOne ({ email: req.body.email }, function(err, existingUser) {
         if (existingUser)

@@ -9,9 +9,11 @@ exports.renderIndex = function(req, res) {
             region = "ES";
         else if (lang == "en"  &&  (!region || region != "GB"))
             region = "GB";
-        }
-    else
-        lang = "es"; region = "ES";
+    }
+    else {
+        lang = "es";
+        region = "ES";
+    }
 
     res.render ('index', {
         lang: lang + "-" + region

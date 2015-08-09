@@ -179,5 +179,7 @@ input[type="radio"].leaflet-control-layers-selector {
     visibility: visible;
 }
 
-
+select option:empty {
+    display:none
+}
 

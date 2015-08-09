@@ -1,8 +1,22 @@
-app.controller ('AuthenticationController', ['$scope', '$auth', '$location', function($scope, $auth, $location) {
+app.controller ('AuthenticationController', ['$scope', 'satellizer.shared', '$auth', '$location', function($scope, shared, $auth, $location) {
 
 	console.log ("DENTRO AUTHENTICATION CONTROLLER");
 
+
+
+    $scope.lang_choice = function() {
+        var lang = document.documentElement.lang.toLowerCase().replace(/_/g, '-').split('-')[1];
+        $scope.lang = lang;
+        $("#lang").select2 ("val", lang);
+    };
+
+    // Me aseguro que por defecto coja en sesion. Esto es peligroso pero como solo accedo cuando estoy desautenticado.
+    shared.almacenamiento = 'sessionStorage';
     $scope.signup = function() {
+        console.log ($scope.remember);
+        //$auth.setStorage('sessionStorage');
+        if ($scope.remember)
+            shared.almacenamiento = 'localStorage';
         $auth.signup ({
             email: $scope.email,
             password: $scope.password
@@ -26,18 +40,19 @@ app.controller ('AuthenticationController', ['$scope', '$auth', '$location', fun
         });
     };
 
-
-    $scope.signin = function() {
-        console.log ("DENTRO");
+    $scope.login = function() {
+        if ($scope.remember)
+            shared.almacenamiento = 'localStorage';
         $auth.login ({
             email: $scope.email,
             password: $scope.password
         }).then (function() {
-            console.log ("REGISTRADO CORRECTAMENTE");
+            console.log ("LOGUEADO CORRECTAMENTE");
+            console.log ($auth.getToken());
+            console.log ($auth.getPayload());
         }).catch (function(response) {
             console.log ("ERROR NO OBJETO");
             console.log (response.data.message);
         });
     };
-
 }]);

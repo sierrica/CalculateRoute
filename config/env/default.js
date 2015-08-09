@@ -48,7 +48,8 @@ module.exports = {
                     'files/lib/materialize/dist/css/materialize.css',
                     'files/lib/perfect-scrollbar/css/perfect-scrollbar.css',
                     'files/lib/leaflet/dist/leaflet.css',
-                    'files/lib/flag-icon-css/css/flag-icon-css.css',
+                    'files/lib/flag-icon-css/css/flag-icon.css',
+                    'files/lib/select2/dist/css/select2.css'
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
@@ -60,6 +61,7 @@ module.exports = {
                     'files/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
                     'files/lib/angular-translate-handler-log/angular-translate-handler-log.js',
                     'files/lib/angular-dynamic-locale/dist/tmhDynamicLocale.js',
+                    'files/lib/select2/dist/js/select2.js',
 
 
 

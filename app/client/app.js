@@ -29,6 +29,120 @@ var app = angular.module('calculateRoute', [
 .config(function (tmhDynamicLocaleProvider) {
     tmhDynamicLocaleProvider.localeLocationPattern ('lib/angular-i18n/angular-locale_{{locale}}.js');
 })
+.factory('satellizer.shared', ['$q', '$window', '$location', 'satellizer.config', 'satellizer.storage', function($q, $window, $location, config, storage) {
+    var shared = {};
+
+    if (localStorage["calculateroute_token"])
+        shared.almacenamiento = "localStorage";
+    else
+        shared.almacenamiento = "sessionStorage";
+
+    var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
+
+    shared.getToken = function() {
+        return storage.get(tokenName);
+    };
+
+    shared.getPayload = function() {
+        var token = storage.get(tokenName);
+
+        if (token && token.split('.').length === 3) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace('-', '+').replace('_', '/');
+            return JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        }
+    };
+
+    shared.setToken = function(response, redirect) {
+        var accessToken = response && response.access_token;
+        var token;
+
+        if (accessToken) {
+            if (angular.isObject(accessToken) && angular.isObject(accessToken.data)) {
+                response = accessToken;
+            } else if (angular.isString(accessToken)) {
+                token = accessToken;
+            }
+        }
+
+        if (!token && response) {
+            token = config.tokenRoot && response.data[config.tokenRoot] ?
+                response.data[config.tokenRoot][config.tokenName] : response.data[config.tokenName];
+        }
+
+        if (!token) {
+            var tokenPath = config.tokenRoot ? config.tokenRoot + '.' + config.tokenName : config.tokenName;
+            throw new Error('Expecting a token named "' + tokenPath + '" but instead got: ' + JSON.stringify(response.data));
+        }
+
+        //storage.set(tokenName, token);
+        if (shared.almacenamiento == 'sessionStorage')
+            sessionStorage.setItem(tokenName, token);
+        else
+            localStorage.setItem(tokenName, token);
+
+
+        if (config.loginRedirect && !redirect) {
+            $location.path(config.loginRedirect);
+        } else if (redirect && angular.isString(redirect)) {
+            $location.path(encodeURI(redirect));
+        }
+    };
+
+    shared.removeToken = function() {
+        //storage.remove(tokenName);
+        if (shared.almacenamiento == 'sessionStorage')
+            sessionStorage.removeItem (tokenName);
+        else
+            localStorage.removeItem (tokenName);
+    };
+
+    shared.isAuthenticated = function() {
+        //var token = storage.get(tokenName);
+        var token;
+        if (shared.almacenamiento == 'sessionStorage')
+            token = sessionStorage.getItem (tokenName);
+        else
+            token = localStorage.getItem (tokenName);
+
+        if (token) {
+            if (token.split('.').length === 3) {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace('-', '+').replace('_', '/');
+                var exp = JSON.parse($window.atob(base64)).exp;
+                if (exp) {
+                    return Math.round(new Date().getTime() / 1000) <= exp;
+                }
+                return true;
+            }
+            return true;
+        }
+        return false;
+    };
+
+    shared.logout = function(redirect) {
+        //storage.remove(tokenName);
+        if (shared.almacenamiento == 'sessionStorage')
+            sessionStorage.removeItem (tokenName);
+        else
+            localStorage.removeItem (tokenName);
+
+        if (config.logoutRedirect && !redirect) {
+            $location.url(config.logoutRedirect);
+        }
+        else if (angular.isString(redirect)) {
+            $location.url(redirect);
+        }
+
+        return $q.when();
+    };
+
+    shared.setStorage = function(type) {
+        config.storage = type;
+    };
+
+    return shared;
+}])
 .factory('satellizer.interceptor', ['$q', 'satellizer.config', 'satellizer.storage', 'satellizer.shared', function($q, config, storage, shared) {
     return {
         request: function(request) {
@@ -53,18 +167,18 @@ var app = angular.module('calculateRoute', [
     tmhDynamicLocale.set (document.documentElement.lang.toLowerCase().replace(/_/g, '-'));
 
     $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        console.log (toState.private);
-        console.log ($auth.isAuthenticated());
         if (toState.private   &&  !$auth.isAuthenticated()) {
-            console.log ("CAMBIO ESTADO");
             event.preventDefault();
             $state.transitionTo ("login");
         }
+        else if ($auth.isAuthenticated()  &&  (toState.name == "login"  ||  toState.name == "signup")) {
+            event.preventDefault();
+            $state.transitionTo ("home");
+        }
+    });
 
-        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-            $(".side-nav li").removeClass("active");
-            $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
-        });
-
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $(".side-nav li").removeClass("active");
+        $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
     });
 });

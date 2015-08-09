@@ -58,7 +58,8 @@ exports.calculateroute = function(req, res) {
         body: peticion
     };
 
-
+    res.json({ "prueba": "correcto" });
+/*
     request.post (options, function callback(error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log ("EXITO");
@@ -73,7 +74,7 @@ exports.calculateroute = function(req, res) {
             console.log (body);
             }
     });
-
+*/
 
 
 

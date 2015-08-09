@@ -54,13 +54,14 @@ angular.module('calculateRoute').factory('Map', function() {
                 zoomControl: false,
                 attributionControl: false,
                 maxBounds: ([[31.952,-18.808],[72.607,44.472]]),
-                layers: [ptv_maps],
+                //layers: [ptv_maps],
+                layers: [open_maps_mapnik],
                 doubleClickZoom: false
             });
 
             map.setView ([41.505, -0.09], 13);
 
-            /* Añadir un boton con los tiles disponibles */
+            /* AÃ±adir un boton con los tiles disponibles */
 
             L.control.layers(baseLayers).addTo (map);
         },

@@ -20,7 +20,9 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
     $authProvider.authToken = 'Bearer';
     $authProvider.withCredentials = true;
     $authProvider.platform = 'browser';                 // or 'mobile'
-    $authProvider.storage = 'localStorage';             // or 'sessionStorage'
+
+    //if (sessionStorage["calculateroute_token"])
+    //    $authProvider.storage = 'sessionStorage';
 
     // Users state routing
     $stateProvider

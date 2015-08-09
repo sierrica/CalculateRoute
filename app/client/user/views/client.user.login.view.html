@@ -21,6 +21,12 @@
                         <span class="form_success" ng-show="loginForm.password.$dirty  &&  loginForm.password.$valid">formato correto</span>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col s12">
+                        <input type="checkbox" id="remember" ng-model="remember"/>
+                        <label for="remember">Recordar nombre de usuario</label>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-large pink" ng-disabled="loginForm.email.$invalid  ||  loginForm.password.$invalid">Login</button>
                 &nbsp;&nbsp;&nbsp; or &nbsp;<a ui-sref="signup">Signup</a>
                 <a ui-sref="home" style="display:block;margin-top:10px;">Forgot your Password?</a>

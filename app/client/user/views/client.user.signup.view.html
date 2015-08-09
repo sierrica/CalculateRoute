@@ -4,7 +4,6 @@
     <div class="breadcumb">Signup<li class="divider"></li></div>
     <div class="row">
         <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <span class="flag-icon flag-icon-gr flag-icon-squared"></span>
             <form name="signupForm" ng-submit="signup()" novalidate>
                 <div class="row">
                     <div class="input-field col s12">
@@ -25,17 +24,44 @@
                     </div>
                 </div>
                 <div class="row">
-                    <span class="flag-icon flag-icon-gr"></span>
-                    <div class="input-field col s12">
-                        <select id="lang" name="lang" ng-model="lang">
-                            <option value="es" selected>Spanish</option>
-                            <option value="en">English</option>
-                        </select>
-                        <label for="lang">language</label>
+                    <div class="col s4 m4 l3">
+                        <label for="lang" style="font-size:15px;">Language</label>
                     </div>
-                    <script>$("#lang").material_select();</script>
+                    <div class="col s7 m5 l9">
+                        <select id="lang" name="lang" ng-init="lang_choice()" ng-model="lang" style="width: 100%">
+                            <option value="es" >Spanish - (ES)</option>
+                            <option value="gb">English - (GB)</option>
+                        </select>
+                    </div>
+                    <script>
+                        function formatState (state) {
+                            if (!state.id)
+                                return state.text;
+                            return $('<span><span class="flag-icon flag-icon-' + state.element.value.toLowerCase() + '"></span> ' + state.text + '</span>');
+                        };
+                        $("#lang").select2({
+                            //theme: "classic",
+                            minimumResultsForSearch: Infinity,
+                            templateResult: formatState,
+                            templateSelection: formatState
+                        });
+                    </script>
                 </div>
-                <button type="submit" class="btn btn-large pink" ng-disabled="signupForm.email.$invalid  ||  signupForm.password.$invalid">Sign up</button>
+                <!--
+                <div class="row">
+                    <div class="col s12">
+                        <input type="checkbox" id="remember" ng-model="remember"/>
+                        <label for="remember">Recordar nombre de usuario</label>
+                    </div>
+                </div>
+                -->
+                <div class="row">
+                    <div class="col s12">
+                        <input type="checkbox" id="accept" ng-model="accept"/>
+                        <label for="accept">Acepto las condiciones de uso</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-large pink" ng-disabled="!accept  ||  signupForm.email.$invalid  ||  signupForm.password.$invalid">Sign up</button>
                 &nbsp;&nbsp;&nbsp; or &nbsp;<a ui-sref="login">Login</a>
             </form>
         </div>
