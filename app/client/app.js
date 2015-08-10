@@ -14,16 +14,13 @@ var app = angular.module('calculateRoute', [
 })
 
 .config(['$translateProvider', function ($translateProvider) {
-
         //$translateProvider.useMissingTranslationHandlerLog();
         $translateProvider.useSanitizeValueStrategy ('escaped');
-
-        $translateProvider.useStaticFilesLoader({
+        $translateProvider.useStaticFilesLoader ({
             prefix: 'i18n/',
             suffix: '.json'
         });
-
-        $translateProvider.preferredLanguage (document.documentElement.lang);
+        //$translateProvider.preferredLanguage (document.documentElement.lang);
 }])
 .config(function (tmhDynamicLocaleProvider) {
     tmhDynamicLocaleProvider.localeLocationPattern ('lib/angular-i18n/angular-locale_{{locale}}.js');
@@ -198,8 +195,10 @@ var app = angular.module('calculateRoute', [
             User.change_lang ($rootScope.user.lang);
         });
     }
-    else
+    else {
         tmhDynamicLocale.set (document.documentElement.lang.toLowerCase());
+        $translate.use (document.documentElement.lang);
+    }
 
     $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         if (toState.private   &&  !$auth.isAuthenticated()) {
