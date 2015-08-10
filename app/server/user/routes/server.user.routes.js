@@ -1,6 +1,11 @@
-module.exports = function(app) {
-    var users = require ('../controllers/server.user.controller');
+var path = require ('path'),
+    user = require ('../controllers/server.user.controller');
 
-    app.route ('/signup').post (users.signup);
-    app.route ('/login').post (users.login);
+module.exports = function(app) {
+
+    app.route ('/signup').post (user.signup);
+    app.route ('/login').post (user.login);
+
+    app.route ('/me').get (user.isAuthenticated, user.me);
+
 };

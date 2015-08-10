@@ -37,12 +37,12 @@
                         </a>
                     </li>
                     <li class="no-padding" ng-show="isAuthenticated()">
-                        <a ui-sref="logout" ng-click="close_sidenav($event)">
+                        <a ui-sref="logout" ng-click="empty_user(); close_sidenav($event)">
                             <i class="material-icons">lock</i> Salir
                         </a>
                     </li>
                 </ul>
-                <a ng-mouseup="dropdown($event)" class="dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                <a ng-mouseup="dropdown($event)" class="dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">{{ user.email || 'unknown' | translate }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
                 <p>Administrator</p>
             </div>
         </div>
@@ -50,7 +50,7 @@
     <li class="divider" style="height:10px"></li>
     <li class="no-padding">
         <a ui-sref="home" class="waves-effect waves-light" ng-click="close_sidenav($event)">
-            <i class="small material-icons">home</i> Inicio
+            <i class="small material-icons">home</i> {{ 'home' | translate }}
         </a>
     </li>
     <li class="no-padding">

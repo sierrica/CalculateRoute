@@ -1,9 +1,7 @@
+var path = require ('path'),
+    user = require (path.resolve('./app/server/user/controllers/server.user.controller')),
+    ptv  = require ('../controllers/server.ptv.controller');
+
 module.exports = function(app) {
-    // Root routing
-    var ptv = require ('../controllers/server.ptv.controller');
-
-    // Define error pages
-    app.route ('/ptv/calculateroute')
-        .post (ptv.calculateroute);
-
+    app.route ('/ptv/calculateroute').post (user.isAuthenticated, ptv.calculateroute);
 };

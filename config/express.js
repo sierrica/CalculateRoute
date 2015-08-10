@@ -11,7 +11,8 @@ var config          = require ('./config'),
     mongoose        = require ("mongoose"),
     morgan          = require ('morgan'),
     compression     = require ('compression'),
-    errorHandler    = require ('errorhandler');
+    errorHandler    = require ('errorhandler'),
+    core = require (path.resolve('./app/server/core/controllers/server.core.controller'));
 
 
 /* Invoke modules server configuration */
@@ -29,6 +30,7 @@ module.exports.initHelmetHeaders = function (app) {
     app.use (helmet.nosniff());
     app.use (helmet.ienoopen());
     app.set ('x-powered-by', false);                // Disable header 'X-Powered-By ? Express'
+
 };
 
 /* Habilitar CORS */
@@ -61,7 +63,7 @@ module.exports.initMiddleware = function (app) {
 
     app.use (bodyParser.json());                                                // for parsing application/json
     app.use (bodyParser.urlencoded({ extended: true }));                        // for parsing application/x-www-form-urlencoded
-//    app.use (multer());                                                         // for parsing multipart/form-data
+    //app.use (multer());                                                         // for parsing multipart/form-data
 
     if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
         app.use (morgan('dev', { stream: { write: function(str) { logger.debug(str); } }}));          // Habilitar Morgan a traves de winston.
@@ -101,6 +103,8 @@ module.exports.initModulesServerRoutes = function (app) {
     config.files.server.routes.forEach (function (routePath) {
         require (path.resolve(routePath))(app);                                         // Globbing routing files
     });
+
+
 };
 
 
@@ -115,8 +119,3 @@ module.exports.init = function () {
     this.initModulesServerRoutes(app);
     return app;
 };
-
-
-/*
-
- */

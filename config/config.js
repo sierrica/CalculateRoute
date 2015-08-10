@@ -10,6 +10,7 @@ var _           = require ('lodash'),
 /**
  * Get files by glob patterns
  */
+
 function getGlobbedPaths(globPatterns, excludes) {
     // URL paths regex
     var urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
@@ -44,7 +45,6 @@ function getGlobbedPaths(globPatterns, excludes) {
     }
     return output;
 }
-
 
 
 

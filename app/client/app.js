@@ -1,6 +1,7 @@
 var app = angular.module('calculateRoute', [
     'ui.router',
     'ngTouch',
+    'ngResource',
     'satellizer',
     'pascalprecht.translate',
     'tmh.dynamicLocale'
@@ -13,10 +14,8 @@ var app = angular.module('calculateRoute', [
 })
 
 .config(['$translateProvider', function ($translateProvider) {
-        //$translateProvider.determinePreferredLanguage();
-        //$translateProvider.uniformLanguageTag('bcp47').determinePreferredLanguage();
 
-        $translateProvider.useMissingTranslationHandlerLog();
+        //$translateProvider.useMissingTranslationHandlerLog();
         $translateProvider.useSanitizeValueStrategy ('escaped');
 
         $translateProvider.useStaticFilesLoader({
@@ -40,12 +39,19 @@ var app = angular.module('calculateRoute', [
     var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
 
     shared.getToken = function() {
-        return storage.get(tokenName);
+        if (shared.almacenamiento == 'sessionStorage')
+            return sessionStorage.getItem (tokenName);
+        else
+            return localStorage.getItem (tokenName);
     };
 
     shared.getPayload = function() {
-        var token = storage.get(tokenName);
-
+        //var token = storage.get(tokenName);
+        var token;
+        if (shared.almacenamiento == 'sessionStorage')
+            token = sessionStorage.getItem (tokenName);
+        else
+            token = localStorage.getItem (tokenName);
         if (token && token.split('.').length === 3) {
             var base64Url = token.split('.')[1];
             var base64 = base64Url.replace('-', '+').replace('_', '/');
@@ -77,9 +83,9 @@ var app = angular.module('calculateRoute', [
 
         //storage.set(tokenName, token);
         if (shared.almacenamiento == 'sessionStorage')
-            sessionStorage.setItem(tokenName, token);
+            sessionStorage.setItem (tokenName, token);
         else
-            localStorage.setItem(tokenName, token);
+            localStorage.setItem (tokenName, token);
 
 
         if (config.loginRedirect && !redirect) {
@@ -143,14 +149,20 @@ var app = angular.module('calculateRoute', [
 
     return shared;
 }])
-.factory('satellizer.interceptor', ['$q', 'satellizer.config', 'satellizer.storage', 'satellizer.shared', function($q, config, storage, shared) {
+.factory ('satellizer.interceptor', ['$q', 'satellizer.config', 'satellizer.storage', 'satellizer.shared', '$location', function($q, config, storage, shared, $location) {
     return {
         request: function(request) {
             if (request.skipAuthorization)
                 return request;
             if (shared.isAuthenticated() && config.httpInterceptor) {
                 var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
-                var token = storage.get(tokenName);
+
+                var token;
+                if (shared.almacenamiento == 'sessionStorage')
+                    token = sessionStorage.getItem (tokenName);
+                else
+                    token = localStorage.getItem (tokenName);
+
                 if (config.authHeader && config.authToken)
                     token = config.authToken + ' ' + token;
                 request.headers[config.authHeader] = token;
@@ -158,13 +170,36 @@ var app = angular.module('calculateRoute', [
             return request;
         },
         responseError: function(response) {
+            if (response.status == 409) {
+                var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
+                if (shared.almacenamiento == 'sessionStorage')
+                    sessionStorage.removeItem (tokenName);
+                else
+                    localStorage.removeItem (tokenName);
+                $location.url('/login');
+            }
             return $q.reject(response);
         }
     };
 }])
-.run(function ($rootScope, tmhDynamicLocale, $auth, $state, $location) {
+.factory('missingTranslationHandler', ['$log', '$translate',
+    function missingTranslationHandlerFactory($log, $translate) {
+        return function(translationId) {
 
-    tmhDynamicLocale.set (document.documentElement.lang.toLowerCase().replace(/_/g, '-'));
+            return true;
+        };
+    }
+])
+.run (function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User) {
+
+    if ($auth.isAuthenticated()) {
+        User.me.get().$promise.then(function(response) {
+            $rootScope.user = response.user;
+            User.change_lang ($rootScope.user.lang);
+        });
+    }
+    else
+        tmhDynamicLocale.set (document.documentElement.lang.toLowerCase());
 
     $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         if (toState.private   &&  !$auth.isAuthenticated()) {
@@ -181,4 +216,9 @@ var app = angular.module('calculateRoute', [
         $(".side-nav li").removeClass("active");
         $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
     });
+
+
+    $rootScope.lang_change = function() {
+    };
+
 });

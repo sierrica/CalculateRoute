@@ -147,9 +147,23 @@ span.form_success {
     background-color: transparent;
 }*/
 
+/* FOOTER */
+footer {
+    padding-left: 300px;
+}
+@media only screen and (max-width: 992px) {
+    footer {
+        padding-left: 0px;
+    }
+}
+
 footer {
     position: absolute;
     bottom: 0px;
+    width: 100%;
+}
+footer.hidden {
+    display: none;
 }
 
 

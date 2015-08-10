@@ -4,21 +4,15 @@ var path   = require ('path'),
     config = require (path.resolve('./config/config'));
 
 
-function extractTokenFromHeader(headers) {
-
+function extractTokenFromHeader (headers) {
     if (headers == null)
         throw new Error ('Header is null');
-
     if (headers.authorization == null)
         throw new Error ('Authorization header is null');
-
     var authorization = headers.authorization;
-
     var authArr = authorization.split(' ');
-
     if (authArr.length !== 2)
         throw new Error('Authorization header value is not of length 2');
-
     var token = authArr[1];
     try {
         jwt.verify (token, config.token.secret);
@@ -28,7 +22,6 @@ function extractTokenFromHeader(headers) {
     }
     return token;
 };
-
 
 function createToken (payload, cb) {
     var ttl = config.token.ttl;
@@ -44,31 +37,12 @@ function createToken (payload, cb) {
     }.bind (null, token));
 };
 
-
-function expireToken(headers, cb) {
-    try {
-        var token = extractTokenFromHeader (headers);
-        if (token == null)
-            return cb (new Error('Token is null'));
-        redis.del (token, function(err, reply) {                 // delete token from redis. reply -> OK
-            if (err)
-                return cb (err);
-            if ( ! reply)
-                return cb (new Error('Token not found'));
-            return cb (null, true);
-        });
-    }
-    catch (err) {
-        return cb (err);
-    }
-};
-
 function verifyToken(headers, cb) {
     try {
         var token = extractTokenFromHeader (headers);
         if (token == null)
             return cb (new Error('Token is null'));
-        redis.get (token, function(err, userData) {               // gets the associated data of the token
+        redis.get (token, function(err, userData) {                             // gets the associated data of the token
             if (err)
                 return cb (err);
             if ( ! userData)
@@ -81,9 +55,28 @@ function verifyToken(headers, cb) {
     }
 };
 
+function expireToken(headers, cb) {
+    try {
+        var token = extractTokenFromHeader (headers);
+        if (token == null)
+            return cb (new Error('Token is null'));
+        redis.del (token, function(err, reply) {                 // delete token from redis. reply -> OK
+            if (err)
+                return cb (err);
+            if (! reply)
+                return cb (new Error('Token not found'));
+            return cb (null, true);
+        });
+    }
+    catch (err) {
+        return cb (err);
+    }
+};
+
+
 module.exports = {
     extractTokenFromHeader: extractTokenFromHeader,
     createToken: createToken,
-    expireToken: expireToken,
-    verifyToken: verifyToken
+    verifyToken: verifyToken,
+    expireToken: expireToken
 };

@@ -1,4 +1,4 @@
-angular.module('calculateRoute').factory('Map', function() {
+app.factory('Map', function() {
 
 
 
@@ -27,7 +27,7 @@ angular.module('calculateRoute').factory('Map', function() {
                 subdomains: '1234',
                 minZoom: 3
             });
-            var ptv_maps_fg = new L.NonTiledLayer.WMS('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=204109275126088', {
+            var ptv_maps_fg = new L.NonTiledLayer.WMS('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=c2b345bf-ae76-4f41-8467-6307423b1bf4', {
                 minZoom: 3,
                 opacity: 1.0,
                 layers: 'xmap-ajaxfg',

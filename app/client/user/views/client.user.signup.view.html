@@ -28,16 +28,16 @@
                         <label for="lang" style="font-size:15px;">Language</label>
                     </div>
                     <div class="col s7 m5 l9">
-                        <select id="lang" name="lang" ng-init="lang_choice()" ng-model="lang" style="width: 100%">
-                            <option value="es" >Spanish - (ES)</option>
-                            <option value="gb">English - (GB)</option>
+                        <select id="lang" name="lang" ng-init="lang_default()" ng-model="lang" style="width: 100%">
+                            <option value="es-ES" >Spanish - (ES)</option>
+                            <option value="en-GB">English - (GB)</option>
                         </select>
                     </div>
                     <script>
                         function formatState (state) {
                             if (!state.id)
                                 return state.text;
-                            return $('<span><span class="flag-icon flag-icon-' + state.element.value.toLowerCase() + '"></span> ' + state.text + '</span>');
+                            return $('<span><span class="flag-icon flag-icon-' + state.element.value.toLowerCase().replace(/_/g, '-').split('-')[1] + '"></span> ' + state.text + '</span>');
                         };
                         $("#lang").select2({
                             //theme: "classic",
@@ -47,14 +47,12 @@
                         });
                     </script>
                 </div>
-                <!--
                 <div class="row">
                     <div class="col s12">
                         <input type="checkbox" id="remember" ng-model="remember"/>
                         <label for="remember">Recordar nombre de usuario</label>
                     </div>
                 </div>
-                -->
                 <div class="row">
                     <div class="col s12">
                         <input type="checkbox" id="accept" ng-model="accept"/>

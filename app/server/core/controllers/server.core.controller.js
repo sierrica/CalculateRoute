@@ -1,4 +1,4 @@
-/* Render the main applicaion page */
+
 exports.renderIndex = function(req, res) {
     //console.log ("user-agent: " + req.headers["user-agent"]);
     if (req.headers["accept-language"]) {

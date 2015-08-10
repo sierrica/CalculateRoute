@@ -6,5 +6,5 @@ var path        = require ('path'),
 module.exports = function(app) {
 
 
-    logger.debug ("DENTRO");
+    //logger.debug ("DENTRO");
 };

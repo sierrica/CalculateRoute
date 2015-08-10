@@ -1,10 +1,26 @@
-app.controller ('HomeController', ['$scope', '$location', '$auth', 'Map', '$http', function($scope, $location, $auth, Map, $http) {
+app.controller ('HomeController', ['$rootScope', '$scope', '$location', '$auth', 'Map', '$http', function($rootScope, $scope, $location, $auth, Map, $http, User) {
     console.log ("DENTRO HOME CONTROLLER");
 
     $scope.map = function () {
         Map.initMap();
     };
 
+
+
+
+    console.log ("PAYLOAD");
+    console.log ($auth.getPayload());
+/*
+    User.me.get().$promise.then(function(response) {
+        $rootScope.user = response.user;
+        console.log ($rootScope.user);
+        if ($rootScope.user.lang != document.documentElement.lang) {
+            document.documentElement.lang = $rootScope.user.lang;
+            tmhDynamicLocale.set ($rootScope.user.lang.toLowerCase());
+            $translate.use ($rootScope.user.lang);
+        }
+    });
+*/
     $scope.calculateroute = function () {
         $http.post ('/ptv/calculateroute', $scope.credentials)
              .success(function(response) {

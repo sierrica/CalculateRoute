@@ -14,7 +14,8 @@ function signup (req, res) {
             return res.status(409).send ({ message: 'Email is already taken' });
         var user = new User ({
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            lang: req.body.lang
         });
         user.save (function() {
             token.createToken (user, function(res, err, token) {
@@ -33,34 +34,45 @@ function login (req, res) {
     User.findOne ({ email: req.body.email }, '+password', function(err, user) {
         if (! user)
             return res.status(401).send ({ message: 'Wrong email and/or password' });
+
         user.comparePassword(req.body.password, function(err, isMatch) {
             if (!isMatch) {
                 return res.status(401).send({ message: 'Wrong email and/or password' });
             }
-            token.createToken ({
-                email: req.body.email
-            }, function(res, err, token) {
+            console.log (user);
+            token.createToken (user, function(res, err, token) {
                 if (err) {
                     logger.error (err.message);
                     return res.status(400).send(err);
                 }
-                res.status(201).json ({token: token});
+                res.status(201).json ({ token: token });
             }.bind(null, res));
         });
     });
 };
 
 
-module.exports = {
-    signup: signup,
-    login: login
+function isAuthenticated(req, res, next) {
+    token.verifyToken(req.headers, function(next, err, data) {
+        if (err) {
+            logger.error (err.message);
+            return res.status(409).send (err.message);
+        }
+        req.user = data;
+
+        next();
+    }.bind(null, next));
+}
+
+
+function me (req, res) {
+    res.status(200).json ({ user: req.user });
 };
 
-/*
+
 module.exports = {
-    signin: signin,
-    signout: signout,
     signup: signup,
-    isAuthenticated: isAuthenticated
+    login: login,
+    isAuthenticated: isAuthenticated,
+    me: me
 };
-*/

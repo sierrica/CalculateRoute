@@ -22,7 +22,7 @@ module.exports = {
     },
     token: {
         secret: process.env.TOKEN_SECRET || 'tauste',
-        ttl: process.env.TOKEN_EXPIRATION || 60*60//*24            //24 hours
+        ttl: process.env.TOKEN_EXPIRATION || 60*60*24                   //24 hours
     },
     ip_node: process.env.OPENSHIFT_NODEJS_IP ||"0.0.0.0",
     port_node: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT  || 80,
@@ -35,13 +35,11 @@ module.exports = {
         client: {
             views: ['app/client/*/views/**/*.html'],
             css: [
-                'app/client/*/css/*.css'
+                'app/client/*/**/*.css'
             ],
             js: [
                 'app/client/app.js',
-                'app/client/*[!lib]*/*.js',
-                'app/client/*[!lib]*/**/*.js'
-
+                'app/client/*/**/*.js'
             ],
             lib: {
                 css: [
@@ -81,8 +79,8 @@ module.exports = {
             ]
         },
         server: {
-            models: 'server/*[!core]/models/**/*.js',
-            routes: 'app/server/**/routes/**/*.js',
+            models: 'server/!(core)/models/**/*.js',
+            routes: ['app/server/!(core)/routes/**/*.js', 'app/server/core/routes/**/*.js'],
             config: 'app/server/*/config/*.js',
             views: 'modules/server/*/views/**/*.html'
         }
