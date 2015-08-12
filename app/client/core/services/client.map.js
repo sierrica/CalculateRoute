@@ -1,37 +1,25 @@
 app.factory('Map', function($translate) {
 
-
     var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
     var cluster = 'eu-n-test';
     var xMapUrl = 'https://xmap-' + cluster + '.cloud.ptvgroup.com';
 
-
-
-
-
-
-
-    function getUrlPram(name) {
-        if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
-            return decodeURIComponent(name[1]);
-    }
-
-
-
     L.PtvLayer.TruckAttributes = L.PtvLayer.TruckAttributes.extend ({
         _formatTooltip: function (description) {
-            //console.log (description);
-            return $translate.instant (description.split("#")[1]);
+            if ($translate.instant (description.split("#")[1]))
+                return $translate.instant (description.split("#")[1]);
+            else
+                return description;
         }
     });
     L.PtvLayer.TrafficInformation = L.PtvLayer.TrafficInformation.extend ({
         _formatTooltip: function (description) {
-            //console.log (description);
-            return $translate.instant (description.split("#")[1]);
+            if ($translate.instant (description.split("#")[1]))
+                return $translate.instant (description.split("#")[1]);
+            else
+                return description;
         }
     });
-
-
 
 
     window.onresize = function () {
@@ -82,11 +70,6 @@ app.factory('Map', function($translate) {
                 token: token
             });
 
-
-
-
-
-
             var ptv_maps = L.layerGroup([ptv_maps_bg, ptv_maps_fg]);
 
             var baseLayers = {
@@ -100,12 +83,6 @@ app.factory('Map', function($translate) {
                 "POI": ptv_maps_poi,
                 "TRAFFIC": ptv_maps_traffic
             }
-
-
-
-
-
-
 
 
             $("#map").css ("width", $("#mapContainer").parent().width());

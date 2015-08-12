@@ -15,6 +15,9 @@ var app = angular.module('calculateRoute', [
 
 .config(['$translateProvider', function ($translateProvider) {
         //$translateProvider.useMissingTranslationHandlerLog();
+
+        //$translateProvider.usePostCompiling (true);
+        $translateProvider.useMissingTranslationHandler('myCustomHandlerFactory');
         $translateProvider.useSanitizeValueStrategy ('escaped');
         $translateProvider.useStaticFilesLoader ({
             prefix: 'i18n/',
@@ -22,6 +25,12 @@ var app = angular.module('calculateRoute', [
         });
         //$translateProvider.preferredLanguage (document.documentElement.lang);
 }])
+.factory('myCustomHandlerFactory', function () {
+    // has to return a function which gets a tranlation ID
+    return function (translationID) {
+        return translationID;
+    };
+})
 .config(function (tmhDynamicLocaleProvider) {
     tmhDynamicLocaleProvider.localeLocationPattern ('lib/angular-i18n/angular-locale_{{locale}}.js');
 })

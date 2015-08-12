@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="calculateroute.sierrica.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>calculateroute</name>
+<widget id="calculateroute2.sierrica.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>calculateroute2</name>
     <description>
         Calculador de Rutas.
     </description>
     <author email="sierrica@hotmail.com" href="http://sierrica.com">
         Hnos Sierra
     </author>
-    <content src="http://192.168.1.103" />
+    <content src="http://ptv.sierrica.com" />
     <plugin name="cordova-plugin-whitelist" version="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
