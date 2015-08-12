@@ -10,17 +10,7 @@ app.controller ('HomeController', ['$rootScope', '$scope', '$location', '$auth',
 
     console.log ("PAYLOAD");
     console.log ($auth.getPayload());
-/*
-    User.me.get().$promise.then(function(response) {
-        $rootScope.user = response.user;
-        console.log ($rootScope.user);
-        if ($rootScope.user.lang != document.documentElement.lang) {
-            document.documentElement.lang = $rootScope.user.lang;
-            tmhDynamicLocale.set ($rootScope.user.lang.toLowerCase());
-            $translate.use ($rootScope.user.lang);
-        }
-    });
-*/
+
     $scope.calculateroute = function () {
         $http.post ('/ptv/calculateroute', $scope.credentials)
              .success(function(response) {

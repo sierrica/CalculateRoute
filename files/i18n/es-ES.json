@@ -1,4 +1,8 @@
 {
   "home": "inicio",
-  "unknown": "desconocido"
+  "unknown": "desconocido",
+  "email is already taken": "email ya esta cogido",
+  "properly registered": "registrado correctamente",
+  "wrong email and/or password": "usuario y/o contrasena erroneos",
+  "properly entered": "logueado correctamente"
 }

@@ -4,11 +4,11 @@
     <div class="breadcumb">Signup<li class="divider"></li></div>
     <div class="row">
         <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <form name="signupForm" ng-submit="signup()" novalidate>
+            <form name="signupForm" ng-submit="signup()" novalidate autocomplete="off">
                 <div class="row">
                     <div class="input-field col s12">
-                        <label for="email">Email</label>
                         <input type="email" id="email" name="email" required ng-class="signupForm.email.$invalid && signupForm.email.$dirty ? 'invalid' : signupForm.email.$valid && signupForm.email.$dirty ? 'valid' : ''" ng-model="email">
+                        <label for="email">Email</label>
                         <span class="form_error" ng-show="signupForm.email.$dirty  &&  signupForm.email.$error.required">es requerido</span>
                         <span class="form_error" ng-show="(signupForm.email.$dirty  &&  signupForm.email.$invalid) && !signupForm.email.$error.required ">formato incorreto</span>
                         <span class="form_success" ng-show="(signupForm.email.$dirty  &&  signupForm.email.$valid)">formato correto</span>
@@ -16,11 +16,19 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <label for="password">Password</label>
                         <input type="password" id="password" name="password" required ng-minlength="6" ng-class="signupForm.password.$invalid && signupForm.password.$dirty ? 'invalid' : signupForm.password.$valid && signupForm.password.$dirty ? 'valid' : ''" ng-model="password">
+                        <label for="password">Password</label>
                         <span class="form_error" ng-show="signupForm.password.$dirty  &&  signupForm.password.$error.required">es requerido</span>
                         <span class="form_error" ng-show="(signupForm.password.$dirty  &&  signupForm.password.$invalid) && !signupForm.password.$error.required ">minimo 6 caracteres</span>
                         <span class="form_success" ng-show="(signupForm.password.$dirty  &&  signupForm.password.$valid)">formato correto</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="password" id="confirm_password" name="confirm_password" ng-change="checkPassword()" ng-class="signupForm.confirm_password.$dirty  &&  signupForm.confirm_password.$error.dontMatch ? 'invalid' : signupForm.confirm_password.$dirty  &&  password == confirm_password ? 'valid' : ''" ng-model="confirm_password">
+                        <label for="confirm_password">Confirmar Password</label>
+                        <span class="form_error" ng-show="signupForm.confirm_password.$dirty && signupForm.confirm_password.$error.dontMatch">Passwords don't match!</span>
+                        <span class="form_success" ng-show="signupForm.confirm_password.$dirty  &&  password === confirm_password">Si coinciden</span>
                     </div>
                 </div>
                 <div class="row">
@@ -59,7 +67,7 @@
                         <label for="accept">Acepto las condiciones de uso</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-large pink" ng-disabled="!accept  ||  signupForm.email.$invalid  ||  signupForm.password.$invalid">Sign up</button>
+                <button type="submit" class="btn btn-large pink" ng-disabled="!accept  ||  signupForm.email.$invalid  ||  signupForm.password.$invalid || signupForm.confirm_password.$error.dontMatch"><i class="small material-icons right">send</i>Sign up</button>
                 &nbsp;&nbsp;&nbsp; or &nbsp;<a ui-sref="login">Login</a>
             </form>
         </div>

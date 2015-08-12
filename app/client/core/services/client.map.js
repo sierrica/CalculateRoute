@@ -1,6 +1,16 @@
 app.factory('Map', function() {
 
 
+    var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
+    var cluster = 'eu-n-test';
+    var xMapUrl = 'https://xmap-' + cluster + '.cloud.ptvgroup.com';
+
+
+    function getUrlPram(name) {
+        if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+            return decodeURIComponent(name[1]);
+    }
+
 
     window.onresize = function () {
         $("#map").css ("width", $("#mapContainer").parent().width());
@@ -27,7 +37,7 @@ app.factory('Map', function() {
                 subdomains: '1234',
                 minZoom: 3
             });
-            var ptv_maps_fg = new L.NonTiledLayer.WMS('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=c2b345bf-ae76-4f41-8467-6307423b1bf4', {
+            var ptv_maps_fg = new L.NonTiledLayer.WMS('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
                 minZoom: 3,
                 opacity: 1.0,
                 layers: 'xmap-ajaxfg',
@@ -36,6 +46,25 @@ app.factory('Map', function() {
                 attribution: false,
                 zIndex: 100
             });
+
+            var ptv_maps_traffic = new L.PtvLayer.TrafficInformation (xMapUrl, {
+                zIndex: 1,
+                token: token
+            });
+            var ptv_maps_truck = new L.PtvLayer.TruckAttributes (xMapUrl, {
+                zIndex: 998,
+                token: token
+            });
+            var ptv_maps_poi = new L.PtvLayer.POI (xMapUrl, {
+                zIndex: 3,
+                token: token
+            });
+
+
+
+
+
+
             var ptv_maps = L.layerGroup([ptv_maps_bg, ptv_maps_fg]);
 
             var baseLayers = {
@@ -43,6 +72,18 @@ app.factory('Map', function() {
                 "ROAD": open_maps_road,
                 "PTV": ptv_maps
             };
+
+            var overlays = {
+                "TRUCK": ptv_maps_truck,
+                "POI": ptv_maps_poi,
+                "TRAFFIC": ptv_maps_traffic
+            }
+
+
+
+
+
+
 
 
             $("#map").css ("width", $("#mapContainer").parent().width());
@@ -54,8 +95,8 @@ app.factory('Map', function() {
                 zoomControl: false,
                 attributionControl: false,
                 maxBounds: ([[31.952,-18.808],[72.607,44.472]]),
-                //layers: [ptv_maps],
-                layers: [open_maps_mapnik],
+                layers: [ptv_maps],
+                //layers: [open_maps_mapnik],
                 doubleClickZoom: false
             });
 
@@ -63,7 +104,7 @@ app.factory('Map', function() {
 
             /* Añadir un boton con los tiles disponibles */
 
-            L.control.layers(baseLayers).addTo (map);
+            L.control.layers(baseLayers, overlays).addTo (map);
         },
         changeLayer: function(layer) {
 

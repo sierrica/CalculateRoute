@@ -190,24 +190,26 @@ var app = angular.module('calculateRoute', [
 .run (function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User) {
 
     if ($auth.isAuthenticated()) {
-        User.me.get().$promise.then(function(response) {
-            $rootScope.user = response.user;
-            User.change_lang ($rootScope.user.lang);
-        });
+        User.me.get().$promise
+            .then(function(response) {
+                $rootScope.user = response.user;
+                User.change_lang ($rootScope.user.lang);
+            });
     }
     else {
         tmhDynamicLocale.set (document.documentElement.lang.toLowerCase());
         $translate.use (document.documentElement.lang);
+        $state.transitionTo ("login");
     }
 
     $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         if (toState.private   &&  !$auth.isAuthenticated()) {
-            event.preventDefault();
-            $state.transitionTo ("login");
+            event.preventDefault();                             // HAY QUE CAMBIAR
+            //$state.transitionTo ("login");
         }
         else if ($auth.isAuthenticated()  &&  (toState.name == "login"  ||  toState.name == "signup")) {
             event.preventDefault();
-            $state.transitionTo ("home");
+            //$state.transitionTo (fromState.name);
         }
     });
 
@@ -215,9 +217,4 @@ var app = angular.module('calculateRoute', [
         $(".side-nav li").removeClass("active");
         $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
     });
-
-
-    $rootScope.lang_change = function() {
-    };
-
 });

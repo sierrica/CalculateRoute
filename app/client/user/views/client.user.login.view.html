@@ -2,7 +2,7 @@
     <div class="breadcumb">Login<li class="divider"></li></div>
     <div class="row">
         <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <form name="loginForm" ng-submit="login()" novalidate>
+            <form name="loginForm" ng-submit="login()" novalidate autocomplete="off">
                 <div class="row">
                     <div class="input-field col s12">
                         <label for="email">Email</label>
@@ -27,7 +27,7 @@
                         <label for="remember">Recordar nombre de usuario</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-large pink" ng-disabled="loginForm.email.$invalid  ||  loginForm.password.$invalid">Login</button>
+                <button type="submit" class="btn btn-large pink" ng-disabled="loginForm.email.$invalid  ||  loginForm.password.$invalid"><i class="small material-icons right">send</i>Login</button>
                 &nbsp;&nbsp;&nbsp; or &nbsp;<a ui-sref="signup">Signup</a>
                 <a ui-sref="home" style="display:block;margin-top:10px;">Forgot your Password?</a>
             </form>

@@ -11,7 +11,7 @@ var path        = require ('path'),
 function signup (req, res) {
     User.findOne ({ email: req.body.email }, function(err, existingUser) {
         if (existingUser)
-            return res.status(409).send ({ message: 'Email is already taken' });
+            return res.status(401).json ({ message: 'email is already taken' });
         var user = new User ({
             email: req.body.email,
             password: req.body.password,
@@ -33,11 +33,10 @@ function signup (req, res) {
 function login (req, res) {
     User.findOne ({ email: req.body.email }, '+password', function(err, user) {
         if (! user)
-            return res.status(401).send ({ message: 'Wrong email and/or password' });
-
+            return res.status(401).send ({ message: 'wrong email and/or password' });
         user.comparePassword(req.body.password, function(err, isMatch) {
             if (!isMatch) {
-                return res.status(401).send({ message: 'Wrong email and/or password' });
+                return res.status(401).send({ message: 'wrong email and/or password' });
             }
             console.log (user);
             token.createToken (user, function(res, err, token) {

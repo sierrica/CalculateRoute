@@ -9,6 +9,10 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'satellizer
         $("#lang").select2 ("val", lang);
     };
 
+    $scope.checkPassword = function() {
+        $scope.signupForm.confirm_password.$error.dontMatch = $scope.password != $scope.confirm_password;
+    };
+
 
 
     // Me aseguro que por defecto coja en sesion. Esto es peligroso pero como solo accedo cuando estoy desautenticado.
@@ -24,25 +28,13 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'satellizer
             password: $scope.password,
             lang: $scope.lang
         }).then (function() {
-            console.log ("REGISTRADO CORRECTAMENTE");
+            Materialize.toast ('<span class="green">' + $translate.instant('properly registered') + '</span>', 5000);
             User.me.get().$promise.then(function(response) {
                 $rootScope.user = response.user;
                 User.change_lang ($rootScope.user.lang);
             });
         }).catch (function(response) {
-
-            console.log ("ERROR EN EL REGISTRO");
-            // Si ha habido errores, llegaremos a esta función
-            if (typeof response.data.message === 'object') {
-                angular.forEach(response.data.message, function(message) {
-                    console.log ("ERROR OBJETO");
-                    console.log (message[0]);
-                });
-            }
-            else {
-                console.log ("ERROR NO OBJETO");
-                console.log (response.data.message);
-            }
+            Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);
         });
     };
 
@@ -54,13 +46,13 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'satellizer
             password: $scope.password
         }).then (function() {
             console.log ("LOGUEADO CORRECTAMENTE");
+            Materialize.toast ('<span class="green">' + $translate.instant('properly entered') + '</span>', 5000);
             User.me.get().$promise.then(function(response) {
                 $rootScope.user = response.user;
                 User.change_lang ($rootScope.user.lang);
             });
         }).catch (function(response) {
-            console.log ("ERROR NO OBJETO");
-            console.log (response.data.message);
+            Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);
         });
     };
 }]);
