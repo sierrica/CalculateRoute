@@ -84,6 +84,7 @@ L.PtvLayer = L.NonTiledLayer.extend({
         });
 
         for (var i = 0; i < objects.length; i++) {
+            //console.log (objects[i].descr);
             var tooltip = this._formatTooltip(objects[i].descr);
             var id = (this._getId) ? this._getId(objects[i]) : null;
 
@@ -133,6 +134,7 @@ L.PtvLayer = L.NonTiledLayer.extend({
             }).bindPopup(tooltip).addTo(this._poiMarkers);
 
             if (this._getId) {
+
                 if ("m" + id === this.lastOpenPopupId)
                     marker.openPopup();
 

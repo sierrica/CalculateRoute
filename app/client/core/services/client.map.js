@@ -1,4 +1,4 @@
-app.factory('Map', function() {
+app.factory('Map', function($translate) {
 
 
     var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
@@ -6,10 +6,32 @@ app.factory('Map', function() {
     var xMapUrl = 'https://xmap-' + cluster + '.cloud.ptvgroup.com';
 
 
+
+
+
+
+
     function getUrlPram(name) {
         if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
             return decodeURIComponent(name[1]);
     }
+
+
+
+    L.PtvLayer.TruckAttributes = L.PtvLayer.TruckAttributes.extend ({
+        _formatTooltip: function (description) {
+            //console.log (description);
+            return $translate.instant (description.split("#")[1]);
+        }
+    });
+    L.PtvLayer.TrafficInformation = L.PtvLayer.TrafficInformation.extend ({
+        _formatTooltip: function (description) {
+            //console.log (description);
+            return $translate.instant (description.split("#")[1]);
+        }
+    });
+
+
 
 
     window.onresize = function () {

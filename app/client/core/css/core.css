@@ -173,15 +173,22 @@ textarea.materialize-textarea:focus:not([readonly]) + label.active {
     }
 }
 */
+
+@media only screen and (min-width: 993px) {
+    #toast-container {
+        right: 1%;
+        top: 50px;
+    }
+}
+
 .toast {
     padding: 0px 0px 0px 0px;
     width: 100%;
-
 }
 
 
 .toast span {
-    padding: 0px 0px 0px 0px;
+    padding: 0px 20px 0px 20px;
     width: 100%;
     text-align: center;
 }
