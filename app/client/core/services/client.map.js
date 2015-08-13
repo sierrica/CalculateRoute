@@ -7,8 +7,6 @@ app.factory('Map', function($translate) {
 
 
 
-
-
     L.PtvLayer.TruckAttributes = L.PtvLayer.TruckAttributes.extend ({
         _formatTooltip: function (description) {
             if ($translate.instant (description.split("#")[1]))
@@ -25,9 +23,6 @@ app.factory('Map', function($translate) {
                 return description;
         }
     });
-
-
-
 
 
 
@@ -113,12 +108,10 @@ app.factory('Map', function($translate) {
 
 
     var map;
+    var pointer_marker;
 
     return {
         initMap: function(container) {
-
-
-
             $("#map").css ("width", $("#mapContainer").parent().width());
             $("#map").css ("height", window.innerHeight - 50);
 
@@ -135,7 +128,10 @@ app.factory('Map', function($translate) {
                 contextmenu: true,
                 contextmenuWidth: 160,
                 contextmenuItems: [{
-                    text: 'Show coordinates',
+                    text: 'anadir origen',
+                    callback: add_origin
+                }, {
+                    text: 'anadir destino',
                     callback: add_origin
                 }]
             });
@@ -146,20 +142,16 @@ app.factory('Map', function($translate) {
                     markerColor: 'red',
                     spin:true
                 });
-
-                var pointer_marker = L.marker (e.latlng, {icon: redMarker}).addTo (map);
-
-                $(".leaflet-contextmenu-item").one ('click', function(e) {
-                    map.removeLayer (pointer_marker);
-                });
-                $(document).one ('mousedown keydown', function(e) {
-                    map.removeLayer (pointer_marker);
-                });
-                map.once ('mouseout mousedown movestart zoomstart contextmenu', function(e) {
-                    map.removeLayer (pointer_marker);
-                });
-
+                pointer_marker = L.marker (e.latlng, {icon: redMarker}).addTo (map);
             });
+            map.on ('contextmenu.hide', function(contextmenu, relatedTarget) {
+                map.removeLayer (pointer_marker);
+            });
+            map.on ('contextmenu:select', function(contextmenu, el) {
+                //console.log ("contextmenu.select");
+            });
+
+
 
             map.setView ([41.505, -0.09], 13);
             /* Añadir un boton con los tiles disponibles */
