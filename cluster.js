@@ -5,6 +5,7 @@ var maxMemory = process.env.WEB_MEMORY || 512;    // " " "
 
 pm2.connect(function() {
     pm2.start({
+        node_args : ["--color"],
         merge_logs: true,
         out_file: '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log',
         error_file: '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2_error.log',
@@ -15,7 +16,6 @@ pm2.connect(function() {
         max_memory_restart : maxMemory + 'M',
         env: {                                          // If needed declare some environment variables
             "NODE_ENV": "production",
-            "AWESOME_SERVICE_API_TOKEN": "xxx"
         },
     }, function(err) {
         if (err) return console.error('Error while launching applications', err.stack || err);
