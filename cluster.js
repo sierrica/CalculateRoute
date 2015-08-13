@@ -7,8 +7,8 @@ pm2.connect(function() {
     pm2.start({
         force: true,
 
+        args: ["--color"],
 
-        node_args : ["--color"],
         merge_logs: true,
         out_file: '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log',
         error_file: '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2_error.log',
