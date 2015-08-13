@@ -31,7 +31,6 @@
     "postinstall": "./node_modules/.bin/bower install",
     "prestart": "node ./config/prestart.js",
     "start": "./node_modules/.bin/pm2 start cluster.json -f"
-    //: "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f"
   },
   "dependencies": {
     "bcryptjs": "2.2.1",
