@@ -4,4 +4,3 @@
 # it could be python, php, ruby, etc.
 
 "$OPENSHIFT_REPO_DIR"/node_modules/.bin/pm2 kill
-
