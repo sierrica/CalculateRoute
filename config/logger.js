@@ -18,6 +18,7 @@ logger.remove (logger.transports.Console);
 logger.add (logger.transports.Console, {
     level: "debug",
     colorize: true,
+    program: 'calculateroute-' + (cluster.worker.id - 1),
     handleExceptions: false
 
 });

@@ -15,6 +15,12 @@ redisClient.on ('connect', function () {
     }, 1000);
 });
 
+process.on ('SIGTERM', function() {                                              //ESRCH
+        redisClient.unref();
+        //process.exit(1);
+});
+
+
 redisClient.on ('error', function (err) {
     logger.error ('ERROR al conectarse al servidor Redis: ' + config.url_mongo);
     logger.error (err);
