@@ -5,6 +5,9 @@ var maxMemory = process.env.WEB_MEMORY || 512;    // " " "
 
 pm2.connect(function() {
     pm2.start({
+        merge_logs: true,
+        out_file: '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log',
+        error_file: '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2_error.log',
         script    : 'server.js',
         name      : 'calculateroute',
         exec_mode : 'cluster',
