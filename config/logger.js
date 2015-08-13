@@ -50,7 +50,7 @@ logger.add (logger.transports.Loggly, {
 });
  */
 if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
-    logger.add (logger.transports.Papertrail, {
+    /*logger.add (logger.transports.Papertrail, {
         level: 'info',
         json: true,
         hostname: process.env.PLATFORM,
@@ -60,6 +60,7 @@ if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
         colorize: true,
         handleExceptions: false
     });
+    */
 }
 
 

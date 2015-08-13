@@ -23,8 +23,8 @@ process.on ('SIGTERM', function() {                                             
 
 redisClient.on ('error', function (err) {
     logger.error ('ERROR al conectarse al servidor Redis: ' + config.url_mongo);
-    logger.error (err);
-    process.exit (1);
+    //logger.error (err);
+    //process.exit (1);
 });
 
 module.exports = redisClient;
