@@ -6,7 +6,7 @@ var maxMemory = process.env.WEB_MEMORY || 512;    // " " "
 pm2.connect(function() {
     pm2.start({
         force: true,
-        cwd: '/var/lib/openshift/559166e75973ca26ac00007f/app-root/runtime/repo',
+
 
         node_args : ["--color"],
         merge_logs: true,
