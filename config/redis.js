@@ -15,9 +15,14 @@ redisClient.on ('connect', function () {
     }, 1000);
 });
 
+process.on ('ESRCH', function() {                                              //ESRCH
+    redisClient.unref();
+    process.exit(1);
+});
+
 process.on ('SIGTERM', function() {                                              //ESRCH
-        redisClient.unref();
-        //process.exit(1);
+    //redisClient.unref();
+    process.exit(1);
 });
 
 
