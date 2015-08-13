@@ -21,6 +21,8 @@
     "angular-i18n": "1.4.3",
     "flag-icon-css": "0.7.1",
     "select2": "4.0.0",
-    "fuse": "~1.2.2"
+    "fuse": "1.2.2",
+    "Leaflet.contextmenu": "*",
+    "Leaflet.awesome-markers": "2.0.2"
   }
 }

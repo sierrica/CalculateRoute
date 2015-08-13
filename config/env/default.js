@@ -46,6 +46,8 @@ module.exports = {
                     'files/lib/materialize/dist/css/materialize.css',
                     'files/lib/perfect-scrollbar/css/perfect-scrollbar.css',
                     'files/lib/leaflet/dist/leaflet.css',
+                    'files/lib/Leaflet.contextmenu/dist/leaflet.contextmenu.css',
+                    'files/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css',
                     'files/lib/flag-icon-css/css/flag-icon.css',
                     'files/lib/select2/dist/css/select2.css'
                 ],
@@ -69,6 +71,8 @@ module.exports = {
                     'files/lib/perfect-scrollbar/js/perfect-scrollbar.js',
 
                     'files/lib/leaflet/dist/leaflet.js',
+                    'files/lib/Leaflet.contextmenu/dist/leaflet.contextmenu-src.js',
+                    'files/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
 
                     'files/ptv/ajax-maps/NonTiledLayer.js',
                     'files/ptv/ajax-maps/NonTiledLayer.WMS.js',
