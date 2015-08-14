@@ -27,6 +27,6 @@ fi
 if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
    echo "  - Installing dependencies w/ new version of npm ... "
    echo
-   (cd "${OPENSHIFT_REPO_DIR}"; export TMPDIR="/tmp"; OPENSHIFT_KEEP_DEPLOYMENTS=0 npm install >> "$OPENSHIFT_LOG_DIR/npm.log")
+   (cd "${OPENSHIFT_REPO_DIR}"; export TMPDIR="/tmp"; npm install >> "$OPENSHIFT_LOG_DIR/npm.log")
 fi
 
