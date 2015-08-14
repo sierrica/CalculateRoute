@@ -12,7 +12,7 @@ exports.renderIndex = function(req, res) {
             region = "ES";
         else if (lang == "en"  &&  (region=="undefined" || region != "GB"))
             region = "GB";
-        else if (lang == "de"  &&  (region=="undefined" || region != "DE"));
+        else if (lang == "de"  &&  (region=="undefined" || region != "DE"))
             region = "DE";
     }
     else {
