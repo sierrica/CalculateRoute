@@ -14,7 +14,7 @@ logger.exitOnError = true;
 logger.remove (logger.transports.Console);
 
 
-console.log (cluster.worker);
+console.log (cluster.worker.id);
 
 /* TRANSPORT Console*/
 logger.add (logger.transports.Console, {
