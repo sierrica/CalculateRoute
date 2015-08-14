@@ -21,7 +21,7 @@ logger.remove (logger.transports.Console);
 logger.add (logger.transports.Console, {
     level: "debug",
     colorize: true,
-    label: process.env.PLATFORM == 'js'  ?  'calculateroute-' + process.env.pm_id  :  '',
+    label: process.env.PM2_EXEC_TYPE == 'js'  ?  'calculateroute-' + process.env.pm_id  :  '',
     handleExceptions: false
 });
 
