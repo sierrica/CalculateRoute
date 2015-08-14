@@ -1,4 +1,5 @@
 {
+  "merge_logs": true,
   "error_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2_error.log",
   "out_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log",
   "name": "calculateroute",
