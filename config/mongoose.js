@@ -30,17 +30,17 @@ module.exports.createMongooseConnection = function (callback) {
     });
 
     // if the Node process ends, close the Mongoose connection
-
+/*
     process.on ('ESRCH', function() {                                              //ESRCH
         mongoose.connection.close (function () {
             logger.info('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
             //process.exit(1); //
         });
     });
-
+*/
    process.on ('SIGTERM', function() {                                              //ESRCH
         mongoose.connection.close (function () {
-            logger.info('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
+            logger.info ('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
             //process.exit(1);
         });
     });

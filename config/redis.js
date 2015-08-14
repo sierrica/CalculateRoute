@@ -14,14 +14,14 @@ redisClient.on ('connect', function () {
         logger.info ('Conectado al servidor Redis: ' + config.redis.ip + ':' + config.redis.port);
     }, 1000);
 });
-
+/*
 process.on ('ESRCH', function() {                                              //ESRCH
     redisClient.unref();
     process.exit(1);
 });
-
+*/
 process.on ('SIGTERM', function() {                                              //ESRCH
-    //redisClient.unref();
+    redisClient.unref();
     process.exit(1);
 });
 
