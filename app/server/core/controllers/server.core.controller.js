@@ -8,11 +8,11 @@ exports.renderIndex = function(req, res) {
         var region = language_prefered.split("-")[1];
         console.log ("LANG: " + lang);
         console.log ("REGION: " + region);
-        if (lang == "es"  &&  (!region || region != "ES"))
+        if (lang == "es"  &&  (region=="undefined" || region != "ES"))
             region = "ES";
-        else if (lang == "en"  &&  (!region || region != "GB"))
+        else if (lang == "en"  &&  (region=="undefined" || region != "GB"))
             region = "GB";
-        else if (lang == "de"  &&  (!region || region != "DE"));
+        else if (lang == "de"  &&  (region=="undefined" || region != "DE"));
             region = "DE";
     }
     else {
