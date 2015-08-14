@@ -4,6 +4,7 @@ app.factory('Map', function($http, $translate) {
     var cluster = 'eu-n-test';
     var xMapUrl = 'https://xmap-' + cluster + '.cloud.ptvgroup.com';
 
+    L.Icon.Default.imagePath = 'images';
 
 
 
