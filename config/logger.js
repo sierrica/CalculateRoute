@@ -14,13 +14,13 @@ logger.exitOnError = true;
 logger.remove (logger.transports.Console);
 
 
-console.log (cluster.worker);
+//console.log (cluster.worker);
 
 /* TRANSPORT Console*/
 logger.add (logger.transports.Console, {
     level: "debug",
     colorize: true,
-    label: 'calculateroute-' + cluster.worker.pm_id,
+    label: 'calculateroute-' + process.env.pm_id,
     handleExceptions: false
 
 });
@@ -56,7 +56,7 @@ if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
         level: 'info',
         json: true,
         hostname: process.env.PLATFORM,
-        program: 'calculateroute-' + cluster.worker.pm_id,
+        program: 'calculateroute-' + process.env.pm_id,
         host: 'logs3.papertrailapp.com',
         port: 15605,
         colorize: true,
