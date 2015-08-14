@@ -1,10 +1,11 @@
 var logger  = require ('./config/logger'),
     pm2     = require ('pm2');
 
-//var instances = process.env.WEB_CONCURRENCY || 0; // Set by Heroku or -1 to scale to max cpu core -1
-var instances = 0;
 
-var maxMemory = process.env.WEB_MEMORY || 512;    // " " "
+// Set by Heroku or -1 to scale to max cpu core -1
+//var instances = process.env.WEB_CONCURRENCY || -1;        // Recomendado por PM2 -> (heroku=1 proccess), (openshift=3 proccess)
+var instances = 0;                                          // Probado por mi -> (heroku=4 proccess), (openshift=4 proccess)
+var maxMemory = process.env.WEB_MEMORY || 512;              // " " "
 
 var out_file = process.env.PLATFORM == "openshift" ? '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log' : "/dev/null";
 var error_file = process.env.PLATFORM == "openshift" ? '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2_error.log' : "/dev/null";
