@@ -13,4 +13,5 @@
 # Application start and stop is subject to different timeouts
 # throughout the system.
 
-#"$OPENSHIFT_REPO_DIR"/node_modules/.bin/pm2 kill
+"$OPENSHIFT_REPO_DIR"/node_modules/.bin/pm2 kill
+
