@@ -7,17 +7,15 @@ var logger  = require ('./config/logger'),
 var instances = 0;                                          // Probado por mi -> (heroku=4 proccess), (openshift=4 proccess)
 var maxMemory = process.env.WEB_MEMORY || 512;              // " " "
 
-var out_file = process.env.PLATFORM == "openshift" ? '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log' : "/dev/null";
-var error_file = process.env.PLATFORM == "openshift" ? '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2_error.log' : "/dev/null";
-
+var file = process.env.PLATFORM == "openshift" ? '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log' : "/dev/null";
 
 pm2.connect(function() {
     pm2.start({
         force: true,
         args: ["--color"],
         merge_logs: true,
-        out_file: out_file,
-        error_file: error_file,
+        out_file: file,
+        error_file: file,
         script: 'server.js',
         name: 'calculateroute',
         exec_mode: 'cluster',
