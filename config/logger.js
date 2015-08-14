@@ -14,15 +14,15 @@ logger.exitOnError = true;
 logger.remove (logger.transports.Console);
 
 
+//console.log (process.env);
 
 
 /* TRANSPORT Console*/
 logger.add (logger.transports.Console, {
     level: "debug",
     colorize: true,
-    label: 'calculateroute-' + process.env.pm_id,
+    label: process.env.PLATFORM == 'js'  ?  'calculateroute-' + process.env.pm_id  :  '',
     handleExceptions: false
-
 });
 
 /* SOLO EN DESARROLLO O RASPBIAN */
@@ -65,7 +65,7 @@ if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
 
 }
 
-console.log (process.env);
+
 
 
 /* NO FUNCIONA, MIRAR

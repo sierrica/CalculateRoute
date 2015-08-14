@@ -22,7 +22,7 @@ pm2.connect(function() {
         instances: instances,
         max_memory_restart: maxMemory + 'M',
         env: {                                          // If needed declare some environment variables
-            "NODE_ENV": "production",
+            "PM2_EXEC_TYPE": "js"
         },
     }, function(err) {
         if (err)

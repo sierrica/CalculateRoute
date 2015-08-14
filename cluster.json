@@ -7,6 +7,9 @@
   "script": "server.js",
   "exec_mode": "cluster",
   "instances": 0,
-  "args": ["--color"]
+  "args": ["--color"],
+  "env": {
+    "PM2_EXEC_TYPE": "json"
+  }
 }
 
