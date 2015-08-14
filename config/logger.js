@@ -14,7 +14,7 @@ logger.exitOnError = true;
 logger.remove (logger.transports.Console);
 
 
-//console.log (cluster.worker);
+
 
 /* TRANSPORT Console*/
 logger.add (logger.transports.Console, {
@@ -65,6 +65,8 @@ if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
 
 }
 
+
+logger.info(cluster.worker);
 
 
 /* NO FUNCIONA, MIRAR
