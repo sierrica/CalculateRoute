@@ -15,24 +15,26 @@ redisClient.on ('connect', function () {
     }, 1000);
 });
 
-
+/*
 process.on ('message', function(msg) {          //ESRCH
     if (msg == 'shutdown') {
         redisClient.unref();
         //process.exit(1);
     }
 });
+*/
 /*
 process.on ('ESRCH', function() {                                              //ESRCH
     redisClient.unref();
     process.exit(1);
 });
-
+*/
 process.on ('SIGTERM', function() {                                              //ESRCH
+    logger.info ('Desconectado al servidor Redis');
     redisClient.unref();
-    process.exit(1);
+    //process.exit(1);
 });
- */
+
 
 redisClient.on ('error', function (err) {
     logger.error ('ERROR al conectarse al servidor Redis: ' + config.url_mongo);
