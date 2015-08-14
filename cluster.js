@@ -1,6 +1,9 @@
-var pm2 = require('pm2');
+var logger  = require ('./config/logger'),
+    pm2     = require ('pm2');
 
-var instances = process.env.WEB_CONCURRENCY || 0; // Set by Heroku or -1 to scale to max cpu core -1
+//var instances = process.env.WEB_CONCURRENCY || 0; // Set by Heroku or -1 to scale to max cpu core -1
+var instances = 0;
+
 var maxMemory = process.env.WEB_MEMORY || 512;    // " " "
 
 var out_file = process.env.PLATFORM == "openshift" ? '/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log' : "/dev/null";
@@ -23,8 +26,9 @@ pm2.connect(function() {
             "NODE_ENV": "production",
         },
     }, function(err) {
-        if (err) return console.error('Error while launching applications', err.stack || err);
-        console.log('PM2 and application has been succesfully started');
+        if (err)
+            return logger.rror ('Error while launching applications', err.stack || err);
+        logger.info ('PM2 and application has been succesfully started');
     });
 });
 
