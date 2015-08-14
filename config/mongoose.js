@@ -14,7 +14,9 @@ module.exports.createMongooseConnection = function (callback) {
     });
 
     mongoose.connection.on ('disconnected', function () {
-        logger.info ('Desconectado de la base de datos: ' + config.mongodb.url);
+        setTimeout(function() {
+            logger.info ('Desconectado de la base de datos: ' + config.mongodb.url);
+        }, 500);
     });
 
     mongoose.connection.once ('open', function () {
@@ -26,7 +28,7 @@ module.exports.createMongooseConnection = function (callback) {
     mongoose.connection.on ('error', function (err) {
         logger.error ('ERROR al conectarse a la Base de datos: ' + config.mongodb.url);
         logger.error (err);
-        process.exit (1);
+        process.exit (10);
     });
 
     // if the Node process ends, close the Mongoose connection
@@ -37,6 +39,15 @@ module.exports.createMongooseConnection = function (callback) {
         });
     });
 */
+    process.on ('message', function(msg) {
+        if (msg == 'shutdown') {
+            mongoose.connection.close (function () {
+                logger.info ('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
+                process.exit(0);
+            });
+        }
+    });
+/*
    process.on ('SIGTERM', function() {                                              //ESRCH
         mongoose.connection.close (function () {
             logger.info ('Se cerro la conexion a la base de datos debido a que se apago el servidor Node');
