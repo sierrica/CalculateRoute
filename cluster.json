@@ -1,7 +1,7 @@
 {
   "comentarios": "redirijo a /dev/null ya que con --no-daemon ya me lo escupe a traves del log de Node. Si pongo la ruta buena salen los datos duplicados por pantalla",
   "start1": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f",
-  "start2": "start": "node cluster.js",
+  "start2": "node cluster.js",
   "merge_logs": true,
   "error_file": "/dev/null",
   "out_file": "/dev/null",
