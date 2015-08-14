@@ -181,6 +181,8 @@ app.factory('Map', function($http, $translate) {
                 }]
             });
             map.on ('contextmenu', function(e) {
+                if (pointer_marker)
+                    map.removeLayer (pointer_marker);
                 pointer_marker = L.marker (e.latlng).addTo (map);
             });
             map.on ('contextmenu.hide', function(contextmenu, relatedTarget) {
