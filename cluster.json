@@ -1,10 +1,12 @@
 {
+  "comentarios": "redirijo a /dev/null ya que con --no-daemon ya me lo escupe a traves del log de Node. Si pongo la ruta buena salen los datos duplicados por pantalla",
   "merge_logs": true,
   "error_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2_error.log",
-  "out_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log",
+  "out_file": "/dev/null",
   "name": "calculateroute",
   "script": "server.js",
   "exec_mode": "cluster",
   "instances": 0,
   "args": ["--color"]
 }
+
