@@ -1,4 +1,4 @@
-app.factory('Map', function($translate) {
+app.factory('Map', function($http, $translate) {
 
     var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
     var cluster = 'eu-n-test';
@@ -26,23 +26,7 @@ app.factory('Map', function($translate) {
 
 
 
-    var showCoordinates2 = function (e) {
- //       console.log ("DENTRO SHOW COORDINATES 2");
- //       console.log (e);
-    };
 
-    var add_origin = function (e) {
-        L.marker (e.latlng, {
-            draggable: true,
-            contextmenu: true,
-            contextmenuInheritItems: false,
-            contextmenuItems: [{
-                text: 'Marker item',
-                index: 0,
-                callback: showCoordinates2
-            }]
-        }).addTo (map);
-    };
 
 
     // BASELAYERS
@@ -105,7 +89,68 @@ app.factory('Map', function($translate) {
 
 
 
+    var icon_loading = L.AwesomeMarkers.icon ({
+        prefix: 'fa',
+        icon: 'spinner',
+        markerColor: 'red',
+        spin:true
+    });
 
+
+    var showCoordinates2 = function (e) {
+        //       console.log ("DENTRO SHOW COORDINATES 2");
+        //       console.log (e);
+    };
+
+    var add_origin = function (e) {
+
+        var marker_pre = L.marker (e.latlng, {icon: icon_loading}).addTo (map);
+        console.log (e.latlng);
+
+        $http.post ('/ptv/findlocation', e.latlng)
+            .success(function(response, response_ptv) {
+                console.log (response);
+                map.removeLayer (marker_pre);
+                var marker_1 = L.marker (e.latlng, {
+                    draggable: true,
+                    contextmenu: true,
+                    contextmenuInheritItems: false,
+                    contextmenuItems: [{
+                        text: 'Marker item',
+                        index: 0,
+                        callback: showCoordinates2
+                    }]
+                }).addTo (map);
+
+                var popup = '';
+                popup += response.result.street;
+                if (response.result.detaillevel > 6)
+                    popup += ', ' + response.result.housenr;
+                if (response.result.streetnumber != "")
+                    popup += ' <b>(' + response.result.streetnumber + ')</b>';
+                popup += '<br>';
+                popup += response.result.postcode + ', ' + response.result.city;
+                if (response.result.district != "")
+                    popup += ' - <i>' + response.result.district + '<i/>';
+                popup += '<br>';
+                if ((response.result.province != ""))
+                    popup += response.result.province + ', ';
+                popup += response.result.state + ' - <b>(' + response.result.country + ')<b>';
+
+
+                marker_1.bindPopup (popup).openPopup();
+
+            })
+            .error(function(response) {
+                console.log ("FRACASO");
+                console.log (response);
+            });
+
+
+
+
+
+    };
 
     var map;
     var pointer_marker;
@@ -136,13 +181,7 @@ app.factory('Map', function($translate) {
                 }]
             });
             map.on ('contextmenu', function(e) {
-                var redMarker = L.AwesomeMarkers.icon ({
-                    prefix: 'fa',
-                    icon: 'spinner',
-                    markerColor: 'red',
-                    spin:true
-                });
-                pointer_marker = L.marker (e.latlng, {icon: redMarker}).addTo (map);
+                pointer_marker = L.marker (e.latlng).addTo (map);
             });
             map.on ('contextmenu.hide', function(contextmenu, relatedTarget) {
                 map.removeLayer (pointer_marker);
@@ -153,7 +192,7 @@ app.factory('Map', function($translate) {
 
 
 
-            map.setView ([41.505, -0.09], 13);
+            map.setView ([41.9204014, -1.2529047000000446], 18);
             /* Añadir un boton con los tiles disponibles */
 
             L.control.layers(baseLayers, overlays).addTo (map);
