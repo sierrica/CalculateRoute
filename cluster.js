@@ -1,8 +1,8 @@
 var logger  = require ('./config/logger'),
     pm2     = require ('pm2');
 
-//var instances = process.env.WEB_CONCURRENCY || 0; // Set by Heroku or -1 to scale to max cpu core -1
-var instances = -1;
+var instances = process.env.WEB_CONCURRENCY || 0; // Set by Heroku or -1 to scale to max cpu core -1
+//var instances = -1;
 
 var maxMemory = process.env.WEB_MEMORY || 512;    // " " "
 
