@@ -65,8 +65,7 @@ if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
 
 }
 
-
-logger.info(cluster.worker);
+console.log (cluster);
 
 
 /* NO FUNCIONA, MIRAR
