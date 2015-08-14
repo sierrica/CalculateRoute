@@ -37,3 +37,4 @@ pm2.connect(function() {
 
 // INICIACION SIN DAEMON
 //"start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f"
+//"start": "node cluster.js"

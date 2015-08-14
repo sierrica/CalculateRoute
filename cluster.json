@@ -1,6 +1,6 @@
 {
-  "error_file": "/dev/null",
-  "out_file": "/dev/null",
+  "error_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2_error.log",
+  "out_file": "/var/lib/openshift/559166e75973ca26ac00007f/app-root/logs/pm2.log",
   "name": "calculateroute",
   "script": "server.js",
   "exec_mode": "cluster",
