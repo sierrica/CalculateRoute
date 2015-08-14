@@ -19,6 +19,7 @@ exports.renderIndex = function(req, res) {
         lang = "es";
         region = "ES";
     }
+    console.log ("LANG-DEF: " + lang + "-" + region)
 
     res.render ('index', {
         lang: lang + "-" + region
