@@ -30,8 +30,8 @@ process.on ('ESRCH', function() {                                              /
 });
 */
 process.on ('SIGTERM', function() {                                              //ESRCH
-    logger.info ('Desconectado al servidor Redis');
     redisClient.unref();
+    logger.info ('Desconectado al servidor Redis');
     //process.exit(1);
 });
 
