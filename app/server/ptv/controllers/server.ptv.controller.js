@@ -67,7 +67,6 @@ exports.findlocation = function (req, res) {
         if (error)
             res.json (error);
         var first_result = body.resultList[0];
-        var detail_level = first_result.additionalFields[14].value;
         var result = {
             housenr: first_result.additionalFields[0].value,
             street: first_result.additionalFields[1].value,
@@ -86,7 +85,7 @@ exports.findlocation = function (req, res) {
             coord_y_request: req.body.lat,
             coord_y_response: first_result.additionalFields[13].value,
             detaillevel: first_result.additionalFields[14].value,
-        }
+        };
         res.json ({ result: result, result_ptv: body });
     });
 };

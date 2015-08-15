@@ -112,16 +112,6 @@ app.factory('Map', function($http, $translate) {
             .success(function(response, response_ptv) {
                 console.log (response);
                 map.removeLayer (marker_pre);
-                var marker_1 = L.marker (e.latlng, {
-                    draggable: true,
-                    contextmenu: true,
-                    contextmenuInheritItems: false,
-                    contextmenuItems: [{
-                        text: 'Marker item',
-                        index: 0,
-                        callback: showCoordinates2
-                    }]
-                }).addTo (map);
 
                 var popup = '';
                 popup += response.result.street;
@@ -138,8 +128,19 @@ app.factory('Map', function($http, $translate) {
                     popup += response.result.province + ', ';
                 popup += response.result.state + ' - <b>(' + response.result.country + ')<b>';
 
+                var marker_1 = L.marker (e.latlng, {
+                    draggable: true,
+                    contextmenu: true,
+                    contextmenuInheritItems: false,
+                    contextmenuItems: [{
+                        text: 'Marker item',
+                        index: 0,
+                        callback: showCoordinates2
+                    }]
+                })
+                .bindPopup (popup).openPopup()
+                .addTo (map);
 
-                marker_1.bindPopup (popup).openPopup();
 
             })
             .error(function(response) {
