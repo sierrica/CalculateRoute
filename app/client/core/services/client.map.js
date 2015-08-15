@@ -205,6 +205,10 @@ app.factory('Map', function($http, $translate) {
                     context: marker
                 }]
             })
+            .on ("contextmenu", function(ev) {
+                var marker_selected = ev.target;
+                index_marker_selected = _.indexOf (markers_stations, marker_selected);
+            })
             .on ("dragstart", function(ev) {
                 dragstart_latlng = ev.target.getLatLng();
             })
@@ -227,11 +231,6 @@ app.factory('Map', function($http, $translate) {
                         ev.target.setOpacity (1);
                     }
                 });
-            })
-            .on ("contextmenu", function(ev) {
-                console.log ("DENTRO CONTEXT OVERRIDE");
-                var marker_selected = ev.target;
-                index_marker_selected = _.indexOf (markers_stations, marker_selected);
             })
             .bindPopup (format_dir_popup(response.result))
             .addTo (map)
