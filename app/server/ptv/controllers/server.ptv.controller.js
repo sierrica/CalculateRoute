@@ -64,29 +64,35 @@ exports.findlocation = function (req, res) {
     };
 
     request.post (options, function (error, response, body) {
-        if (error)
-            res.json (error);
-        var first_result = body.resultList[0];
-        var result = {
-            housenr: first_result.additionalFields[0].value,
-            street: first_result.additionalFields[1].value,
-            streetnumber: first_result.additionalFields[2].value,
-            postcode: first_result.additionalFields[3].value,
-            city: first_result.additionalFields[4].value,
-            district: first_result.additionalFields[5].value,
-            province: first_result.additionalFields[6].value,
-            state: first_result.additionalFields[7].value,
-            country: first_result.additionalFields[8].value,
-            segment_id: first_result.additionalFields[9].value,
-            segment_country: first_result.additionalFields[10].value,
-            segment_direction: first_result.additionalFields[11].value,
-            coord_x_request: req.body.lng,
-            coord_x_response: first_result.additionalFields[12].value,
-            coord_y_request: req.body.lat,
-            coord_y_response: first_result.additionalFields[13].value,
-            detaillevel: first_result.additionalFields[14].value,
-        };
-        res.json ({ result: result, result_ptv: body });
+        if (error) {
+            console.log(error);
+            res.status(500).json (error);
+        }
+        if (body.errorCode == 0   &&   body.resultList.length == 0)
+            res.status(404).json ({ result: {}, result_ptv: body });
+        else {
+            var first_result = body.resultList[0];
+            var result = {
+                housenr: first_result.additionalFields[0].value,
+                street: first_result.additionalFields[1].value,
+                streetnumber: first_result.additionalFields[2].value,
+                postcode: first_result.additionalFields[3].value,
+                city: first_result.additionalFields[4].value,
+                district: first_result.additionalFields[5].value,
+                province: first_result.additionalFields[6].value,
+                state: first_result.additionalFields[7].value,
+                country: first_result.additionalFields[8].value,
+                segment_id: first_result.additionalFields[9].value,
+                segment_country: first_result.additionalFields[10].value,
+                segment_direction: first_result.additionalFields[11].value,
+                coord_x_request: req.body.lng,
+                coord_x_response: first_result.additionalFields[12].value,
+                coord_y_request: req.body.lat,
+                coord_y_response: first_result.additionalFields[13].value,
+                detaillevel: first_result.additionalFields[14].value,
+            };
+            res.status(200).json ({ result: result, result_ptv: body });
+        }
     });
 };
 

@@ -6,13 +6,18 @@
 nav {
     height: 50px !important;
     line-height: 50px !important;
+    /* No permitir la seleccion en toda nav */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 nav i {
     height: 50px !important;
     line-height: 50px !important;
 }
-
-
 nav .btn-floating.btn-large {
     left: 5px;
     height: 55px;
@@ -22,15 +27,6 @@ nav .btn-floating.btn-large {
 nav .button-collapse i {
     margin-top: 2px;
     font-size: 3.5rem;
-}
-
-nav { /* No permitir la seleccion en toda nav */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 
@@ -302,22 +298,35 @@ div.inputForm select {
 
 
 
-.leaflet-contextmenu > {
-    display: none;
-    box-shadow: 0 1px 7px rgba(0,0,0,0.4);
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    padding: 4px 0;
-    background-color: #fff;
-    cursor: default;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-}
 
 
 
+
+/* LEAFLET CONTEXT MENU */
 .leaflet-contextmenu a.leaflet-contextmenu-item {
     font-size: 20px;
     line-height: 40px;
+}
+.leaflet-contextmenu-icon {
+    margin: 10px 8px 0 0;
+    width: 20px;
+    height: 20px;
+    float: left;
+    border: 0;
+}
+
+
+/* LEAFLET ICON BACKGROUND LETTER */
+.leaflet-div-icon {
+    background: transparent;
+    border: none;
+}
+.leaflet-marker-icon .number {
+    position: relative;
+    top: -49px;
+    font-size: 22px;
+    width: 25px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
 }

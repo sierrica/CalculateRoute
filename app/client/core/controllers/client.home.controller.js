@@ -14,8 +14,7 @@ app.controller ('HomeController', ['$rootScope', '$scope', '$location', '$auth',
     $scope.calculateroute = function () {
         $http.post ('/ptv/calculateroute', $scope.credentials)
              .success(function(response) {
-                console.log ("EXITO");
-                console.log (response);
+                //console.log (response);
             })
             .error(function(response) {
             console.log ("FRACASO");

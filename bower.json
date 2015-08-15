@@ -23,6 +23,7 @@
     "select2": "4.0.0",
     "fuse": "1.2.2",
     "Leaflet.contextmenu": "*",
-    "Leaflet.awesome-markers": "2.0.2"
+    "Leaflet.awesome-markers": "2.0.2",
+    "underscore": "~1.8.3"
   }
 }

@@ -53,6 +53,7 @@ module.exports = {
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
+                    'files/lib/underscore/underscore.js',
                     'files/lib/angular/angular.js',
                     'files/lib/angular-touch/angular-touch.js',
                     'files/lib/angular-resource/angular-resource.js',
