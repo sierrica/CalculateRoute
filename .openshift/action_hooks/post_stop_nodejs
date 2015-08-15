@@ -15,4 +15,3 @@
 
 # POR MI
 "$OPENSHIFT_REPO_DIR"/node_modules/.bin/pm2 kill
-
