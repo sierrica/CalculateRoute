@@ -1,15 +1,24 @@
 <div ng-controller="HomeController">
     <div ng-init="calculateroute()"></div>
     <!--<leaflet ng-init="map()" layers="layers"></leaflet> -->
-    <div id="map" ng-init="map()"></div>
+    <div id="map" ng-init="initMap()"></div>
+
+
 
     <div id="modal_choice_index" class="modal">
         <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
+            <h5 style="display:inline">Posicion, </h5><i>(Antes de...)</i>
+
+            <div class="input-field col s12">
+                <select class="browser-default" id="select_choice_index" name="select_choice_index" ng-model="select_choice_index" convert-to-number ng-options="option.text for option in options_choice_index() track by option.index"></select>
+            </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+            <button id="button_select_choice_index" class="btn pink waves-effect">Anadir</button>
         </div>
     </div>
+
+    <script>
+        $('#select_choice_index').material_select();
+    </script>
 </div>

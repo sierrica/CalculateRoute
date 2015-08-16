@@ -330,3 +330,16 @@ div.inputForm select {
     color: white;
     font-weight: bold;
 }
+
+
+
+.modal {
+    width: 95%;
+}
+/* MODALS */
+@media only screen and (min-width: 993px) {
+    .modal {
+        left: 300px;
+        width: 70%
+    }
+}
