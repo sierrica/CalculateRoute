@@ -343,3 +343,9 @@ div.inputForm select {
         width: 70%
     }
 }
+
+
+
+.rangeslider__fill {
+    background: transparent;
+}

@@ -3,10 +3,11 @@ app.factory ('Map', function($http, $translate) {
     /* TRANSLATE PTV POIS ATRIBUTES MAP */
     L.PtvLayer.TruckAttributes = L.PtvLayer.TruckAttributes.extend ({
         _formatTooltip: function (description) {
-            var word = description.split("#")[1].toLowerCase();
+ /*           var word = description.split("#")[1].toLowerCase();
             if ($translate.instant (word))
                 return $translate.instant(word).charAt(0).toUpperCase() + $translate.instant(word).slice(1);
             else
+           */
                 return description;
         }
     });

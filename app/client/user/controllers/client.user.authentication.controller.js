@@ -17,12 +17,12 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
 
     // Me aseguro que por defecto coja en sesion. Esto es peligroso pero como solo accedo cuando estoy desautenticado.
     $scope.remember = false;
-    shared.almacenamiento = 'sessionStorage';
+    //shared.almacenamiento = 'sessionStorage';
 
 
     $scope.signup = function() {
-        if ($scope.remember)
-            shared.almacenamiento = 'localStorage';
+        if (! $scope.remember)
+            shared.setStorageType ("sessionStorage");
         console.log ($scope.lang)
         $auth.signup ({
             email: $scope.email,
@@ -38,8 +38,8 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
     };
 
     $scope.login = function() {
-        if ($scope.remember)
-            shared.almacenamiento = 'localStorage';
+        if (! $scope.remember)
+            shared.setStorageType ("sessionStorage");
         $auth.login ({
             email: $scope.email,
             password: $scope.password

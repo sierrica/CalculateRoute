@@ -64,7 +64,7 @@ module.exports = {
                     'files/lib/angular-translate-handler-log/angular-translate-handler-log.js',
                     'files/lib/angular-dynamic-locale/dist/tmhDynamicLocale.js',
                     'files/lib/select2/dist/js/select2.js',
-                    'files/lib/rangeslider.js/dist/rangeslider.js',
+
 
 
 
@@ -79,7 +79,10 @@ module.exports = {
 
                     'files/ptv/ajax-maps/NonTiledLayer.js',
                     'files/ptv/ajax-maps/NonTiledLayer.WMS.js',
-                    'files/ptv/ajax-maps/Leaflet.PtvLayer.js'
+                    'files/ptv/ajax-maps/Leaflet.PtvLayer.js',
+
+
+                    'files/lib/rangeslider.js/dist/rangeslider.js'
                 ]
             },
             tests: [

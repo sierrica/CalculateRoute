@@ -3,8 +3,8 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
     // Parametros de configuración
     $authProvider.httpInterceptor = true;               // Add Authorization header to HTTP request
     $authProvider.withCredentials = true;
-    $authProvider.tokenRoot = null;                    // set the token parent element if the token is not the JSON root
-    $authProvider.cordova = false,
+    $authProvider.tokenRoot = null;                     // set the token parent element if the token is not the JSON root
+    $authProvider.cordova = false,                      // necesario configurar para el uso de OAuth y cordova (REPASAR CUANDO SE IMPL OAUTH)
     $authProvider.baseUrl = '/'                         // API Base URL for the paths below.
     $authProvider.loginUrl = '/login';
     $authProvider.signupUrl = '/signup';
@@ -13,21 +13,6 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
     $authProvider.tokenPrefix = 'calculateroute';       // Local Storage name prefix
     $authProvider.authHeader = 'Authorization';
     $authProvider.authToken = 'Bearer';
-    //$authProvider.loginOnSignup = true;
-    //$authProvider.loginRedirect = '/';
-    //$authProvider.logoutRedirect = '/login';
-    //$authProvider.signupRedirect = '/';
-    //$authProvider.loginRoute = '/login';
-    //$authProvider.signupRoute = '/signup';
-
-
-    //$authProvider.unlinkMethod = 'get';
-
-
-    //$authProvider.platform = 'browser';                 // or 'mobile'
-
-    //if (sessionStorage["calculateroute_token"])
-    //    $authProvider.storage = 'sessionStorage';
 
     // Users state routing
     $stateProvider
@@ -45,13 +30,15 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
         url: '/logout',
         template: null,
         private: false,
-        controller: function($auth, $state) {
+        controller: function($rootScope, $auth, $state) {
             if (! $auth.isAuthenticated()) {
                 console.log ("FALLO");
-                return;
+                $state.transitionTo ("login");
+                return;                                 // Lo mismo que else lo de abajo.
             }
             $auth.logout()
-            .then(function() {
+            .then (function() {
+                $rootScope.user = {};
                 $state.transitionTo ("login");
                 console.log ("DESAUTENTICADO");
             });
