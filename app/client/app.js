@@ -16,7 +16,7 @@ var app = angular.module('calculateRoute', [
 .config(['$translateProvider', function ($translateProvider) {
         //$translateProvider.useMissingTranslationHandlerLog();
 
-        //$translateProvider.usePostCompiling (true);
+        $translateProvider.usePostCompiling (true);     // Importante para el instant
         $translateProvider.useMissingTranslationHandler('myCustomHandlerFactory');
         $translateProvider.useSanitizeValueStrategy ('escaped');
         $translateProvider.useStaticFilesLoader ({
@@ -34,6 +34,116 @@ var app = angular.module('calculateRoute', [
 .config(function (tmhDynamicLocaleProvider) {
     tmhDynamicLocaleProvider.localeLocationPattern ('lib/angular-i18n/angular-locale_{{locale}}.js');
 })
+
+.factory('SatellizerShared', ['$q', '$window', 'SatellizerConfig', 'SatellizerStorage', function($q, $window, config, storage) {
+    var Shared = {};
+
+    if (localStorage["calculateroute_token"])
+        Shared.almacenamiento = "localStorage";
+    else
+        Shared.almacenamiento = "sessionStorage";
+
+    var tokenName = config.tokenPrefix ? [config.tokenPrefix, config.tokenName].join('_') : config.tokenName;
+
+    Shared.getToken = function() {
+        //return storage.get(tokenName);
+        if (Shared.almacenamiento == 'sessionStorage')
+            return sessionStorage.getItem (tokenName);
+        else
+            return localStorage.getItem (tokenName);
+    };
+
+    Shared.getPayload = function() {
+        //var token = storage.get(tokenName);
+        var token;
+        if (Shared.almacenamiento == 'sessionStorage')
+            token = sessionStorage.getItem (tokenName);
+        else
+            token = localStorage.getItem (tokenName);
+        if (token && token.split('.').length === 3) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace('-', '+').replace('_', '/');
+            return JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        }
+    };
+
+    Shared.setToken = function(response) {
+        var accessToken = response && response.access_token;
+        var token;
+
+        if (accessToken) {
+            if (angular.isObject(accessToken) && angular.isObject(accessToken.data)) {
+                response = accessToken;
+            } else if (angular.isString(accessToken)) {
+                token = accessToken;
+            }
+        }
+
+        if (!token && response) {
+            var tokenRootData = config.tokenRoot && config.tokenRoot.split('.').reduce(function(o, x) { return o[x]; }, response.data);
+            token = tokenRootData ? tokenRootData[config.tokenName] : response.data[config.tokenName];
+        }
+
+        if (!token) {
+            var tokenPath = config.tokenRoot ? config.tokenRoot + '.' + config.tokenName : config.tokenName;
+            throw new Error('Expecting a token named "' + tokenPath + '" but instead got: ' + JSON.stringify(response.data));
+        }
+
+        //storage.set(tokenName, token);
+        if (Shared.almacenamiento == 'sessionStorage')
+            sessionStorage.setItem (tokenName, token);
+        else
+            localStorage.setItem (tokenName, token);
+    };
+
+    Shared.removeToken = function() {
+        //storage.remove(tokenName);
+        if (Shared.almacenamiento == 'sessionStorage')
+            sessionStorage.removeItem (tokenName);
+        else
+            localStorage.removeItem (tokenName);
+    };
+
+
+    Shared.isAuthenticated = function() {
+        //var token = storage.get(tokenName);
+        var token;
+        if (Shared.almacenamiento == 'sessionStorage')
+            token = sessionStorage.getItem (tokenName);
+        else
+            token = localStorage.getItem (tokenName);
+
+        if (token) {
+            if (token.split('.').length === 3) {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace('-', '+').replace('_', '/');
+                var exp = JSON.parse($window.atob(base64)).exp;
+                if (exp) {
+                    return Math.round(new Date().getTime() / 1000) <= exp;
+                }
+                return true;
+            }
+            return true;
+        }
+        return false;
+    };
+
+    Shared.logout = function() {
+        //storage.remove(tokenName);
+        if (Shared.almacenamiento == 'sessionStorage')
+            sessionStorage.removeItem (tokenName);
+        else
+            localStorage.removeItem (tokenName);
+        return $q.when();
+    };
+
+    Shared.setStorageType = function(type) {
+        config.storageType = type;
+    };
+
+    return Shared;
+}])
+    /*
 .factory('satellizer.shared', ['$q', '$window', '$location', 'satellizer.config', 'satellizer.storage', function($q, $window, $location, config, storage) {
     var shared = {};
 
@@ -155,6 +265,45 @@ var app = angular.module('calculateRoute', [
 
     return shared;
 }])
+*/
+.factory('SatellizerInterceptor', ['$q', 'SatellizerConfig', 'SatellizerStorage', 'SatellizerShared', '$location', function($q, config, storage, shared, $location) {
+    return {
+        request: function(request) {
+            if (request.skipAuthorization)
+                return request;
+
+            if (shared.isAuthenticated() && config.httpInterceptor) {
+                var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
+
+                //var token = storage.get(tokenName);
+                var token;
+                if (shared.almacenamiento == 'sessionStorage')
+                    token = sessionStorage.getItem (tokenName);
+                else
+                    token = localStorage.getItem (tokenName);
+
+                if (config.authHeader && config.authToken)
+                    token = config.authToken + ' ' + token;
+
+                request.headers[config.authHeader] = token;
+            }
+            return request;
+        },
+        responseError: function(response) {
+            if (response.status == 409) {
+                var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
+                if (shared.almacenamiento == 'sessionStorage')
+                    sessionStorage.removeItem (tokenName);
+                else
+                    localStorage.removeItem (tokenName);
+                $location.url('/login');
+            }
+            return $q.reject(response);
+        }
+    };
+}])
+
+/*
 .factory ('satellizer.interceptor', ['$q', 'satellizer.config', 'satellizer.storage', 'satellizer.shared', '$location', function($q, config, storage, shared, $location) {
     return {
         request: function(request) {
@@ -188,6 +337,7 @@ var app = angular.module('calculateRoute', [
         }
     };
 }])
+*/
 .factory('missingTranslationHandler', ['$log', '$translate',
     function missingTranslationHandlerFactory($log, $translate) {
         return function(translationId) {
@@ -196,14 +346,14 @@ var app = angular.module('calculateRoute', [
         };
     }
 ])
-.run (function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User) {
+.run (function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User, $location) {
 
     if ($auth.isAuthenticated()) {
         User.me.get().$promise
-            .then(function(response) {
-                $rootScope.user = response.user;
-                User.change_lang ($rootScope.user.lang);
-            });
+        .then (function(response) {
+            $rootScope.user = response.user;
+            User.change_lang ($rootScope.user.lang);
+        });
     }
     else {
         tmhDynamicLocale.set (document.documentElement.lang.toLowerCase());
@@ -212,13 +362,17 @@ var app = angular.module('calculateRoute', [
     }
 
     $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        $(".modal").closeModal();           // Error que se queda oscuo cuando pretas ir "hacia atras" con un modal abierto
         if (toState.private   &&  !$auth.isAuthenticated()) {
             event.preventDefault();                             // HAY QUE CAMBIAR
             //$state.transitionTo ("login");
         }
         else if ($auth.isAuthenticated()  &&  (toState.name == "login"  ||  toState.name == "signup")) {
-            event.preventDefault();
-            //$state.transitionTo (fromState.name);
+            console.log ("DENTRO LOGIN ENTRANDO");
+            if (fromState.name)
+                event.preventDefault();
+            else
+                $location.url ('/');
         }
     });
 

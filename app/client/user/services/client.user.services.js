@@ -6,11 +6,9 @@ app.factory ('User', function($resource, $rootScope, tmhDynamicLocale, $translat
             }
         }),
         change_lang: function(lang) {
-            if (lang != document.documentElement.lang) {
-                document.documentElement.lang = $rootScope.user.lang;
-                tmhDynamicLocale.set ($rootScope.user.lang.toLowerCase());
-                $translate.use ($rootScope.user.lang);
-            }
+            document.documentElement.lang = $rootScope.user.lang;
+            tmhDynamicLocale.set ($rootScope.user.lang.toLowerCase());
+            $translate.use ($rootScope.user.lang);
         }
     }
 });

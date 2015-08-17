@@ -1,4 +1,4 @@
-app.controller ('AuthenticationController', ['$rootScope', '$scope', 'satellizer.shared', '$auth', '$location', 'tmhDynamicLocale', '$translate', 'User', function($rootScope, $scope, shared, $auth, $location, tmhDynamicLocale, $translate, User) {
+app.controller ('AuthenticationController', ['$rootScope', '$scope', 'SatellizerShared', '$auth', '$location', 'tmhDynamicLocale', '$translate', 'User', '$state', function($rootScope, $scope, shared, $auth, $location, tmhDynamicLocale, $translate, User, $state) {
 
 	console.log ("DENTRO AUTHENTICATION CONTROLLER");
 
@@ -19,6 +19,7 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'satellizer
     $scope.remember = false;
     shared.almacenamiento = 'sessionStorage';
 
+
     $scope.signup = function() {
         if ($scope.remember)
             shared.almacenamiento = 'localStorage';
@@ -28,11 +29,9 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'satellizer
             password: $scope.password,
             lang: $scope.lang
         }).then (function() {
+            console.log ("REGISTRADO CORRECTAMENTE");
             Materialize.toast ('<span class="green">' + $translate.instant('properly registered') + '</span>', 5000);
-            User.me.get().$promise.then(function(response) {
-                $rootScope.user = response.user;
-                User.change_lang ($rootScope.user.lang);
-            });
+            $scope.login();
         }).catch (function(response) {
             Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);
         });
@@ -46,10 +45,12 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'satellizer
             password: $scope.password
         }).then (function() {
             console.log ("LOGUEADO CORRECTAMENTE");
-            Materialize.toast ('<span class="green">' + $translate.instant('properly entered') + '</span>', 5000);
             User.me.get().$promise.then(function(response) {
                 $rootScope.user = response.user;
-                User.change_lang ($rootScope.user.lang);
+                if ($rootScope.user.lang != document.documentElement.lang)
+                    User.change_lang ($rootScope.user.lang);
+                $state.transitionTo ("home");
+                Materialize.toast ('<span class="green">' + $translate.instant('properly entered') + '</span>', 5000);
             });
         }).catch (function(response) {
             Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);

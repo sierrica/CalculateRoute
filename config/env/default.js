@@ -49,7 +49,8 @@ module.exports = {
                     'files/lib/Leaflet.contextmenu/dist/leaflet.contextmenu.css',
                     'files/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css',
                     'files/lib/flag-icon-css/css/flag-icon.css',
-                    'files/lib/select2/dist/css/select2.css'
+                    'files/lib/select2/dist/css/select2.css',
+                    'files/lib/rangeslider.js/dist/rangeslider.css',
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
@@ -63,6 +64,7 @@ module.exports = {
                     'files/lib/angular-translate-handler-log/angular-translate-handler-log.js',
                     'files/lib/angular-dynamic-locale/dist/tmhDynamicLocale.js',
                     'files/lib/select2/dist/js/select2.js',
+                    'files/lib/rangeslider.js/dist/rangeslider.js',
 
 
 

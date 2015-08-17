@@ -1,77 +1,25 @@
 app.factory ('Map', function($http, $translate) {
 
-    var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
-    var cluster = 'eu-n-test';
-    var xMapUrl = 'https://xmap-' + cluster + '.cloud.ptvgroup.com';
-
-
-    // BASELAYERS
-    // Tile Open Street Maps
-    var open_maps_mapnik = L.tileLayer ('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        minZoom: 3
-    });
-    var open_maps_road = L.tileLayer ('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}', {
-        minZoom: 3
-    });
-    // Tile PTV Maps
-    var ptv_maps_bg = L.tileLayer ('https://ajaxbg{s}-eu-n-test.cloud.ptvgroup.com/WMS/GetTile/xmap-ajaxbg/{x}/{y}/{z}.png', {
-        subdomains: '1234',
-        minZoom: 3
-    });
-    var ptv_maps_fg = new L.NonTiledLayer.WMS('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
-        minZoom: 3,
-        opacity: 1.0,
-        layers: 'xmap-ajaxfg',
-        format: 'image/png',
-        transparent: true,
-        attribution: false,
-        zIndex: 100
-    });
-    var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
-    var baseLayers = {
-        "MAPNIK": open_maps_mapnik,
-        "ROAD": open_maps_road,
-        "PTV": ptv_maps
-    };
-
-
-    /* OVERLAYS */
-    var ptv_maps_traffic = new L.PtvLayer.TrafficInformation (xMapUrl, {
-        zIndex: 1,
-        token: token
-    });
-    var ptv_maps_truck = new L.PtvLayer.TruckAttributes (xMapUrl, {
-        zIndex: 998,
-        token: token
-    });
-    var ptv_maps_poi = new L.PtvLayer.POI (xMapUrl, {
-        zIndex: 3,
-        token: token
-    });
-    var overlays = {
-        "TRUCK": ptv_maps_truck,
-        "POI": ptv_maps_poi,
-        "TRAFFIC": ptv_maps_traffic
-    };
-
     /* TRANSLATE PTV POIS ATRIBUTES MAP */
     L.PtvLayer.TruckAttributes = L.PtvLayer.TruckAttributes.extend ({
         _formatTooltip: function (description) {
-            if ($translate.instant (description.split("#")[1]))
-                return $translate.instant (description.split("#")[1]);
+            var word = description.split("#")[1].toLowerCase();
+            if ($translate.instant (word))
+                return $translate.instant(word).charAt(0).toUpperCase() + $translate.instant(word).slice(1);
             else
                 return description;
         }
     });
     L.PtvLayer.TrafficInformation = L.PtvLayer.TrafficInformation.extend ({
         _formatTooltip: function (description) {
-            if ($translate.instant (description.split("#")[1]))
-                return $translate.instant (description.split("#")[1]);
+            var word = description.split("#")[1].toLowerCase();
+            if ($translate.instant (word))
+                return $translate.instant(word).charAt(0).toUpperCase() + $translate.instant(word).slice(1);
             else
                 return description;
+
         }
     });
-
 
 
     /* ICONS */
@@ -110,7 +58,6 @@ app.factory ('Map', function($http, $translate) {
         markerColor: 'blue',
         spin: true
     });
-
     var icon_pushpin = L.icon({
         iconUrl: 'images/pushpin-pink.png',
         //shadowUrl: 'images/pushpin-pink.png',
@@ -126,22 +73,19 @@ app.factory ('Map', function($http, $translate) {
         $("#map").css ("height", window.innerHeight - 50);
     };
 
-
     var letters = ['A','B','C','D','E','F','G','H','I','J'];
     var markers_stations = [];
     return {
-        BaseLayers: baseLayers,
-        Overlays: overlays,
+        IconPushpin: icon_pushpin,
+        IconLoading: icon_loading,
+        Letters: letters,
+        MarkersStations: markers_stations,
         getLayers: function (tilelayers_names) {
             var layers = [];
             if (_.indexOf(tilelayers_names, 'ptv_maps') != -1)
                 layers.push (ptv_maps);
             return layers;
         },
-        IconPushpin: icon_pushpin,
-        IconLoading: icon_loading,
-        Letters: letters,
-        MarkersStations: markers_stations,
         formatDirPopup: function (dir) {
             var popup = '';
             popup += dir.street;

@@ -2,24 +2,29 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
 
     // Parametros de configuración
     $authProvider.httpInterceptor = true;               // Add Authorization header to HTTP request
-    $authProvider.loginOnSignup = true;
+    $authProvider.withCredentials = true;
+    $authProvider.tokenRoot = null;                    // set the token parent element if the token is not the JSON root
+    $authProvider.cordova = false,
     $authProvider.baseUrl = '/'                         // API Base URL for the paths below.
-    $authProvider.loginRedirect = '/';
-    $authProvider.logoutRedirect = '/login';
-    $authProvider.signupRedirect = '/';
     $authProvider.loginUrl = '/login';
     $authProvider.signupUrl = '/signup';
-    $authProvider.loginRoute = '/login';
-    $authProvider.signupRoute = '/signup';
-    $authProvider.tokenRoot = false;                    // set the token parent element if the token is not the JSON root
+    $authProvider.unlinkUrl = '/logout';
     $authProvider.tokenName = 'token';
     $authProvider.tokenPrefix = 'calculateroute';       // Local Storage name prefix
-    $authProvider.unlinkUrl = '/logout';
-    $authProvider.unlinkMethod = 'get';
     $authProvider.authHeader = 'Authorization';
     $authProvider.authToken = 'Bearer';
-    $authProvider.withCredentials = true;
-    $authProvider.platform = 'browser';                 // or 'mobile'
+    //$authProvider.loginOnSignup = true;
+    //$authProvider.loginRedirect = '/';
+    //$authProvider.logoutRedirect = '/login';
+    //$authProvider.signupRedirect = '/';
+    //$authProvider.loginRoute = '/login';
+    //$authProvider.signupRoute = '/signup';
+
+
+    //$authProvider.unlinkMethod = 'get';
+
+
+    //$authProvider.platform = 'browser';                 // or 'mobile'
 
     //if (sessionStorage["calculateroute_token"])
     //    $authProvider.storage = 'sessionStorage';
@@ -40,13 +45,14 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
         url: '/logout',
         template: null,
         private: false,
-        controller: function($auth) {
+        controller: function($auth, $state) {
             if (! $auth.isAuthenticated()) {
                 console.log ("FALLO");
                 return;
             }
             $auth.logout()
             .then(function() {
+                $state.transitionTo ("login");
                 console.log ("DESAUTENTICADO");
             });
         }
