@@ -23,20 +23,15 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
 
 
     console.log ("OPCIONES");
+    console.log (options);
 
-/*
-    $scope.options = {
-        trayect: {
-            tollroads: 10,
-            highways: 0
-        }
-    }
+    $scope.tollroads = parseInt (options.trayect.tollroads);
+    $scope.highways = parseInt (options.trayect.highways);
+
+    /*var options = Ptv.getOptions();
+    $scope.trayect.tollroads = parseInt ($scope.trayect.tollroads);
+    $scope.trayect.highways = parseInt ($scope.trayect.highways);
 */
-    $scope.options = {};
-    $scope.tollroads = 10;
-    $scope.highways = 0;
-
-
 
     var format_extremes = function (identifier, value) {
         if (value == -99)
@@ -58,12 +53,13 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
     };
 
     $scope.rangeSlider = function(id) {
-        $('input[for="' + id + '"]').val ($scope.tollroads);
+        $('input[for="' + id + '"]').val ($scope[id]);
         var range_slider = $('input[for="' + id + '"]').rangeslider ({
             polyfill: false,            // Deactivate the feature detection
             update: true,
 
             onInit: function() {
+                this.update();
                 console.log (this)
                 format_background (this.identifier, this.value);
                 format_extremes (this.identifier, this.value);

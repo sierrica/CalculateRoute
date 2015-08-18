@@ -1,9 +1,9 @@
-app.factory ('Ptv', function() {
+app.service ('Ptv', function() {
 
     var options = {
         trayect: {
-            tollroads: 30,
-            highways: 0
+            tollroads: -15,
+            highways: 2300
         }
     };
 

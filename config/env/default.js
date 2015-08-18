@@ -35,11 +35,13 @@ module.exports = {
         client: {
             views: ['app/client/*/views/**/*.html'],
             css: [
-                'app/client/*/**/*.css'
+                'app/client/*/css/**/*.css'
             ],
             js: [
                 'app/client/app.js',
-                'app/client/*/**/*.js'
+                'app/client/*/services/**/*.js',
+                'app/client/*/routes/**/*.js',
+                'app/client/*/controllers/**/*.js'
             ],
             lib: {
                 css: [

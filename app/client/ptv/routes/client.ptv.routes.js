@@ -1,36 +1,27 @@
-app.config (['$stateProvider', function ($stateProvider, Ptv) {
+app.config (['$stateProvider', function ($stateProvider) {
     $stateProvider.
         state ('trayect', {
         url: '/trayect',
         templateUrl: 'ptv/views/client.trayect.view.html',
         private: true,
-        resolve: {
+        onEnter: ['$rootScope', '$state', 'Ptv', function ($rootScope, $state, Ptv) {
+            options = Ptv.getOptions();
+        }],
+        onExit: ['$state', '$rootScope', 'Ptv', function($state, $rootScope, Ptv) {
+            console.log ("SALIENDO PTV")
+            //console.log (tollroads);
+            console.log ($(tollroads).val())
 
-            // A string value resolves to a service
-            Ptv: 'Ptv'
 
-            // A function value resolves to the return
-            // value of the function
-            /*options: function (Ptv) {
-                return Ptv.getOptions();
-            }*/
-        },
-        onEnter: function () {
-
-            //opciones = Ptv.getDefaults();
-        },
-        onExit: function() {
-/*
             Ptv.setOptions ({
                 trayect: {
-                    tollroads: tollroads,
-                    highways: highways
+                    tollroads: $(tollroads).val(),
+                    highways: $(highways).val()
                 }
             });
-            */
             //Map.getMap().remove();
             console.log ("SALIENDO EN HOME CONTROLLER");
 
-        }
+        }]
     });
 }]);
