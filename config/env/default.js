@@ -51,6 +51,11 @@ module.exports = {
                     'files/lib/flag-icon-css/css/flag-icon.css',
                     'files/lib/select2/dist/css/select2.css',
                     'files/lib/rangeslider.js/dist/rangeslider.css',
+                    'files/lib/tooltipster/css/tooltipster.css',
+                    'files/lib/tooltipster/css/themes/tooltipster-light.css',
+                    'files/lib/tooltipster/css/themes/tooltipster-noir.css',
+                    'files/lib/tooltipster/css/themes/tooltipster-punk.css',
+                    'files/lib/tooltipster/css/themes/tooltipster-shadow.css'
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
@@ -64,6 +69,7 @@ module.exports = {
                     'files/lib/angular-translate-handler-log/angular-translate-handler-log.js',
                     'files/lib/angular-dynamic-locale/dist/tmhDynamicLocale.js',
                     'files/lib/select2/dist/js/select2.js',
+                    'files/lib/angular-contenteditable/angular-contenteditable.js',
 
 
 
@@ -82,7 +88,8 @@ module.exports = {
                     'files/ptv/ajax-maps/Leaflet.PtvLayer.js',
 
 
-                    'files/lib/rangeslider.js/dist/rangeslider.js'
+                    'files/lib/rangeslider.js/dist/rangeslider.js',
+                    'files/lib/tooltipster/js/jquery.tooltipster.js'
                 ]
             },
             tests: [

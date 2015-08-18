@@ -4,7 +4,8 @@ var app = angular.module('calculateRoute', [
     'ngResource',
     'satellizer',
     'pascalprecht.translate',
-    'tmh.dynamicLocale'
+    'tmh.dynamicLocale',
+    'contenteditable'
 ])
 .config(function ($urlRouterProvider, $locationProvider) {
     // Redirect to home view when route not found
@@ -66,6 +67,19 @@ var app = angular.module('calculateRoute', [
         };
     }
 ])
+.directive('rangeParser', function() {
+    return {
+        require: '?ngModel',
+        link: function (scope, element, attr, ctrl) {
+            if (!ctrl) return;
+            ctrl.$parsers.push(function (value) {
+                var val = Number(value);
+                if (val !== val) val = undefined;
+                return val;
+            });
+        }
+    }
+})
 .run (['$rootScope', 'tmhDynamicLocale', '$translate', '$auth', '$state', '$location', 'User', 'SatellizerShared',
 function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User, shared) {
 
