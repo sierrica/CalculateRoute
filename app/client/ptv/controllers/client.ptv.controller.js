@@ -22,15 +22,19 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
     };
 
 
+    console.log ("OPCIONES");
 
-    $scope.tollroads = 2;
+/*
+    $scope.options = {
+        trayect: {
+            tollroads: 10,
+            highways: 0
+        }
+    }
+*/
+    $scope.options = {};
+    $scope.tollroads = 10;
     $scope.highways = 0;
-
-
-    var options_range = [{
-
-    }]
-
 
 
 
@@ -61,11 +65,12 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
 
             onInit: function() {
                 console.log (this)
-                this.value = that.tollroads;
                 format_background (this.identifier, this.value);
+                format_extremes (this.identifier, this.value);
                 var slider = this;
                 $("#" + id).on ('input', function(ev) {
-                    slider.value = that.tollroads;
+                    var value = $(ev.currentTarget).val();
+                    slider.value = value;
                     slider.update();
                     format_background (slider.identifier, slider.value);
                     format_extremes (slider.identifier, slider.value);
@@ -73,11 +78,6 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             },
 
             onSlide: function(position, value) {
-                console.log (value);
-                that.tollroads = parseInt(value);
-                //console.log('onSlide');
-                console.log (this);
-                console.log (this.$fill[0]);
                 format_background (this.identifier, this.value);
                 format_extremes (this.identifier, this.value);
             },

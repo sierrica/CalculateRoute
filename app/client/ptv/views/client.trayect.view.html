@@ -5,17 +5,21 @@
             Autopistas
         </div>
         <div class="col s4 m2 l2 right-align">
-                <input type="number" min="-99" max="2501" step="1" class="output_input" id="tollroads" name="tollroads" ng-model="tollroads"/>
+                <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="tollroads" name="tollroads" ng-model="tollroads"/>
         </div>
         <div class="col s12 m6 l6">
             <input type="range" for="tollroads" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSlider('tollroads')" ng-model="tollroads">
         </div>
     </div>
-    <!--
     <div class="row">
-        <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <input type="range" min="-99" max="2501" step="10" data-rangeslider id="highways" name="highways" ng-init="rangeSlider('highways')" ng-model="highways">
+        <div class="col s8 m4 l3 offset-l1" style="font-size:25px; padding-top:5px;">
+            Autovias
+        </div>
+        <div class="col s4 m2 l2 right-align">
+            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="highways" name="highways" ng-model="highways"/>
+        </div>
+        <div class="col s12 m6 l6">
+            <input type="range" for="highways" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSlider('highways')" ng-model="highways">
         </div>
     </div>
-    -->
 </div>
