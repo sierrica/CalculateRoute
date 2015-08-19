@@ -27,6 +27,7 @@
     "satellizer": "0.12.1",
     "tooltipster": "3.3.0",
     "angular-contenteditable": "~0.3.7",
-    "perfect-scrollbar": "0.6.5"
+    "perfect-scrollbar": "0.6.5",
+    "leaflet-plugins": "~1.3.9"
   }
 }

@@ -24,14 +24,16 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
 
     console.log ("OPCIONES");
     console.log (options);
+    $scope.trayect = {};
+    /*
+        tollroads: parseInt (options.trayect.tollroads),
+        highways: parseInt (options.trayect.highways)
+    };*/
 
+    /*var options = Ptv.getOptions();*/
     $scope.tollroads = parseInt (options.trayect.tollroads);
     $scope.highways = parseInt (options.trayect.highways);
 
-    /*var options = Ptv.getOptions();
-    $scope.trayect.tollroads = parseInt ($scope.trayect.tollroads);
-    $scope.trayect.highways = parseInt ($scope.trayect.highways);
-*/
 
     var format_extremes = function (identifier, value) {
         if (value == -99)

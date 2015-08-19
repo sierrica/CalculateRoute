@@ -7,6 +7,13 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
     // BASELAYERS
+
+    // Google Maps
+    var google_maps = new L.Google ({
+        minZoom: 3,
+        attribution: ''
+    });
+
     // Tile Open Street Maps
     var open_maps_mapnik = L.tileLayer ('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         minZoom: 3
@@ -30,6 +37,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     });
     var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
     var baseLayers = {
+        "GOOGLE": google_maps,
         "MAPNIK": open_maps_mapnik,
         "ROAD": open_maps_road,
         "PTV": ptv_maps
@@ -163,7 +171,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             zoomControl: false,
             attributionControl: false,
             maxBounds: ([[31.952,-18.808],[72.607,44.472]]),
-            layers: ptv_maps,
+            layers: google_maps,
             //layers: [open_maps_mapnik],
             contextmenu: true,
             contextmenuWidth: 160,
@@ -195,8 +203,38 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         .on ('contextmenu:select', function(contextmenu, el) {
             //var index_select = $("div.leaflet-contextmenu a").index(contextmenu.el);
         })
+        .on ('load', function(e) {
+            if (e.name = "GOOGLE") {
+                setTimeout(function () {
+                    $("div.gmnoprint, div.gm-style-cc").fadeOut(1000, function () {
+                        $("div.gmnoprint, div.gm-style-cc").remove();
+                    });
+                    $("img[src='http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png']").first().parent().parent().parent().fadeOut(1000, function () {
+                        $("img[src='http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png']").first().parent().parent().parent().remove();
+                    });
+                }, 2000);
+            }
+        })
+        .on ('baselayerchange', function(e) {
+            if (e.name = "GOOGLE") {
+                setTimeout(function(){
+                    $("div.gmnoprint, div.gm-style-cc").fadeOut (1000, function() {
+                        $("div.gmnoprint, div.gm-style-cc").remove();
+                    });
+                    $("img[src='http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png']").first().parent().parent().parent().fadeOut (1000, function() {
+                        $("img[src='http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png']").first().parent().parent().parent().remove();
+                    });
+                }, 2000);
+            }
+            console.log(e);
+        })
         .setView ([41.9204014, -1.2529047000000446], 18);
+/*
 
+
+
+*/
+        //map._controlCorners.bottomright.style.marginBottom = '10px';
         L.control.layers (baseLayers, overlays).addTo (that.map);            /* Añadir un boton con los tiles disponibles */
 
     };
