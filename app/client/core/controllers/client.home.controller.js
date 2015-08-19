@@ -119,8 +119,10 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 var marker_selected = ev.target;
                 that.map.contextmenu.hide();
                 that.latlng_dragstart = marker_selected.getLatLng();
+
             })
             .on ("dragend", function(ev) {
+                //console.log (marker_selected.getLatLng());
                 var marker_selected = ev.target;
                 marker_selected.setOpacity (0.0);
                 var marker_loading = L.marker (ev.target.getLatLng(), {icon: Map.IconLoading }).addTo (that.map);
@@ -228,20 +230,12 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             console.log(e);
         })
         .setView ([41.9204014, -1.2529047000000446], 18);
-/*
 
+        L.control.layers (baseLayers, overlays).addTo (that.map);
 
-
-*/
-        //map._controlCorners.bottomright.style.marginBottom = '10px';
-        L.control.layers (baseLayers, overlays).addTo (that.map);            /* Añadir un boton con los tiles disponibles */
-
-        var marker_bug_google = L.marker ([31.952,-18.808],[72.607,44.472], {
-            opacity: 0
-        }).addTo (that.map);
+        // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash
+        var marker_bug_google = L.marker ([0, 0], { opacity: 0.0 }).addTo (that.map);
     };
-
-
 
 
     $scope.select_choice_index = { index: 0 };
