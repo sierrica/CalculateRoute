@@ -8,11 +8,12 @@ app.config (['$stateProvider', function ($stateProvider) {
             trayect = Ptv.getOptions ('trayect');
         },
         onExit: function (Ptv) {
-            console.log ("SALIENDO PTV")
+            console.log ("SALIENDO PTV");
+            //tollroads: $("#" + "trayect.tollroads".replace(/(:|\.|\[|\])/g, "\\$1")).val(),
             Ptv.setOptions ({
                 trayect: {
-                    tollroads: $("#" + "trayect.tollroads".replace(/(:|\.|\[|\])/g, "\\$1")).val(),
-                    highways: $("#" + "trayect.highways".replace(/(:|\.|\[|\])/g, "\\$1")).val()
+                    tollroads: $(tollroads).val(),
+                    highways: $(highways).val()
                 }
             });
         }

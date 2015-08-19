@@ -16,17 +16,23 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             theme: 'tooltipster-shadow',
             touchDevices: true,
             trigger: 'click',
-            contentAsHTML: true
+            contentAsHTML: true,
+            maxWidth: 295,
+            offsetX: 10,
+            offsetY: -10
         });
         console.log ("TOLLTIP")
 
     }
+    $scope.tollroads = parseInt (trayect.tollroads);
+    $scope.highways = parseInt (trayect.highways);
 
+/*
     $scope.trayect = {
         tollroads: parseInt (trayect.tollroads),
         highways: parseInt (trayect.highways)
     };
-
+*/
 
     var format_extremes = function (identifier, value) {
         if (value == -99)
@@ -42,33 +48,28 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         if (value < 0)
             $("#" + identifier).css ("background", "rgba(255, 0, 0, " + Math.abs(value) / 100 + ")");
         else if (value > 0)
-            $("#" + identifier).css ("background", "rgba(0, 255, 0, " + Math.abs(value) / 25 / 100 + ")");
+            $("#" + identifier).css ("background", "rgba(0, 255, 0, " + (value / 25 / 100) + ")");
         else
             $("#" + identifier).css ("background", "#D2D3CB");
     };
 
     $scope.rangeSlider = function(id) {
-        console.log ($scope);
-        var id_escaped = id.replace(/(:|\.|\[|\])/g, "\\$1");
+        /*var id_escaped = id.replace(/(:|\.|\[|\])/g, "\\$1");
         var type_option = id.split(".")[0];
         var option = id.split(".")[1];
         var scope_type_option = $scope[type_option];
         var scope_option_value = scope_type_option[option];
-        $('input[for="' + id_escaped + '"]').val (scope_option_value);                    // Como no se acceder a nested
+        $('input[for="' + id_escaped + '"]').val (scope_option_value);*/
+        $('input[for="' + id + '"]').val ($scope[id]);
         console.log ("SCOPE ID: " + $scope[id])
-        var range_slider = $('input[for="' + id_escaped + '"]').rangeslider ({
+        var range_slider = $('input[for="' + id + '"]').rangeslider ({
             polyfill: false,            // Deactivate the feature detection
             update: true,
-
             onInit: function() {
-                this.update();
-                console.log (this)
                 format_background (this.identifier, this.value);
                 format_extremes (this.identifier, this.value);
                 var slider = this;
-
-
-                $('#' + id_escaped).on ('input', function(ev) {
+                $('#' + id).on ('input', function(ev) {
                     console.log ("DENTRO EVENTO")
                     var value = $(ev.currentTarget).val();
                     slider.value = value;
@@ -76,9 +77,7 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
                     format_background (slider.identifier, slider.value);
                     format_extremes (slider.identifier, slider.value);
                 });
-                /*setTimeout(function(){
-                    $('#' + id_escaped).trigger('input');
-                }, 50);*/
+                /*setTimeout(function(){ $('#' + id_escaped).trigger('input'); }, 50);*/
             },
             onSlide: function (position, value) {
                 format_background (this.identifier, this.value);
@@ -87,5 +86,4 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             onSlideEnd: function (position, value) { }
         });
     };
-
 });

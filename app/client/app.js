@@ -119,5 +119,8 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         $(".side-nav li").removeClass("active");
         $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
+
+        if (toState.name == 'home')
+        console.log (toState);
     });
 }]);
