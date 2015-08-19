@@ -1,8 +1,8 @@
 <div class="container" ng-controller="PtvController">
     <div class="breadcumb">Login<li class="divider"></li></div>
     <div class="row">
-        <div class="col s8 m4 l3 offset-l1">
-            Autopistas
+        <div class="col s8 m4 l3 offset-l1" class="tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('trayect.tollroads')" style="font-size:25px; padding-top:5px;">
+            Autopistas <i class="tiny material-icons" style="vertical-align:top; font-size:20px">help</i>
         </div>
         <div class="col s4 m2 l2 right-align">
                 <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="trayect.tollroads" name="trayect.tollroads" ng-model="trayect.tollroads"/>
@@ -12,8 +12,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s8 m4 l3 offset-l1" style="font-size:25px; padding-top:5px;">
-            Autovias
+        <div class="col s8 m4 l3 offset-l1" class="tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('trayect.highways')" style="font-size:25px; padding-top:5px;">
+            Autovias <i class="material-icons" style="vertical-align:top; font-size:20px">help</i>
         </div>
         <div class="col s4 m2 l2 right-align">
             <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="trayect.highways" name="trayect.highways" ng-model="trayect.highways"/>
@@ -22,4 +22,7 @@
             <input type="range" for="trayect.highways" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSlider('trayect.highways')" ng-model="trayect.highways">
         </div>
     </div>
+
+    <script>
+    </script>
 </div>

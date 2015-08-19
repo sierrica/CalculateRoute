@@ -16,7 +16,7 @@ app.service ('Ptv', function() {
         },
         setOptions: function(new_options) {
             options = angular.extend (options, new_options);
-            console.log (options);
+            //console.log (options);
         }
     }
 });

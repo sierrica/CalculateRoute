@@ -7,20 +7,20 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
 
 
 
-    $("span[contenteditable='true']").keydown (function(e) {
-        if(e.keyCode == 13){
-            e.preventDefault();
-        }
-    });
+    $scope.toolTipster = function (id) {
+        var id_escaped = id.replace(/(:|\.|\[|\])/g, "\\$1");
+        $("#" + id_escaped).parent().prev().tooltipster ({
+            animation: 'fade',
+            delay: 200,
+            //theme: 'tooltipster-default',
+            theme: 'tooltipster-shadow',
+            touchDevices: true,
+            trigger: 'click',
+            contentAsHTML: true
+        });
+        console.log ("TOLLTIP")
 
-
-    $scope.changeSlider = function(id) {
-        console.log ($('#' + id).val());
-        $('input[for="' + id + '"]').val ($scope.tollroads);
-        $('#js-rangeslider-0').value = $scope.tollroads;
-        //$('#js-rangeslider-0').update();
-    };
-
+    }
 
     $scope.trayect = {
         tollroads: parseInt (trayect.tollroads),
