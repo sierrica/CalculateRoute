@@ -22,17 +22,10 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
     };
 
 
-    console.log ("OPCIONES");
-    console.log (options);
-    $scope.trayect = {};
-    /*
-        tollroads: parseInt (options.trayect.tollroads),
-        highways: parseInt (options.trayect.highways)
-    };*/
-
-    /*var options = Ptv.getOptions();*/
-    $scope.tollroads = parseInt (options.trayect.tollroads);
-    $scope.highways = parseInt (options.trayect.highways);
+    $scope.trayect = {
+        tollroads: parseInt (trayect.tollroads),
+        highways: parseInt (trayect.highways)
+    };
 
 
     var format_extremes = function (identifier, value) {
@@ -55,8 +48,15 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
     };
 
     $scope.rangeSlider = function(id) {
-        $('input[for="' + id + '"]').val ($scope[id]);
-        var range_slider = $('input[for="' + id + '"]').rangeslider ({
+        console.log ($scope);
+        var id_escaped = id.replace(/(:|\.|\[|\])/g, "\\$1");
+        var type_option = id.split(".")[0];
+        var option = id.split(".")[1];
+        var scope_type_option = $scope[type_option];
+        var scope_option_value = scope_type_option[option];
+        $('input[for="' + id_escaped + '"]').val (scope_option_value);                    // Como no se acceder a nested
+        console.log ("SCOPE ID: " + $scope[id])
+        var range_slider = $('input[for="' + id_escaped + '"]').rangeslider ({
             polyfill: false,            // Deactivate the feature detection
             update: true,
 
@@ -66,24 +66,25 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
                 format_background (this.identifier, this.value);
                 format_extremes (this.identifier, this.value);
                 var slider = this;
-                $("#" + id).on ('input', function(ev) {
+
+
+                $('#' + id_escaped).on ('input', function(ev) {
+                    console.log ("DENTRO EVENTO")
                     var value = $(ev.currentTarget).val();
                     slider.value = value;
                     slider.update();
                     format_background (slider.identifier, slider.value);
                     format_extremes (slider.identifier, slider.value);
                 });
+                /*setTimeout(function(){
+                    $('#' + id_escaped).trigger('input');
+                }, 50);*/
             },
-
-            onSlide: function(position, value) {
+            onSlide: function (position, value) {
                 format_background (this.identifier, this.value);
                 format_extremes (this.identifier, this.value);
             },
-
-            onSlideEnd: function(position, value) {
-                //console.log('onSlideEnd');
-                //console.log('position: ' + position, 'value: ' + value);
-            }
+            onSlideEnd: function (position, value) { }
         });
     };
 

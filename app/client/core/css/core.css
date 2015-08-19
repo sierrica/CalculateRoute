@@ -192,10 +192,6 @@ textarea.materialize-textarea:focus:not([readonly]) + label.active {
 
 
 
-
-
-
-
 span.form_error, span.form_success {
     position: relative;
     top: -10px;

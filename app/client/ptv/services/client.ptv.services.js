@@ -7,9 +7,12 @@ app.service ('Ptv', function() {
         }
     };
 
+
+
     return {
-        getOptions: function () {
-            return options;
+        getOptions: function (type) {
+            if (type = 'trayect')
+                return options.trayect;
         },
         setOptions: function(new_options) {
             options = angular.extend (options, new_options);

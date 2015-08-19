@@ -5,16 +5,14 @@ app.config (['$stateProvider', function ($stateProvider) {
         templateUrl: 'ptv/views/client.trayect.view.html',
         private: true,
         onEnter: function (Ptv) {
-            options = Ptv.getOptions();
+            trayect = Ptv.getOptions ('trayect');
         },
         onExit: function (Ptv) {
             console.log ("SALIENDO PTV")
-            //console.log (tollroads);
-            console.log ($(tollroads).val())
             Ptv.setOptions ({
                 trayect: {
-                    tollroads: $(tollroads).val(),
-                    highways: $(highways).val()
+                    tollroads: $("#" + "trayect.tollroads".replace(/(:|\.|\[|\])/g, "\\$1")).val(),
+                    highways: $("#" + "trayect.highways".replace(/(:|\.|\[|\])/g, "\\$1")).val()
                 }
             });
         }
