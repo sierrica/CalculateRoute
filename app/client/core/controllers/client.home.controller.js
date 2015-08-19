@@ -9,9 +9,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     // BASELAYERS
 
     // Google Maps
-    var google_maps = new L.Google ({
-        minZoom: 3,
-        attribution: ''
+    var google_maps = new L.Google ('ROADMAP', {
+        minZoom: 3
     });
 
     // Tile Open Street Maps
@@ -237,6 +236,9 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         //map._controlCorners.bottomright.style.marginBottom = '10px';
         L.control.layers (baseLayers, overlays).addTo (that.map);            /* Añadir un boton con los tiles disponibles */
 
+        var marker_bug_google = L.marker ([31.952,-18.808],[72.607,44.472], {
+            opacity: 0
+        }).addTo (that.map);
     };
 
 
