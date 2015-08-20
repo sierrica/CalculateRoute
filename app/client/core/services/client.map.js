@@ -74,9 +74,18 @@ app.factory ('Map', function($http, $translate) {
         $("#map").css ("height", window.innerHeight - 50);
     };
 
+    var map;
     var letters = ['A','B','C','D','E','F','G','H','I','J'];
     var markers_stations = [];
     return {
+        getMap: function () {
+            return map;
+        },
+        setMap: function(mapa) {
+            console.log ("SET MAPA")
+            map = mapa;
+            console.log (map)
+        },
         IconPushpin: icon_pushpin,
         IconLoading: icon_loading,
         Letters: letters,

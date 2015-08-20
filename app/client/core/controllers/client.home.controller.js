@@ -205,6 +205,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             //var index_select = $("div.leaflet-contextmenu a").index(contextmenu.el);
         })
         .on ('load', function(e) {
+
             if (e.name = "GOOGLE") {
                 setTimeout(function () {
                     $("div.gmnoprint, div.gm-style-cc").fadeOut(1000, function () {
@@ -235,6 +236,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
         // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash
         var marker_bug_google = L.marker ([0, 0], { opacity: 0.0 }).addTo (that.map);
+        //Map.setMap ($scope.map);
+
     };
 
 

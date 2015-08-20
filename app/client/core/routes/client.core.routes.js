@@ -1,5 +1,5 @@
 angular.module('calculateRoute')
-.config (['$stateProvider', function ($stateProvider, Map) {
+.config (['$stateProvider', function ($stateProvider) {
     $stateProvider.
         state ('home', {
         url: '/',
@@ -8,12 +8,10 @@ angular.module('calculateRoute')
         onEnter: function () {
             console.log ("ENTRANDO EN HOME CONTROLLER");
         },
-        onExit: function() {
+        onExit: function(Map) {
             //Map.getMap().remove();
             console.log ("SALIENDO EN HOME CONTROLLER");
-            console.log (map);
-            map.remove();
-
+            //Map.getMap().remove();
         }
     });
 }]);
