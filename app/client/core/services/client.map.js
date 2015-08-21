@@ -156,7 +156,7 @@ app.factory ('Map', function($http, $translate) {
         spiderfyDistanceMultiplier: 1,
         polygonOptions: {}
     });
-    var markers_stations = [];
+    var list_markers_stations = [];
     return {
         getBaseLayers: function() {
             return base_layers;
@@ -195,40 +195,34 @@ app.factory ('Map', function($http, $translate) {
         IconLoading: icon_loading,
         Letters: letters,
         lengthMarkerStations: function() {
-            return markers_stations.length;
+            return list_markers_stations.length;
         },
         getMarkersStations: function() {
-            return markers_stations;
+            return list_markers_stations;
         },
         removeMarkersStations: function() {
-            markers_stations = [];
+            list_markers_stations = [];
             cluster_markers_stations.clearLayers();
         },
         setMarkersStations: function (markers) {
-            markers_stations = markers;
+            list_markers_stations = markers;
             cluster_markers_stations.addLayers (markers);
         },
         getMarkerStation: function(index) {
-            return markers_stations[index];
+            return list_markers_stations[index];
         },
-        setMarkerStation: function(marker, index) {
-            markers_stations[i] = marker;
+        setMarkerStation: function (marker, index) {
+            list_markers_stations[i] = marker;
             cluster_markers_stations.addLayer (marker);
         },
         addMarkerStation: function (marker, index) {
-            markers_stations.splice (index, 0, marker);
+            list_markers_stations.splice (index, 0, marker);
             cluster_markers_stations.addLayer (marker);
         },
         removeMarkerStation: function (index) {
-            var marker = markers_stations[index];
-            markers_stations.splice (index, 1);
+            var marker = list_markers_stations[index];
+            list_markers_stations.splice (index, 1);
             cluster_markers_stations.removeLayer (marker);
-        },
-        getLayers: function (tilelayers_names) {
-            var layers = [];
-            if (_.indexOf(tilelayers_names, 'ptv_maps') != -1)
-                layers.push (ptv_maps);
-            return layers;
         },
         formatDirPopup: function (dir) {
             var popup = '';

@@ -6,22 +6,39 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     $scope.addOrigin = function (ev) {
         $scope.add (ev, 0);
     };
-
     $scope.addDestine = function (ev) {
         $scope.add (ev, Map.lengthMarkerStations());
     };
-
     $scope.addIntermediate = function (ev) {
+        $scope.select_choice_index = { index: 0 };
+        $scope.$apply();
+        $('#select_choice_index').material_select();
         $('#modal_choice_index').openModal();
         var that = $scope;
         $("#button_select_choice_index").off('click').on ('click', function(e) {
             that.add (ev, that.select_choice_index.index);
             $('#modal_choice_index').closeModal();
         });
-
-
-        //$scope.add (ev, 1);
     };
+
+    $scope.select_choice_index = { index: 0 };
+    $scope.options_choice_index = function() {
+        var available_options = [];
+        if (Map.lengthMarkerStations() == 0)
+            available_options.push ({ index: 0, text: "A: Origen" })
+        else {
+            for (i=0; i<Map.lengthMarkerStations(); i++) {
+                available_options.push ({
+                    index: i,
+                    text: Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"")
+                });
+            }
+        }
+        return available_options;
+    };
+
+
+
 
     $scope.contextMenu = function (marker) {
         var that = $scope;
@@ -67,7 +84,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
     var removeMarker = function(ev) {
         var that = $scope;
-        that.map.removeLayer (Map.getMarkerStation(that.index_marker_selected));
         Map.removeMarkerStation (that.index_marker_selected);                 // REMOVE
         for (i=that.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
             var marker = Map.getMarkerStation(i);
@@ -101,9 +117,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             that.dragEnd (marker);
             marker.bindPopup (Map.formatDirPopup(response.result));
             Map.addMarkerStation (marker, index);                  //ADD TO FACTORY
-            //marker.addTo (that.map);
             marker.openPopup();
-
 
             for (i=index; i<Map.lengthMarkerStations(); i++) {
                 var marker = Map.getMarkerStation(i);
@@ -187,34 +201,17 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     });
                 }, 2000);
             }
-            console.log(e);
         }).setView([41.9204014, -1.2529047000000446], 18);
 
         L.control.layers (Map.getBaseLayers(), Map.getOverlays()).addTo (that.map);
 
-        // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash
-        var marker_bug_google = L.marker([0, 0], {opacity: 0.0}).addTo(that.map);
-        Map.setMap ($scope.map);
 
+        var marker_bug_google = L.marker([0, 0], {opacity: 0.0}).addTo(that.map);           // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash
+        Map.setMap ($scope.map);                                                            // Save Map in Factory
     };
 
 
 
-    $scope.select_choice_index = { index: 0 };
-    $scope.options_choice_index = function() {
-        var available_options = [];
-        if (Map.lengthMarkerStations() == 0)
-            available_options.push ({ index: 0, text: "A: Origen" })
-        else {
-            for (i=0; i<Map.lengthMarkerStations(); i++) {
-                available_options.push ({
-                    index: i,
-                    text: Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"")
-                });
-            }
-        }
-        return available_options;
-    };
 
 
 

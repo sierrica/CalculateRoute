@@ -5,7 +5,6 @@ angular.module('calculateRoute').config (['$stateProvider', function ($stateProv
         templateUrl: 'core/views/client.home.view.html',
         private: true,
         onEnter: function () {
-
 /*
             setTimeout(function(){
                 $("#loader_route").next().css ("opacity", "0");
