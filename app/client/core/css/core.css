@@ -1,6 +1,17 @@
 /* HEADER */
 
 
+/*
+#map {
+    width: 100%;
+    height: calc(100% - 50px);
+}
+@media only screen and (min-width: 992px) {
+    #map {
+        width: calc(100% - 300px);
+    }
+}
+*/
 
 
 html {

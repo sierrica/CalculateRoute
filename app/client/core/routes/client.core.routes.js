@@ -16,7 +16,6 @@ angular.module('calculateRoute').config (['$stateProvider', function ($stateProv
             }, 1000);
 */
             console.log ("ENTRANDO EN HOME CONTROLLER");
-
         },
         onExit: function(Map) {
             //Map.getMap().remove();

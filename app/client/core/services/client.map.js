@@ -132,11 +132,15 @@ app.factory ('Map', function($http, $translate) {
     };
 
 
-
-    window.onresize = function () {
-        $("#map").css ("width", $("#mapContainer").parent().width());
-        $("#map").css ("height", window.innerHeight - 50);
+    window.onresize = function() {
+        console.log ("RESIZE");
+        if (window.innerWidth > 992)
+            $("#map").css("width", window.innerWidth - 300);
+        else
+            $("#map").css("width", window.innerWidth);
+        $("#map").css("height", window.innerHeight - 50);
     };
+
 
     var map;
     var map_html;
@@ -157,6 +161,7 @@ app.factory ('Map', function($http, $translate) {
         polygonOptions: {}
     });
     var list_markers_stations = [];
+
     return {
         getBaseLayers: function() {
             return base_layers;

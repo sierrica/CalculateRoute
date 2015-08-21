@@ -2,7 +2,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     console.log ("DENTRO HOME CONTROLLER");
 
 
-
     $scope.addOrigin = function (ev) {
         $scope.add (ev, 0);
     };
@@ -10,17 +9,23 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         $scope.add (ev, Map.lengthMarkerStations());
     };
     $scope.addIntermediate = function (ev) {
-        $scope.$apply();
-        $('#select_choice_index').material_select();
+        $rootScope.$apply();
+        $("#modal_choice_index option:selected").removeAttr("selected");
+        var value_first = $("#select_choice_index option:nth-child(1)").val();
+        if ( !value_first   || value_first == '?')
+            $("#select_choice_index option:nth-child(2)").attr("selected", "selected");
+        else
+            $("#select_choice_index option:nth-child(1)").attr("selected", "selected");
         $('#modal_choice_index').openModal();
         var that = $scope;
         $("#button_select_choice_index").off('click').on ('click', function(e) {
-            that.add (ev, that.select_choice_index.index);
+            var val_selected = $("#modal_choice_index option:selected").val();
+            that.add (ev, val_selected);
             $('#modal_choice_index').closeModal();
         });
     };
 
-    $scope.select_choice_index = { index: 0 };
+
     $scope.options_choice_index = function() {
         var available_options = [];
         if (Map.lengthMarkerStations() == 0)
@@ -31,7 +36,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     index: i,
                     text: Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"")
                 });
-            }
+            };
         }
         return available_options;
     };
@@ -81,15 +86,15 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         });
     };
 
+    var that = $scope;
     var removeMarker = function(ev) {
-        var that = $scope;
         Map.removeMarkerStation (that.index_marker_selected);                 // REMOVE
         for (i=that.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
             var marker = Map.getMarkerStation(i);
             marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
             Map.setMarkerStation (marker, i);
         }
-        $scope.select_choice_index = { index: 0 };                  // Especifico el index de "intermediate" a 0 por si borro el que estaba seleccionado
+        that.$apply();
     };
 
 
@@ -136,10 +141,14 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
     $scope.renderMap = function() {
-        $("#map").css("width", $("#mapContainer").parent().width());
+        if (window.innerWidth > 992)
+            $("#map").css("width", window.innerWidth - 300);
+        else
+            $("#map").css("width", window.innerWidth);
         $("#map").css("height", window.innerHeight - 50);
+
         if (Map.getMap() != undefined)
-            $("#map").html (Map.restoreMapHtml());
+            $("#map").parent().html (Map.restoreMapHtml());
         else
             $scope.initMap();
     };
