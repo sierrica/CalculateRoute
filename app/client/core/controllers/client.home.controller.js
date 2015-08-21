@@ -10,7 +10,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         $scope.add (ev, Map.lengthMarkerStations());
     };
     $scope.addIntermediate = function (ev) {
-        $scope.select_choice_index = { index: 0 };
         $scope.$apply();
         $('#select_choice_index').material_select();
         $('#modal_choice_index').openModal();
@@ -90,6 +89,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
             Map.setMarkerStation (marker, i);
         }
+        $scope.select_choice_index = { index: 0 };                  // Especifico el index de "intermediate" a 0 por si borro el que estaba seleccionado
     };
 
 
