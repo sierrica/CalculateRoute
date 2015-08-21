@@ -141,16 +141,22 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
     $scope.renderMap = function() {
-        if (window.innerWidth > 992)
-            $("#map").css("width", window.innerWidth - 300);
-        else
-            $("#map").css("width", window.innerWidth);
-        $("#map").css("height", window.innerHeight - 50);
-
-        if (Map.getMap() != undefined)
+        if (Map.getMap() != undefined) {
             $("#map").replaceWith (Map.restoreMapHtml());
-        else
+            if (window.innerWidth > 992)
+                $("#map").css("width", window.innerWidth - 300);
+            else
+                $("#map").css("width", window.innerWidth);
+            $("#map").css("height", window.innerHeight - 50);
+        }
+        else {
+            if (window.innerWidth > 992)
+                $("#map").css("width", window.innerWidth - 300);
+            else
+                $("#map").css("width", window.innerWidth);
+            $("#map").css("height", window.innerHeight - 50);
             $scope.initMap();
+        }
     };
 
 
