@@ -1,7 +1,15 @@
 app.service ('Ptv', function() {
 
     var options = {
+        details: {
+            manoeuvres: false
+        },
+        vehicle: {
+          height: 145,
+          width: 200
+        },
         trayect: {
+            dinamic_route: true,
             tollroads: -15,
             highways: 2300
         }
@@ -11,12 +19,10 @@ app.service ('Ptv', function() {
 
     return {
         getOptions: function (type) {
-            if (type = 'trayect')
-                return options.trayect;
+            return options;
         },
         setOptions: function(new_options) {
             options = angular.extend (options, new_options);
-            //console.log (options);
         }
     }
 });

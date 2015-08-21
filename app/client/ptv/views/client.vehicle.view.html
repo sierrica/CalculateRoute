@@ -1,0 +1,21 @@
+<div class="container" ng-controller="PtvController">
+    <div class="header_section">vehicle<li class="divider"></li></div>
+    <div class="row">
+        <div class="col s6 m5 l3 offset-l1 truncate" class="tooltip" title="This is my div's tooltip!" ng-init="toolTipster('height')" style="font-size:25px; padding-top:5px;">
+            Altura <i class="tiny material-icons" style="vertical-align:top;">help</i>
+        </div>
+        <div class="col s5 m2 l2 right-align">
+            <input type="number" ng-min="0" ng-max="1000" step="1" class="output_input" id="height" name="height" ng-model="height"/>
+        </div>
+        <div class="col s1 right-left" style="padding-left:0px"><i><b style="font-size:20px">cm</b></i></div>
+    </div>
+    <div class="row">
+        <div class="col s6 m5 l3 offset-l1 truncate" class="tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('width')" style="font-size:25px; padding-top:5px;">
+            Anchura <i class="tiny material-icons" style="vertical-align:top">help</i>
+        </div>
+        <div class="col s5 m2 l2 right-align truncate">
+            <input type="number" ng-min="0" ng-max="1000" step="1" class="output_input" id="width" name="width" ng-model="width"/>
+        </div>
+        <div class="col s1 right-left" style="padding-left:0px"><i><b style="font-size:20px">cm</b></i></div>
+    </div>
+</div>

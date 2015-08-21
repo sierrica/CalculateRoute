@@ -50,7 +50,12 @@
     <li class="divider" style="height:10px"></li>
     <li class="no-padding">
         <a ui-sref="home" class="waves-effect waves-light" ng-click="close_sidenav($event)">
-            <i class="small material-icons">home</i> {{ 'home' | translate }}
+            <i class="small material-icons">map</i> Mapa
+        </a>
+    </li>
+    <li class="no-padding">
+        <a ui-sref="vehicle" class="waves-effect waves-light" ng-click="close_sidenav($event)">
+            <i class="small material-icons">local_shipping</i> Vehiculo
         </a>
     </li>
     <li class="no-padding">
@@ -59,15 +64,9 @@
         </a>
     </li>
     <li class="no-padding">
-        <a class="waves-effect waves-light">
-            <i class="small material-icons">public</i> Lugares
+        <a ui-sref="details" class="waves-effect waves-light" ng-click="close_sidenav($event)">
+            <i class="small material-icons">assignment</i> Detalles
         </a>
-        <div>
-            <li><a class="waves-effect waves-light">Color</a></li>
-        </div>
-
-
-
     </li>
     <!--
     <li><a ui-sref="home" class="waves-effect waves-light" ng-click="close_sidenav($event)">Vehiculo2</a></li>

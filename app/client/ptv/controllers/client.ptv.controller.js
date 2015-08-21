@@ -22,10 +22,20 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             offsetY: -10
         });
         console.log ("TOLLTIP")
-
     }
-    $scope.tollroads = parseInt (trayect.tollroads);
-    $scope.highways = parseInt (trayect.highways);
+
+
+        $scope.tollroads = parseInt (options.trayect.tollroads);
+        $scope.highways = parseInt (options.trayect.highways);
+
+        $scope.height = parseInt (options.vehicle.height);
+        $scope.width = parseInt (options.vehicle.width);
+
+        $scope.manoeuvres = options.details.manoeuvres;
+
+
+    console.log ("scope.width: " + $scope.width)
+
 
 /*
     $scope.trayect = {

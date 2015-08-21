@@ -75,21 +75,53 @@ app.factory ('Map', function($http, $translate) {
     };
 
     var map;
+    var map_html;
     var letters = ['A','B','C','D','E','F','G','H','I','J'];
     var markers_stations = [];
     return {
+        removeMap: function() {
+            map.remove();
+        },
         getMap: function () {
             return map;
         },
         setMap: function(mapa) {
-            console.log ("SET MAPA")
             map = mapa;
-            console.log (map)
         },
+        saveMapHtml: function() {
+            map_html = map.getContainer();
+        },
+        restoreMapHtml: function() {
+            return map_html;
+        },
+
         IconPushpin: icon_pushpin,
         IconLoading: icon_loading,
         Letters: letters,
-        MarkersStations: markers_stations,
+        lengthMarkerStations: function() {
+            return markers_stations.length;
+        },
+        getMarkersStations: function() {
+            return markers_stations;
+        },
+        removeMarkersStations: function() {
+            markers_stations = [];
+        },
+        setMarkersStations: function (markers) {
+            markers_stations = markers;
+        },
+        getMarkerStation: function(index) {
+            return markers_stations[index];
+        },
+        setMarkerStation: function(marker, index) {
+            markers_stations[i] = marker;
+        },
+        addMarkerStation: function (marker, index) {
+            markers_stations.splice (index, 0, marker);
+        },
+        removeMarkerStation: function (index) {
+            markers_stations.splice (index, 1);
+        },
         getLayers: function (tilelayers_names) {
             var layers = [];
             if (_.indexOf(tilelayers_names, 'ptv_maps') != -1)

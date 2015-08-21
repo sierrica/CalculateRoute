@@ -102,6 +102,10 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
     }
 
     $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        //if (window.innerWidth < 600)
+        //    $('body').removeClass ('loaded');
+
+
         $(".modal").closeModal();           // Error que se queda oscuo cuando pretas ir "hacia atras" con un modal abierto
         if (toState.private   &&  !$auth.isAuthenticated()) {
             event.preventDefault();                             // HAY QUE CAMBIAR
@@ -114,13 +118,21 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             else
                 $location.url ('/');
         }
+        else if ($auth.isAuthenticated()  &&  toState.name == "home") {
+            console.log ("DENTRO HOME ENTRANDO");
+        }
+
     });
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         $(".side-nav li").removeClass("active");
         $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
 
-        if (toState.name == 'home')
-        console.log (toState);
+        /*setTimeout(function(){
+            $('body').addClass ('loaded');
+        }, 500);
+*/
+
+
     });
 }]);

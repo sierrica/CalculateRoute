@@ -57,7 +57,8 @@ module.exports = {
                     'files/lib/tooltipster/css/themes/tooltipster-light.css',
                     'files/lib/tooltipster/css/themes/tooltipster-noir.css',
                     'files/lib/tooltipster/css/themes/tooltipster-punk.css',
-                    'files/lib/tooltipster/css/themes/tooltipster-shadow.css'
+                    'files/lib/tooltipster/css/themes/tooltipster-shadow.css',
+                    'files/lib/paper-switch/paper-switch.css'
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
