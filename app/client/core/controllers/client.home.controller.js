@@ -148,7 +148,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         $("#map").css("height", window.innerHeight - 50);
 
         if (Map.getMap() != undefined)
-            $("#map").parent().html (Map.restoreMapHtml());
+            $("#map").replaceWith (Map.restoreMapHtml());
         else
             $scope.initMap();
     };
