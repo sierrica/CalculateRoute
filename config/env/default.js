@@ -50,6 +50,8 @@ module.exports = {
                     'files/lib/leaflet/dist/leaflet.css',
                     'files/lib/Leaflet.contextmenu/dist/leaflet.contextmenu.css',
                     'files/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css',
+                    'files/lib/leaflet.markercluster/dist/MarkerCluster.css',
+                    'files/lib/leaflet.markercluster/dist/MarkerCluster.Default.css',
                     'files/lib/flag-icon-css/css/flag-icon.css',
                     'files/lib/select2/dist/css/select2.css',
                     'files/lib/rangeslider.js/dist/rangeslider.css',
@@ -86,6 +88,7 @@ module.exports = {
                     'files/lib/leaflet-plugins/layer/tile/Google.js',
                     'files/lib/Leaflet.contextmenu/dist/leaflet.contextmenu-src.js',
                     'files/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
+                    'files/lib/leaflet.markercluster/dist/leaflet.markercluster-src.js',
 
 
 

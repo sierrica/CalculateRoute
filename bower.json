@@ -28,6 +28,7 @@
     "satellizer": "0.12.2",
     "paper-switch": "*",
     "leaflet": "0.7.3",
-    "Leaflet.contextmenu": "*"
+    "Leaflet.contextmenu": "*",
+    "leaflet.markercluster": "~0.4.0"
   }
 }

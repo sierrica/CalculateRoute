@@ -1,70 +1,6 @@
 app.controller ('HomeController', function ($rootScope, $scope, $location, $auth, Map, $http, User, $translate) {
     console.log ("DENTRO HOME CONTROLLER");
 
-    var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
-    var cluster = 'eu-n-test';
-    var xMapUrl = 'https://xmap-' + cluster + '.cloud.ptvgroup.com';
-
-
-    // BASELAYERS
-
-    // Google Maps
-    var google_maps = new L.Google ('ROADMAP', {
-        minZoom: 3
-    });
-
-    // Tile Open Street Maps
-    var open_maps_mapnik = L.tileLayer ('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        minZoom: 3
-    });
-    var open_maps_road = L.tileLayer ('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}', {
-        minZoom: 3
-    });
-    // Tile PTV Maps
-    var ptv_maps_bg = L.tileLayer ('https://ajaxbg{s}-eu-n-test.cloud.ptvgroup.com/WMS/GetTile/xmap-ajaxbg/{x}/{y}/{z}.png', {
-        subdomains: '1234',
-        minZoom: 3
-    });
-    var ptv_maps_fg = new L.NonTiledLayer.WMS('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
-        minZoom: 3,
-        opacity: 1.0,
-        layers: 'xmap-ajaxfg',
-        format: 'image/png',
-        transparent: true,
-        attribution: false,
-        zIndex: 100
-    });
-    var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
-    var baseLayers = {
-        "GOOGLE": google_maps,
-        "MAPNIK": open_maps_mapnik,
-        "ROAD": open_maps_road,
-        "PTV": ptv_maps
-    };
-
-
-    /* OVERLAYS */
-    var ptv_maps_traffic = new L.PtvLayer.TrafficInformation (xMapUrl, {
-        zIndex: 1,
-        token: token
-    });
-    var ptv_maps_truck = new L.PtvLayer.TruckAttributes (xMapUrl, {
-        zIndex: 998,
-        token: token
-    });
-    var ptv_maps_poi = new L.PtvLayer.POI (xMapUrl, {
-        zIndex: 3,
-        token: token
-    });
-    var overlays = {
-        "TRUCK": ptv_maps_truck,
-        "POI": ptv_maps_poi,
-        "TRAFFIC": ptv_maps_traffic
-    };
-
-
-
-
 
 
     $scope.addOrigin = function (ev) {
@@ -164,10 +100,11 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             that.dragStart (marker);
             that.dragEnd (marker);
             marker.bindPopup (Map.formatDirPopup(response.result));
-            marker.addTo (that.map);
+            Map.addMarkerStation (marker, index);                  //ADD TO FACTORY
+            //marker.addTo (that.map);
             marker.openPopup();
 
-            Map.addMarkerStation (marker, index);                  //ADD TO FACTORY
+
             for (i=index; i<Map.lengthMarkerStations(); i++) {
                 var marker = Map.getMarkerStation(i);
                 marker.setIcon (new L.NumberedDivIcon ({letter: Map.Letters[i] }));
@@ -185,27 +122,22 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
     $scope.renderMap = function() {
-        if (Map.getMap() != undefined) {
-            $("#map").css("width", $("#mapContainer").parent().width());
-            $("#map").css("height", window.innerHeight - 50);
-            $("#map").html(Map.restoreMapHtml());
-            console.log ("EXISTE EL MAPA");
-        }
-        else {
+        $("#map").css("width", $("#mapContainer").parent().width());
+        $("#map").css("height", window.innerHeight - 50);
+        if (Map.getMap() != undefined)
+            $("#map").html (Map.restoreMapHtml());
+        else
             $scope.initMap();
-        }
     };
 
 
     $scope.initMap = function () {
-        $("#map").css("width", $("#mapContainer").parent().width());
-        $("#map").css("height", window.innerHeight - 50);
         var that = $scope;
         $scope.map = L.map('map', {
             zoomControl: false,
             attributionControl: false,
             maxBounds: ([[31.952, -18.808], [72.607, 44.472]]),
-            layers: google_maps,
+            layers: Map.getLayer('google_maps'),
             //layers: [open_maps_mapnik],
             contextmenu: true,
             contextmenuWidth: 160,
@@ -225,20 +157,15 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 text: $translate.instant('destino'),
                 callback: that.addDestine
             }]
-        })
-            .on('contextmenu', function (ev) {
+        }).on ('contextmenu', function (ev) {
             if (that.pointer_marker)
                 that.map.removeLayer(that.pointer_marker);
             that.pointer_marker = L.marker(ev.latlng, {icon: Map.IconPushpin}).addTo(that.map);
-        })
-            .on('contextmenu.hide', function (contextmenu, relatedTarget) {
+        }).on ('contextmenu.hide', function (contextmenu, relatedTarget) {
             that.map.removeLayer(that.pointer_marker);
-        })
-            .on('contextmenu:select', function (contextmenu, el) {
+        }).on('contextmenu:select', function (contextmenu, el) {
             //var index_select = $("div.leaflet-contextmenu a").index(contextmenu.el);
-        })
-            .on('load', function (e) {
-
+        }).on('load', function (e) {
             if (e.name = "GOOGLE") {
                 setTimeout(function () {
                     $("div.gmnoprint, div.gm-style-cc").fadeOut(1000, function () {
@@ -249,8 +176,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     });
                 }, 2000);
             }
-        })
-            .on('baselayerchange', function (e) {
+        }).on('baselayerchange', function (e) {
             if (e.name = "GOOGLE") {
                 setTimeout(function () {
                     $("div.gmnoprint, div.gm-style-cc").fadeOut(1000, function () {
@@ -262,44 +188,14 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 }, 2000);
             }
             console.log(e);
-        })
-            .setView([41.9204014, -1.2529047000000446], 18);
+        }).setView([41.9204014, -1.2529047000000446], 18);
 
-        L.control.layers(baseLayers, overlays).addTo(that.map);
+        L.control.layers (Map.getBaseLayers(), Map.getOverlays()).addTo (that.map);
 
         // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash
         var marker_bug_google = L.marker([0, 0], {opacity: 0.0}).addTo(that.map);
         Map.setMap ($scope.map);
 
-
-        var old_marker_stations = Map.getMarkersStations();
-        //Map.removeMarkersStations();
-        for (i = 0; i < old_marker_stations.length; i++) {
-            console.log("DENTRO");
-            var marker = Map.getMarkerStation(i);
-            //marker.addTo (that.map)
-            console.log(marker)
-            var new_marker = L.marker(marker.getLatLng(), {
-                icon: new L.NumberedDivIcon({letter: Map.Letters[i]}),
-                draggable: true,
-                contextmenu: true,
-                contextmenuInheritItems: false,
-                contextmenuItems: [{
-                    index: 3,
-                    icon: 'images/cross_red.png',
-                    text: $translate.instant('borrar'),
-                    callback: removeMarker
-                }]
-            });
-            that.contextMenu(new_marker);
-            that.dragStart(new_marker);
-            that.dragEnd(new_marker);
-            new_marker.bindPopup(marker.getPopup().getContent());
-            new_marker.addTo(that.map);
-            //new_marker.openPopup();
-
-            //Map.addMarkerStation (new_marker, i);
-        }
     };
 
 
