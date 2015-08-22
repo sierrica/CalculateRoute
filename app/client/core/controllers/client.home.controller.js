@@ -87,6 +87,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     };
 
     var that = $scope;
+    var thut = $scope;
     var removeMarker = function(ev) {
         Map.removeMarkerStation (that.index_marker_selected);                 // REMOVE
         for (i=that.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
@@ -95,6 +96,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             Map.setMarkerStation (marker, i);
         }
         that.$apply();
+        thut.$apply();
     };
 
 
@@ -143,10 +145,10 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     $scope.renderMap = function() {
         if (Map.getMap() != undefined) {
             $("#map").replaceWith (Map.restoreMapHtml());
-            window.dispatchEvent(new Event('resize'));
+            window.dispatchEvent (new Event('resize'));
         }
         else {
-            window.dispatchEvent(new Event('resize'));
+            window.dispatchEvent (new Event('resize'));
             $scope.initMap();
         }
     };
@@ -184,9 +186,9 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             that.pointer_marker = L.marker(ev.latlng, {icon: Map.IconPushpin}).addTo(that.map);
         }).on ('contextmenu.hide', function (contextmenu, relatedTarget) {
             that.map.removeLayer(that.pointer_marker);
-        }).on('contextmenu:select', function (contextmenu, el) {
+        }).on ('contextmenu:select', function (contextmenu, el) {
             //var index_select = $("div.leaflet-contextmenu a").index(contextmenu.el);
-        }).on('load', function (e) {
+        }).on ('load', function (e) {
             if (e.name = "GOOGLE") {
                 setTimeout(function () {
                     $("div.gmnoprint, div.gm-style-cc").fadeOut(1000, function () {
@@ -197,7 +199,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     });
                 }, 2000);
             }
-        }).on('baselayerchange', function (e) {
+        }).on ('baselayerchange', function (e) {
             if (e.name = "GOOGLE") {
                 setTimeout(function () {
                     $("div.gmnoprint, div.gm-style-cc").fadeOut(1000, function () {
@@ -214,6 +216,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
         var marker_bug_google = L.marker([0, 0], {opacity: 0.0}).addTo(that.map);           // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash
+
         Map.setMap ($scope.map);                                                            // Save Map in Factory
     };
 
