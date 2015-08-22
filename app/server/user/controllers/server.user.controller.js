@@ -52,6 +52,10 @@ function login (req, res) {
 
 
 function isAuthenticated(req, res, next) {
+    console.log ("HEADERS");
+    console.log (req.headers);
+
+    console.log ("FIN HEADERS");
     token.verifyToken(req.headers, function(next, err, data) {
         if (err) {
             logger.error (err.message);

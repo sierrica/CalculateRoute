@@ -31,7 +31,7 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
             $scope.login();
         }).catch (function(response) {
             Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);
-        });
+    });
     };
 
     $scope.login = function() {
