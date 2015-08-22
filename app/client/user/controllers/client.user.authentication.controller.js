@@ -35,7 +35,7 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
     };
 
     $scope.login = function() {
-        alert ("Hello! I am an alert box!!");
+        //alert ("Hello! I am an alert box!!");
         if (! $scope.remember)
             shared.setStorageType ("sessionStorage");
         else

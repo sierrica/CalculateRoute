@@ -3,9 +3,13 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
     $scope.addOrigin = function (ev) {
+        $scope.$apply();
+        $rootScope.$apply();
         $scope.add (ev, 0);
     };
     $scope.addDestine = function (ev) {
+        $scope.$apply();
+        $rootScope.$apply();
         $scope.add (ev, Map.lengthMarkerStations());
     };
     $scope.addIntermediate = function (ev) {

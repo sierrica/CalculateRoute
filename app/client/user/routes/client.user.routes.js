@@ -4,7 +4,7 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
     $authProvider.httpInterceptor = true;               // Add Authorization header to HTTP request
     $authProvider.withCredentials = true;
     $authProvider.tokenRoot = null;                     // set the token parent element if the token is not the JSON root
-    $authProvider.cordova = false,                      // necesario configurar para el uso de OAuth y cordova (REPASAR CUANDO SE IMPL OAUTH)
+    $authProvider.cordova = true,                      // necesario configurar para el uso de OAuth y cordova (REPASAR CUANDO SE IMPL OAUTH)
     $authProvider.baseUrl = '/'                         // API Base URL for the paths below.
     $authProvider.loginUrl = '/login';
     $authProvider.signupUrl = '/signup';
