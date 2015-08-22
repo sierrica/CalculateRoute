@@ -12,14 +12,14 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         $("#" + id_escaped).parent().prev().tooltipster ({
             position: 'top-left',
             animation: 'fade',
-            delay: 200,
-            //theme: 'tooltipster-default',
-            theme: 'tooltipster-shadow',
+            delay: 100,
+            theme: 'tooltipster-default',
+            //theme: 'tooltipster-shadow',
             touchDevices: true,
             trigger: 'click',
             contentAsHTML: true,
             maxWidth: 295,
-            offsetX: 5,
+            offsetX: 0,
             offsetY: -10
         });
         console.log ("TOLLTIP")
