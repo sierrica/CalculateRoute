@@ -10,6 +10,7 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
     $scope.toolTipster = function (id) {
         var id_escaped = id.replace(/(:|\.|\[|\])/g, "\\$1");
         $("#" + id_escaped).parent().prev().tooltipster ({
+            position: 'top-left',
             animation: 'fade',
             delay: 200,
             //theme: 'tooltipster-default',
@@ -18,7 +19,7 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             trigger: 'click',
             contentAsHTML: true,
             maxWidth: 295,
-            offsetX: 10,
+            offsetX: 5,
             offsetY: -10
         });
         console.log ("TOLLTIP")

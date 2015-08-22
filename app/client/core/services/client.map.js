@@ -1,14 +1,13 @@
 app.factory ('Map', function($http, $translate) {
 
     /* TRANSLATE PTV POIS ATRIBUTES MAP */
-    /*
     L.PtvLayer.TruckAttributes = L.PtvLayer.TruckAttributes.extend ({
         _formatTooltip: function (description) {
-            var word = description.split("#")[1].toLowerCase();
+            /*var word = description.split("#")[1].toLowerCase();
             if ($translate.instant (word))
                 return $translate.instant(word).charAt(0).toUpperCase() + $translate.instant(word).slice(1);
             else
-
+        */
                 return description;
         }
     });
@@ -22,7 +21,7 @@ app.factory ('Map', function($http, $translate) {
 
         }
     });
-*/
+
 
     /* ICONS */
     L.Icon.Default.imagePath = 'images';
@@ -105,26 +104,7 @@ app.factory ('Map', function($http, $translate) {
     });
 
 
-
-/*
-    var ptv_maps_fg = new L.NonTiledLayer.WMS ('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
-        minZoom: 3,
-        opacity: 1.0,
-        layers: 'xmap-ajaxfg',
-        format: 'image/png',
-        transparent: true,
-        attribution: false,
-        zIndex: 100
-    });
-*/
-
-
-
-
-
-
-
-    /* OVERLAYS
+    /* OVERLAYS */
     var ptv_maps_traffic = new L.PtvLayer.TrafficInformation (xMapUrl, {
         zIndex: 1,
         token: token
@@ -142,7 +122,7 @@ app.factory ('Map', function($http, $translate) {
         "POI": ptv_maps_poi,
         "TRAFFIC": ptv_maps_traffic
     };
-     */
+
 
     window.onresize = function() {
         console.log ("RESIZE");
@@ -229,7 +209,7 @@ app.factory ('Map', function($http, $translate) {
                 "ROAD": open_maps_road
             };
 
-            L.control.layers (base_layers).addTo (map);
+            L.control.layers (base_layers, overlays).addTo (map);
         },
         saveMapHtml: function() {
             map_html = map.getContainer();

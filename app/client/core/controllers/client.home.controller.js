@@ -35,8 +35,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             var polyline = L.polyline (points, {
                 stroke: true,
                 color: 'red',
-                weight: 10,
-                opacity: 1.0,
+                weight: 15,
+                opacity: 0.4,
                 fill: false,
                 fillColor: 'red',
                 fillOpacity: 0.2,
