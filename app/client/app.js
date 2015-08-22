@@ -118,15 +118,22 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             else
                 $location.url ('/');
         }
-        else if ($auth.isAuthenticated()  &&  toState.name == "home") {
-            console.log ("DENTRO HOME ENTRANDO");
-        }
+
 
     });
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         $(".side-nav li").removeClass("active");
         $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
+
+
+        if (toState.name == "home") {
+            $("#breadcumb").html('<img src="images/logo_camion.png" style="height:60px; width:135px"/>');
+        }
+        else {
+            $("#breadcumb").html(toState.name);
+        }
+
 
         /*setTimeout(function(){
             $('body').addClass ('loaded');

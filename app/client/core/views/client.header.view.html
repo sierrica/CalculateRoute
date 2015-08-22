@@ -3,8 +3,8 @@
         <div class="nav-wrapper">
             <a class="btn-floating btn-large pink" ng-show="collapsing"></a>
             <a href="/" class="button-collapse btn-floating btn-large pink" data-activates="slide-out" ng-show="!collapsing" ng-click="button_collapse()"><i class="material-icons" ng-click="button_collapse()">menu</i></a>
-            <a class="brand-logo hide-on-med-and-down" ui-sref="home" ng-click="close_sidenav($event)" style="text-indent:30px">Calculateroute</a>
-            <a class="brand-logo center" ui-sref="home" ng-click="close_sidenav($event)"><img src="images/logo_camion.png" style="height:60px; width:135px"/></a>
+            <a class="brand-logo hide-on-med-and-down" style="text-indent:30px">Calculateroute</a>
+            <a id="breadcumb" class="brand-logo center"><img src="images/logo_camion.png" style="height:60px; width:135px"/></a>
             <ul class="right">
                 <a ng-mouseup="dropdown($event)" class='dropdown-button' href='#' data-activates='dropdown_layers'><i class="large material-icons">more_vert</i></a>
                 <ul id='dropdown_layers' class='dropdown-content'>
