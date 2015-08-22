@@ -130,7 +130,7 @@ L.NonTiledLayer = L.Class.extend({
     },
 
     _animateZoom: function (e) {
-	    if (this._currentImage._bounds)
+        if (this._currentImage._bounds)
             this._animateImage(this._currentImage, e);
         if (this._bufferImage._bounds)
             this._animateImage(this._bufferImage, e);
@@ -138,25 +138,25 @@ L.NonTiledLayer = L.Class.extend({
 
     _animateImage: function (image, e) {
         var map = this._map,
-		    scale = image._scale * map.getZoomScale(e.zoom),
-		    nw = image._bounds.getNorthWest(),
-		    se = image._bounds.getSouthEast(),
-			
-		    topLeft = map._latLngToNewLayerPoint(nw, e.zoom, e.center),
-		    size = map._latLngToNewLayerPoint(se, e.zoom, e.center)._subtract(topLeft),
-		    origin = topLeft._add(size._multiplyBy((1 / 2) * (1 - 1 / scale)));
+            scale = image._scale * map.getZoomScale(e.zoom),
+            nw = image._bounds.getNorthWest(),
+            se = image._bounds.getSouthEast(),
+
+            topLeft = map._latLngToNewLayerPoint(nw, e.zoom, e.center),
+            size = map._latLngToNewLayerPoint(se, e.zoom, e.center)._subtract(topLeft),
+            origin = topLeft._add(size._multiplyBy((1 / 2) * (1 - 1 / scale)));
 
         image.style[L.DomUtil.TRANSFORM] =
-		        L.DomUtil.getTranslateString(origin) + ' scale(' + scale + ') ';
-				
-		image._lastScale = scale;
+            L.DomUtil.getTranslateString(origin) + ' scale(' + scale + ') ';
+
+        image._lastScale = scale;
     },
 
     _resetImage: function (image) {
         var bounds = new L.Bounds(
-		        this._map.latLngToLayerPoint(image._bounds.getNorthWest()),
-		        this._map.latLngToLayerPoint(image._bounds.getSouthEast())),
-		    size = bounds.getSize();
+                this._map.latLngToLayerPoint(image._bounds.getNorthWest()),
+                this._map.latLngToLayerPoint(image._bounds.getSouthEast())),
+            size = bounds.getSize();
 
         L.DomUtil.setPosition(image, bounds.min);
 
@@ -183,21 +183,21 @@ L.NonTiledLayer = L.Class.extend({
         return new L.LatLngBounds(world1, world2);
     },
 
-    _update: function () {	
+    _update: function () {
         if ((this.options.minZoom && this._map.getZoom() < this.options.minZoom) ||
-		(this.options.maxZoom && this._map.getZoom() > this.options.maxZoom)) {
+            (this.options.maxZoom && this._map.getZoom() > this.options.maxZoom)) {
             this._currentImage.src = L.Util.emptyImageUrl;
             this._bufferImage.src = L.Util.emptyImageUrl;
-			this._div.style.visibility = 'hidden';
-			
-			if (this._addInteraction) 
-               this._addInteraction(null);			 
-			   
+            this._div.style.visibility = 'hidden';
+
+            if (this._addInteraction)
+                this._addInteraction(null);
+
             return;
         }
 
         this._div.style.visibility = 'visible';
-    
+
         var bounds = this._getClippedBounds();
 
         // re-project to corresponding pixel bounds
@@ -212,10 +212,10 @@ L.NonTiledLayer = L.Class.extend({
         if (width < 32 || height < 32)
             return;
 
-		// set scales for zoom animation
-		this._bufferImage._scale = this._bufferImage._lastScale;
-		this._currentImage._scale = 1;
-		this._currentImage._lastScale = 1;
+        // set scales for zoom animation
+        this._bufferImage._scale = this._bufferImage._lastScale;
+        this._currentImage._scale = 1;
+        this._currentImage._lastScale = 1;
 
         this._currentImage._bounds = bounds;
         this._resetImage(this._currentImage);
@@ -243,13 +243,13 @@ L.NonTiledLayer = L.Class.extend({
             i.tag = tag;
             i.key = k;
         }
-    }, 
+    },
 
     _onImageLoad: function (e) {
-		if(e.target.src ==  L.Util.emptyImageUrl)
-			return;
-	
-		if (this.key != e.target.key || e.target != this._currentImage)
+        if(e.target.src ==  L.Util.emptyImageUrl)
+            return;
+
+        if (this.key != e.target.key || e.target != this._currentImage)
             return;
 
         if (this._addInteraction)

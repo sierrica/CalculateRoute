@@ -35,8 +35,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             var polyline = L.polyline (points, {
                 stroke: true,
                 color: 'red',
-                weight: 5,
-                opacity: 0.5,
+                weight: 10,
+                opacity: 1.0,
                 fill: false,
                 fillColor: 'red',
                 fillOpacity: 0.2,
@@ -46,7 +46,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 lineJoin: null,
                 clickable: true,
                 pointerEvents: null,
-                className: '',                 // custom class
+                className: 'carretera',                 // custom class
                 smoothFactor: 1.0,
                 noClip: false,
 
@@ -59,7 +59,14 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     callback: that.showInfo
                 }]
 
-            }).addTo (that.map);
+            }).addTo (that.map).bringToFront();
+
+
+            polyline.on ("click", function(ev) {
+                console.log ("CLICK CLICK")
+
+
+            })
 
 
             console.log ("EXITO");
@@ -245,8 +252,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             zoomControl: false,
             attributionControl: false,
             maxBounds: ([[31.952, -18.808], [72.607, 44.472]]),
+            //layers: google_maps,
             layers: Map.getLayer('google_maps'),
-            //layers: [open_maps_mapnik],
             contextmenu: true,
             contextmenuWidth: 160,
             contextmenuItems: [{
@@ -297,7 +304,12 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             }
         }).setView([41.9204014, -1.2529047000000446], 18);
 
-        L.control.layers (Map.getBaseLayers(), Map.getOverlays()).addTo (that.map);
+
+
+
+
+
+
 
 
         var marker_bug_google = L.marker([0, 0], {opacity: 0.0}).addTo(that.map);           // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash

@@ -84,7 +84,15 @@ module.exports = {
                     'files/lib/satellizer/satellizer.js',
                     'files/lib/perfect-scrollbar/js/perfect-scrollbar.js',
 
+
+
+
                     'files/lib/leaflet/dist/leaflet.js',
+
+                    'files/ptv/ajax-maps/NonTiledLayer.js',
+                    'files/ptv/ajax-maps/NonTiledLayer.WMS.js',
+                    'files/ptv/ajax-maps/Leaflet.PtvLayer.js',
+
                     'files/lib/leaflet-plugins/layer/tile/Google.js',
                     'files/lib/Leaflet.contextmenu/dist/leaflet.contextmenu-src.js',
                     'files/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
@@ -92,9 +100,8 @@ module.exports = {
 
 
 
-                    'files/ptv/ajax-maps/NonTiledLayer.js',
-                    'files/ptv/ajax-maps/NonTiledLayer.WMS.js',
-                    'files/ptv/ajax-maps/Leaflet.PtvLayer.js',
+
+
 
 
                     'files/lib/rangeslider.js/dist/rangeslider.js',

@@ -1,13 +1,14 @@
 app.factory ('Map', function($http, $translate) {
 
     /* TRANSLATE PTV POIS ATRIBUTES MAP */
+    /*
     L.PtvLayer.TruckAttributes = L.PtvLayer.TruckAttributes.extend ({
         _formatTooltip: function (description) {
- /*           var word = description.split("#")[1].toLowerCase();
+            var word = description.split("#")[1].toLowerCase();
             if ($translate.instant (word))
                 return $translate.instant(word).charAt(0).toUpperCase() + $translate.instant(word).slice(1);
             else
-           */
+
                 return description;
         }
     });
@@ -21,7 +22,7 @@ app.factory ('Map', function($http, $translate) {
 
         }
     });
-
+*/
 
     /* ICONS */
     L.Icon.Default.imagePath = 'images';
@@ -76,12 +77,25 @@ app.factory ('Map', function($http, $translate) {
     var xMapUrl = 'https://xmap-' + cluster + '.cloud.ptvgroup.com';
 
 
+    var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
+
+
+
+
+
     /* BASELAYERS */
+
+    // Tile PTV Maps
+    var ptv_maps_bg = L.tileLayer ('https://ajaxbg{s}-eu-n-test.cloud.ptvgroup.com/WMS/GetTile/xmap-ajaxbg/{x}/{y}/{z}.png', {
+        subdomains: '1234',
+        minZoom: 3,
+        opacity: 1.0
+    });
+
     // Google Maps
     var google_maps = new L.Google ('ROADMAP', {
         minZoom: 3
     });
-
     // Tile Open Street Maps
     var open_maps_mapnik = L.tileLayer ('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         minZoom: 3
@@ -89,12 +103,11 @@ app.factory ('Map', function($http, $translate) {
     var open_maps_road = L.tileLayer ('http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}', {
         minZoom: 3
     });
-    // Tile PTV Maps
-    var ptv_maps_bg = L.tileLayer ('https://ajaxbg{s}-eu-n-test.cloud.ptvgroup.com/WMS/GetTile/xmap-ajaxbg/{x}/{y}/{z}.png', {
-        subdomains: '1234',
-        minZoom: 3
-    });
-    var ptv_maps_fg = new L.NonTiledLayer.WMS('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
+
+
+
+/*
+    var ptv_maps_fg = new L.NonTiledLayer.WMS ('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
         minZoom: 3,
         opacity: 1.0,
         layers: 'xmap-ajaxfg',
@@ -103,16 +116,15 @@ app.factory ('Map', function($http, $translate) {
         attribution: false,
         zIndex: 100
     });
-    var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
-    var base_layers = {
-        "GOOGLE": google_maps,
-        "MAPNIK": open_maps_mapnik,
-        "ROAD": open_maps_road,
-        "PTV": ptv_maps
-    };
+*/
 
 
-    /* OVERLAYS */
+
+
+
+
+
+    /* OVERLAYS
     var ptv_maps_traffic = new L.PtvLayer.TrafficInformation (xMapUrl, {
         zIndex: 1,
         token: token
@@ -130,7 +142,7 @@ app.factory ('Map', function($http, $translate) {
         "POI": ptv_maps_poi,
         "TRAFFIC": ptv_maps_traffic
     };
-
+     */
 
     window.onresize = function() {
         console.log ("RESIZE");
@@ -188,6 +200,36 @@ app.factory ('Map', function($http, $translate) {
         setMap: function(mapa) {
             map = mapa;
             map.addLayer (cluster_markers_stations);
+
+            // NECESARIO HAER AQUI POR EL "pane"
+            var ptv_maps_fg = new L.NonTiledLayer.WMS ('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
+                minZoom: 3,
+                opacity: 1.0,
+                layers: 'xmap-ajaxfg',
+                format: 'image/png',
+                transparent: true,
+                attribution: false,
+                zIndex: 100,
+                pane: map.getPanes().tilePane
+            });
+            var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
+
+            var base_layers = {
+                "GOOGLE": google_maps,
+                "PTV": ptv_maps,
+                "MAPNIK": open_maps_mapnik,
+                "ROAD": open_maps_road
+            };
+
+            var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
+            var base_layers = {
+                "GOOGLE": google_maps,
+                "PTV": ptv_maps,
+                "MAPNIK": open_maps_mapnik,
+                "ROAD": open_maps_road
+            };
+
+            L.control.layers (base_layers).addTo (map);
         },
         saveMapHtml: function() {
             map_html = map.getContainer();
