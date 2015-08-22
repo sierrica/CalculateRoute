@@ -97,12 +97,38 @@ exports.findlocation = function (req, res) {
 };
 
 exports.calculateroute = function(req, res) {
+    var peticion = {};
 
+    peticion.waypoints = [];
+    for (i=0; i<req.body.waypoints.length; i++) {
+        peticion.waypoints.push ({
+            coords: [{
+                point: {
+                    x: req.body.waypoints[i].lng,
+                    y: req.body.waypoints[i].lat
+                }
+            }],
+            linkType: 'NEXT_SEGMENT'
+        });
+    }
+
+    peticion.details = req.body.options.details;
+    //peticion.details.manoeuvreAttributes = true,
+
+    peticion.details.detailLevel = 'STANDARD';
+    peticion.details.polygon = true;
+
+    peticion.options= [];
+
+    peticion.callerContext = callerContext;
+    peticion.exceptionPaths = [];
+
+/*
     var peticion = {
         waypoints: [{
             coords: [{
                 point: {
-                    x: -0.98397434992,
+                    : -0.98397434992,
                     y: 41.651353453
                 }
             }],
@@ -133,7 +159,10 @@ exports.calculateroute = function(req, res) {
             urbanManoeuvres: false
         }
     };
+*/
 
+    console.log ("PETICION");
+    console.log (peticion);
 
     var options = {
         url: 'https://xroute-eu-n-test.cloud.ptvgroup.com/xroute/rs/XRoute/calculateRoute',
@@ -145,9 +174,11 @@ exports.calculateroute = function(req, res) {
     request.post (options, function (error, response, body) {
         if (error) {
             console.log ("ERROR");
+            console.log (error)
             res.json (error);
         }
         console.log ("EXITO");
+        console.log (body)
         res.json (body);
     });
 };

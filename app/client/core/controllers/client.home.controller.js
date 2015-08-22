@@ -1,5 +1,77 @@
-app.controller ('HomeController', function ($rootScope, $scope, $location, $auth, Map, $http, User, $translate) {
+app.controller ('HomeController', function ($rootScope, $scope, $location, $auth, Map, Ptv, $http, User, $translate) {
     console.log ("DENTRO HOME CONTROLLER");
+
+
+    $scope.showInfo = function(ev) {
+        console.log ("SHOW INFO");
+
+        console.log (ev);
+
+        $('#modal_info').openModal();
+        $('.lean-overlay').css ("display", "none");
+
+    };
+
+
+    $scope.calculateroute = function () {
+        console.log ("DENTRO CACULATEROUTE")
+        var request = {
+            waypoints: Map.getWaypoints(),
+            options: Ptv.getOptions(),
+        };
+        console.log ("REQUEST");
+        console.log (request);
+
+        $http.post ('/ptv/calculateroute', request)
+        .success (function(response) {
+
+            var points = [];
+            for (i=0; i<response.polygon.lineString.points.length; i++) {
+                points.push({
+                    lat: response.polygon.lineString.points[i].y,
+                    lng: response.polygon.lineString.points[i].x,
+                })
+            }
+            var polyline = L.polyline (points, {
+                stroke: true,
+                color: 'red',
+                weight: 5,
+                opacity: 0.5,
+                fill: false,
+                fillColor: 'red',
+                fillOpacity: 0.2,
+                fillRule: 'evenodd',
+                dashArray: null,
+                lineCap: null,
+                lineJoin: null,
+                clickable: true,
+                pointerEvents: null,
+                className: '',                 // custom class
+                smoothFactor: 1.0,
+                noClip: false,
+
+                contextmenu: true,
+                contextmenuInheritItems: false,
+                contextmenuItems: [{
+                    index: 3,
+                    //icon: 'images/cross_red.png',
+                    text: 'Info General',
+                    callback: that.showInfo
+                }]
+
+            }).addTo (that.map);
+
+
+            console.log ("EXITO");
+            console.log (response)
+        })
+        .error (function(response, status) {
+            console.log ("ERROR CALCULATEROUTE");
+        });
+
+    };
+
+
 
 
     $scope.addOrigin = function (ev) {
@@ -136,6 +208,14 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 marker.setIcon (new L.NumberedDivIcon ({letter: Map.Letters[i] }));
                 Map.setMarkerStation (marker, i);
             }
+
+            //that.$apply();
+            //thut.$apply();
+
+
+            if (Map.lengthMarkerStations() >= 2)
+                that.calculateroute();
+
         })
         .error (function(response, status) {
             if (status == 404) {
@@ -242,17 +322,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
 
-
-    $scope.calculateroute = function () {
-        $http.post ('/ptv/calculateroute', $scope.credentials)
-             .success(function(response) {
-                //console.log (response);
-            })
-            .error(function(response) {
-            console.log ("FRACASO");
-            console.log (response);
-        });
-    }
 
     $scope.mostrar_posicion = function (posicion) {
         //console.log ("LATITUD");

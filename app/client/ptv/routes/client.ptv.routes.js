@@ -12,6 +12,7 @@ app.config (['$stateProvider', function ($stateProvider) {
                 //tollroads: $("#" + "trayect.tollroads".replace(/(:|\.|\[|\])/g, "\\$1")).val(),
                 Ptv.setOptions ({
                     trayect: {
+                        dinamic_route: $(dinamic_route).prop("checked"),
                         tollroads: $(tollroads).val(),
                         highways: $(highways).val()
                     }

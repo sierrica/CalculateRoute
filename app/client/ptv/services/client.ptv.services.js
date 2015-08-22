@@ -1,4 +1,4 @@
-app.service ('Ptv', function() {
+app.factory ('Ptv', function(Map) {
 
     var options = {
         details: {
@@ -9,7 +9,7 @@ app.service ('Ptv', function() {
           width: 200
         },
         trayect: {
-            dinamic_route: true,
+            dinamic_route: false,
             tollroads: -15,
             highways: 2300
         }

@@ -205,6 +205,12 @@ app.factory ('Map', function($http, $translate) {
         getMarkersStations: function() {
             return list_markers_stations;
         },
+        getWaypoints: function() {
+            var waypoints = [];
+            for (i=0; i<list_markers_stations.length; i++)
+                waypoints.push (list_markers_stations[i].getLatLng())
+            return waypoints;
+        },
         removeMarkersStations: function() {
             list_markers_stations = [];
             cluster_markers_stations.clearLayers();

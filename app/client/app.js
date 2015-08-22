@@ -107,6 +107,10 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
 
 
         $(".modal").closeModal();           // Error que se queda oscuo cuando pretas ir "hacia atras" con un modal abierto
+        $(".lean-overlay").remove();        // Error que se queda oscuo cuando pretas ir "hacia atras" con un modal abierto
+
+
+
         if (toState.private   &&  !$auth.isAuthenticated()) {
             event.preventDefault();                             // HAY QUE CAMBIAR
             //$state.transitionTo ("login");

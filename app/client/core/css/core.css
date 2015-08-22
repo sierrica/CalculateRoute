@@ -227,7 +227,12 @@ span.form_success {
 
 
 /*sdsdds */
-/* Cuando sale el sidenav que no se oscurezca el resto del content de la pantalla
+/* Cuando sale el sidenav que no se oscurezca el resto del content de la pantalla */
+
+#lean-overlay {
+    background-color: transparent;
+}
+/*
 #sidenav-overlay {
     background-color: transparent;
 }*/

@@ -24,9 +24,10 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         console.log ("TOLLTIP")
     }
 
-
+        $scope.dinamic_route = options.trayect.dinamic_route;
         $scope.tollroads = parseInt (options.trayect.tollroads);
         $scope.highways = parseInt (options.trayect.highways);
+
 
         $scope.height = parseInt (options.vehicle.height);
         $scope.width = parseInt (options.vehicle.width);
@@ -34,7 +35,8 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         $scope.manoeuvres = options.details.manoeuvres;
 
 
-    console.log ("scope.width: " + $scope.width)
+        console.log ("scope.width: " + $scope.width)
+        console.log ("dinamic route: " + options.trayect.dinamic_route)
 
 
 /*
