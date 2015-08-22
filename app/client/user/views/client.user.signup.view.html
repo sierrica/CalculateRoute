@@ -7,20 +7,20 @@
             <form name="signupForm" ng-submit="signup()" novalidate autocomplete="off">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="email" id="email" name="email" required ng-class="signupForm.email.$invalid && signupForm.email.$dirty ? 'invalid' : signupForm.email.$valid && signupForm.email.$dirty ? 'valid' : ''" ng-model="email">
+                        <input type="email" id="email" name="email" ng-required="true" ng-class="signupForm.email.$invalid && signupForm.email.$dirty ? 'invalid' : signupForm.email.$valid && signupForm.email.$dirty ? 'valid' : ''" ng-model="email">
                         <label for="email">Email</label>
                         <span class="form_error" ng-show="signupForm.email.$dirty  &&  signupForm.email.$error.required">es requerido</span>
-                        <span class="form_error" ng-show="(signupForm.email.$dirty  &&  signupForm.email.$invalid) && !signupForm.email.$error.required ">formato incorreto</span>
-                        <span class="form_success" ng-show="(signupForm.email.$dirty  &&  signupForm.email.$valid)">formato correto</span>
+                        <span class="form_error" ng-show="signupForm.email.$dirty  &&  !signupForm.email.$error.required   &&  signupForm.email.$invalid">formato incorreto</span>
+                        <span class="form_success" ng-show="signupForm.email.$dirty  &&  signupForm.email.$valid">formato correto</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="password" id="password" name="password" required ng-minlength="6" ng-class="signupForm.password.$invalid && signupForm.password.$dirty ? 'invalid' : signupForm.password.$valid && signupForm.password.$dirty ? 'valid' : ''" ng-model="password">
+                        <input type="password" id="password" name="password" ng-required="true" ng-minlength="6" ng-class="signupForm.password.$invalid && signupForm.password.$dirty ? 'invalid' : signupForm.password.$valid && signupForm.password.$dirty ? 'valid' : ''" ng-model="password">
                         <label for="password">Password</label>
                         <span class="form_error" ng-show="signupForm.password.$dirty  &&  signupForm.password.$error.required">es requerido</span>
-                        <span class="form_error" ng-show="(signupForm.password.$dirty  &&  signupForm.password.$invalid) && !signupForm.password.$error.required ">minimo 6 caracteres</span>
-                        <span class="form_success" ng-show="(signupForm.password.$dirty  &&  signupForm.password.$valid)">formato correto</span>
+                        <span class="form_error" ng-show="signupForm.password.$dirty  &&  !signupForm.password.$error.required  &&  signupForm.password.$invalid">minimo 6 caracteres</span>
+                        <span class="form_success" ng-show="signupForm.password.$dirty  &&  signupForm.password.$valid">formato correto</span>
                     </div>
                 </div>
                 <div class="row">

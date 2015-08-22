@@ -20,8 +20,6 @@ angular.module('calculateRoute').config (['$stateProvider', function ($stateProv
         onExit: function(Map) {
             //Map.getMap().remove();
             console.log ("SALIENDO EN HOME CONTROLLER");
-            //$(map).css ("width", "10px");
-            //$(map).css ("height", "10px");
             Map.saveMapHtml();
         }
     });

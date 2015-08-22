@@ -9,6 +9,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         $scope.add (ev, Map.lengthMarkerStations());
     };
     $scope.addIntermediate = function (ev) {
+        $scope.$apply();
         $rootScope.$apply();
         $("#modal_choice_index option:selected").removeAttr("selected");
         var value_first = $("#select_choice_index option:nth-child(1)").val();
