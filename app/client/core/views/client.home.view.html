@@ -16,8 +16,8 @@
 
 
     <div id="modal_info" class="modal bottom-sheet">
+        <i class="material-icons" onclick="$('#modal_info').closeModal()">clear</i>
         <div class="modal-content">
-            <i class="material-icons" style="position: absolute; float: left; display: inline; right: 10px; bottom: 220px; cursor:pointer" onclick="$('#modal_info').closeModal();">clear</i>
             <table>
                 <thead>
                     <tr>
@@ -32,6 +32,26 @@
                         <td>{{ info.time | timeParser }}</b></td>
                         <td>{{ info.cost }}</td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="modal_manoeuvres" class="modal bottom-sheet">
+        <i class="material-icons" onclick="$('#modal_manoeuvres').closeModal()">clear</i>
+        <div class="modal-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="text-align:center">#</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="manoeuvres in manoeuvres">
+                    <td style="text-align:center; white-space: nowrap">{{ $index + 1 }}     <span class="leaflet-routing-icon {{manoeuvres.icon }}"></span></td>
+                    <td>{{ manoeuvres.description }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>

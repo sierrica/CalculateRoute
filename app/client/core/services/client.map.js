@@ -125,7 +125,6 @@ app.factory ('Map', function($http, $translate) {
 
 
     window.onresize = function() {
-        console.log ("RESIZE");
         if (window.innerWidth > 992)
             $("#map").css("width", window.innerWidth - 300);
         else

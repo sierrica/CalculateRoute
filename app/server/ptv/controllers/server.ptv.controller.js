@@ -118,7 +118,10 @@ exports.calculateroute = function(req, res) {
     peticion.details.detailLevel = 'STANDARD';
     peticion.details.polygon = true;
 
-    peticion.options= [];
+    peticion.options= [{
+        parameter: 'ROUTE_LANGUAGE',
+        value: req.user.lang.split('-')[0].toUpperCase()
+    }];
 
     peticion.callerContext = callerContext;
     peticion.exceptionPaths = [];

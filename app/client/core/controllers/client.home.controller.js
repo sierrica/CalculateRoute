@@ -2,6 +2,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     console.log ("DENTRO HOME CONTROLLER");
 
 
+
+    $scope.manoeuvres = [];
     $scope.info = {
         cost: 0,
         distance: 0,
@@ -10,15 +12,56 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
 
+    $scope.parseManoeuvres = function(manoeuvres) {
+        console.log ("DENTRO manoeuvres")
+        console.log (manoeuvres)
+        var parsed_manoeuvres = [];
+        for (i=0; i<manoeuvres.length; i++) {
+            var type = manoeuvres[i].manoeuvreType;
+            var orient = manoeuvres[i].turnOrient;
+            var icon = '';
+            if (type=='UTURN' || type=='ENTER_RA' || type=='STAY_RA' || type=='EXIT_RA_ENTER' || type=='EXIT_RA_ENTER_FERRY')
+                icon = 'leaflet-routing-icon-enter-roundabout';
+            else if (type=='FURTHER' || type=='KEEP' || type=='CHANGE' || type=='ENTER' || type=='EXIT' || type=='ENTER_FERRY' || type=='EXIT_FERRY') {
+                if (orient == 'LEFT')
+                    icon = 'leaflet-routing-icon-turn-left';
+                else if (orient == 'RIGHT')
+                    icon = 'leaflet-routing-icon-turn-right';
+                else
+                    icon = 'leaflet-routing-icon-continue';
+            }
+            else if (type=='TURN') {
+                if (orient == 'LEFT')
+                    icon = (manoeuvres[i].turnWeight == 'HALF') ? 'leaflet-routing-icon-bear-left' : (manoeuvres[i].turnWeight == 'STRONG') ? 'leaflet-routing-icon-sharp-left' : 'leaflet-routing-icon-turn-left';
+                else if (orient == 'RIGHT')
+                    icon = (manoeuvres[i].turnWeight == 'HALF') ? 'leaflet-routing-icon-bear-right' : (manoeuvres[i].turnWeight == 'STRONG') ? 'leaflet-routing-icon-sharp-right' : 'leaflet-routing-icon-turn-right';
+                else
+                    icon = 'leaflet-routing-icon-enter-roundabout';
+            }
+            else
+                icon = 'leaflet-routing-icon-continue';
+            parsed_manoeuvres.push ({
+                icon: icon,
+                description: manoeuvres[i].manoeuvreDesc
+            });
+        }
+        console.log ("SALIENDO manoeuvres")
+        console.log (parsed_manoeuvres)
+        return parsed_manoeuvres;
+    };
+
+
+    $scope.showManoeuvres = function (ev) {
+        $('#modal_manoeuvres').openModal();
+        $('#modal_manoeuvres').css ("z-index", "651");
+        $('.lean-overlay').css ("display", "none");
+    };
+
+
     $scope.showInfo = function(ev) {
-        console.log ("SHOW INFO");
-
-        console.log (ev);
-
         $('#modal_info').openModal();
         $('#modal_info').css ("z-index", "651");
         $('.lean-overlay').css ("display", "none");
-
     };
 
 
@@ -66,6 +109,11 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     //icon: 'images/cross_red.png',
                     text: 'Info General',
                     callback: that.showInfo
+                }, {
+                    index: 4,
+                    //icon: 'images/cross_red.png',
+                    text: 'Maniobras',
+                    callback: that.showManoeuvres
                 }]
 
             }).addTo (that.map).bringToFront();
@@ -73,7 +121,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
             that.info = response.info;
 
-
+            that.manoeuvres = that.parseManoeuvres(response.manoeuvres);
 
             console.log ("EXITO");
             console.log (response)
