@@ -9,18 +9,19 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
 
     $scope.toolTipster = function (id) {
         var id_escaped = id.replace(/(:|\.|\[|\])/g, "\\$1");
-        $("#" + id_escaped).parent().prev().tooltipster ({
-            position: 'top-left',
+        $("#" + id_escaped).closest("div.row").find('.tooltip').tooltipster ({
+            position: 'top',
             animation: 'fade',
             delay: 100,
             theme: 'tooltipster-default',
             //theme: 'tooltipster-shadow',
             touchDevices: true,
             trigger: 'hover',
+            hideOnClick: true,
             contentAsHTML: true,
-            maxWidth: 295,
-            offsetX: 0,
-            offsetY: -10
+            maxWidth: 250,
+            offsetX: -5,
+            offsetY: -5
         });
         console.log ("TOLLTIP")
     }
