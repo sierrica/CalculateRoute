@@ -17,10 +17,10 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             //theme: 'tooltipster-shadow',
             touchDevices: true,
             trigger: 'hover',
-            hideOnClick: true,
+            hideOnClick: false,     // Importante, sino en movil, CRASH
             contentAsHTML: true,
             maxWidth: 250,
-            offsetX: -5,
+            offsetX: 0,
             offsetY: -5
         });
         console.log ("TOLLTIP")
