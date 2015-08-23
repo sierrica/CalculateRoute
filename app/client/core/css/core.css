@@ -456,3 +456,19 @@ input[type=number]:hover::-webkit-inner-spin-button {
     height: 250px;
     max-height: none;
 }
+
+.modal.bottom-sheet .modal-content {
+    padding: 10px;
+}
+
+@media only screen and (min-width: 993px) {
+    .modal.bottom-sheet table {
+        width: calc(100% - 300px);
+    }
+}
+
+
+.modal.bottom-sheet table thead th {
+    padding: 0px 5px 5px 5px;
+}
+

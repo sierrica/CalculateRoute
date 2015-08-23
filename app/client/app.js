@@ -80,6 +80,21 @@ var app = angular.module('calculateRoute', [
         }
     }
 })
+.filter('distanceParser', function () {
+    return function (input) {
+        return (input/1000).toFixed(0) + ' km, ' + input % 1000 + ' m';
+    }
+})
+.filter('timeParser', function () {
+    return function (input) {
+        var h = Math.floor(input / (60 * 60));
+        var m_divisor = input % (60 * 60);
+        var m = Math.floor((input - (h * 3600)) / 60);
+        var s_divisor = m_divisor % 60;
+        var s = Math.ceil(s_divisor);
+        return (h + ' h, ' + m + ' m, ' + s + ' s');
+    }
+})
 .run (['$rootScope', 'tmhDynamicLocale', '$translate', '$auth', '$state', '$location', 'User', 'SatellizerShared',
 function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User, shared) {
 

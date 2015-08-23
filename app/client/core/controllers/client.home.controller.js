@@ -2,6 +2,14 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     console.log ("DENTRO HOME CONTROLLER");
 
 
+    $scope.info = {
+        cost: 0,
+        distance: 0,
+        time: 0
+    };
+
+
+
     $scope.showInfo = function(ev) {
         console.log ("SHOW INFO");
 
@@ -22,7 +30,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         };
         console.log ("REQUEST");
         console.log (request);
-
+        var that = $scope;
         $http.post ('/ptv/calculateroute', request)
         .success (function(response) {
 
@@ -63,11 +71,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             }).addTo (that.map).bringToFront();
 
 
-            polyline.on ("click", function(ev) {
-                console.log ("CLICK CLICK")
+            that.info = response.info;
 
-
-            })
 
 
             console.log ("EXITO");

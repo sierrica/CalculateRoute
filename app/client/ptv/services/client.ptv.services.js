@@ -2,7 +2,7 @@ app.factory ('Ptv', function(Map) {
 
     var options = {
         details: {
-            manoeuvres: false
+            manoeuvres: true
         },
         vehicle: {
           height: 145,

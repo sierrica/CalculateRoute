@@ -16,17 +16,21 @@
 
 
     <div id="modal_info" class="modal bottom-sheet">
-        <i class="material-icons" style="position: fixed; right: 15px; bottom: 220px; cursor:pointer" onclick="$('#modal_info').closeModal();">clear</i>
         <div class="modal-content">
+            <i class="material-icons" style="position: absolute; float: left; display: inline; right: 10px; bottom: 220px; cursor:pointer" onclick="$('#modal_info').closeModal();">clear</i>
             <table>
                 <thead>
                     <tr>
-                        <th>Code</th>
+                        <th>Distancia</th>
+                        <th>Tiempo</th>
+                        <th>Coste</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>AAC</td>
+                        <td>{{ info.distance | distanceParser }}</td>
+                        <td>{{ info.time | timeParser }}</b></td>
+                        <td>{{ info.cost }}</td>
                     </tr>
                 </tbody>
             </table>
