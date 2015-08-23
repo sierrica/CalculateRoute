@@ -40,13 +40,6 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         console.log ("dinamic route: " + options.trayect.dinamic_route)
 
 
-/*
-    $scope.trayect = {
-        tollroads: parseInt (trayect.tollroads),
-        highways: parseInt (trayect.highways)
-    };
-*/
-
     var format_extremes = function (identifier, value) {
         if (value == -99)
             $("#" + identifier + ' .rangeslider__handle').css ("background-image", "url('images/prohibited.png')");

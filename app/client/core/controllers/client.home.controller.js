@@ -8,6 +8,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         console.log (ev);
 
         $('#modal_info').openModal();
+        $('#modal_info').css ("z-index", "651");
         $('.lean-overlay').css ("display", "none");
 
     };
