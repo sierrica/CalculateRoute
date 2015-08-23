@@ -12,24 +12,19 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
 
-    $scope.parseManoeuvres = function(manoeuvres) {
+    $scope.parseManoeuvres = function(manoeuvres, stations, segments) {
         console.log ("DENTRO manoeuvres")
         console.log (manoeuvres)
         var parsed_manoeuvres = [];
         for (i=0; i<manoeuvres.length; i++) {
+
             var type = manoeuvres[i].manoeuvreType;
             var orient = manoeuvres[i].turnOrient;
             var icon = '';
             if (type=='UTURN' || type=='ENTER_RA' || type=='STAY_RA' || type=='EXIT_RA_ENTER' || type=='EXIT_RA_ENTER_FERRY')
                 icon = 'leaflet-routing-icon-enter-roundabout';
-            else if (type=='FURTHER' || type=='KEEP' || type=='CHANGE' || type=='ENTER' || type=='EXIT' || type=='ENTER_FERRY' || type=='EXIT_FERRY') {
-                if (orient == 'LEFT')
-                    icon = 'leaflet-routing-icon-turn-left';
-                else if (orient == 'RIGHT')
-                    icon = 'leaflet-routing-icon-turn-right';
-                else
-                    icon = 'leaflet-routing-icon-continue';
-            }
+            else if (type=='FURTHER' || type=='KEEP' || type=='CHANGE' || type=='ENTER' || type=='EXIT' || type=='ENTER_FERRY' || type=='EXIT_FERRY')
+                icon = (orient == 'LEFT') ? 'leaflet-routing-icon-turn-left' : (orient == 'RIGHT') ? 'leaflet-routing-icon-turn-right' : 'leaflet-routing-icon-continue'
             else if (type=='TURN') {
                 if (orient == 'LEFT')
                     icon = (manoeuvres[i].turnWeight == 'HALF') ? 'leaflet-routing-icon-bear-left' : (manoeuvres[i].turnWeight == 'STRONG') ? 'leaflet-routing-icon-sharp-left' : 'leaflet-routing-icon-turn-left';
@@ -40,14 +35,61 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             }
             else
                 icon = 'leaflet-routing-icon-continue';
+
+
             parsed_manoeuvres.push ({
                 icon: icon,
-                description: manoeuvres[i].manoeuvreDesc
+                description: manoeuvres[i].manoeuvreDesc,
+                distance: segments[manoeuvres[i].succSegmentIdx].accDist,
+                index: segments[manoeuvres[i].succSegmentIdx].firstPolyIdx,
+                time: segments[manoeuvres[i].succSegmentIdx].accTime,
             });
         }
-        console.log ("SALIENDO manoeuvres")
-        console.log (parsed_manoeuvres)
+        for (var i = stations.length - 1; i >= 0; i--) {
+            parsed_manoeuvres.splice (stations[i].manoeuvreIdx, 0, {
+                icon: (i == stations.length - 1) ? "leaflet-routing-icon-arrive" : (i == 0) ? "leaflet-routing-icon-depart" : "leaflet-routing-icon-via",
+                description: (i == stations.length - 1) ? "Destino" : (i == 0) ? "Origen" : "Intermedio " + i,
+                distance: stations[i].accDist,
+                index: stations[i].polyIdx,
+                time: stations[i].accTime
+            });
+        }
+        console.log ("PARSED MANOUVRES")
+        console.log (parsed_manoeuvres);
         return parsed_manoeuvres;
+    };
+
+    $scope.contextManoeuvre = function (index_manoeuvre) {
+        $('#modal_manoeuvres table tbody tr').css ('background-color', 'white');
+        $('#modal_manoeuvres table tbody tr:nth-child(' + (index_manoeuvre+1) + ')').css ('background-color', '#f2f2f2');
+
+        console.log (index_manoeuvre);
+        var manoeuvre = $scope.manoeuvres[index_manoeuvre];
+        console.log (manoeuvre);
+
+        var latlng = $scope.polygon.getLatLngs()[manoeuvre.index];
+        console.log (latlng);
+
+        if ($scope.circulo_manoeuvre)
+            $scope.map.removeLayer ($scope.circulo_manoeuvre);
+        $scope.circulo_manoeuvre = L.circle (latlng, 4, {
+            stroke: true,
+            color: 'gray',
+            weight: 3,
+            opacity: 1,
+            fill: true,
+            fillColor: 'white',
+            fillOpacity: 1,
+            fillRule: 'evenodd',
+            dashArray: null,
+            lineCap: null,
+            lineJoin: null,
+            clickable: false,
+            pointerEvents: null,
+            className: '',                 // custom class
+        }).addTo ($scope.map);
+
+
     };
 
 
@@ -84,7 +126,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     lng: response.polygon.lineString.points[i].x,
                 })
             }
-            var polyline = L.polyline (points, {
+            $scope.polygon = L.polyline (points, {
                 stroke: true,
                 color: 'red',
                 weight: 15,
@@ -121,7 +163,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
             that.info = response.info;
 
-            that.manoeuvres = that.parseManoeuvres(response.manoeuvres);
+            that.manoeuvres = that.parseManoeuvres(response.manoeuvres, response.stations, response.segments);
 
             console.log ("EXITO");
             console.log (response)
@@ -357,11 +399,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 }, 2000);
             }
         }).setView([41.9204014, -1.2529047000000446], 18);
-
-
-
-
-
 
 
 

@@ -117,6 +117,7 @@ exports.calculateroute = function(req, res) {
 
     peticion.details.detailLevel = 'STANDARD';
     peticion.details.polygon = true;
+    peticion.details.segments = true;
 
     peticion.options= [{
         parameter: 'ROUTE_LANGUAGE',

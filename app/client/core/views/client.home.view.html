@@ -48,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="manoeuvres in manoeuvres">
+                <tr ng-repeat="manoeuvres in manoeuvres" ng-click="contextManoeuvre($index)" style="cursor:pointer">
                     <td style="text-align:center; white-space: nowrap">{{ $index + 1 }}     <span class="leaflet-routing-icon {{manoeuvres.icon }}"></span></td>
                     <td>{{ manoeuvres.description }}</td>
                 </tr>
