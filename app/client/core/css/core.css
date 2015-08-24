@@ -49,6 +49,46 @@ nav .button-collapse i {
 }
 
 
+
+
+
+nav .input-field input[type=search] {
+    padding-left: 1rem;
+    padding-right: 3rem;
+}
+.input-field input[type=search] + label {
+    left: auto;
+    right: 5px;
+}
+nav .input-field {
+    width: calc(100% - 300px);
+    margin-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+    nav .input-field {
+        position: absolute;
+        right: 0px;
+        width: 100%;
+        z-index: 0;
+        width: 100%;
+    }
+    nav .input-field input[type=search] {
+        padding-left: 5rem;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
 /* SIDENAV */
 .side-nav.fixed {
     top: 50px;
@@ -516,9 +556,14 @@ input[type=number]:hover::-webkit-inner-spin-button {
 .leaflet-routing-icon-via              { background-position: -220px 0; }
 
 
-
+/* TOOLTIPSTER*/
 i.material-icons.tooltip {
     vertical-align:top;
     font-size: 1.2rem;
     cursor: pointer;
 }
+
+
+
+
+

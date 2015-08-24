@@ -7,25 +7,24 @@
             <a href="/" class="button-collapse btn-floating btn-large pink" data-activates="slide-out" ng-show="!collapsing" ng-click="button_collapse()"><i class="material-icons" ng-click="button_collapse()">menu</i></a>
             <a class="brand-logo hide-on-med-and-down" style="text-indent:30px">Calculateroute</a>
             <a id="breadcumb" class="brand-logo center"><img src="images/logo_camion.png" style="height:60px; width:135px"/></a>
-            <ul class="right">
-                <!--
-                <form>
+
+
+
                     <div class="input-field">
-                        <input id="search" type="search">
+                        <input id="search" type="search" onblur="$('#search').val('')">
                         <label for="search"><i class="material-icons">search</i></label>
-                        <!--<i class="material-icons">close</i>
+                        <!--<i class="material-icons">close</i>-->
                     </div>
-                </form>
-        -->
-                <!--
+
+<!--
                 <a ng-mouseup="dropdown($event)" class='dropdown-button' href='#' data-activates='dropdown_layers'><i class="large material-icons">more_vert</i></a>
                 <ul id='dropdown_layers' class='dropdown-content'>
                     <li><a href="/" ng-click="change_layer()">PTV</a></li>
                     <li><a href="/" ng-click="change_layer()">Mapnik</a></li>
                     <li><a href="/" ng-click="change_layer()">Road</a></li>
                 </ul>
-                -->
-            </ul>
+-->
+
         </div>
     </nav>
 </div>

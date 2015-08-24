@@ -32,6 +32,7 @@ app.controller ('HeaderController', ['$scope', '$auth', 'Sidenav', function($sco
                 else {
                     $(".button-collapse i").text ("menu");
                     $('.drag-target').css ("width", "10px");
+
                 }
                 that.collapsing = false;
                 that.$apply();

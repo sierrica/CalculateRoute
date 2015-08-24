@@ -61,8 +61,9 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
                     $(".button-collapse i").text ("menu");
                     $('.drag-target').css ("width", "10px");
                 }
-                else
+                else {
                     $event.stopPropagation();
+                }
             }, 400);
         },
 
