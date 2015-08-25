@@ -166,6 +166,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             that.info = response.info;
 
             that.manoeuvres = that.parseManoeuvres(response.manoeuvres, response.stations, response.segments);
+            //that.$apply()
 
             console.log ("EXITO");
             console.log (response)
@@ -180,17 +181,14 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
     $scope.addOrigin = function (ev) {
-        $scope.$apply();
         $rootScope.$apply();
         $scope.add (ev, 0);
     };
     $scope.addDestine = function (ev) {
-        $scope.$apply();
         $rootScope.$apply();
         $scope.add (ev, Map.lengthMarkerStations());
     };
     $scope.addIntermediate = function (ev) {
-        $scope.$apply();
         $rootScope.$apply();
         $("#modal_choice_index option:selected").removeAttr("selected");
         var value_first = $("#select_choice_index option:nth-child(1)").val();
@@ -231,6 +229,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         marker.on ("contextmenu", function(ev) {
             var marker_selected = ev.target;
             that.index_marker_selected = _.indexOf (Map.getMarkersStations(), marker_selected);
+            that.$apply();
         });
     };
     $scope.dragStart = function (marker) {
@@ -239,46 +238,46 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             var marker_selected = ev.target;
             that.map.contextmenu.hide();
             that.latlng_dragstart = marker_selected.getLatLng();
-
+            that.$apply();
         })
     };
     $scope.dragEnd = function (marker) {
         var that = $scope;
         marker.on ("dragend", function(ev) {
-            //console.log (marker_selected.getLatLng());
             var marker_selected = ev.target;
             marker_selected.setOpacity (0.0);
-            var marker_loading = L.marker (ev.target.getLatLng(), {icon: Map.IconLoading }).addTo (that.map);
+            var marker_loading = L.marker (marker_selected.getLatLng(), {icon: Map.IconLoading }).addTo (that.map);
             $http.post ('/ptv/findlocation', marker_selected.getLatLng())
-                .success (function(response) {
+            .success (function(response) {
                 that.map.removeLayer (marker_loading);
+                that.$apply();
                 marker_selected.openPopup().getPopup().setContent (Map.formatDirPopup (response.result));
                 marker_selected.setOpacity (1);
             })
-                .error (function(response, status) {
+            .error (function(response, status) {
                 if (status == 404) {
                     //console.log ("PUNTO IMPOSIBLE DE LOCALIZAR");
                     that.map.removeLayer (marker_loading);
                     marker_selected.setLatLng (that.latlng_dragstart);
                     marker_selected.update();
                     marker_selected.setOpacity (1);
+                    that.$apply();
                     Materialize.toast ('<span class="red">' + 'PUNTO IMPOSIBLE DE LOCALIZAR' + '</span>', 4000);
                 }
             });
         });
     };
 
-    var that = $scope;
-    var thut = $scope;
-    var removeMarker = function(ev) {
-        Map.removeMarkerStation (that.index_marker_selected);                 // REMOVE
-        for (i=that.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
+
+    $scope.removeMarker = function(ev) {
+        Map.removeMarkerStation ($scope.index_marker_selected);                 // REMOVE
+        for (i=$scope.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
             var marker = Map.getMarkerStation(i);
             marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
             Map.setMarkerStation (marker, i);
         }
-        that.$apply();
-        thut.$apply();
+        $scope.$apply();
+        $rootScope.$apply();
     };
 
 
@@ -298,7 +297,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     index: 3,
                     icon: 'images/cross_red.png',
                     text: $translate.instant ('borrar'),
-                    callback: removeMarker
+                    callback: that.removeMarker
                 }]
             });
             that.contextMenu (marker);
