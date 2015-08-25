@@ -42,4 +42,12 @@ app.controller ('HeaderController', ['$scope', '$auth', 'Sidenav', function($sco
             }, 350);
         }
     };
+
+
+    $scope.findDirection = function() {
+       alert($scope.direction);
+    };
+
+
+
 }]);

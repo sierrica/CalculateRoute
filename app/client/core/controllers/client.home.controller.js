@@ -126,6 +126,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     lng: response.polygon.lineString.points[i].x,
                 })
             }
+            if (that.polygon)
+                that.map.removeLayer (that.polygon);
             $scope.polygon = L.polyline (points, {
                 stroke: true,
                 color: 'red',
@@ -158,7 +160,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     callback: that.showManoeuvres
                 }]
 
-            }).addTo (that.map).bringToFront();
+            }).addTo (that.map);
 
 
             that.info = response.info;
