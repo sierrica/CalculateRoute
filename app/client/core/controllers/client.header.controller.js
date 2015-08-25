@@ -28,11 +28,14 @@ app.controller ('HeaderController', ['$scope', '$auth', 'Sidenav', function($sco
                 if (anchura_menu_inicial < anchura_menu_actual) {
                     $(".button-collapse i").text ("arrow_back");
                     $('.drag-target').css ("width", "calc(100% - 300px)");
+                    $("#search").parent().css ("z-index", "-1");
+                    $("#search").parent().css ("opacity", "0");
                 }
                 else {
                     $(".button-collapse i").text ("menu");
                     $('.drag-target').css ("width", "10px");
-
+                    $("#search").parent().css ("z-index", "0");
+                    $("#search").parent().css ("opacity", "1");
                 }
                 that.collapsing = false;
                 that.$apply();

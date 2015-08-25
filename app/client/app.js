@@ -148,8 +148,15 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
 
         if (toState.name == "home") {
             $("#breadcumb").html('<img src="images/logo_camion.png" style="height:60px; width:135px"/>');
+
+            setTimeout(function(){
+                $("#search").parent().css ('display', 'block');
+                $("#search").parent().css ('opacity', '1');
+            }, 500);
+
         }
         else {
+            $("#search").parent().css ("display", "none");
             $("#breadcumb").html(toState.name);
         }
 

@@ -8,6 +8,8 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
             if ($("#slide-out").css("left") != "0px") {
                 $(".button-collapse i").text("menu");
                 $('.drag-target').css ("width", "10px");
+                $("#search").parent().css ("z-index", "0");
+                $("#search").parent().css ("opacity", "1");
             }
         }
     });
@@ -38,6 +40,8 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
                 setTimeout (function() {
                     $(".button-collapse i").text("menu");
                     $('.drag-target').css ("width", "10px");
+                    $("#search").parent().css ("z-index", "0");
+                    $("#search").parent().css ("opacity", "1");
                 }, 350);
             });
             $('.drag-target').on('panend', function(){
@@ -45,10 +49,14 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
                     if ($("#slide-out").css("left") == "-310px") {
                         $(".button-collapse i").text("menu");
                         $('.drag-target').css ("width", "10px");
+                        $("#search").parent().css ("z-index", "0");
+                        $("#search").parent().css ("opacity", "1");
                     }
                     else {
                         $(".button-collapse i").text("arrow_back");
                         $('.drag-target').css ("width", "calc(100% - 300px)");
+                        $("#search").parent().css ("z-index", "-1");
+                        $("#search").parent().css ("opacity", "0");
                     }
                 }, 350);
             });
@@ -60,6 +68,8 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
                     $('.button-collapse').sideNav ('hide');
                     $(".button-collapse i").text ("menu");
                     $('.drag-target').css ("width", "10px");
+                    $("#search").parent().css ("z-index", "0");
+                    $("#search").parent().css ("opacity", "0");
                 }
                 else {
                     $event.stopPropagation();

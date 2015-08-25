@@ -8,13 +8,11 @@
             <a class="brand-logo hide-on-med-and-down" style="text-indent:30px">Calculateroute</a>
             <a id="breadcumb" class="brand-logo center"><img src="images/logo_camion.png" style="height:60px; width:135px"/></a>
 
-
-
-                    <div class="input-field">
-                        <input id="search" type="search" onblur="$('#search').val('')">
-                        <label for="search"><i class="material-icons">search</i></label>
-                        <!--<i class="material-icons">close</i>-->
-                    </div>
+            <div class="input-field" ng-show="!collapsing">
+                <input id="search" type="search" onfocus="$('#search').parent().css('z-index', '999').css('opacity', '1')" onblur="$('#search').val('').parent().css('z-index', '0')">
+                <label for="search"><i class="material-icons">search</i></label>
+                <!--<i class="material-icons">close</i>-->
+            </div>
 
 <!--
                 <a ng-mouseup="dropdown($event)" class='dropdown-button' href='#' data-activates='dropdown_layers'><i class="large material-icons">more_vert</i></a>
