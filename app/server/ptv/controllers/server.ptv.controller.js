@@ -22,6 +22,35 @@ var callerContext = {
 };
 
 
+exports.findaddress = function(req, res) {
+
+
+    var body = {
+        address: req.body.address,
+        callerContext: callerContext
+    }
+
+    var options = {
+        url: 'https://xlocate-eu-n-test.cloud.ptvgroup.com/xlocate/rs/XLocate/findAddressByText',
+        headers: headers,
+        json: true,
+        body: body
+    };
+
+    request.post (options, function (error, response, body) {
+        if (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+        if (body.errorCode == 0 && body.resultList.length == 0)
+            res.status(404).json({result: {}, result_ptv: body});
+        else {
+            res.status(200).json (body);
+        }
+    });
+
+};
+
 exports.findlocation = function (req, res) {
     var body = {
         location: {

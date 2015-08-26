@@ -8,13 +8,34 @@
             <a class="brand-logo hide-on-med-and-down" style="text-indent:30px">Calculateroute</a>
             <a id="breadcumb" class="brand-logo center"><img src="images/logo_camion.png" style="height:60px; width:135px"/></a>
 
+
+            <div>
             <form name="directionForm" ng-submit="findDirection()">
-                <div class="input-field" ng-show="!collapsing">
-                    <input type="search" id="search" ng-required ng-model="direction" onfocus="$('#search').parent().css('z-index', '999').css('opacity', '1')" onblur="$('#search').val('').parent().css('z-index', '0')">
+                <div class="input-field move-down" ng-show="!collapsing">
+                    <input type="search" id="search" ng-required ng-model="direction" onfocus="$('#search_table').css('display', 'block'); $('#search').parent().css('z-index', '999').css('opacity', '1')" onblur="$('#search_table').css('display', 'none'); $('#search').val('').parent().css('z-index', '0')">
                     <label for="search"><i class="material-icons">search</i></label>
                     <!--<i class="material-icons">close</i>-->
                 </div>
             </form>
+
+            <table id="search_table">
+                <tbody id="search_table_tbody">
+                    <tr>
+                        <td>100</td>
+                        <td>Calle de madre sacramento 32</td>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>Calle de madre sacramento 33</td>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>Calle de madre sacramento 34</td>
+                    </tr>
+                </tbody>
+            </table>
+
+           </div>
 
 <!--
                 <a ng-mouseup="dropdown($event)" class='dropdown-button' href='#' data-activates='dropdown_layers'><i class="large material-icons">more_vert</i></a>

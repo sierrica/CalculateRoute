@@ -1,4 +1,4 @@
-app.controller ('HeaderController', ['$scope', '$auth', 'Sidenav', function($scope, $auth, Sidenav) {
+app.controller ('HeaderController', function($scope, $http, $auth, Sidenav) {
     console.log ("DENTRO CONTROLADOR HEADER");
 
     $scope.isAuthenticated = function() {
@@ -44,10 +44,27 @@ app.controller ('HeaderController', ['$scope', '$auth', 'Sidenav', function($sco
     };
 
 
+    $scope.result1 = '';
+    $scope.options1 = null;
+    $scope.details1 = '';
+
+
     $scope.findDirection = function() {
-       alert($scope.direction);
+       //alert ($scope.direction);
+        Ps.initialize (document.getElementById('search_table'));
+        $http.post ('/ptv/findaddress', { address: $scope.direction })
+        .success (function(response) {
+            console.log (response);
+        })
+            .error (function(response, status) {
+            if (status == 404) {
+                console.log ("ERROR");
+            }
+        });
+
+
     };
 
 
 
-}]);
+});

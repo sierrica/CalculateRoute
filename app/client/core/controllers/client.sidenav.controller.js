@@ -16,8 +16,4 @@ app.controller ('SidenavController', ['$rootScope', '$scope', '$state', '$auth',
     $scope.dropdown = function ($event) {
         Sidenav.dropdown($event);
     };
-
-    $scope.empty_user = function() {
-        $rootScope.user = {};
-    }
 }]);

@@ -52,6 +52,9 @@ nav .button-collapse i {
 
 
 
+
+
+
 nav .input-field input[type=search] {
     padding-left: 1rem;
     padding-right: 3rem;
@@ -71,6 +74,32 @@ nav .input-field {
         width: 100%;
     }
 }
+
+
+#search_table {
+    width: 100%;
+    top: 52px;
+    left: 0px;
+    position: absolute;
+    background-color: white;
+    color: black;
+    display:none;
+    z-index: 1000;
+
+}
+
+#search_table {
+    display: none;
+    overflow-y:scroll;
+    height: 220px;
+}
+
+@media only screen and (min-width: 993px) {
+    #search_table {
+        left: 300px
+    }
+}
+
 
 
 

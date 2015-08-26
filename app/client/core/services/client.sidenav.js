@@ -35,6 +35,7 @@ angular.module('calculateRoute').factory('Sidenav', ['$rootScope', function($roo
             Ps.initialize (document.getElementById('slide-out'));
 
 
+
             // Eventos para cambiar el icono al cerrar el menu sin pulsar en el boton
             $('.drag-target').on('click', function() {
                 setTimeout (function() {
