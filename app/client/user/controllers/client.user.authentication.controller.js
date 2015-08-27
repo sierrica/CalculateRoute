@@ -47,6 +47,7 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
             console.log ("LOGUEADO CORRECTAMENTE");
             User.me.get().$promise.then(function(response) {
                 $rootScope.user = response.user;
+                $rootScope.user.name = $rootScope.user.email.split("@")[0];
                 if ($rootScope.user.lang != document.documentElement.lang)
                     User.change_lang ($rootScope.user.lang);
                 $state.transitionTo ("home");

@@ -3,8 +3,8 @@
 
     <li class="pink no-padding no-margin">
         <div class="row" style="margin-bottom: 0px;">
-            <div class="col s4">
-                 <img src="files/images/camion.jpg" alt="" class="responsive-img">
+            <div class="col s4" style="padding-top:25px;">
+                <img src="files/images/camion.jpg" alt="" class="circle responsive-img">
             </div>
             <div class="col s8">
                 <ul id="profile-dropdown" class="dropdown-content">
@@ -42,7 +42,7 @@
                         </a>
                     </li>
                 </ul>
-                <a ng-mouseup="dropdown($event)" class="dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">{{ user.email || 'unknown' | translate }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                <a ng-mouseup="dropdown($event)" class="truncate dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">{{ user.name || 'unknown' | translate }}</span><i class="mdi-navigation-arrow-drop-down left" style="margin-right:5px"></i></a>
                 <p>Administrator</p>
             </div>
         </div>

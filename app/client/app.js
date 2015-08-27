@@ -108,6 +108,7 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
         User.me.get().$promise
         .then (function(response) {
             $rootScope.user = response.user;
+            $rootScope.user.name = $rootScope.user.email.split("@")[0];
             User.change_lang ($rootScope.user.lang);
         });
     }
