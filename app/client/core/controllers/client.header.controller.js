@@ -1,5 +1,4 @@
-app.controller ('HeaderController', function($scope, $http, $auth, Sidenav) {
-    console.log ("DENTRO CONTROLADOR HEADER");
+app.controller ('HeaderController', function($rootScope, $scope, $http, $translate, $auth, Sidenav, Map) {
 
     $scope.isAuthenticated = function() {
         return $auth.isAuthenticated();
@@ -12,10 +11,6 @@ app.controller ('HeaderController', function($scope, $http, $auth, Sidenav) {
     $scope.dropdown = function ($event) {
         Sidenav.dropdown($event);
     };
-
-    $scope.change_layer = function () {
-    };
-
 
     $scope.collapsing = false;
     $scope.button_collapse = function () {
@@ -44,27 +39,59 @@ app.controller ('HeaderController', function($scope, $http, $auth, Sidenav) {
     };
 
 
-    $scope.result1 = '';
-    $scope.options1 = null;
-    $scope.details1 = '';
 
-
+    $scope.directions = [{ text: "ningun resultado" }];
     $scope.findDirection = function() {
-       //alert ($scope.direction);
-        Ps.initialize (document.getElementById('search_table'));
+        var that = $scope;
         $http.post ('/ptv/findaddress', { address: $scope.direction })
         .success (function(response) {
-            console.log (response);
+            var direcciones = [];
+            for (i=0; i<response.result.length; i++)
+                direcciones.push ({
+                    direction: response.result[i],
+                    text: Map.formatDirPopup(response.result[i])
+                });
+            that.directions = direcciones;
         })
-            .error (function(response, status) {
-            if (status == 404) {
-                console.log ("ERROR");
-            }
+        .error (function(response, status) {
+            console.log ("ERROR");
         });
-
-
     };
 
+    $scope.blurDirection = function () {
+        $('#search').val('').parent().css('z-index', '0');
+        $('#search_table').fadeOut (800);
+    };
+    $scope.focusDirection = function () {
+        $('#search').val($scope.direction).parent().css('z-index', '999').css('opacity', '1');
+        $('#search_table').fadeIn (800);
+    };
 
-
+    $scope.selectDirection = function (index) {
+        var latlng = {
+            lng: $scope.directions[index].direction.coord_x_response,
+            lat: $scope.directions[index].direction.coord_y_response
+        }
+        if ($scope.circulo_direction)
+            Map.getMap().removeLayer($scope.circulo_direction);
+        var that = $scope;
+        $scope.circulo_direction = L.circle (latlng, 3, {
+            stroke: true,
+            color: 'blue',
+            weight: 25,
+            opacity: 0.5,
+            fill: true,
+            fillColor: 'blue',
+            fillOpacity: 1,
+            fillRule: 'evenodd',
+            dashArray: null,
+            lineCap: null,
+            lineJoin: null,
+            clickable: true,
+            pointerEvents: null,
+            className: '',                 // custom class
+        }).on ('click', function(ev) {
+            Map.getMap().removeLayer(that.circulo_direction);
+        }).addTo (Map.getMap().setView(latlng));
+    };
 });

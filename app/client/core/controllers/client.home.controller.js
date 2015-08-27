@@ -2,15 +2,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     console.log ("DENTRO HOME CONTROLLER");
 
 
-
-    $scope.manoeuvres = [];
-    $scope.info = {
-        cost: 0,
-        distance: 0,
-        time: 0
-    };
-
-
+    $scope.results = Ptv.getResults;
 
     $scope.parseManoeuvres = function(manoeuvres, stations, segments) {
         console.log ("DENTRO manoeuvres")
@@ -62,17 +54,9 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     $scope.contextManoeuvre = function (index_manoeuvre) {
         $('#modal_manoeuvres table tbody tr').css ('background-color', 'white');
         $('#modal_manoeuvres table tbody tr:nth-child(' + (index_manoeuvre+1) + ')').css ('background-color', '#f2f2f2');
-
-        console.log (index_manoeuvre);
-        var manoeuvre = $scope.manoeuvres[index_manoeuvre];
-        console.log (manoeuvre);
-
-        var latlng = $scope.polygon.getLatLngs()[manoeuvre.index];
-        console.log (latlng);
-
-        if ($scope.circulo_manoeuvre)
-            $scope.map.removeLayer ($scope.circulo_manoeuvre);
-        $scope.circulo_manoeuvre = L.circle (latlng, 4, {
+        var manoeuvre = $scope.results.manoeuvres[index_manoeuvre];
+        var latlng = $scope.results.polygon.getLatLngs()[manoeuvre.index];
+        var circle_manoeuvre = L.circle (latlng, 4, {
             stroke: true,
             color: 'gray',
             weight: 3,
@@ -80,25 +64,20 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             fill: true,
             fillColor: 'white',
             fillOpacity: 1,
-            fillRule: 'evenodd',
-            dashArray: null,
-            lineCap: null,
-            lineJoin: null,
-            clickable: false,
-            pointerEvents: null,
             className: '',                 // custom class
-        }).addTo ($scope.map);
-
-
+        });
+        Map.setCircleManoeuvre (circle_manoeuvre);
     };
-
 
     $scope.showManoeuvres = function (ev) {
         $('#modal_manoeuvres').openModal();
         $('#modal_manoeuvres').css ("z-index", "651");
         $('.lean-overlay').css ("display", "none");
     };
-
+    $scope.closeManoeuvres = function (ev) {
+        Map.removeCircleManoeuvre();
+        $('#modal_manoeuvres').closeModal();
+    };
 
     $scope.showInfo = function(ev) {
         $('#modal_info').openModal();
@@ -128,7 +107,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             }
             if (that.polygon)
                 that.map.removeLayer (that.polygon);
-            $scope.polygon = L.polyline (points, {
+            $scope.results.polygon = L.polyline (points, {
                 stroke: true,
                 color: 'red',
                 weight: 15,
@@ -145,7 +124,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 className: 'carretera',                 // custom class
                 smoothFactor: 1.0,
                 noClip: false,
-
                 contextmenu: true,
                 contextmenuInheritItems: false,
                 contextmenuItems: [{
@@ -161,20 +139,17 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 }]
 
             }).addTo (that.map);
-
-
-            that.info = response.info;
-
-            that.manoeuvres = that.parseManoeuvres(response.manoeuvres, response.stations, response.segments);
-            //that.$apply()
-
-            console.log ("EXITO");
-            console.log (response)
+            that.results.info = response.info;
+            that.results.manoeuvres = that.parseManoeuvres(response.manoeuvres, response.stations, response.segments);
+            Ptv.setResults({
+                polygon: that.results.polygon,
+                info: that.results.info,
+                manoeuvres: that.results.manoeuvres
+            });
         })
         .error (function(response, status) {
             console.log ("ERROR CALCULATEROUTE");
         });
-
     };
 
 
@@ -228,6 +203,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         var that = $scope;
         marker.on ("contextmenu", function(ev) {
             var marker_selected = ev.target;
+            console.log ("ev.target")
+            console.log (ev.target)
             that.index_marker_selected = _.indexOf (Map.getMarkersStations(), marker_selected);
             that.$apply();
         });
@@ -250,9 +227,10 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             $http.post ('/ptv/findlocation', marker_selected.getLatLng())
             .success (function(response) {
                 that.map.removeLayer (marker_loading);
-                that.$apply();
-                marker_selected.openPopup().getPopup().setContent (Map.formatDirPopup (response.result));
+                marker_selected.openPopup().getPopup().setContent (Map.formatDirPopup (response.result, true));
                 marker_selected.setOpacity (1);
+                if (Map.lengthMarkerStations() >= 2)
+                    that.calculateroute();
             })
             .error (function(response, status) {
                 if (status == 404) {
@@ -261,7 +239,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     marker_selected.setLatLng (that.latlng_dragstart);
                     marker_selected.update();
                     marker_selected.setOpacity (1);
-                    that.$apply();
                     Materialize.toast ('<span class="red">' + 'PUNTO IMPOSIBLE DE LOCALIZAR' + '</span>', 4000);
                 }
             });
@@ -272,12 +249,21 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     $scope.removeMarker = function(ev) {
         Map.removeMarkerStation ($scope.index_marker_selected);                 // REMOVE
         for (i=$scope.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
-            var marker = Map.getMarkerStation(i);
+                var marker = Map.getMarkerStation(i);
             marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
             Map.setMarkerStation (marker, i);
         }
         $scope.$apply();
         $rootScope.$apply();
+        if (Map.lengthMarkerStations() >= 2)
+            $scope.calculateroute();
+        else if ($scope.polygon) {
+            Map.getMap().removeLayer ($scope.polygon);
+            $scope.results.info = { cost: 0, distance: 0, time: 0 };
+            $scope.results.manoeuvres = [];
+            $scope.$apply();
+            $("#modal_info, #modal_manoeuvres").closeModal();
+        }
     };
 
 
@@ -303,7 +289,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             that.contextMenu (marker);
             that.dragStart (marker);
             that.dragEnd (marker);
-            marker.bindPopup (Map.formatDirPopup(response.result));
+            marker.bindPopup (Map.formatDirPopup(response.result, true));
             Map.addMarkerStation (marker, index);                  //ADD TO FACTORY
             marker.openPopup();
 
@@ -334,10 +320,18 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     $scope.renderMap = function() {
         if (Map.getMap() != undefined) {
             $("#map").replaceWith (Map.restoreMapHtml());
-            window.dispatchEvent (new Event('resize'));
+            if (window.innerWidth > 992)
+                $("#map").css("width", window.innerWidth - 300);
+            else
+                $("#map").css("width", window.innerWidth);
+            $("#map").css("height", window.innerHeight - 50);
         }
         else {
-            window.dispatchEvent (new Event('resize'));
+            if (window.innerWidth > 992)
+                $("#map").css("width", window.innerWidth - 300);
+            else
+                $("#map").css("width", window.innerWidth);
+            $("#map").css("height", window.innerHeight - 50);
             $scope.initMap();
         }
     };

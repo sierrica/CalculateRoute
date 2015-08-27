@@ -27,6 +27,20 @@ exports.findaddress = function(req, res) {
 
     var body = {
         address: req.body.address,
+        additionalFields: [
+            "HOUSENR",
+            "STREET",
+            "POSTCODE",
+            "CITY",
+            "CITY2",
+            "PROVINCE",
+            "STATE",
+            "COUNTRY",
+            "COUNTRY_NAME",
+            "COORDX",
+            "COORDY",
+            "DETAILLEVEL"
+        ],
         callerContext: callerContext
     }
 
@@ -45,7 +59,27 @@ exports.findaddress = function(req, res) {
         if (body.errorCode == 0 && body.resultList.length == 0)
             res.status(404).json({result: {}, result_ptv: body});
         else {
-            res.status(200).json (body);
+
+            var directions = [];
+            for (i=0; i<body.resultList.length; i++) {
+                console.log (body.resultList[i]);
+                directions.push ({
+                    housenr: body.resultList[i].additionalFields[0].value,
+                    street: body.resultList[i].additionalFields[1].value,
+                    postcode: body.resultList[i].additionalFields[2].value,
+                    city: body.resultList[i].additionalFields[3].value,
+                    district: body.resultList[i].additionalFields[4].value,
+                    province: body.resultList[i].additionalFields[5].value,
+                    state: body.resultList[i].additionalFields[6].value,
+                    country: body.resultList[i].additionalFields[7].value,
+                    country_name: body.resultList[i].additionalFields[8].value,
+                    coord_x_response: body.resultList[i].additionalFields[9].value / 100000,
+                    coord_y_response: body.resultList[i].additionalFields[10].value / 100000,
+                    detaillevel: body.resultList[i].additionalFields[11].value,
+                    score: body.resultList[i].totalScore
+                })
+            }
+            res.status(200).json ({ result: directions, result_ptv: body });
         }
     });
 

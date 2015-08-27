@@ -135,6 +135,7 @@ app.factory ('Map', function($http, $translate) {
 
     var map;
     var map_html;
+    var circle_manoeuvre;
     var letters = ['A','B','C','D','E','F','G','H','I','J'];
 
 
@@ -256,22 +257,43 @@ app.factory ('Map', function($http, $translate) {
             list_markers_stations.splice (index, 1);
             cluster_markers_stations.removeLayer (marker);
         },
-        formatDirPopup: function (dir) {
+        formatDirPopup: function (dir, br) {
             var popup = '';
             popup += dir.street;
             if (dir.detaillevel > 6)
-                popup += ', ' + dir.housenr;
-            if (dir.streetnumber != "")
-                popup += ' <b>(' + dir.streetnumber + ')</b>';
-            popup += '<br>';
-            popup += dir.postcode + ', ' + dir.city;
+                popup += ', ' + dir.housenr + ', ';
+            if (dir.streetnumber  &&  dir.streetnumber != "")
+                popup += ' (' + dir.streetnumber + '),';
+            if (br) {
+                popup += '<br>';
+                popup += dir.postcode + ', ' + dir.city;
+            }
+            else
+                popup += ' ' + dir.postcode + ', ' + dir.city;
             if (dir.district != "")
-                popup += ' - <u><i>' + dir.district + '<i/></u>';
-            popup += '<br>';
-            if ((dir.province != ""))
-                popup += dir.province + ', ';
-            popup += dir.state + ' - <b>(' + dir.country + ')<b>';
+                popup += ' - ' + dir.district + '';
+            if (br)
+                popup += '<br>';
+            else
+                popup += ', ';
+            if (dir.province != "")
+                popup += dir.province;
+            popup += ', ' + dir.state + ' - (' + dir.country + ')';
             return popup;
-        }
+        },
+        getCircleManoeuvre: function() {
+            return circle_manoeuvre;
+        },
+        setCircleManoeuvre: function(circle) {
+            if (circle_manoeuvre)
+                map.removeLayer(circle_manoeuvre);
+            circle_manoeuvre = circle;
+            circle_manoeuvre.addTo (map);
+        },
+        removeCircleManoeuvre: function() {
+            if (circle_manoeuvre)
+                map.removeLayer(circle_manoeuvre);
+            //circle_manoeuvre = null;
+        },
     }
 });

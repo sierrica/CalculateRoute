@@ -18,7 +18,7 @@
     <div id="modal_info" class="modal bottom-sheet">
         <i class="material-icons" onclick="$('#modal_info').closeModal()">clear</i>
         <div class="modal-content">
-            <table>
+            <table style="margin-top:30px">
                 <thead>
                     <tr>
                         <th>Distancia</th>
@@ -28,9 +28,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ info.distance | distanceParser }}</td>
-                        <td>{{ info.time | timeParser }}</b></td>
-                        <td>{{ info.cost }}</td>
+                        <td>{{ results.info.distance | distanceParser }}</td>
+                        <td>{{ results.info.time | timeParser }}</b></td>
+                        <td>{{ results.info.cost }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -38,19 +38,14 @@
     </div>
 
     <div id="modal_manoeuvres" class="modal bottom-sheet">
-        <i class="material-icons" onclick="$('#modal_manoeuvres').closeModal()">clear</i>
+        <i class="material-icons" ng-click="closeManoeuvres()">clear</i>
         <div class="modal-content">
             <table>
-                <thead>
-                    <tr>
-                        <th style="text-align:center">#</th>
-                        <th>Descripcion</th>
-                    </tr>
-                </thead>
+                <!--<thead><tr><th style="text-align:center">#</th><th>Descripcion</th></tr></thead>-->
                 <tbody>
-                <tr ng-repeat="manoeuvres in manoeuvres" ng-click="contextManoeuvre($index)" style="cursor:pointer">
-                    <td style="text-align:center; white-space: nowrap">{{ $index + 1 }}     <span class="leaflet-routing-icon {{manoeuvres.icon }}"></span></td>
-                    <td>{{ manoeuvres.description }}</td>
+                <tr ng-repeat="manoeuvre in results.manoeuvres" ng-click="contextManoeuvre($index)" style="cursor:pointer">
+                    <td style="text-align:center; white-space: nowrap">{{ $index + 1 }}     <span class="leaflet-routing-icon {{manoeuvre.icon }}"></span></td>
+                    <td>{{ manoeuvre.description }}</td>
                 </tr>
                 </tbody>
             </table>

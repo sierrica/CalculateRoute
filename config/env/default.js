@@ -47,6 +47,7 @@ module.exports = {
                 css: [
                     'files/lib/materialize/dist/css/materialize.css',
                     'files/lib/perfect-scrollbar/css/perfect-scrollbar.css',
+                    'files/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
                     'files/lib/leaflet/dist/leaflet.css',
                     'files/lib/Leaflet.contextmenu/dist/leaflet.contextmenu.css',
                     'files/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css',
@@ -60,7 +61,9 @@ module.exports = {
                     'files/lib/tooltipster/css/themes/tooltipster-noir.css',
                     'files/lib/tooltipster/css/themes/tooltipster-punk.css',
                     'files/lib/tooltipster/css/themes/tooltipster-shadow.css',
-                    'files/lib/paper-switch/paper-switch.css'
+                    'files/lib/paper-switch/paper-switch.css',
+                    'files/lib/ng-table/dist/ng-table.css',
+                    'files/lib/angular-ui-grid/ui-grid.css',
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
@@ -83,6 +86,7 @@ module.exports = {
                     'files/lib/materialize/dist/js/materialize.js',
                     'files/lib/satellizer/satellizer.js',
                     'files/lib/perfect-scrollbar/js/perfect-scrollbar.js',
+                    'files/lib/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',
 
 
 
@@ -105,7 +109,10 @@ module.exports = {
 
 
                     'files/lib/rangeslider.js/dist/rangeslider.js',
-                    'files/lib/tooltipster/js/jquery.tooltipster.js'
+                    'files/lib/tooltipster/js/jquery.tooltipster.js',
+
+                    'files/lib/ng-table/dist/ng-table.js',
+                    'files/lib/angular-ui-grid/ui-grid.js',
                 ]
             },
             tests: [

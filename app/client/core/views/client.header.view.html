@@ -6,36 +6,30 @@
             <a class="btn-floating btn-large pink" ng-show="collapsing"></a>
             <a href="/" class="button-collapse btn-floating btn-large pink" data-activates="slide-out" ng-show="!collapsing" ng-click="button_collapse()"><i class="material-icons" ng-click="button_collapse()">menu</i></a>
             <a class="brand-logo hide-on-med-and-down" style="text-indent:30px">Calculateroute</a>
-            <a id="breadcumb" class="brand-logo center"><img src="images/logo_camion.png" style="height:60px; width:135px"/></a>
+            <a id="breadcumb" ng-show="!collapsing" class="brand-logo center"><img src="images/logo_camion.png" style="height:60px; width:135px"/></a>
 
 
-            <div>
-            <form name="directionForm" ng-submit="findDirection()">
+
+
+            <form name="directionForm" ng-show="isAuthenticated()" ng-submit="findDirection()">
                 <div class="input-field move-down" ng-show="!collapsing">
-                    <input type="search" id="search" ng-required ng-model="direction" onfocus="$('#search_table').css('display', 'block'); $('#search').parent().css('z-index', '999').css('opacity', '1')" onblur="$('#search_table').css('display', 'none'); $('#search').val('').parent().css('z-index', '0')">
+                    <input type="search" id="search" ng-required ng-model="direction" ng-focus="focusDirection()" ng-blur="blurDirection()">
                     <label for="search"><i class="material-icons">search</i></label>
                     <!--<i class="material-icons">close</i>-->
                 </div>
             </form>
-
+<!--
+            <div id="directions" class="gridStyle"  ui-grid="gridOptions">
+            </div>
+-->
             <table id="search_table">
                 <tbody id="search_table_tbody">
-                    <tr>
-                        <td>100</td>
-                        <td>Calle de madre sacramento 32</td>
-                    </tr>
-                    <tr>
-                        <td>100</td>
-                        <td>Calle de madre sacramento 33</td>
-                    </tr>
-                    <tr>
-                        <td>100</td>
-                        <td>Calle de madre sacramento 34</td>
+                    <tr ng-repeat="direction in directions" ng-click="selectDirection($index)">
+                        <td class="waves-effect" ><i class="material-icons">forward</i> {{ direction.text }}</td>
                     </tr>
                 </tbody>
             </table>
 
-           </div>
 
 <!--
                 <a ng-mouseup="dropdown($event)" class='dropdown-button' href='#' data-activates='dropdown_layers'><i class="large material-icons">more_vert</i></a>

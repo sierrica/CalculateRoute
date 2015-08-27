@@ -5,7 +5,8 @@ var app = angular.module('calculateRoute', [
     'satellizer',
     'pascalprecht.translate',
     'tmh.dynamicLocale',
-    'contenteditable'
+    'contenteditable',
+    'ui.grid'
 ])
 .config(function ($urlRouterProvider, $locationProvider) {
     // Redirect to home view when route not found
@@ -95,8 +96,8 @@ var app = angular.module('calculateRoute', [
         return (h + ' h, ' + m + ' m, ' + s + ' s');
     }
 })
-.run (['$rootScope', 'tmhDynamicLocale', '$translate', '$auth', '$state', '$location', 'User', 'SatellizerShared',
-function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User, shared) {
+.run (['$rootScope', 'tmhDynamicLocale', '$translate', '$auth', '$state', '$location', 'User', 'SatellizerShared', 'Map',
+function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User, shared, Map) {
 
     if (localStorage["calculateroute_token"])
         shared.setStorageType ("localStorage");
@@ -137,8 +138,6 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             else
                 $location.url ('/');
         }
-
-
     });
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
@@ -148,6 +147,7 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
 
         if (toState.name == "home") {
             $("#breadcumb").html ('<img src="images/logo_camion.png" style="height:60px; width:135px"/>');
+            Map.removeCircleManoeuvre();
 
             setTimeout(function(){
                 $("#search").parent().css ('display', 'block');
@@ -156,16 +156,12 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
 
         }
         else {
-            $("#breadcumb").html(toState.name);
+            $("#breadcumb").html (toState.name);
             $("#search").parent().css ("display", "none");
         }
-
-
         /*setTimeout(function(){
             $('body').addClass ('loaded');
         }, 500);
 */
-
-
     });
 }]);
