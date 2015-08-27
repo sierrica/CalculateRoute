@@ -105,8 +105,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     lng: response.polygon.lineString.points[i].x,
                 })
             }
-            if (that.polygon)
-                that.map.removeLayer (that.polygon);
+            if (that.results.polygon)
+                that.map.removeLayer (that.results.polygon);
             $scope.results.polygon = L.polyline (points, {
                 stroke: true,
                 color: 'red',
