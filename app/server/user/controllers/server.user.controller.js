@@ -15,7 +15,8 @@ function signup (req, res) {
         var user = new User ({
             email: req.body.email,
             password: req.body.password,
-            lang: req.body.lang
+            lang: req.body.lang,
+            rol: 'user'
         });
         user.save (function() {
             token.createToken (user, function(res, err, token) {

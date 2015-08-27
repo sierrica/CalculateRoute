@@ -17,7 +17,10 @@ var UserSchema = new mongoose.Schema ({
 	},
 	lang: {
 		type: String
-	}
+	},
+	rol: {
+        type: String
+    }
 });
 
 
