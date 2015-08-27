@@ -2,6 +2,21 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
 
 	console.log ("DENTRO AUTHENTICATION CONTROLLER");
 
+    $scope.user = User.getUser();
+    $scope.confirm_password = "";
+    $scope.password = "";
+    $scope.lang = '';
+    $scope.$on('login', function (event) {
+        var user = User.getUser();
+        $scope.email = user.email;
+        $scope.lang = user.lang;
+        $scope.password = "";
+        $scope.confirm_password = "";
+    });
+
+    console.log ($scope.user)
+    //$scope.email = $rootScope.user.email;
+    //$scope.password = $rootScope.user.password;
 
     $scope.lang_default = function() {
         var lang = document.documentElement.lang;
@@ -9,8 +24,11 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
         $("#lang").select2 ("val", lang);
     };
 
-    $scope.checkPassword = function() {
-        $scope.signupForm.confirm_password.$error.dontMatch = $scope.password != $scope.confirm_password;
+    $scope.checkPassword = function(form) {
+        if (form == 'signupForm')
+            $scope.signupForm.confirm_password.$error.dontMatch = $scope.password != $scope.confirm_password;
+        else if (form == 'profileForm')
+            $scope.profileForm.confirm_password.$error.dontMatch = $scope.password != $scope.confirm_password;
     };
 
 
@@ -26,16 +44,14 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
             password: $scope.password,
             lang: $scope.lang
         }).then (function() {
-            console.log ("REGISTRADO CORRECTAMENTE");
             Materialize.toast ('<span class="green">' + $translate.instant('properly registered') + '</span>', 5000);
             $scope.login();
         }).catch (function(response) {
             Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);
-    });
+        });
     };
 
     $scope.login = function() {
-        //alert ("Hello! I am an alert box!!");
         if (! $scope.remember)
             shared.setStorageType ("sessionStorage");
         else
@@ -44,14 +60,15 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
             email: $scope.email,
             password: $scope.password
         }).then (function() {
-            console.log ("LOGUEADO CORRECTAMENTE");
             User.me.get().$promise.then(function(response) {
-                $rootScope.user = response.user;
-                $rootScope.user.name = $rootScope.user.email.split("@")[0];
-                if ($rootScope.user.lang != document.documentElement.lang)
-                    User.change_lang ($rootScope.user.lang);
+                var user = response.user;
+                user.name = response.user.email.split("@")[0];
+                User.setUser (user);
+                if (response.user.lang != document.documentElement.lang)
+                    User.change_lang (response.user.lang);
                 $state.transitionTo ("home");
                 Materialize.toast ('<span class="green">' + $translate.instant('properly entered') + '</span>', 5000);
+                $rootScope.$emit ('login');
             });
         }).catch (function(response) {
             Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);

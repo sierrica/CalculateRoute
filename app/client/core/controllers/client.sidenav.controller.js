@@ -1,5 +1,12 @@
-app.controller ('SidenavController', ['$rootScope', '$scope', '$state', '$auth', 'Sidenav', function($rootScope, $scope, $state, $auth, Sidenav) {
+app.controller ('SidenavController', function($rootScope, $scope, $state, $auth, Sidenav, User) {
     console.log ("DENTRO CONTROLADOR SIDENAV");
+
+    $scope.user = User.getUser();
+
+    $rootScope.$on('logout', function (event) {
+        $scope.user = User.getUser();
+    });
+
 
     $rootScope.$on('$includeContentLoaded', function() {
         Sidenav.init();
@@ -16,4 +23,4 @@ app.controller ('SidenavController', ['$rootScope', '$scope', '$state', '$auth',
     $scope.dropdown = function ($event) {
         Sidenav.dropdown($event);
     };
-}]);
+});

@@ -1,0 +1,59 @@
+<div class="container" ng-controller="AuthenticationController">
+    <div class="row">
+        <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <form name="profileForm" ng-submit="updateProfile()" novalidate autocomplete="off" style="margin-top:15px">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="email" id="email" name="email" ng-model="email" readonly>
+                        <label for="email">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="password" id="password" name="password" ng-required="true" ng-minlength="6" ng-change="checkPassword('profileForm')" ng-class="profileForm.password.$invalid && profileForm.password.$dirty ? 'invalid' : profileForm.password.$valid && profileForm.password.$dirty ? 'valid' : ''" ng-model="password">
+                        <label for="password">Nueva contrasena</label>
+                        <span class="form_error" ng-show="profileForm.password.$dirty  &&  profileForm.password.$error.required">es requerido</span>
+                        <span class="form_error" ng-show="profileForm.password.$dirty  &&  !profileForm.password.$error.required  &&  profileForm.password.$invalid">minimo 6 caracteres</span>
+                        <span class="form_success" ng-show="profileForm.password.$dirty  &&  profileForm.password.$valid">formato correto</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="password" id="confirm_password" name="confirm_password" ng-change="checkPassword('profileForm')" ng-class="profileForm.confirm_password.$dirty  &&  profileForm.confirm_password.$error.dontMatch ? 'invalid' : profileForm.confirm_password.$dirty  &&  password == confirm_password ? 'valid' : ''" ng-model="confirm_password">
+                        <label for="confirm_password">Confirmar Password</label>
+                        <span class="form_error" ng-show="profileForm.confirm_password.$dirty && profileForm.confirm_password.$error.dontMatch">Passwords don't match!</span>
+                        <span class="form_success" ng-show="profileForm.confirm_password.$dirty  &&  password == confirm_password">Si coinciden</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4 m4 l3">
+                        <label for="lang" style="font-size:15px;">Language</label>
+                    </div>
+                    <div class="col s7 m5 l9">
+                        <select id="lang" name="lang" ng-init="lang_default()" ng-model="lang" style="width: 100%">
+                            <option value="es-ES" >Spanish - (ES)</option>
+                            <option value="en-GB">English - (GB)</option>
+                        </select>
+                    </div>
+                    <script>
+                        function formatState (state) {
+                            if (!state.id)
+                                return state.text;
+                            return $('<span><span class="flag-icon flag-icon-' + state.element.value.toLowerCase().replace(/_/g, '-').split('-')[1] + '"></span> ' + state.text + '</span>');
+                        };
+                        $("#lang").select2({
+                            //theme: "classic",
+                            minimumResultsForSearch: Infinity,
+                            templateResult: formatState,
+                            templateSelection: formatState
+                        });
+                    </script>
+                </div>
+                <button type="submit" class="btn btn-large pink" ><i class="small material-icons right">send</i>Actualizar</button>
+            </form>
+            <script>
+                $("#email").trigger('focus');
+            </script>
+        </div>
+    </div>
+</div>

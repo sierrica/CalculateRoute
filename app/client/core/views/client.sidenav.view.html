@@ -9,7 +9,7 @@
             <div class="col s8">
                 <ul id="profile-dropdown" class="dropdown-content">
                     <li class="no-padding" ng-show="isAuthenticated()">
-                        <a href="#" ng-click="close_sidenav($event)">
+                        <a ui-sref="profile" ng-click="close_sidenav($event)">
                             <i class="material-icons">face</i> Perfil
                         </a>
                     </li>
@@ -42,8 +42,8 @@
                         </a>
                     </li>
                 </ul>
-                <a ng-mouseup="dropdown($event)" class="truncate dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">{{ user.name || 'unknown' | translate }}</span><i class="mdi-navigation-arrow-drop-down left" style="margin-right:5px"></i></a>
-                <p style="color:white; text-indent: 40px; text-transform: capitalize;" translate>{{ user.rol }}</p>
+                <a ng-mouseup="dropdown($event)" class="truncate dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">{{ user.name || 'unknown' | translate }}<i class="mdi-navigation-arrow-drop-down left" style="margin-right:5px"></i></a>
+                <p style="color:white; text-indent: 40px; text-transform: capitalize;" translate>{{ user.rol || 'desautenticado' }}</p>
             </div>
         </div>
     </li>

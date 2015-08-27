@@ -68,6 +68,24 @@ var app = angular.module('calculateRoute', [
         };
     }
 ])
+.directive('compareTo', function() {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=compareTo"
+        },
+        link: function(scope, element, attributes, ngModel) {
+
+            ngModel.$validators.compareTo = function(modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
+
+            scope.$watch("otherModelValue", function() {
+                ngModel.$validate();
+            });
+        }
+    };
+})
 .directive('rangeParser', function() {
     return {
         require: '?ngModel',
@@ -107,9 +125,11 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
     if ($auth.isAuthenticated()) {
         User.me.get().$promise
         .then (function(response) {
-            $rootScope.user = response.user;
-            $rootScope.user.name = $rootScope.user.email.split("@")[0];
-            User.change_lang ($rootScope.user.lang);
+            var user = response.user;
+            user.name = response.user.email.split("@")[0];
+            User.setUser (user);
+            User.change_lang (response.user.lang);
+            $rootScope.$broadcast ('login');
         });
     }
     else {

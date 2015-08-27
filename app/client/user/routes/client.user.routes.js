@@ -26,21 +26,25 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
         templateUrl: 'user/views/client.user.login.view.html',
         private: false
     })
+    .state ('profile', {
+        url: '/profile',
+        templateUrl: 'user/views/client.user.profile.view.html',
+        private: false
+    })
     .state ('logout', {
         url: '/logout',
         template: null,
         private: false,
-        controller: function($rootScope, $auth, $state) {
+        controller: function($scope, $rootScope, $auth, $state, User) {
             if (! $auth.isAuthenticated()) {
-                console.log ("FALLO");
                 $state.transitionTo ("login");
                 return;                                 // Lo mismo que else lo de abajo.
             }
             $auth.logout()
             .then (function() {
-                $rootScope.user = {};
+                User.removeUser();
+                $rootScope.$emit ('logout');            // going up!
                 $state.transitionTo ("login");
-                console.log ("DESAUTENTICADO");
             });
         }
     });
