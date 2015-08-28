@@ -60,8 +60,10 @@ function forgot (req, res) {
                 from = 'sierrica@ptv_email.sierrica.com';
             }
             else if (process.env.PLATFORM == 'heroku') {
-                options = { auth: { api_key: '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' } };
-                from = 'sierrica@ptv_email_heroku.sierrica.com';
+                options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
+                from = 'sierrica@ptv_email.sierrica.com';
+                //options = { auth: { api_key: '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' } };
+                //from = 'sierrica@ptv_email_heroku.sierrica.com';
             }
             else {
                 options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
