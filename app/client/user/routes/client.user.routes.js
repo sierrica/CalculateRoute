@@ -26,6 +26,11 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
         templateUrl: 'user/views/client.user.login.view.html',
         private: false
     })
+    .state ('forgot', {
+        url: '/forgot',
+        templateUrl: 'user/views/client.user.forgot.view.html',
+        private: false
+    })
     .state ('profile', {
         url: '/profile',
         templateUrl: 'user/views/client.user.profile.view.html',
@@ -43,7 +48,7 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
             $auth.logout()
             .then (function() {
                 User.removeUser();
-                $rootScope.$emit ('logout');            // going up!
+                $rootScope.$emit ('logout');
                 $state.transitionTo ("login");
             });
         }

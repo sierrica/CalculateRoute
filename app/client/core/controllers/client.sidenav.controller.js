@@ -1,12 +1,11 @@
 app.controller ('SidenavController', function($rootScope, $scope, $state, $auth, Sidenav, User) {
+
     console.log ("DENTRO CONTROLADOR SIDENAV");
 
     $scope.user = User.getUser();
-
     $rootScope.$on('logout', function (event) {
         $scope.user = User.getUser();
     });
-
 
     $rootScope.$on('$includeContentLoaded', function() {
         Sidenav.init();

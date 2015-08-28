@@ -1,22 +1,15 @@
-app.controller ('AuthenticationController', ['$rootScope', '$scope', 'SatellizerShared', '$auth', '$location', 'tmhDynamicLocale', '$translate', 'User', '$state', function($rootScope, $scope, shared, $auth, $location, tmhDynamicLocale, $translate, User, $state) {
+app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'SatellizerShared', '$auth', '$location', 'tmhDynamicLocale', '$translate', 'User', '$state', function($rootScope, $scope, $http, shared, $auth, $location, tmhDynamicLocale, $translate, User, $state) {
 
 	console.log ("DENTRO AUTHENTICATION CONTROLLER");
 
-    $scope.user = User.getUser();
-    $scope.confirm_password = "";
-    $scope.password = "";
-    $scope.lang = '';
+    var user = User.getUser();
+    $scope.email = user.email;
+    $scope.lang = user.lang;
     $scope.$on('login', function (event) {
-        var user = User.getUser();
+        user = User.getUser();
         $scope.email = user.email;
         $scope.lang = user.lang;
-        $scope.password = "";
-        $scope.confirm_password = "";
     });
-
-    console.log ($scope.user)
-    //$scope.email = $rootScope.user.email;
-    //$scope.password = $rootScope.user.password;
 
     $scope.lang_default = function() {
         var lang = document.documentElement.lang;
@@ -32,13 +25,38 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
     };
 
 
-    $scope.remember = false;
+    $scope.forgot = function() {
+        $http.post ('/forgot', {email: $scope.email})
+        .success (function(response) {
+            Materialize.toast ('<span class="green">' + $translate.instant('En breves recibiras un email con la nueva contrasena') + '</span>', 5000);
+        }).error (function(response, status) {
+            console.log ("ERROR CALCULATEROUTE");
+        });
+    }
 
+    $scope.updateProfile = function() {
+        User.me.update ({
+            email: $scope.email,
+            password: $scope.password,
+            lang: $scope.lang
+        }, function(response) {
+            $scope.email = response.email;
+            $scope.lang = response.lang;
+            if ($scope.lang != document.documentElement.lang)
+                User.change_lang ($scope.lang);
+            Materialize.toast ('<span class="green">' + $translate.instant('Cambios realizados correctamente') + '</span>', 5000);
+        }, function(response) {
+            Materialize.toast ('<span class="red">' + $translate.instant('Cambios no realizados correctamente') + '</span>', 5000);
+        });
+    };
+
+
+    $scope.remember = false;
     $scope.signup = function() {
-        if (! $scope.remember)
-            shared.setStorageType ("sessionStorage");
-        else
+        if ($scope.remember)
             shared.setStorageType ("localStorage");
+        else
+            shared.setStorageType ("sessionStorage");
         $auth.signup ({
             email: $scope.email,
             password: $scope.password,
@@ -50,12 +68,11 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', 'Satellizer
             Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);
         });
     };
-
     $scope.login = function() {
-        if (! $scope.remember)
-            shared.setStorageType ("sessionStorage");
-        else
+        if ($scope.remember)
             shared.setStorageType ("localStorage");
+        else
+            shared.setStorageType ("sessionStorage");
         $auth.login ({
             email: $scope.email,
             password: $scope.password

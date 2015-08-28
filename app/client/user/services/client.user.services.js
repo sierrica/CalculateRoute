@@ -3,9 +3,7 @@ app.factory ('User', function($resource, $rootScope, tmhDynamicLocale, $translat
     var user = {};
     return {
         me: $resource ('me', {}, {
-            update: {
-                method: 'PUT'
-            }
+            'update': { method: 'PUT' }
         }),
         change_lang: function(lang) {
             document.documentElement.lang = lang;
