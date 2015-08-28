@@ -63,8 +63,7 @@
     "request": "2.61.0",
     "btoa": "1.1.2",
     "nodemailer": "1.4.0",
-    "nodemailer-sengrid-transport": "0.2.0",
-    "nodemailer-smtp-transport": "1.0.3"
+    "nodemailer-sengrid-transport": "0.2.0"
   },
   "devDependencies": {
     "cordova": "5.2.0",
