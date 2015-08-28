@@ -63,7 +63,8 @@
     "request": "2.61.0",
     "btoa": "1.1.2",
     "nodemailer": "1.4.0",
-    "nodemailer-sendgrid-transport": "0.2.0"
+    "nodemailer-sendgrid-transport": "0.2.0",
+    "randomstring": "1.0.7"
   },
   "devDependencies": {
     "cordova": "5.2.0",

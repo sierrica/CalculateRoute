@@ -4,7 +4,8 @@ var _           = require ('lodash'),
     User        = require (path.resolve('./app/server/user/models/server.user.model')),
     logger      = require (path.resolve('./config/logger')),
     nodemailer  = require ('nodemailer'),
-    sgTransport = require ('nodemailer-sendgrid-transport');
+    sgTransport = require ('nodemailer-sendgrid-transport'),
+    randomstring = require ("randomstring");
 
 
 
@@ -51,6 +52,7 @@ function login (req, res) {
 function forgot (req, res) {
     User.findOne ({ email: req.body.email }, function(err, existingUser) {
         if (existingUser) {
+            var password = randomstring.generate(7);
             var options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
             var mailer = nodemailer.createTransport (sgTransport(options));
             var email = {
@@ -62,7 +64,7 @@ function forgot (req, res) {
             };
             mailer.sendMail(email, function(err, result) {
                 if (err)
-                    return res.status(400).send (err);
+                    return res.status(200).send (err);
                 console.log (result);
                 res.status(200).send (result);
             });
