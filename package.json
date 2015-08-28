@@ -61,9 +61,7 @@
     "winston-papertrail": "1.0.1",
     "fs-extra": "0.23.1",
     "request": "2.61.0",
-    "btoa": "1.1.2",
-    "nodemailer": "1.4.0",
-    "nodemailer-sengrid-transport": "0.2.0"
+    "btoa": "1.1.2"
   },
   "devDependencies": {
     "cordova": "5.2.0",
