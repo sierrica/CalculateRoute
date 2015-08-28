@@ -52,40 +52,43 @@ function login (req, res) {
 function forgot (req, res) {
     User.findOne ({ email: req.body.email }, function(err, existingUser) {
         if (existingUser) {
-            var password = randomstring.generate(7);
-            var options = {};
-            var from = '';
-            if (process.env.PLATFORM == 'openshift') {
-                options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
-                from = 'sierrica@ptv_email.sierrica.com';
-            }
-            else if (process.env.PLATFORM == 'heroku') {
-                options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
-                from = 'sierrica@ptv_email.sierrica.com';
-                //options = { auth: { api_key: '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' } };
-                //from = 'sierrica@ptv_email_heroku.sierrica.com';
-            }
-            else {
-                options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
-                from = 'sierrica@ptv_email.sierrica.com';
-            }
-            var mailer = nodemailer.createTransport (sgTransport(options));
-            var email = {
-                to: [req.body.email],
-                from: from,
-                subject: 'forgot password',
-                text: 'Su nueva contrasena es: ',
-                html: '<b>Su nueva contrasena es: ' + password + '</b>'
-            };
-            mailer.sendMail(email, function(err, result) {
-                if (err)
-                    return res.status(200).send (err);
-                console.log (result);
-                res.status(200).send (result);
+            var random_password = randomstring.generate(6);
+            existingUser.password = random_password;
+            existingUser.save (function (err) {
+               if (err)
+                   return res.status(400).send (err);
+                // tengo que crear un addon en heroku para que me deje instalar el module nodemailer, pero como solo puedo tener en sendgrid un dominio, utilizo el mismo en todos lados
+                // { auth: { api_key: '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' } };
+                // 'sierrica@ptv_email_heroku.sierrica.com'
+                var options =   process.env.PLATFORM == 'openshift'  ? { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } } :
+                                process.env.PLATFORM == 'heroku'     ? { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } } :     // utilizo el mismo
+                                                                       { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };       //heroku addon
+                var from =  process.env.PLATFORM == 'openshift'  ?  'sierrica@ptv_email.sierrica.com' :
+                            process.env.PLATFORM == 'heroku'     ?  'sierrica@ptv_email.sierrica.com' :         // utilizo el mismo
+                                                                    'sierrica@ptv_email.sierrica.com';
+                var subject =   existingUser.lang == 'es-ES'  ?  'Contraseña perdida Calculateroute' :
+                                existingUser.lang == 'en-GB'  ?  'Forgot password Calculateroute' :
+                                                                 'Forgot password Calculateroute';
+                var text =      existingUser.lang == 'es-ES'  ?  'Tu nueva contraseña es: ' +  random_password :
+                                existingUser.lang == 'en-GB'  ?  'Your new password is: ' + random_password :
+                                                                 'Your new password is: ' + random_password;
+                var mailer = nodemailer.createTransport (sgTransport(options));
+                var email = {
+                    to: [req.body.email],
+                    from: from,
+                    subject: subject,
+                    text: text,
+                    html: '<b>' + text + '</b>'
+                };
+                mailer.sendMail(email, function(err, result) {
+                    if (err)
+                        return res.status(200).send (err);
+                    res.status(200).send (result);
+                });
             });
         }
         else
-            res.status(200).send ("");
+            res.status(200).send ("");                                  // envio como satisfactorio para evitar que se identifiquen los emails registrados
     });
 };
 
