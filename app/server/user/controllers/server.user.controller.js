@@ -53,7 +53,18 @@ function forgot (req, res) {
     User.findOne ({ email: req.body.email }, function(err, existingUser) {
         if (existingUser) {
             var password = randomstring.generate(7);
-            var options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
+            if (process.env.PLATFORM == 'openshift') {
+                var options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
+                var from = 'sierrica@ptv_email.sierrica.com';
+            }
+            else if (process.env.PLATFORM == 'heroku') {
+                var options = { auth: { api_key: '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' } };
+                var from = 'sierrica@ptv_email_heroku.sierrica.com';
+            }
+            else {
+                var options = { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };
+                var from = 'sierrica@ptv_email.sierrica.com';
+            }
             var mailer = nodemailer.createTransport (sgTransport(options));
             var email = {
                 to: [req.body.email],
