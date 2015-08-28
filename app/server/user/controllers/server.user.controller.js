@@ -60,7 +60,7 @@ function forgot (req, res) {
                 from: 'sierrica@ptv_email.sierrica.com',
                 subject: 'forgot password',
                 text: 'Su nueva contrasena es: ',
-                html: '<b>Su nueva contrasena es: </b>'
+                html: '<b>Su nueva contrasena es: ' + password + '</b>'
             };
             mailer.sendMail(email, function(err, result) {
                 if (err)
