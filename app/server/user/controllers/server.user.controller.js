@@ -68,7 +68,7 @@ function forgot (req, res) {
             var mailer = nodemailer.createTransport (sgTransport(options));
             var email = {
                 to: [req.body.email],
-                from: 'sierrica@ptv_email.sierrica.com',
+                from: from,
                 subject: 'forgot password',
                 text: 'Su nueva contrasena es: ',
                 html: '<b>Su nueva contrasena es: ' + password + '</b>'
