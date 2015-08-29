@@ -299,6 +299,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             $("#map").css("height", window.innerHeight - 50);
             $scope.initMap();
         }
+        Map.addMarkerBugRestaure();
     };
 
 
@@ -362,7 +363,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
         Map.setMap ($scope.map);
-        Map.addMarkerBugRestaure()
+
         //var marker_bug_google = L.marker([0, 0], {opacity: 0.0}).addTo(that.map);           // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash
 
                                                           // Save Map in Factory
