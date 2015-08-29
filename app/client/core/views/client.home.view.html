@@ -6,9 +6,8 @@
         <div class="modal-content">
             <h5 style="display:inline">Posicion, </h5><i>(Antes de...)</i>
             <div class="input-field col s12">
-                <!--<select class="browser-default" id="select_choice_index" name="select_choice_index" convert-to-number ng-model="select_choice_index" ng-options="option.text for option in options_choice_index track by option.index"></select>-->
-                <select ng-init="initIntermediate()" class="browser-default" id="select_choice_index" name="select_choice_index" convert-to-number ng-model="select_choice_index">
-                    <option ng-repeat="option in options_choice_index.availableOptions" value="{{$index}}">{{option.text}}</option>
+                <select class="browser-default" id="select_choice_index" name="select_choice_index">
+                    <option value="0">A: Origen</option>
                 </select>
             </div>
         </div>

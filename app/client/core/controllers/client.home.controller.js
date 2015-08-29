@@ -1,7 +1,6 @@
 app.controller ('HomeController', function ($rootScope, $scope, $location, $auth, Map, Ptv, $http, User, $translate) {
     console.log ("DENTRO HOME CONTROLLER");
 
-
     $scope.results = Ptv.getResults;
 
     $scope.contextManoeuvre = function (index_manoeuvre) {
@@ -111,7 +110,13 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         $scope.add (ev, Map.lengthMarkerStations());
     };
     $scope.addIntermediate = function (ev) {
-        //$scope.$apply();
+        $("#select_choice_index option").remove();
+        if (Map.lengthMarkerStations() == 0)
+            $("#select_choice_index").append('<option value="0">A: Origen</option>');
+        else {
+            for (i=0; i<Map.lengthMarkerStations(); i++)
+                $("#select_choice_index").append('<option value="' + i + '">' + Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"") +  '</option>')
+        }
         $("#modal_choice_index option:selected").removeAttr("selected");
         var value_first = $("#select_choice_index option:nth-child(1)").val();
         if ( !value_first   || value_first == '?' || value_first == '? undefined:undefined ?')
@@ -121,25 +126,13 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         $('#modal_choice_index').openModal();
         var that = $scope;
         $("#button_select_choice_index").off('click').on ('click', function(e) {
-            var val_selected = $("#modal_choice_index option:selected").val();
+            var val_selected = $("#modal_choice_index option:selected").val().split(":")[1];
+            if (!val_selected)
+                val_selected = $("#modal_choice_index option:selected").val();
             that.add (ev, val_selected);
             $('#modal_choice_index').closeModal();
         });
     };
-
-    $scope.initIntermediate = function() {
-        $scope.options_choice_index = { singleSelect: null, availableOptions: []};
-        for (i=0; i<Map.lengthMarkerStations(); i++) {
-            $scope.options_choice_index.availableOptions.push ({ text: Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"") });
-            console.log ($scope.options_choice_index.availableOptions[i].text);
-        }
-        if ($scope.options_choice_index.availableOptions.length == 0)
-            $scope.options_choice_index.availableOptions.push ({ text: "A: Origen" });
-        //$scope.$apply();
-    }
-
-
-
 
 
 
@@ -151,7 +144,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             console.log ("ev.target")
             console.log (ev.target)
             that.index_marker_selected = _.indexOf (Map.getMarkersStations(), marker_selected);
-            that.$apply();
+            //that.$apply();
         });
     };
     $scope.dragStart = function (marker) {
@@ -160,7 +153,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             var marker_selected = ev.target;
             that.map.contextmenu.hide();
             that.latlng_dragstart = marker_selected.getLatLng();
-            that.$apply();
+            //that.$apply();
         })
     };
     $scope.dragEnd = function (marker) {
@@ -194,26 +187,10 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
     $scope.removeMarker = function(ev) {
         Map.removeMarkerStation ($scope.index_marker_selected);                 // REMOVE
         for (i=$scope.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
-                var marker = Map.getMarkerStation(i);
+            var marker = Map.getMarkerStation(i);
             marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
             Map.setMarkerStation (marker, i);
         }
-
-
-        //$scope.options_choice_index.availableOptions.splice ($scope.index_marker_selected, 1);
-        $scope.options_choice_index.availableOptions = [];
-        var that = $scope;
-        for (i=0; i<Map.lengthMarkerStations(); i++) {
-            that.options_choice_index.availableOptions.push ({ text: Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"") });
-            console.log (that.options_choice_index.availableOptions[i].text);
-        }
-
-        if ($scope.options_choice_index.availableOptions.length == 0)
-            $scope.options_choice_index.availableOptions.push ({ text: "A: Origen" });
-
-
-        $scope.$apply();
-        $rootScope.$apply();
         if (Map.lengthMarkerStations() >= 2)
             $scope.calculateroute();
         else if ($scope.results.polygon) {
@@ -254,23 +231,11 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
             for (i=index; i<Map.lengthMarkerStations(); i++) {
                 var marker = Map.getMarkerStation(i);
-                marker.setIcon (new L.NumberedDivIcon ({letter: Map.Letters[i] }));
+                marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
                 Map.setMarkerStation (marker, i);
             }
-
-            that.options_choice_index.availableOptions = [];
-            for (i=0; i<Map.lengthMarkerStations(); i++) {
-                that.options_choice_index.availableOptions.push({ text: Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"") });
-                console.log (that.options_choice_index.availableOptions[i].text);
-            }
-
-            //that.$apply();
-            //thut.$apply();
-
-
             if (Map.lengthMarkerStations() >= 2)
                 that.calculateroute();
-
         })
         .error (function(response, status) {
             if (status == 404) {
@@ -361,12 +326,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             }
         }).setView([41.9204014, -1.2529047000000446], 18);
 
-
         Map.setMap ($scope.map);
-
-        //var marker_bug_google = L.marker([0, 0], {opacity: 0.0}).addTo(that.map);           // marker hidden necessary for fix bug in layer google maps in Android, when Zoom -> Crash
-
-                                                          // Save Map in Factory
     };
 
 
