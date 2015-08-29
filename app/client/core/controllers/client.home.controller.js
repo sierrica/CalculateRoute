@@ -164,9 +164,11 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             var marker_loading = L.marker (marker_selected.getLatLng(), {icon: Map.IconLoading }).addTo (that.map);
             $http.post ('/ptv/findlocation', marker_selected.getLatLng())
             .success (function(response) {
+                Map.setClusterMarkerStation (marker_selected);
                 that.map.removeLayer (marker_loading);
                 marker_selected.openPopup().getPopup().setContent (Map.formatDirPopup (response.result, true));
                 marker_selected.setOpacity (1);
+
                 if (Map.lengthMarkerStations() >= 2)
                     that.calculateroute();
             })

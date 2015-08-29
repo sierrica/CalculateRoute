@@ -250,13 +250,18 @@ app.factory ('Map', function($http, $translate) {
         getMarkerStation: function(index) {
             return list_markers_stations[index];
         },
+        setClusterMarkerStation: function (marker) {
+            cluster_markers_stations.clearLayers();
+            cluster_markers_stations.addLayers (list_markers_stations);
+        },
         setMarkerStation: function (marker, index) {
             list_markers_stations[i] = marker;
             cluster_markers_stations.addLayer (marker);
         },
         addMarkerStation: function (marker, index) {
             list_markers_stations.splice (index, 0, marker);
-            cluster_markers_stations.addLayer (marker);
+            cluster_markers_stations.clearLayers();
+            cluster_markers_stations.addLayers (list_markers_stations);
         },
         removeMarkerStation: function (index) {
             var marker = list_markers_stations[index];

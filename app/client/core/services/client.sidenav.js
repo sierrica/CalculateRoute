@@ -18,11 +18,19 @@ app.factory('Sidenav', function($rootScope) {
             Ps.initialize (document.getElementById('slide-out'));                   // Perfect Scrollbar
             // Eventos para cambiar el icono al cerrar el menu sin pulsar en el boton
             $('.drag-target').on('click', function() {
-                setTimeout (function() {
-                    $(".button-collapse i").text("menu");
-                    $('.drag-target').css ("width", "10px");
-                    $("#search").parent().css ("z-index", "0").css ("opacity", "1");
-                }, 350);
+                if (window.innerWidth <= 992) {
+                    setTimeout (function() {
+                        $(".button-collapse i").text("menu");
+                        $('.drag-target').css ("width", "10px");
+                        $("#search").parent().css ("z-index", "0").css ("opacity", "1");
+                    }, 350);
+                }
+                else {
+                    // Error por el que pretas en la izquierda del todo y se cierra
+                    $('.button-collapse').sideNav ('show');
+                    $('#sidenav-overlay').remove();
+                    $('.drag-target').css('left', '0px').css('touch-action', 'pan-y').css('-webkit-user-drag', 'none').css('-webkit-tap-highlight-color', 'rgba(0, 0, 0, 0)');
+                }
             });
             $('.drag-target').on('panend', function(){
                 setTimeout (function() {
