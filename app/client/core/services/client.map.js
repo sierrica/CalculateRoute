@@ -135,6 +135,7 @@ app.factory ('Map', function($http, $translate) {
 
     var map;
     var map_html;
+    var marker_bug_restaure;
     var circle_manoeuvre;
     var letters = ['A','B','C','D','E','F','G','H','I','J'];
 
@@ -155,6 +156,11 @@ app.factory ('Map', function($http, $translate) {
     var list_markers_stations = [];
 
     return {
+        addMarkerBugRestaure: function() {
+            if (marker_bug_restaure)
+                map.removeLayer(marker_bug_restaure);
+            marker_bug_restaure = L.marker([0, 0], {opacity: 0.0}).addTo(map);
+        },
         getBaseLayers: function() {
             return base_layers;
         },
