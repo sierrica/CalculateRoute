@@ -66,7 +66,7 @@ module.exports.initMiddleware = function (app) {
     //app.use (multer());                                                         // for parsing multipart/form-data
 
     if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
-        app.use (morgan('dev', { stream: { write: function(str) { logger.debug(str); } }}));          // Habilitar Morgan a traves de winston.
+        //app.use (morgan('dev', { stream: { write: function(str) { logger.debug(str); } }}));          // Habilitar Morgan a traves de winston.
         app.set('view cache', false);                                                                   // Disable views cache
         app.use(errorHandler()); // Error handler - has to be last
     }

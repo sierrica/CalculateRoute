@@ -1,4 +1,7 @@
 {
+
+  "or": "or",
+
   "home": "home",
   "unknown": "unknown",
   "email is already taken": "email is already taken",
@@ -8,12 +11,64 @@
   "user": "user",
 
 
+  "email": "email",
+  "password": "password",
+  "language": "language",
+
+  "Spanish - (ES)": "Spanish - (ES)",
+  "English - (GB)": "English - (GB)",
+
+
+  "confirm password": "confirm password",
+
+  "login": "login",
+  "signup": "signup",
+  "logout": "logout",
+  "update": "update",
+
+  "remember": "remember",
+
+  "required": "required",
+
+  "correct format": "correct format",
+  "incorrect format": "incorrect format",
+  "6 characters minimum": "6 characters min",
+
+  "passwords dont match!": "passwords don't match!",
+  "match": "match",
+
+
+  "remember username": "remember username",
+  "I accept the terms of use": "I accept the terms of use",
+
+  "forgot your password?": "forgot your password?",
+
+  "changes successfully": "changes successfully",
+  "changes unsuccessfully": "changes unsuccessfully",
+
+
+  "profile": "profile",
+
+
+  "new password": "new password",
+
+
+  "map": "map",
+  "vehicle": "vehicle",
+  "trayect": "trayect",
+  "details": "details",
+
+
+
 
   "erase": "erase",
 
   "origin": "origin",
   "destine": "destine",
   "intermediate": "intermediate",
+
+
+
 
 
 

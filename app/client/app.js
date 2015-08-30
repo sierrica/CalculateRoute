@@ -30,6 +30,9 @@ var app = angular.module('calculateRoute', [
 .factory('myCustomHandlerFactory', function () {
     // has to return a function which gets a tranlation ID
     return function (translationID) {
+        //console.log ("DENTRO ERROR TRADUCCCION");
+        //console.log (translationID);
+        //console.log (this);
         return translationID;
     };
 })
@@ -126,8 +129,9 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
         User.me.get().$promise
         .then (function(response) {
             var user = response.user;
-            user.name = response.user.email.split("@")[0];
+            user.name = user.email.split("@")[0];
             User.setUser (user);
+            console.log ("LANF RESPUESTA: " + response.user.lang)
             User.change_lang (response.user.lang);
             $rootScope.$broadcast ('login');
         });
@@ -138,6 +142,8 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
         $state.transitionTo ("login");
     }
 
+
+
     $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         //if (window.innerWidth < 600)
         //    $('body').removeClass ('loaded');
@@ -145,8 +151,6 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
 
         $(".modal").closeModal();           // Error que se queda oscuo cuando pretas ir "hacia atras" con un modal abierto
         $(".lean-overlay").remove();        // Error que se queda oscuo cuando pretas ir "hacia atras" con un modal abierto
-
-
 
         if (toState.private   &&  !$auth.isAuthenticated()) {
             event.preventDefault();                             // HAY QUE CAMBIAR
@@ -161,23 +165,32 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
         }
     });
 
-    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+
+    $rootScope.$on ('change_lang', function (event) {
+        console.log ("APP CHANGE LANG");
+        var breadcumb = $("#breadcumb").text();
+        console.log (breadcumb);
+        if (breadcumb.indexOf("<img") == -1) {          // No estamos en el home con el logo y por tanto hy ue traducir
+            console.log ("DENTRO IF")
+            $("#breadcumb").html ($translate.instant (breadcumb));
+        }
+    });
+
+    $rootScope.$on ('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         $(".side-nav li").removeClass("active");
         $(".side-nav a[ui-sref=" + toState.name + "]").parent().addClass("active");
 
 
         if (toState.name == "home") {
             $("#breadcumb").html ('<img src="images/logo_camion.png" style="height:60px; width:135px"/>');
-            Map.removeCircleManoeuvre();
-
             setTimeout(function(){
                 $("#search").parent().css ('display', 'block');
                 $("#search").parent().css ('opacity', '1');
             }, 500);
-
         }
         else {
-            $("#breadcumb").html (toState.name);
+            $("#breadcumb").html ($translate.instant (toState.name));
+            //$("#breadcumb").html ($translate.instant (toState.name));
             $("#search").parent().css ("display", "none");
         }
         /*setTimeout(function(){

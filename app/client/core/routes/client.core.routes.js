@@ -1,4 +1,4 @@
-angular.module('calculateRoute').config (['$stateProvider', function ($stateProvider) {
+app.config (function ($stateProvider) {
     $stateProvider.
         state ('home', {
         url: '/',
@@ -18,9 +18,9 @@ angular.module('calculateRoute').config (['$stateProvider', function ($stateProv
             console.log ("ENTRANDO EN HOME CONTROLLER");
         },
         onExit: function(Map) {
-            //Map.getMap().remove();
             console.log ("SALIENDO EN HOME CONTROLLER");
+            Map.removeCircleManoeuvre();
             Map.saveMapHtml();
         }
     });
-}]);
+});

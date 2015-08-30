@@ -1,74 +1,58 @@
-
 <div class="container" ng-controller="AuthenticationController">
-
-    <div class="breadcumb">Signup<li class="divider"></li></div>
     <div class="row">
         <div class="col s12 m8 offset-m2 l6 offset-l3">
             <form name="signupForm" ng-submit="signup()" novalidate autocomplete="off">
                 <div class="row">
                     <div class="input-field col s12">
                         <input type="email" id="email" name="email" ng-required="true" ng-class="signupForm.email.$invalid && signupForm.email.$dirty ? 'invalid' : signupForm.email.$valid && signupForm.email.$dirty ? 'valid' : ''" ng-model="email">
-                        <label for="email">Email</label>
-                        <span class="form_error" ng-show="signupForm.email.$dirty  &&  signupForm.email.$error.required">es requerido</span>
-                        <span class="form_error" ng-show="signupForm.email.$dirty  &&  !signupForm.email.$error.required   &&  signupForm.email.$invalid">formato incorreto</span>
-                        <span class="form_success" ng-show="signupForm.email.$dirty  &&  signupForm.email.$valid">formato correto</span>
+                        <label for="email">{{ 'email' | translate }}</label>
+                        <span class="form_error" ng-show="signupForm.email.$dirty  &&  signupForm.email.$error.required">{{ 'required' | translate }}</span>
+                        <span class="form_error" ng-show="signupForm.email.$dirty  &&  !signupForm.email.$error.required   &&  signupForm.email.$invalid">{{ 'incorrect format' | translate }}</span>
+                        <span class="form_success" ng-show="signupForm.email.$dirty  &&  signupForm.email.$valid">{{ 'correct format' | translate }}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <input type="password" id="password" name="password" ng-required="true" ng-minlength="6" ng-change="checkPassword('signupForm')" ng-class="signupForm.password.$invalid && signupForm.password.$dirty ? 'invalid' : signupForm.password.$valid && signupForm.password.$dirty ? 'valid' : ''" ng-model="password">
-                        <label for="password">Password</label>
-                        <span class="form_error" ng-show="signupForm.password.$dirty  &&  signupForm.password.$error.required">es requerido</span>
-                        <span class="form_error" ng-show="signupForm.password.$dirty  &&  !signupForm.password.$error.required  &&  signupForm.password.$invalid">minimo 6 caracteres</span>
-                        <span class="form_success" ng-show="signupForm.password.$dirty  &&  signupForm.password.$valid">formato correto</span>
+                        <label for="password">{{ 'password' | translate }}</label>
+                        <span class="form_error" ng-show="signupForm.password.$dirty  &&  signupForm.password.$error.required">{{ 'required' | translate }}</span>
+                        <span class="form_error" ng-show="signupForm.password.$dirty  &&  !signupForm.password.$error.required  &&  signupForm.password.$invalid">{{ '6 characters minimum' | translate }}</span>
+                        <span class="form_success" ng-show="signupForm.password.$dirty  &&  signupForm.password.$valid">{{ 'correct format' | translate }}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <input type="password" id="confirm_password" name="confirm_password" ng-change="checkPassword('signupForm')" ng-class="signupForm.confirm_password.$dirty  &&  signupForm.confirm_password.$error.dontMatch ? 'invalid' : signupForm.confirm_password.$dirty  &&  password == confirm_password ? 'valid' : ''" ng-model="confirm_password">
-                        <label for="confirm_password">Confirmar Password</label>
-                        <span class="form_error" ng-show="signupForm.confirm_password.$dirty && signupForm.confirm_password.$error.dontMatch">Passwords don't match!</span>
-                        <span class="form_success" ng-show="signupForm.confirm_password.$dirty  &&  password == confirm_password">Si coinciden</span>
+                        <label for="confirm_password">{{ 'confirm password' | translate }}</label>
+                        <span class="form_error" ng-show="signupForm.confirm_password.$dirty && signupForm.confirm_password.$error.dontMatch">{{ 'passwords dont match!' | translate }}</span>
+                        <span class="form_success" ng-show="signupForm.confirm_password.$dirty  &&  password == confirm_password">{{ 'match' | translate }}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s4 m4 l3">
-                        <label for="lang" style="font-size:15px;">Language</label>
+                        <label for="lang" style="font-size:15px;">{{ 'language' | translate }}</label>
                     </div>
                     <div class="col s7 m5 l9">
                         <select id="lang" name="lang" ng-init="lang_default()" ng-model="lang" style="width: 100%">
-                            <option value="es-ES" >Spanish - (ES)</option>
+                            <option value="es-ES">Spanish - (ES)</option>
                             <option value="en-GB">English - (GB)</option>
                         </select>
                     </div>
-                    <script>
-                        function formatState (state) {
-                            if (!state.id)
-                                return state.text;
-                            return $('<span><span class="flag-icon flag-icon-' + state.element.value.toLowerCase().replace(/_/g, '-').split('-')[1] + '"></span> ' + state.text + '</span>');
-                        };
-                        $("#lang").select2({
-                            //theme: "classic",
-                            minimumResultsForSearch: Infinity,
-                            templateResult: formatState,
-                            templateSelection: formatState
-                        });
-                    </script>
                 </div>
                 <div class="row">
                     <div class="col s12">
                         <input type="checkbox" id="remember" ng-model="remember"/>
-                        <label for="remember">Recordar nombre de usuario</label>
+                        <label for="remember">{{ 'remember username' | translate }}</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12">
                         <input type="checkbox" id="accept" ng-model="accept"/>
-                        <label for="accept">Acepto las condiciones de uso</label>
+                        <label for="accept">{{ 'I accept the terms of use' | translate }}</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-large pink" ng-disabled="!accept  ||  signupForm.email.$invalid  ||  signupForm.password.$invalid || signupForm.confirm_password.$error.dontMatch"><i class="small material-icons right">send</i>Sign up</button>
-                &nbsp;&nbsp;&nbsp; or &nbsp;<a ui-sref="login">Login</a>
+                <button type="submit" class="btn btn-large pink" ng-disabled="!accept  ||  signupForm.email.$invalid  ||  signupForm.password.$invalid || signupForm.confirm_password.$error.dontMatch"><i class="small material-icons right">send</i>{{ 'signup' | translate }}</button>
+                &nbsp;&nbsp;&nbsp; {{ 'or' | translate }} &nbsp;<a ui-sref="login">{{ 'login' | translate }}</a>
             </form>
         </div>
     </div>

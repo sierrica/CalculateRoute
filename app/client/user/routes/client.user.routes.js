@@ -26,9 +26,9 @@ app.config (['$stateProvider', '$authProvider', function ($stateProvider, $authP
         templateUrl: 'user/views/client.user.login.view.html',
         private: false
     })
-    .state ('forgot', {
-        url: '/forgot',
-        templateUrl: 'user/views/client.user.forgot.view.html',
+    .state ('remember', {
+        url: '/remember',
+        templateUrl: 'user/views/client.user.remember.view.html',
         private: false
     })
     .state ('profile', {

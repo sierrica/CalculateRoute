@@ -1,4 +1,4 @@
-app.factory('Sidenav', function($rootScope) {
+app.factory ('Sidenav', function($rootScope) {
     // Comprobar si el menu esta abierto y se redimensiona la pantalla > 992 -> Se cierra el menu pero es necesario colocar el icono
     $(window).resize(function() {
         if (window.innerWidth > 992   &&  $("#slide-out").css("left") == "0px") {

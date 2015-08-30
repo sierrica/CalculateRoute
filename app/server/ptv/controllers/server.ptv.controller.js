@@ -190,47 +190,6 @@ exports.calculateroute = function(req, res) {
     peticion.callerContext = callerContext;
     peticion.exceptionPaths = [];
 
-/*
-    var peticion = {
-        waypoints: [{
-            coords: [{
-                point: {
-                    : -0.98397434992,
-                    y: 41.651353453
-                }
-            }],
-            linkType: 'NEXT_SEGMENT'
-        }, {
-            coords: [{
-                point: {
-                    x: -1.13744,
-                    y: 42.12921
-                }
-            }],
-            linkType: 'NEXT_SEGMENT'
-        }],
-        callerContext: callerContext,
-        options: [],
-        exceptionPaths: [],
-        details: {
-            binaryPathDesc: false,
-            manoeuvreAttributes: false,
-            manoeuvres: false,
-            nodes: false,
-            polygon: false,
-            polygonElevations: false,
-            segmentAttributes: false,
-            segments: false,
-            speedLimits: false,
-            texts: false,
-            urbanManoeuvres: false
-        }
-    };
-*/
-
-    console.log ("PETICION");
-    console.log (peticion);
-
     var options = {
         url: 'https://xroute-eu-n-test.cloud.ptvgroup.com/xroute/rs/XRoute/calculateRoute',
         headers: headers,

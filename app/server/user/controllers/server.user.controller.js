@@ -124,7 +124,13 @@ function update(req, res, next) {
         user.save (function (err) {
             if (err)
                 return res.status(400).send (err);
-            res.status(201).send (user);
+            token.createToken (user, function(res, err, token) {
+                if (err) {
+                    logger.error (err.message);
+                    return res.status(400).send(err);
+                }
+                res.status(201).json ({ access_token: token, user: user });
+            }.bind(null, res));
         });
     });
 };

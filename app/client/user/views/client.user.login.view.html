@@ -4,31 +4,31 @@
             <form name="loginForm" ng-submit="login()" novalidate autocomplete="off" style="margin-top: 15px;">
                 <div class="row">
                     <div class="input-field col s12">
-                        <label for="email">Email</label>
+                        <label for="email">{{ 'email' | translate }}</label>
                         <input type="email" id="email" name="email" ng-required="true" ng-class="loginForm.email.$invalid && loginForm.email.$dirty ? 'invalid' : loginForm.email.$valid && loginForm.email.$dirty ? 'valid' : ''" ng-model="email">
-                        <span class="form_error" ng-show="loginForm.email.$dirty  &&  loginForm.email.$error.required">es requerido</span>
-                        <span class="form_error" ng-show="loginForm.email.$dirty  &&  !loginForm.email.$error.required  && loginForm.email.$invalid">formato incorreto</span>
-                        <span class="form_success" ng-show="loginForm.email.$dirty  &&  loginForm.email.$valid">formato correto</span>
+                        <span class="form_error" ng-show="loginForm.email.$dirty  &&  loginForm.email.$error.required">{{ 'required' | translate }}</span>
+                        <span class="form_error" ng-show="loginForm.email.$dirty  &&  !loginForm.email.$error.required  && loginForm.email.$invalid">{{ 'incorrect format' | translate }}</span>
+                        <span class="form_success" ng-show="loginForm.email.$dirty  &&  loginForm.email.$valid">{{ 'correct format' | translate }}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <label for="password">Password</label>
+                        <label for="password">{{ 'password' | translate }}</label>
                         <input type="password" id="password" name="password" ng-required="true" ng-minlength="6" ng-class="loginForm.password.$invalid && loginForm.password.$dirty ? 'invalid' : loginForm.password.$valid && loginForm.password.$dirty ? 'valid' : ''" ng-model="password">
-                        <span class="form_error" ng-show="loginForm.password.$dirty  &&  loginForm.password.$error.required">es requerido</span>
-                        <span class="form_error" ng-show="loginForm.password.$dirty  &&  loginForm.password.$error.minlength">minimo 6 caracteres</span>
-                        <span class="form_success" ng-show="loginForm.password.$dirty  &&  loginForm.password.$valid">formato correto</span>
+                        <span class="form_error" ng-show="loginForm.password.$dirty  &&  loginForm.password.$error.required">{{ 'required' | translate }}</span>
+                        <span class="form_error" ng-show="loginForm.password.$dirty  &&  loginForm.password.$error.minlength">{{ '6 characters minimum' | translate }}</span>
+                        <span class="form_success" ng-show="loginForm.password.$dirty  &&  loginForm.password.$valid">{{ 'correct format' | translate }}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12">
                         <input type="checkbox" id="remember" ng-model="remember"/>
-                        <label for="remember">Recordar nombre de usuario</label>
+                        <label for="remember">{{ 'remember username' | translate }}</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-large pink" ng-disabled="loginForm.email.$invalid  ||  loginForm.password.$invalid"><i class="small material-icons right">send</i>Login</button>
-                &nbsp;&nbsp;&nbsp; or &nbsp;<a ui-sref="signup">Signup</a>
-                <a ui-sref="forgot" style="display:block;margin-top:10px;">Forgot your Password?</a>
+                <button type="submit" class="btn btn-large pink" ng-disabled="loginForm.email.$invalid  ||  loginForm.password.$invalid"><i class="small material-icons right">send</i>{{ 'login' | translate }}</button>
+                &nbsp;&nbsp;&nbsp; {{ 'or' | translate }} &nbsp;<a ui-sref="signup">{{ 'signup' | translate }}</a>
+                <a ui-sref="remember" style="display:block;margin-top:10px;">{{ 'forgot your password?' | translate }}</a>
             </form>
         </div>
     </div>

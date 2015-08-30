@@ -10,7 +10,7 @@
                 <ul id="profile-dropdown" class="dropdown-content">
                     <li class="no-padding" ng-show="isAuthenticated()">
                         <a ui-sref="profile" ng-click="close_sidenav($event)">
-                            <i class="material-icons">face</i> Perfil
+                            <i class="material-icons">face</i> {{ 'profile' | translate }}
                         </a>
                     </li>
                     <!--<li class="no-padding">
@@ -43,29 +43,29 @@
                     </li>
                 </ul>
                 <a ng-mouseup="dropdown($event)" class="truncate dropdown-button waves-effect waves-light white-text" data-beloworigin="true" href="#" data-activates="profile-dropdown">{{ user.name || 'unknown' | translate }}<i class="mdi-navigation-arrow-drop-down left" style="margin-right:5px"></i></a>
-                <p style="color:white; text-indent: 40px; text-transform: capitalize;" translate>{{ user.rol || 'desautenticado' }}</p>
+                <p style="color:white; text-indent: 40px; text-transform: capitalize;">{{ user.rol || 'unknown' | translate}}</p>
             </div>
         </div>
     </li>
     <li class="divider" style="height:10px"></li>
     <li class="no-padding">
-        <a ui-sref="home" class="waves-effect waves-light" ng-click="close_sidenav($event)">
-            <i class="small material-icons">map</i> Mapa
+        <a ui-sref="home" class="waves-effect waves-light" ng-click="close_sidenav($event)" ng-show="isAuthenticated()">
+            <i class="small material-icons">map</i> {{ 'map' | translate }}
         </a>
     </li>
     <li class="no-padding">
-        <a ui-sref="vehicle" class="waves-effect waves-light" ng-click="close_sidenav($event)">
-            <i class="small material-icons">local_shipping</i> Vehiculo
+        <a ui-sref="vehicle" class="waves-effect waves-light" ng-click="close_sidenav($event)" ng-show="isAuthenticated()">
+            <i class="small material-icons">local_shipping</i> {{ 'vehicle' | translate }}
         </a>
     </li>
     <li class="no-padding">
-        <a ui-sref="trayect" class="waves-effect waves-light" ng-click="close_sidenav($event)">
-            <i class="small material-icons">confirmation_number</i> Trayecto
+        <a ui-sref="trayect" class="waves-effect waves-light" ng-click="close_sidenav($event)" ng-show="isAuthenticated()">
+            <i class="small material-icons">confirmation_number</i> {{ 'trayect' | translate }}
         </a>
     </li>
     <li class="no-padding">
-        <a ui-sref="details" class="waves-effect waves-light" ng-click="close_sidenav($event)">
-            <i class="small material-icons">assignment</i> Detalles
+        <a ui-sref="details" class="waves-effect waves-light" ng-click="close_sidenav($event)" ng-show="isAuthenticated()">
+            <i class="small material-icons">assignment</i> {{ 'details' | translate }}
         </a>
     </li>
     <!--

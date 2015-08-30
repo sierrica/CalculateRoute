@@ -7,8 +7,10 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         $('#modal_manoeuvres table tbody tr').css ('background-color', 'white');
         $('#modal_manoeuvres table tbody tr:nth-child(' + (index_manoeuvre+1) + ')').css ('background-color', '#f2f2f2');
         var manoeuvre = $scope.results.manoeuvres[index_manoeuvre];
-        var latlng = $scope.results.polygon.getLatLngs()[manoeuvre.index];
-        var circle_manoeuvre = L.circle (latlng, 4, {
+        var latlng_manoeuvre = $scope.results.polygon.getLatLngs()[manoeuvre.index];
+        if ($scope.circle_manoeuvre)
+            map.removeLayer ($scope.circle_manoeuvre);
+        var circle_manoeuvre = L.circle (latlng_manoeuvre, 4, {
             stroke: true,
             color: 'gray',
             weight: 3,
@@ -16,9 +18,10 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             fill: true,
             fillColor: 'white',
             fillOpacity: 1,
-            className: '',                 // custom class
+            className: '',
         });
         Map.setCircleManoeuvre (circle_manoeuvre);
+
     };
     $scope.showInfo = function(ev) {
         $('#modal_info').openModal();
@@ -115,14 +118,14 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             $("#select_choice_index").append('<option value="0">A: Origen</option>');
         else {
             for (i=0; i<Map.lengthMarkerStations(); i++)
-                $("#select_choice_index").append('<option value="' + i + '">' + Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"") +  '</option>')
+                $("#select_choice_index").append ('<option value="' + i + '">' + Map.Letters[i] + ': ' + Map.getMarkerStation(i).getPopup().getContent().replace(/[<]br[^>]*[>]/gi," - ").replace(/[<]b[^>]*[>]/gi,"") +  '</option>')
         }
-        $("#modal_choice_index option:selected").removeAttr("selected");
+        $("#modal_choice_index option:selected").removeAttr ("selected");
         var value_first = $("#select_choice_index option:nth-child(1)").val();
         if ( !value_first   || value_first == '?' || value_first == '? undefined:undefined ?')
-            $("#select_choice_index option:nth-child(2)").attr("selected", "selected");
+            $("#select_choice_index option:nth-child(2)").attr ("selected", "selected");
         else
-            $("#select_choice_index option:nth-child(1)").attr("selected", "selected");
+            $("#select_choice_index option:nth-child(1)").attr ("selected", "selected");
         $('#modal_choice_index').openModal();
         var that = $scope;
         $("#button_select_choice_index").off('click').on ('click', function(e) {
@@ -133,77 +136,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             $('#modal_choice_index').closeModal();
         });
     };
-
-
-
-
-    $scope.contextMenu = function (marker) {
-        var that = $scope;
-        marker.on ("contextmenu", function(ev) {
-            var marker_selected = ev.target;
-            console.log ("ev.target")
-            console.log (ev.target)
-            that.index_marker_selected = _.indexOf (Map.getMarkersStations(), marker_selected);
-            //that.$apply();
-        });
-    };
-    $scope.dragStart = function (marker) {
-        var that = $scope;
-        marker.on ("dragstart", function(ev) {
-            var marker_selected = ev.target;
-            that.map.contextmenu.hide();
-            that.latlng_dragstart = marker_selected.getLatLng();
-            //that.$apply();
-        })
-    };
-    $scope.dragEnd = function (marker) {
-        var that = $scope;
-        marker.on ("dragend", function(ev) {
-            var marker_selected = ev.target;
-            marker_selected.setOpacity (0.0);
-            var marker_loading = L.marker (marker_selected.getLatLng(), {icon: Map.IconLoading }).addTo (that.map);
-            $http.post ('/ptv/findlocation', marker_selected.getLatLng())
-            .success (function(response) {
-                Map.setClusterMarkerStation (marker_selected);
-                that.map.removeLayer (marker_loading);
-                marker_selected.openPopup().getPopup().setContent (Map.formatDirPopup (response.result, true));
-                marker_selected.setOpacity (1);
-
-                if (Map.lengthMarkerStations() >= 2)
-                    that.calculateroute();
-            })
-            .error (function(response, status) {
-                if (status == 404) {
-                    //console.log ("PUNTO IMPOSIBLE DE LOCALIZAR");
-                    that.map.removeLayer (marker_loading);
-                    marker_selected.setLatLng (that.latlng_dragstart);
-                    marker_selected.update();
-                    marker_selected.setOpacity (1);
-                    Materialize.toast ('<span class="red">' + 'PUNTO IMPOSIBLE DE LOCALIZAR' + '</span>', 4000);
-                }
-            });
-        });
-    };
-
-
-    $scope.removeMarker = function(ev) {
-        Map.removeMarkerStation ($scope.index_marker_selected);                 // REMOVE
-        for (i=$scope.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
-            var marker = Map.getMarkerStation(i);
-            marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
-            Map.setMarkerStation (marker, i);
-        }
-        if (Map.lengthMarkerStations() >= 2)
-            $scope.calculateroute();
-        else if ($scope.results.polygon) {
-            Map.getMap().removeLayer ($scope.results.polygon);
-            $scope.results.info = { cost: 0, distance: 0, time: 0 };
-            $scope.results.manoeuvres = [];
-            $scope.$apply();
-            $("#modal_info, #modal_manoeuvres").closeModal();
-        }
-    };
-
 
     $scope.add = function (ev, index) {
         var point_selected = ev;
@@ -223,13 +155,42 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                     text: $translate.instant ('borrar'),
                     callback: that.removeMarker
                 }]
-            });
-            that.contextMenu (marker);
-            that.dragStart (marker);
-            that.dragEnd (marker);
-            marker.bindPopup (Map.formatDirPopup(response.result, true));
-            Map.addMarkerStation (marker, index);                  //ADD TO FACTORY
-            marker.openPopup();
+            }).on ("contextmenu", function(ev) {
+                var marker_selected = ev.target;
+                console.log ("ev.target")
+                console.log (ev.target)
+                that.index_marker_selected = _.indexOf (Map.getMarkersStations(), marker_selected);
+                //that.$apply();
+            }).on ("dragstart", function(ev) {
+                var marker_selected = ev.target;
+                that.map.contextmenu.hide();
+                that.latlng_dragstart = marker_selected.getLatLng();
+            }).on ("dragend", function(ev) {
+                var marker_selected = ev.target;
+                marker_selected.setOpacity (0.0);
+                var marker_loading = L.marker (marker_selected.getLatLng(), {icon: Map.IconLoading }).addTo (that.map);
+                $http.post ('/ptv/findlocation', marker_selected.getLatLng()).success (function(response) {
+                    Map.setClusterMarkerStation (marker_selected);
+                    that.map.removeLayer (marker_loading);
+                    marker_selected.openPopup().getPopup().setContent (Map.formatDirPopup (response.result, true));
+                    marker_selected.setOpacity (1);
+                    if (Map.lengthMarkerStations() >= 2)
+                        that.calculateroute();
+                }).error (function(response, status) {
+                    if (status == 404) {
+                        that.map.removeLayer (marker_loading);
+                        marker_selected.setLatLng (that.latlng_dragstart);
+                        marker_selected.update();
+                        marker_selected.setOpacity (1);
+                        Materialize.toast ('<span class="red">' + 'PUNTO IMPOSIBLE DE LOCALIZAR' + '</span>', 4000);
+                    }
+                });
+            }).bindPopup (Map.formatDirPopup(response.result, true));
+
+            Map.addMarkerStation (marker, index);
+            setTimeout (function() {
+                marker.openPopup();
+            }, 100);
 
             for (i=index; i<Map.lengthMarkerStations(); i++) {
                 var marker = Map.getMarkerStation(i);
@@ -241,29 +202,49 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         })
         .error (function(response, status) {
             if (status == 404) {
-                that.map.removeLayer (marker_pre);
-                console.log ("PUNTO IMPOSIBLE DE LOCALIZAR");
+                Map.getMap().removeLayer (loading_marker);
                 Materialize.toast ('<span class="red">' + 'PUNTO IMPOSIBLE DE LOCALIZAR' + '</span>', 4000);
             }
         });
-    }
+    };
+
+    $scope.removeMarker = function(ev) {
+        Map.removeMarkerStation ($scope.index_marker_selected);
+        for (i=$scope.index_marker_selected; i<Map.lengthMarkerStations(); i++) {
+            var marker = Map.getMarkerStation(i);
+            marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
+            Map.setMarkerStation (marker, i);
+        }
+        if (Map.lengthMarkerStations() >= 2)
+            $scope.calculateroute();
+        else {
+            Map.getMap().removeLayer ($scope.results.polygon);
+            $scope.results.info = { cost: 0, distance: 0, time: 0 };
+            $scope.results.manoeuvres = [];
+            $scope.$apply();
+            $("#modal_info, #modal_manoeuvres").closeModal();
+        }
+    };
+
+
+
+    $scope.cssMap = function() {
+        if (window.innerWidth > 992)
+            $("#map").css("width", window.innerWidth - 300);
+        else
+            $("#map").css("width", window.innerWidth);
+        $("#map").css("height", window.innerHeight - 50);
+    };
 
 
     $scope.renderMap = function() {
         if (Map.getMap() != undefined) {
+            $scope.map = Map.getMap();
             $("#map").replaceWith (Map.restoreMapHtml());
-            if (window.innerWidth > 992)
-                $("#map").css("width", window.innerWidth - 300);
-            else
-                $("#map").css("width", window.innerWidth);
-            $("#map").css("height", window.innerHeight - 50);
+            $scope.cssMap();
         }
         else {
-            if (window.innerWidth > 992)
-                $("#map").css("width", window.innerWidth - 300);
-            else
-                $("#map").css("width", window.innerWidth);
-            $("#map").css("height", window.innerHeight - 50);
+            $scope.cssMap();
             $scope.initMap();
         }
         Map.addMarkerBugRestaure();
@@ -283,17 +264,17 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             contextmenuItems: [{
                 index: 0,
                 icon: 'images/flecha_verde.png',
-                text: $translate.instant('origen'),
+                text: $translate.instant ('origen'),
                 callback: that.addOrigin
             }, {
                 index: 1,
                 icon: 'images/flecha_verde.png',
-                text: $translate.instant('intermedio'),
+                text: $translate.instant ('intermedio'),
                 callback: that.addIntermediate
             }, {
                 index: 2,
                 icon: 'images/flecha_verde.png',
-                text: $translate.instant('destino'),
+                text: $translate.instant ('destino'),
                 callback: that.addDestine
             }]
         }).on ('contextmenu', function (ev) {
@@ -305,7 +286,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         }).on ('contextmenu:select', function (contextmenu, el) {
             //var index_select = $("div.leaflet-contextmenu a").index(contextmenu.el);
         }).on ('load', function (e) {
-            if (e.name = "GOOGLE") {
+            /*if (e.name = "GOOGLE") {
                 setTimeout(function () {
                     $("div.gmnoprint, div.gm-style-cc").fadeOut(1000, function () {
                         $("div.gmnoprint, div.gm-style-cc").remove();
@@ -314,47 +295,20 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                         $("img[src='http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png']").first().parent().parent().parent().remove();
                     });
                 }, 2000);
-            }
+            }*/
         }).on ('baselayerchange', function (e) {
-            if (e.name = "GOOGLE") {
-                setTimeout(function () {
-                    $("div.gmnoprint, div.gm-style-cc").fadeOut(1000, function () {
-                        $("div.gmnoprint, div.gm-style-cc").remove();
-                    });
-                    $("img[src='http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png']").first().parent().parent().parent().fadeOut(1000, function () {
-                        $("img[src='http://maps.gstatic.com/mapfiles/api-3/images/google_white2.png']").first().parent().parent().parent().remove();
-                    });
-                }, 2000);
-            }
-        }).setView([41.9204014, -1.2529047000000446], 18);
+        }).setView ([41.9204014, -1.2529047000000446], 18);
 
         Map.setMap ($scope.map);
     };
 
 
 
-
-
-
-
-
-
-
-
     console.log ("PAYLOAD");
     console.log ($auth.getPayload());
 
-
-
-
-
-
     $scope.mostrar_posicion = function (posicion) {
-        //console.log ("LATITUD");
-        //console.log (posicion.coords.latitude);
         $scope.latitud = posicion.coords.latitude;
-        //console.log ("LONGITUD");
-        //console.log (posicion.coords.longitude);
         $scope.$apply();
     };
     $scope.error_posicion = function (error) {

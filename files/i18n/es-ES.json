@@ -1,11 +1,59 @@
 {
+  "or": "o",
   "home": "inicio",
   "unknown": "desconocido",
-  "email is already taken": "email ya esta cogido",
-  "properly registered": "registrado correctamente",
-  "wrong email and/or password": "usuario y/o contrasena erroneos",
-  "properly entered": "logueado correctamente",
+  "email is already taken": "correo electr\u00F3nico ya cogido",
+  "properly registered": "registrado corr\u00E9ctamente",
+  "wrong email and/or password": "usuario y/o contrase\u00F1a erroneos",
+  "properly entered": "entrado corr\u00E9ctamente",
   "user": "usuario",
+
+  "email": "correo electr\u00F3nico",
+  "password": "contrase\u00F1a",
+  "language": "lenguaje",
+  "Spanish - (ES)": "Espa\u00F1ol - (ES)",
+  "English - (GB)": "Ingl\u00E9s - (GB)",
+
+
+  "confirm password": "confirmar contrase\u00F1a",
+
+  "login": "entrar",
+  "signup": "registrarse",
+  "logout": "salir",
+  "update": "actualizar",
+
+  "remember": "recordar",
+
+  "required": "requerido",
+
+  "correct format": "formato correcto",
+  "incorrect format": "formato incorrecto",
+  "6 characters minimum": "6 caracteres m\u00EDnimo",
+
+  "passwords dont match!": "\u00A1las contrase\u00F1as no coinciden!",
+  "match": "coincide",
+
+  "remember username": "recordar nombre de usuario",
+  "I accept the terms of use": "Acepto las condiciones de uso",
+  "forgot your password?": "\u00BFHas perdido la contrase\u00F1a?",
+
+
+  "changes successfully": "cambios realizados correctamente",
+  "changes unsuccessfully": "cambios no realizados correctamente",
+
+
+
+  "profile": "perfil",
+
+
+  "new password": "nueva contrase\u00F1a",
+
+  "map": "mapa",
+  "vehicle": "veh\u00EDculo",
+  "trayect": "trayecto",
+  "details": "detalles",
+
+
 
 
   "erase": "borrar",
@@ -14,7 +62,6 @@
   "origin": "origen",
   "destine": "destino",
   "intermediate": "intermedio",
-
 
 
   "baustelle": "obra"

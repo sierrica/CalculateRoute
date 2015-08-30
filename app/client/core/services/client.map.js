@@ -139,7 +139,7 @@ app.factory ('Map', function($http, $translate) {
     var circle_manoeuvre;
     var letters = ['A','B','C','D','E','F','G','H','I','J'];
 
-
+    var list_markers_stations = [];
     var cluster_markers_stations = new L.MarkerClusterGroup ({
         maxClusterRadius: 80,
         iconCreateFunction: null,
@@ -153,17 +153,11 @@ app.factory ('Map', function($http, $translate) {
         spiderfyDistanceMultiplier: 1,
         polygonOptions: {}
     });
-    var list_markers_stations = [];
 
     return {
-        addMarkerBugRestaure: function() {
-            if (marker_bug_restaure)
-                map.removeLayer(marker_bug_restaure);
-            marker_bug_restaure = L.marker([0, 0], {opacity: 0.0}).addTo(map);
-        },
-        getBaseLayers: function() {
-            return base_layers;
-        },
+        IconPushpin: icon_pushpin,
+        IconLoading: icon_loading,
+        Letters: letters,
         getLayer: function(layer) {
             if (layer == 'google_maps')
                 return google_maps;
@@ -174,11 +168,11 @@ app.factory ('Map', function($http, $translate) {
             else if (layer == 'ptv_maps')
                 return ptv_maps;
         },
-        getOverlays: function() {
-          return overlays;
-        },
-        removeMap: function() {
-            map.remove();
+        getWaypoints: function() {
+            var waypoints = [];
+            for (i=0; i<list_markers_stations.length; i++)
+                waypoints.push (list_markers_stations[i].getLatLng())
+            return waypoints;
         },
         getMap: function () {
             return map;
@@ -187,16 +181,9 @@ app.factory ('Map', function($http, $translate) {
             map = mapa;
             map.addLayer (cluster_markers_stations);
 
-            // NECESARIO HAER AQUI POR EL "pane"
+            // NECESARIO HACER AQUI POR EL "pane"
             var ptv_maps_fg = new L.NonTiledLayer.WMS ('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
-                minZoom: 3,
-                opacity: 1.0,
-                layers: 'xmap-ajaxfg',
-                format: 'image/png',
-                transparent: true,
-                attribution: false,
-                zIndex: 100,
-                pane: map.getPanes().tilePane
+                minZoom: 3, opacity: 1.0, layers: 'xmap-ajaxfg', format: 'image/png', transparent: true, attribution: false, zIndex: 100, pane: map.getPanes().tilePane
             });
             var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
 
@@ -223,40 +210,19 @@ app.factory ('Map', function($http, $translate) {
         restoreMapHtml: function() {
             return map_html;
         },
-
-        IconPushpin: icon_pushpin,
-        IconLoading: icon_loading,
-        Letters: letters,
+        addMarkerBugRestaure: function() {
+            if (marker_bug_restaure)
+                map.removeLayer(marker_bug_restaure);
+            marker_bug_restaure = L.marker([0, 0], {opacity: 0.0}).addTo(map);
+        },
         lengthMarkerStations: function() {
             return list_markers_stations.length;
         },
         getMarkersStations: function() {
             return list_markers_stations;
         },
-        getWaypoints: function() {
-            var waypoints = [];
-            for (i=0; i<list_markers_stations.length; i++)
-                waypoints.push (list_markers_stations[i].getLatLng())
-            return waypoints;
-        },
-        removeMarkersStations: function() {
-            list_markers_stations = [];
-            cluster_markers_stations.clearLayers();
-        },
-        setMarkersStations: function (markers) {
-            list_markers_stations = markers;
-            cluster_markers_stations.addLayers (markers);
-        },
         getMarkerStation: function(index) {
             return list_markers_stations[index];
-        },
-        setClusterMarkerStation: function (marker) {
-            cluster_markers_stations.clearLayers();
-            cluster_markers_stations.addLayers (list_markers_stations);
-        },
-        setMarkerStation: function (marker, index) {
-            list_markers_stations[i] = marker;
-            cluster_markers_stations.addLayer (marker);
         },
         addMarkerStation: function (marker, index) {
             list_markers_stations.splice (index, 0, marker);
@@ -267,6 +233,14 @@ app.factory ('Map', function($http, $translate) {
             var marker = list_markers_stations[index];
             list_markers_stations.splice (index, 1);
             cluster_markers_stations.removeLayer (marker);
+        },
+        setMarkerStation: function (marker, index) {
+            list_markers_stations[i] = marker;
+            cluster_markers_stations.addLayer (marker);
+        },
+        setClusterMarkerStation: function (marker) {
+            cluster_markers_stations.clearLayers();
+            cluster_markers_stations.addLayers (list_markers_stations);
         },
         formatDirPopup: function (dir, br) {
             var popup = '';
@@ -305,6 +279,6 @@ app.factory ('Map', function($http, $translate) {
             if (circle_manoeuvre)
                 map.removeLayer(circle_manoeuvre);
             //circle_manoeuvre = null;
-        },
+        }
     }
 });

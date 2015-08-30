@@ -5,7 +5,7 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
     var user = User.getUser();
     $scope.email = user.email;
     $scope.lang = user.lang;
-    $scope.$on('login', function (event) {
+    $scope.$on ('login', function (event) {
         user = User.getUser();
         $scope.email = user.email;
         $scope.lang = user.lang;
@@ -14,6 +14,21 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
     $scope.lang_default = function() {
         var lang = document.documentElement.lang;
         $scope.lang = lang;
+        console.log ("SCOPE LANG: " + lang);
+
+        function formatState (state) {
+            if (!state.id)
+                return state.text;
+            return $('<span><span class="flag-icon flag-icon-' + state.element.value.toLowerCase().replace(/_/g, '-').split('-')[1] + '"></span> ' + $translate.instant(state.text) + '</span>');
+        };
+
+        $("#lang").select2 ({
+            //theme: "classic",
+            minimumResultsForSearch: Infinity,
+            templateResult: formatState,
+            templateSelection: formatState
+        });
+
         $("#lang").select2 ("val", lang);
     };
 
@@ -40,13 +55,21 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
             password: $scope.password,
             lang: $scope.lang
         }, function(response) {
-            $scope.email = response.email;
-            $scope.lang = response.lang;
+            $auth.setToken (response.access_token);                 // Sobreescribo el token
+            $scope.email = response.user.email;
+            $scope.lang = response.user.lang;
+
             if ($scope.lang != document.documentElement.lang)
                 User.change_lang ($scope.lang);
-            Materialize.toast ('<span class="green">' + $translate.instant('Cambios realizados correctamente') + '</span>', 5000);
+
+            setTimeout (function() {
+                Materialize.toast ('<span class="green">' + $translate.instant('changes successfully') + '</span>', 5000);
+                $scope.lang_default();
+            }, 2000);
+
+
         }, function(response) {
-            Materialize.toast ('<span class="red">' + $translate.instant('Cambios no realizados correctamente') + '</span>', 5000);
+            Materialize.toast ('<span class="red">' + $translate.instant('changes unsuccessfully') + '</span>', 5000);
         });
     };
 
@@ -83,9 +106,9 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
                 User.setUser (user);
                 if (response.user.lang != document.documentElement.lang)
                     User.change_lang (response.user.lang);
-                $state.transitionTo ("home");
                 Materialize.toast ('<span class="green">' + $translate.instant('properly entered') + '</span>', 5000);
                 $rootScope.$emit ('login');
+                $state.transitionTo ("home");
             });
         }).catch (function(response) {
             Materialize.toast ('<span class="red">' + $translate.instant(response.data.message) + '</span>', 5000);
