@@ -109,10 +109,16 @@
   "blocked emergency lane": "blocked emergency lane",
   "danger from defective truck": "danger from defective truck",
   "exit locked": "exit locked",
+  "exits locked": "exits locked",
   "temporary basis with temporary traffic lights": "temporary basis with temporary traffic lights",
   "traffic obstruction by salvage operations": "traffic obstruction by salvage operations",
   "obstruction by curious": "obstruction by curious",
   "danger from people on the road": "danger from people on the road",
+  "accident with truck": "accident with truck",
+  "danger due to unsecured accident site": "danger due to unsecured accident site",
+  "traffic obstruction by fallen trees": "traffic obstruction by fallen trees",
+  "thunderstorm": "thunderstorm",
+  "lane alternately free": "lane alternately free",
   "accident": "accident"
 
 

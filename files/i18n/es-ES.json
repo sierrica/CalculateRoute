@@ -102,10 +102,16 @@
   "blocked emergency lane": "carril de emergencias bloqueado",
   "danger from defective truck": "peligro por camion averiado",
   "exit locked": "salida bloqueada",
+  "exits locked": "salidas bloqueadas",
   "temporary basis with temporary traffic lights": "de manera temporal con semaforos temporales",
   "traffic obstruction by salvage operations": "obstruccion del trafico por operaciones de salvamento",
   "obstruction by curious": "obstruccion por curioso",
   "danger from people on the road": "peligro de personas en la carretera",
+  "accident with truck": "accidente con camion",
+  "danger due to unsecured accident site": "peligro debido al lugar del accidente sin garantía",
+  "traffic obstruction by fallen trees": "obstruccion de trafico por arboles caídos",
+  "thunderstorm": "tormenta electrica",
+  "lane alternately free": "carril alternativamente gratuito",
   "accident": "accidente"
 
 }

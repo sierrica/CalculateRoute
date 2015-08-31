@@ -13,8 +13,10 @@ app.factory ('Map', function($http, $translate) {
     });
     L.PtvLayer.TrafficInformation = L.PtvLayer.TrafficInformation.extend ({
         _formatTooltip: function (description) {
+            console.log (description);
             var phrase = description.split("#")[1];
             return phrase.replace(/bei/i, '<b>' + $translate.instant ('at') + '</b>')
+                         .replace(/Ein- und Ausfahrten gesperrt/i, '<b>' + $translate.instant ('exits locked') + '</b>')
                          .replace(/Unfall mit mehreren Fahrzeugen/i, '<b>' + $translate.instant ('accident involving several vehicles') + '</b>')
                          .replace(/Gefahr durch Gegenst\u00E4nde auf der Fahrbahn/i, '<b>' + $translate.instant ('danger of objects on the roadway') + '</b>')
                          .replace(/Gefahr durch defekten LKW/i, '<b>' + $translate.instant ('danger from defective truck') + '</b>')
@@ -40,6 +42,12 @@ app.factory ('Map', function($http, $translate) {
                          .replace(/Standstreifen blockiert/i, '<b>' + $translate.instant ('blocked emergency lane') + '</b>')
                          .replace(/Behinderung durch Neugierige/i, '<b>' + $translate.instant ('obstruction by curious') + '</b>')
                          .replace(/Gefahr durch Personen auf der Fahrbahn/i, '<b>' + $translate.instant ('danger from people on the road') + '</b>')
+                         .replace(/Gefahr durch ungesicherte Unfallstelle/i, '<b>' + $translate.instant ('danger due to unsecured accident site') + '</b>')
+                         .replace(/Verkehrsbehinderung durch umgest\u00FCrzte B\u00E4ume/i, '<b>' + $translate.instant ('traffic obstruction by fallen trees') + '</b>')
+
+                        .replace(/Fahrstreifen abwechselnd frei/i, '<b>' + $translate.instant ('lane alternately free') + '</b>')
+
+                         .replace(/Unfall mit LKW/i, '<b>' + $translate.instant ('accident with truck') + '</b>')
                          .replace(/Unfall/i, '<b>' + $translate.instant ('accident') + '</b>')
                          .replace(/Ausfahrt gesperrt/i, '<b>' + $translate.instant ('exit locked') + '</b>')
                          .replace(/Gesperrt/i, '<b>' + $translate.instant ('blocked') + '</b>')
@@ -47,13 +55,16 @@ app.factory ('Map', function($http, $translate) {
                          .replace(/dichter Verkehr/i, '<b>' + $translate.instant ('heavy traffic') + '</b>')
                          .replace(/Stau/i, '<b>' + $translate.instant ('traffic jam') + '</b>')
                          .replace(/stockender Verkehr/i, '<b>' + $translate.instant ('halting traffic') + '</b>')
+                         .replace(/Gewitter/i, '<b>' + $translate.instant ('thunderstorm') + '</b>')
                          .replace(/Dauerbaustelle/i, '<b>' + $translate.instant ('oeuvre') + '</b>')
+                         .replace(/Tagesbaustelle/i, '<b>' + $translate.instant ('oeuvre') + '</b>')
                          .replace(/Baustelle/i, '<b>' + $translate.instant ('oeuvre') + '</b>')
                          .replace(/Richtung/i, '<b>' + $translate.instant ('direction') + '</b>')
                          .replace(/Tiefbauarbeiten/i, '<b>' + $translate.instant ('public works') + '</b>')
                          .replace(/Br\u00FCckenabriss/i, '<b>' + $translate.instant ('bridge demolition') + '</b>')
                          .replace(/Br\u00FCckenarbeiten/i, '<b>' + $translate.instant ('bridges works') + '</b>')
                          .replace(/Br\u00FCckenarenten/i, '<b>' + $translate.instant ('bridges works') + '</b>')
+                         .replace(/Markierungsarbeiten/i, '<b>' + $translate.instant ('working') + '</b>')
                          .replace(/Arbeiten/i, '<b>' + $translate.instant ('working') + '</b>')
                          .replace(/Fahrstreifen/i, '<b>' + $translate.instant ('lane') + '</b>')
                          .replace(/Instandhaltungsarbeiten/i, '<b>' + $translate.instant ('maintenance work') + '</b>')
