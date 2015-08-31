@@ -63,6 +63,8 @@
   "destine": "destino",
   "intermediate": "intermedio",
 
+
+
   "oeuvre": "obra",
   "blocked": "bloqueado",
   "at": "en",
@@ -76,13 +78,34 @@
   "for both directions only one lane turns freely": "para ambas direcciones solamente un carril gira libremente",
   "maintenance work": "trabajos de mantenimiento",
   "bridge demolition": "demolicion de puente",
-  "risk of road damage": "riesgo de daños en la carretera",
+  "risk of road damage": "riesgo de da\u00F1os en la carretera",
+  "petrol station and rest area": "gasolinera y area de descanso",
   "petrol station closed": "gasolinera cerrada",
   "traffic obstruction by undermining the roadway": "obstrucción del trafico, al socavar la calzada",
   "changed traffic light control": "control de semaforos cambiado",
   "lane closure": "carril cerrado",
   "lost cargo": "carga perdida",
-
+  "accident involving several vehicles": "accidente con varios vehiculos involucrados",
+  "road renovation": "renovacion de la carretera",
+  "narrowed roadway on a lane": "carretera estrecha en un carril",
+  "narrowed roadway to two lanes": "la carretera se redujo a dos carriles",
+  "left lane blocked": "carril izquierdo bloqueado",
+  "right lane blocked": "carril derecho bloqueado",
+  "security incident": "incidente d seguridad",
+  "public works": "obras publicas",
+  "changed traffic routing": "encaminamiento de trafico cambiado",
+  "changed traffic management at construction sites": "gestion d trafico cambiado en los sitios en construccion",
+  "new traffic management": "nueva gestion del trafico",
+  "accident vehicle": "vehiculo accidentado",
+  "bridges works": "puente en obras",
+  "danger of objects on the roadway": "peligro por objetos en la calzada",
+  "blocked emergency lane": "carril de emergencias bloqueado",
+  "danger from defective truck": "peligro por camion averiado",
+  "exit locked": "salida bloqueada",
+  "temporary basis with temporary traffic lights": "de manera temporal con semaforos temporales",
+  "traffic obstruction by salvage operations": "obstruccion del trafico por operaciones de salvamento",
+  "obstruction by curious": "obstruccion por curioso",
+  "danger from people on the road": "peligro de personas en la carretera",
   "accident": "accidente"
 
 }

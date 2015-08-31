@@ -72,7 +72,6 @@
 
 
 
-
   "oeuvre": "oeuvre",
   "blocked": "blocked",
   "at": "at",
@@ -92,8 +91,28 @@
   "changed traffic light control": "changed traffic light control",
   "lane closure": "lane closure",
   "lost cargo": "lost cargo",
-
-
+  "petrol station and rest area": "petrol station and rest area",
+  "accident involving several vehicles": "accident involving several vehicles",
+  "road renovation": "road renovation",
+  "narrowed roadway on a lane": "narrowed roadway on a lane",
+  "narrowed roadway to two lanes": "narrowed roadway to two lanes",
+  "left lane blocked": "left lane blocked",
+  "right lane blocked": "right lane blocked",
+  "security incident": "security incident",
+  "public works": "public works",
+  "changed traffic routing": "changed traffic routing",
+  "changed traffic management at construction sites": "changed traffic management at construction sites",
+  "new traffic management": "new traffic management",
+  "accident vehicle": "accident vehicle",
+  "bridges works": "bridges works",
+  "danger of objects on the roadway": "danger of objects on the roadway",
+  "blocked emergency lane": "blocked emergency lane",
+  "danger from defective truck": "danger from defective truck",
+  "exit locked": "exit locked",
+  "temporary basis with temporary traffic lights": "temporary basis with temporary traffic lights",
+  "traffic obstruction by salvage operations": "traffic obstruction by salvage operations",
+  "obstruction by curious": "obstruction by curious",
+  "danger from people on the road": "danger from people on the road",
   "accident": "accident"
 
 

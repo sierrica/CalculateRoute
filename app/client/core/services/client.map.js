@@ -13,31 +13,54 @@ app.factory ('Map', function($http, $translate) {
     });
     L.PtvLayer.TrafficInformation = L.PtvLayer.TrafficInformation.extend ({
         _formatTooltip: function (description) {
-            console.log ("DESCRIPTION: " + description);
             var phrase = description.split("#")[1];
-            return phrase.replace(/bei/i, $translate.instant ('at'))
+            return phrase.replace(/bei/i, '<b>' + $translate.instant ('at') + '</b>')
+                         .replace(/Unfall mit mehreren Fahrzeugen/i, '<b>' + $translate.instant ('accident involving several vehicles') + '</b>')
+                         .replace(/Gefahr durch Gegenst\u00E4nde auf der Fahrbahn/i, '<b>' + $translate.instant ('danger of objects on the roadway') + '</b>')
+                         .replace(/Gefahr durch defekten LKW/i, '<b>' + $translate.instant ('danger from defective truck') + '</b>')
+                         .replace(/vor\u00FCbergehende Regelung mit provisorischen Ampeln/i, '<b>' + $translate.instant ('temporary basis with temporary traffic lights') + '</b>')
+                         .replace(/Verkehrsbehinderung durch Bergungsarbeiten/i, '<b>' + $translate.instant ('traffic obstruction by salvage operations') + '</b>')
                          .replace(/Verkehrsbehinderung durch Untersp\u00FClung der Fahrbahn/i, '<b>' + $translate.instant ('traffic obstruction by undermining the roadway') + '</b>') //no va
                          .replace(/Ampelanlagensteuerung ge\u00E4ndert/i, '<b>' + $translate.instant ('changed traffic light control') + '</b>')
+                         .replace(/Fahrbahn auf einen Fahrstreifen verengt/i, '<b>' + $translate.instant ('narrowed roadway on a lane') + '</b>')
+                         .replace(/Fahrbahn auf zwei Fahrstreifen verengt/i, '<b>' + $translate.instant ('narrowed roadway to two lanes') + '</b>')
+                         .replace(/linker Fahrstreifen gesperrt/i, '<b>' + $translate.instant ('left lane blocked') + '</b>')
+                         .replace(/linker Fahrstreifen blockiert/i, '<b>' + $translate.instant ('left lane blocked') + '</b>')
+                         .replace(/rechter Fahrstreifen gesperrt/i, '<b>' + $translate.instant ('right lane blocked') + '</b>')
+                         .replace(/rechter Fahrstreifen blockiert/i, '<b>' + $translate.instant ('right lane blocked') + '</b>')
+                         .replace(/Fahrzeug verungl\u00FCckt/i, '<b>' + $translate.instant ('accident vehicle') + '</b>')
+                         .replace(/F\u00FCr beide Richtungen nur ein Fahrstreifen abwechselnd frei/i, '<b>' + $translate.instant ('for both directions only one lane turns freely') + '</b>')
+                         .replace(/Gefahr durch Stra\u00DFensch\u00E4den/i, '<b>' + $translate.instant ('risk of road damage') + '</b>')
+                         .replace(/Tank- und Rastanlage/i, '<b>' + $translate.instant ('petrol station and rest area') + '</b>')
+                         .replace(/Tankstelle geschlossen/i, '<b>' + $translate.instant ('petrol station closed') + '</b>')
+                         .replace(/Verkehrsbehinderung durch defektes Fahrzeug/i, '<b>' + $translate.instant ('traffic obstruction by defective vehicle') + '</b>')
+                         .replace(/Ver\u00E4nderte Verkehrsf\u00FChrung im Baustellenbereich/i, '<b>' + $translate.instant ('changed traffic management at construction sites') + '</b>')
+                         .replace(/Ver\u00E4nderte Verkehrsf\u00FChrung/i, '<b>' + $translate.instant ('changed traffic routing') + '</b>')
+                         .replace(/ge\u00E4nderte Verkehrsf\u00FChrung/i, '<b>' + $translate.instant ('new traffic management') + '</b>')
+                         .replace(/Standstreifen blockiert/i, '<b>' + $translate.instant ('blocked emergency lane') + '</b>')
+                         .replace(/Behinderung durch Neugierige/i, '<b>' + $translate.instant ('obstruction by curious') + '</b>')
+                         .replace(/Gefahr durch Personen auf der Fahrbahn/i, '<b>' + $translate.instant ('danger from people on the road') + '</b>')
                          .replace(/Unfall/i, '<b>' + $translate.instant ('accident') + '</b>')
+                         .replace(/Ausfahrt gesperrt/i, '<b>' + $translate.instant ('exit locked') + '</b>')
                          .replace(/Gesperrt/i, '<b>' + $translate.instant ('blocked') + '</b>')
                          .replace(/gesperrt/i, '<b>' + $translate.instant ('blocked') + '</b>')
                          .replace(/dichter Verkehr/i, '<b>' + $translate.instant ('heavy traffic') + '</b>')
                          .replace(/Stau/i, '<b>' + $translate.instant ('traffic jam') + '</b>')
                          .replace(/stockender Verkehr/i, '<b>' + $translate.instant ('halting traffic') + '</b>')
+                         .replace(/Dauerbaustelle/i, '<b>' + $translate.instant ('oeuvre') + '</b>')
                          .replace(/Baustelle/i, '<b>' + $translate.instant ('oeuvre') + '</b>')
                          .replace(/Richtung/i, '<b>' + $translate.instant ('direction') + '</b>')
-                         .replace(/Verkehrsbehinderung durch defektes Fahrzeug/i, '<b>' + $translate.instant ('traffic obstruction by defective vehicle') + '</b>')
+                         .replace(/Tiefbauarbeiten/i, '<b>' + $translate.instant ('public works') + '</b>')
+                         .replace(/Br\u00FCckenabriss/i, '<b>' + $translate.instant ('bridge demolition') + '</b>')
+                         .replace(/Br\u00FCckenarbeiten/i, '<b>' + $translate.instant ('bridges works') + '</b>')
+                         .replace(/Br\u00FCckenarenten/i, '<b>' + $translate.instant ('bridges works') + '</b>')
                          .replace(/Arbeiten/i, '<b>' + $translate.instant ('working') + '</b>')
                          .replace(/Fahrstreifen/i, '<b>' + $translate.instant ('lane') + '</b>')
-                         .replace(/F\u00FCr beide Richtungen nur ein Fahrstreifen abwechselnd frei/i, '<b>' + $translate.instant ('for both directions only one lane turns freely') + '</b>')
                          .replace(/Instandhaltungsarbeiten/i, '<b>' + $translate.instant ('maintenance work') + '</b>')
-                         .replace(/Brückenabriss/i, '<b>' + $translate.instant ('bridge demolition') + '</b>')
-                         .replace(/Gefahr durch Stra\u00DFensch\u00E4den/i, '<b>' + $translate.instant ('risk of road damage') + '</b>')
-                         .replace(/Tankstelle geschlossen/i, '<b>' + $translate.instant ('petrol station closed') + '</b>')
                          .replace(/Fahrbahnverengung/i, '<b>' + $translate.instant ('lane closure') + '</b>')
-                         .replace(/verlorene ladung/i, '<b>' + $translate.instant ('lane closure') + '</b>');
-
-
+                         .replace(/verlorene ladung/i, '<b>' + $translate.instant ('lane closure') + '</b>')
+                         .replace(/Fahrbahnerneuerung/i, '<b>' + $translate.instant ('road renovation') + '</b>')
+                         .replace(/Sicherheitsvorfall/i, '<b>' + $translate.instant ('security incident') + '</b>');
             }
     });
 
