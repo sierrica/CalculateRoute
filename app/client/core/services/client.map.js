@@ -44,9 +44,7 @@ app.factory ('Map', function($http, $translate) {
                          .replace(/Gefahr durch Personen auf der Fahrbahn/i, '<b>' + $translate.instant ('danger from people on the road') + '</b>')
                          .replace(/Gefahr durch ungesicherte Unfallstelle/i, '<b>' + $translate.instant ('danger due to unsecured accident site') + '</b>')
                          .replace(/Verkehrsbehinderung durch umgest\u00FCrzte B\u00E4ume/i, '<b>' + $translate.instant ('traffic obstruction by fallen trees') + '</b>')
-
-                        .replace(/Fahrstreifen abwechselnd frei/i, '<b>' + $translate.instant ('lane alternately free') + '</b>')
-
+                         .replace(/Fahrstreifen abwechselnd frei/i, '<b>' + $translate.instant ('lane alternately free') + '</b>')
                          .replace(/Unfall mit LKW/i, '<b>' + $translate.instant ('accident with truck') + '</b>')
                          .replace(/Unfall/i, '<b>' + $translate.instant ('accident') + '</b>')
                          .replace(/Ausfahrt gesperrt/i, '<b>' + $translate.instant ('exit locked') + '</b>')
