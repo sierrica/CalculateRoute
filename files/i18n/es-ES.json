@@ -63,6 +63,26 @@
   "destine": "destino",
   "intermediate": "intermedio",
 
+  "oeuvre": "obra",
+  "blocked": "bloqueado",
+  "at": "en",
+  "heavy traffic": "trafico pesado",
+  "traffic jam": "embotellamiento",
+  "halting traffic": "trafico lento",
+  "direction": "direccion",
+  "traffic obstruction by defective vehicle": "obstruccion de trafico por vehiculo defectuoso",
+  "working": "trabajando",
+  "lane": "carril",
+  "for both directions only one lane turns freely": "para ambas direcciones solamente un carril gira libremente",
+  "maintenance work": "trabajos de mantenimiento",
+  "bridge demolition": "demolicion de puente",
+  "risk of road damage": "riesgo de daños en la carretera",
+  "petrol station closed": "gasolinera cerrada",
+  "traffic obstruction by undermining the roadway": "obstrucción del trafico, al socavar la calzada",
+  "changed traffic light control": "control de semaforos cambiado",
+  "lane closure": "carril cerrado",
+  "lost cargo": "carga perdida",
 
-  "baustelle": "obra"
+  "accident": "accidente"
+
 }

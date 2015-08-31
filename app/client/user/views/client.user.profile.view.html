@@ -4,7 +4,7 @@
             <form name="profileForm" ng-submit="updateProfile()" novalidate autocomplete="off" style="margin-top:15px">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="email" id="email" name="email" ng-model="email">
+                        <input type="email" id="email" name="email" ng-readonly="true" ng-model="email">
                         <label for="email">{{ 'email' | translate }}</label>
                     </div>
                 </div>

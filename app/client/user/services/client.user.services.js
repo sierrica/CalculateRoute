@@ -9,7 +9,7 @@ app.factory ('User', function($resource, $rootScope, tmhDynamicLocale, $translat
             document.documentElement.lang = lang;
             tmhDynamicLocale.set (lang.toLowerCase());
             $translate.use (lang);
-            $rootScope.$emit ('change_lang');
+            $rootScope.$broadcast ('change_lang');
         },
         getUser: function() {
             return user;

@@ -107,6 +107,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
     $scope.addOrigin = function (ev) {
+        console.log (ev);
         $scope.add (ev, 0);
     };
     $scope.addDestine = function (ev) {
@@ -278,6 +279,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 callback: that.addDestine
             }]
         }).on ('contextmenu', function (ev) {
+            console.log (ev.target);
             if (that.pointer_marker)
                 that.map.removeLayer(that.pointer_marker);
             that.pointer_marker = L.marker(ev.latlng, {icon: Map.IconPushpin}).addTo(that.map);
@@ -297,7 +299,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 }, 2000);
             }*/
         }).on ('baselayerchange', function (e) {
-        }).setView ([41.9204014, -1.2529047000000446], 18);
+        }).setView ([41.645722822493845, -0.8850860595703125], 12);
+        //.setView ([41.9204014, -1.2529047000000446], 18);
 
         Map.setMap ($scope.map);
     };

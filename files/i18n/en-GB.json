@@ -73,7 +73,28 @@
 
 
 
-  "baustelle": "building site"
+  "oeuvre": "oeuvre",
+  "blocked": "blocked",
+  "at": "at",
+  "heavy traffic": "heavy traffic",
+  "traffic jam": "traffic jam",
+  "halting traffic": "halting traffic",
+  "direction": "direction",
+  "traffic obstruction by defective vehicle": "traffic obstruction by defective vehicle",
+  "working": "working",
+  "lane": "lane",
+  "for both directions only one lane turns freely": "for both directions only one lane turns freely",
+  "maintenance work": "maintenance work",
+  "bridge demolition": "bridge demolition",
+  "risk of road damage": "risk of road damage",
+  "petrol station closed": "petrol station closed",
+  "traffic obstruction by undermining the roadway": "traffic obstruction by undermining the roadway",
+  "changed traffic light control": "changed traffic light control",
+  "lane closure": "lane closure",
+  "lost cargo": "lost cargo",
+
+
+  "accident": "accident"
 
 
 

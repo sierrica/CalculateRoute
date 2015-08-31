@@ -131,7 +131,6 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             var user = response.user;
             user.name = user.email.split("@")[0];
             User.setUser (user);
-            console.log ("LANF RESPUESTA: " + response.user.lang)
             User.change_lang (response.user.lang);
             $rootScope.$broadcast ('login');
         });
@@ -142,12 +141,19 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
         $state.transitionTo ("login");
     }
 
+    $rootScope.$on ('change_lang', function (event) {
+        var breadcumb = $location.url().split("/")[1];
+        if (breadcumb) {                             // No estamos en el home con el logo y por tanto hy ue traducir
+            setTimeout (function() {
+                $("#breadcumb").text ($translate.instant (breadcumb));
+            }, 700);
+        }
+    });
 
 
     $rootScope.$on ('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         //if (window.innerWidth < 600)
         //    $('body').removeClass ('loaded');
-
 
         $(".modal").closeModal();           // Error que se queda oscuo cuando pretas ir "hacia atras" con un modal abierto
         $(".lean-overlay").remove();        // Error que se queda oscuo cuando pretas ir "hacia atras" con un modal abierto
@@ -157,7 +163,6 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             //$state.transitionTo ("login");
         }
         else if ($auth.isAuthenticated()  &&  (toState.name == "login"  ||  toState.name == "signup")) {
-            console.log ("DENTRO LOGIN ENTRANDO");
             if (fromState.name)
                 event.preventDefault();
             else
@@ -166,15 +171,7 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
     });
 
 
-    $rootScope.$on ('change_lang', function (event) {
-        console.log ("APP CHANGE LANG");
-        var breadcumb = $("#breadcumb").text();
-        console.log (breadcumb);
-        if (breadcumb.indexOf("<img") == -1) {          // No estamos en el home con el logo y por tanto hy ue traducir
-            console.log ("DENTRO IF")
-            $("#breadcumb").html ($translate.instant (breadcumb));
-        }
-    });
+
 
     $rootScope.$on ('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         $(".side-nav li").removeClass("active");
@@ -189,8 +186,9 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             }, 500);
         }
         else {
-            $("#breadcumb").html ($translate.instant (toState.name));
-            //$("#breadcumb").html ($translate.instant (toState.name));
+            setTimeout (function() {
+                $("#breadcumb").text ($translate.instant (toState.name));
+            }, 200);
             $("#search").parent().css ("display", "none");
         }
         /*setTimeout(function(){

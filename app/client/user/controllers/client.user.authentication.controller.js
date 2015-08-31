@@ -2,34 +2,37 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
 
 	console.log ("DENTRO AUTHENTICATION CONTROLLER");
 
-    var user = User.getUser();
-    $scope.email = user.email;
-    $scope.lang = user.lang;
+    $scope.email = User.getUser().email;
+
     $scope.$on ('login', function (event) {
-        user = User.getUser();
-        $scope.email = user.email;
-        $scope.lang = user.lang;
+        $scope.email = User.getUser().email;
+    });
+    $scope.$on ('change_lang', function (event) {
+        setTimeout (function() {
+            if ($location.url().indexOf('profile'))
+                $scope.lang_default();
+        }, 400);
     });
 
     $scope.lang_default = function() {
         var lang = document.documentElement.lang;
-        $scope.lang = lang;
-        console.log ("SCOPE LANG: " + lang);
-
         function formatState (state) {
             if (!state.id)
                 return state.text;
             return $('<span><span class="flag-icon flag-icon-' + state.element.value.toLowerCase().replace(/_/g, '-').split('-')[1] + '"></span> ' + $translate.instant(state.text) + '</span>');
         };
-
         $("#lang").select2 ({
             //theme: "classic",
             minimumResultsForSearch: Infinity,
             templateResult: formatState,
             templateSelection: formatState
         });
-
+        var that = $scope;
         $("#lang").select2 ("val", lang);
+        setTimeout (function() {
+            that.lang = lang;
+            that.$apply();
+        }, 50);
     };
 
     $scope.checkPassword = function(form) {
@@ -55,19 +58,12 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
             password: $scope.password,
             lang: $scope.lang
         }, function(response) {
-            $auth.setToken (response.access_token);                 // Sobreescribo el token
-            $scope.email = response.user.email;
-            $scope.lang = response.user.lang;
-
+            $auth.setToken (response.access_token);                                     // Sobreescribo el token
             if ($scope.lang != document.documentElement.lang)
                 User.change_lang ($scope.lang);
-
             setTimeout (function() {
                 Materialize.toast ('<span class="green">' + $translate.instant('changes successfully') + '</span>', 5000);
-                $scope.lang_default();
-            }, 2000);
-
-
+            }, 300);
         }, function(response) {
             Materialize.toast ('<span class="red">' + $translate.instant('changes unsuccessfully') + '</span>', 5000);
         });
@@ -104,10 +100,11 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
                 var user = response.user;
                 user.name = response.user.email.split("@")[0];
                 User.setUser (user);
+
+                Materialize.toast ('<span class="green">' + $translate.instant('properly entered') + '</span>', 5000);
+                $rootScope.$broadcast ('login');
                 if (response.user.lang != document.documentElement.lang)
                     User.change_lang (response.user.lang);
-                Materialize.toast ('<span class="green">' + $translate.instant('properly entered') + '</span>', 5000);
-                $rootScope.$emit ('login');
                 $state.transitionTo ("home");
             });
         }).catch (function(response) {
