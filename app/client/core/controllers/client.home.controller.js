@@ -229,14 +229,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
 
-    $scope.cssMap = function() {
-        if (window.innerWidth > 992)
-            $("#map").css("width", window.innerWidth - 300);
-        else
-            $("#map").css("width", window.innerWidth);
-        $("#map").css("height", window.innerHeight - 50);
-    };
-
 
     $scope.renderMap = function() {
         if (Map.getMap() != undefined) {
@@ -246,12 +238,10 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             $(window).trigger('resize');
         }
         else {
-            //$scope.cssMap();
             $(window).trigger('resize');
             $scope.initMap();
         }
     };
-
 
     $scope.initMap = function () {
         var that = $scope;
@@ -298,8 +288,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 }, 2000);
             }*/
         }).on ('baselayerchange', function (e) {
-        }).setView ([41.645722822493845, -0.8850860595703125], 12)
-          .invalidateSize();
+        }).setView ([41.645722822493845, -0.8850860595703125], 12);
         //.setView ([41.9204014, -1.2529047000000446], 18);
 
         Map.setMap ($scope.map);
