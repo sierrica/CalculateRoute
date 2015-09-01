@@ -8,10 +8,12 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
         $scope.email = User.getUser().email;
     });
     $scope.$on ('change_lang', function (event) {
-        setTimeout (function() {
-            if ($location.url().indexOf('profile'))
-                $scope.lang_default();
-        }, 400);
+        if ($location.url().indexOf("profile")) {
+            setTimeout (function() {
+                if ($location.url().indexOf('profile'))
+                    $scope.lang_default();
+            }, 400);
+        }
     });
 
     $scope.lang_default = function() {
@@ -28,10 +30,10 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
             templateSelection: formatState
         });
         var that = $scope;
-        $("#lang").select2 ("val", lang);
         setTimeout (function() {
             that.lang = lang;
             that.$apply();
+            $("#lang").select2 ("val", lang);
         }, 50);
     };
 

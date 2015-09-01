@@ -92,6 +92,6 @@ app.controller ('HeaderController', function($rootScope, $scope, $http, $transla
             className: '',                 // custom class
         }).on ('click', function(ev) {
             Map.getMap().removeLayer(that.circulo_direction);
-        }).addTo (Map.getMap().setView(latlng), 18);
+        }).addTo (Map.getMap().setView(latlng), 15);
     };
 });
