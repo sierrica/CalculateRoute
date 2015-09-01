@@ -242,14 +242,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         if (Map.getMap() != undefined) {
             $scope.map = Map.getMap();
             $("#map").replaceWith (Map.restoreMapHtml());
-
-            //$(window).trigger('resize');
-            $scope.map.invalidateSize();
-            //setTimeout (function() {
-                //Map.addMarkerBugRestaure();
-                //$(window).trigger('resize');
-                //$("#map").trigger('resize');
-            //}, 2000);
+            //$scope.map.invalidateSize();
+            $(window).trigger('resize');
         }
         else {
             //$scope.cssMap();
