@@ -242,10 +242,11 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         if (Map.getMap() != undefined) {
             $scope.map = Map.getMap();
             $("#map").replaceWith (Map.restoreMapHtml());
+            $scope.map.invalidateSize();
             setTimeout (function() {
                 Map.addMarkerBugRestaure();
                 $(window).trigger('resize');
-                $("#map").trigger('resize');
+                //$("#map").trigger('resize');
             }, 2000);
             //$scope.cssMap();
             //$(window).trigger('resize');
@@ -303,7 +304,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 }, 2000);
             }*/
         }).on ('baselayerchange', function (e) {
-        }).setView ([41.645722822493845, -0.8850860595703125], 12);
+        }).setView ([41.645722822493845, -0.8850860595703125], 12)
+          .invalidateSize ('true');
         //.setView ([41.9204014, -1.2529047000000446], 18);
 
         Map.setMap ($scope.map);

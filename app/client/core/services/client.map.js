@@ -182,7 +182,7 @@ app.factory ('Map', function($http, $translate) {
         else
             $("#map").css("width", $(window).width());
         $("#map").css("height", $(window).height() - 50);
-        $("#map").trigger ('resize');
+        //$("#map").trigger ('resize');
     };
 
 
