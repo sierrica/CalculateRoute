@@ -177,11 +177,12 @@ app.factory ('Map', function($http, $translate) {
 
     window.onresize = function() {
         console.log ("ONRESIZE")
-        if (window.innerWidth > 992)
-            $("#map").css("width", window.innerWidth - 300);
+        if ($(window).width() > 992)
+            $("#map").css("width", $(window).width() - 300);
         else
-            $("#map").css("width", window.innerWidth);
-        $("#map").css("height", window.innerHeight - 50);
+            $("#map").css("width", $(window).width());
+        $("#map").css("height", $(window).height() - 50);
+        $("#map").trigger ('resize');
     };
 
 
