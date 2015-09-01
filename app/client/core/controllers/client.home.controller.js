@@ -247,7 +247,7 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             setTimeout (function() {
                 Map.addMarkerBugRestaure();
                 $(window).trigger('resize');
-                //$("#map").trigger('resize');
+                $("#map").trigger('resize');
             }, 2000);
         }
         else {
