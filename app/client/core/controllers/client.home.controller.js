@@ -242,16 +242,18 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         if (Map.getMap() != undefined) {
             $scope.map = Map.getMap();
             $("#map").replaceWith (Map.restoreMapHtml());
-            $scope.cssMap();
+            setTimeout (function() {
+                Map.addMarkerBugRestaure();
+                $(window).trigger('resize');
+            }, 2000);
+            //$scope.cssMap();
+            //$(window).trigger('resize');
         }
         else {
-            $scope.cssMap();
+            //$scope.cssMap();
+            $(window).trigger('resize');
             $scope.initMap();
         }
-        setTimeout (function() {
-            $(window).trigger('resize');
-            //Map.addMarkerBugRestaure();
-        }, 2000);
     };
 
 
@@ -261,7 +263,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             zoomControl: false,
             attributionControl: false,
             maxBounds: ([[31.952, -18.808], [72.607, 44.472]]),
-            //layers: google_maps,
             layers: Map.getLayer('google_maps'),
             contextmenu: true,
             contextmenuWidth: 160,
@@ -282,12 +283,11 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 callback: that.addDestine
             }]
         }).on ('contextmenu', function (ev) {
-            console.log (ev.target);
             if (that.pointer_marker)
                 that.map.removeLayer(that.pointer_marker);
             that.pointer_marker = L.marker(ev.latlng, {icon: Map.IconPushpin}).addTo(that.map);
         }).on ('contextmenu.hide', function (contextmenu, relatedTarget) {
-            that.map.removeLayer(that.pointer_marker);
+            that.map.removeLayer (that.pointer_marker);
         }).on ('contextmenu:select', function (contextmenu, el) {
             //var index_select = $("div.leaflet-contextmenu a").index(contextmenu.el);
         }).on ('load', function (e) {
