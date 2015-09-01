@@ -249,7 +249,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             $scope.initMap();
         }
         setTimeout (function() {
-            Map.addMarkerBugRestaure();
+            $(window).trigger('resize');
+            //Map.addMarkerBugRestaure();
         }, 2000);
     };
 
