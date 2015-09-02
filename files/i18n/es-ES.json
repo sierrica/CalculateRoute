@@ -108,10 +108,21 @@
   "obstruction by curious": "obstruccion por curioso",
   "danger from people on the road": "peligro de personas en la carretera",
   "accident with truck": "accidente con camion",
-  "danger due to unsecured accident site": "peligro debido al lugar del accidente sin garantía",
+  "danger due to unsecured accident site": "peligro debido al lugar del accidente sin garantia",
   "traffic obstruction by fallen trees": "obstruccion de trafico por arboles caídos",
   "thunderstorm": "tormenta electrica",
   "lane alternately free": "carril alternativamente gratuito",
+  "traffic obstruction by rockfall": "obstruccion de trafico por caida de rocas",
+  "traffic obstruction by major fire": "obstruccion de trafico por gran incendio",
+  "hard shoulder blocked": "arcen bloqueado",
+  "traffic obstruction by people on the road": "obstruccion de trafico por personas en la carretera",
+  "driveway blocked": "entrada bloqueada",
+  "junction blocked": "union bloqueada",
+  "failed traffic lights": "semaforos fallidos",
+  "transit closed for heavy goods vehicles": "transito cerrado para los vehiculos pesados",
+  "danger of animals on the road": "peligro de animales en la carretera",
+  "danger from defective vehicle": "peligro de vehiculo defectuoso",
+  "blocked middle lane": "carril central bloqueado",
   "accident": "accidente"
 
 }

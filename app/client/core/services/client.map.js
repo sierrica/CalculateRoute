@@ -23,7 +23,8 @@ app.factory ('Map', function($http, $translate) {
                          .replace(/vor\u00FCbergehende Regelung mit provisorischen Ampeln/i, '<b>' + $translate.instant ('temporary basis with temporary traffic lights') + '</b>')
                          .replace(/Verkehrsbehinderung durch Bergungsarbeiten/i, '<b>' + $translate.instant ('traffic obstruction by salvage operations') + '</b>')
                          .replace(/Verkehrsbehinderung durch Untersp\u00FClung der Fahrbahn/i, '<b>' + $translate.instant ('traffic obstruction by undermining the roadway') + '</b>') //no va
-                         .replace(/Ampelanlagensteuerung ge\u00E4ndert/i, '<b>' + $translate.instant ('changed traffic light control') + '</b>')
+                .replace(/Verkehrsbehinderung durch Personen auf der Fahrbahn/i, '<b>' + $translate.instant ('traffic obstruction by people on the road') + '</b>')
+                .replace(/Ampelanlagensteuerung ge\u00E4ndert/i, '<b>' + $translate.instant ('changed traffic light control') + '</b>')
                          .replace(/Fahrbahn auf einen Fahrstreifen verengt/i, '<b>' + $translate.instant ('narrowed roadway on a lane') + '</b>')
                          .replace(/Fahrbahn auf zwei Fahrstreifen verengt/i, '<b>' + $translate.instant ('narrowed roadway to two lanes') + '</b>')
                          .replace(/linker Fahrstreifen gesperrt/i, '<b>' + $translate.instant ('left lane blocked') + '</b>')
@@ -45,9 +46,22 @@ app.factory ('Map', function($http, $translate) {
                          .replace(/Gefahr durch ungesicherte Unfallstelle/i, '<b>' + $translate.instant ('danger due to unsecured accident site') + '</b>')
                          .replace(/Verkehrsbehinderung durch umgest\u00FCrzte B\u00E4ume/i, '<b>' + $translate.instant ('traffic obstruction by fallen trees') + '</b>')
                          .replace(/Fahrstreifen abwechselnd frei/i, '<b>' + $translate.instant ('lane alternately free') + '</b>')
+                         .replace(/Verkehrsbehinderung durch Steinschlag/i, '<b>' + $translate.instant ('traffic obstruction by rockfall') + '</b>')
+                         .replace(/Verkehrsbehinderung durch Gro\u00DFbrand/i, '<b>' + $translate.instant ('traffic obstruction by major fire') + '</b>')
+                .replace(/Durchfahrt gesperrt f\u00FCr Schwerlastverkehr/i, '<b>' + $translate.instant ('transit closed for heavy goods vehicles') + '</b>')
+                .replace(/Gefahr durch Tiere auf der Fahrbahn/i, '<b>' + $translate.instant ('danger of animals on the road') + '</b>')
+                .replace(/Gefahr durch defektes Fahrzeug/i, '<b>' + $translate.instant ('danger from defective vehicle') + '</b>')
+                .replace(/mittlerer Fahrstreifen blockiert/i, '<b>' + $translate.instant ('blocked middle lane') + '</b>')
+
+
+
+                .replace(/Ampeln ausgefallen/i, '<b>' + $translate.instant ('failed traffic lights') + '</b>')
                          .replace(/Unfall mit LKW/i, '<b>' + $translate.instant ('accident with truck') + '</b>')
                          .replace(/Unfall/i, '<b>' + $translate.instant ('accident') + '</b>')
                          .replace(/Ausfahrt gesperrt/i, '<b>' + $translate.instant ('exit locked') + '</b>')
+                .replace(/Pannenstreifen gesperrt/i, '<b>' + $translate.instant ('hard shoulder blocked') + '</b>')
+                .replace(/Einfahrt gesperrt/i, '<b>' + $translate.instant ('driveway blocked') + '</b>')
+                .replace(/Einfahrt gesperrt/i, '<b>' + $translate.instant ('junction blocked') + '</b>')
                          .replace(/Gesperrt/i, '<b>' + $translate.instant ('blocked') + '</b>')
                          .replace(/gesperrt/i, '<b>' + $translate.instant ('blocked') + '</b>')
                          .replace(/dichter Verkehr/i, '<b>' + $translate.instant ('heavy traffic') + '</b>')
