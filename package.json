@@ -52,7 +52,7 @@
     "morgan": "1.6.1",
     "multer": "1.0.3",
     "pm2": "0.14.7",
-    "redis": "0.12.1",
+    "redis": "1.0.0",
     "serve-favicon": "2.3.0",
     "swig": "1.4.2",
     "uglify-js": "2.4.24",
