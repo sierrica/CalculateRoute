@@ -236,10 +236,12 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             $("#map").replaceWith (Map.restoreMapHtml());
             $scope.map.invalidateSize();
             $(window).trigger('resize');
+            Map.addMarkerBugRestaure();
         }
         else {
             $(window).trigger('resize');
             $scope.initMap();
+            Map.addMarkerBugRestaure();
         }
     };
 

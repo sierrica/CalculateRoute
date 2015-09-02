@@ -142,12 +142,23 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
     }
 
     $rootScope.$on ('change_lang', function (event) {
+        console.log ("CHANGE LANG")
         var breadcumb = $location.url().split("/")[1];
         if (breadcumb) {                             // No estamos en el home con el logo y por tanto hy ue traducir
             setTimeout (function() {
                 $("#breadcumb").text ($translate.instant (breadcumb));
             }, 700);
         }
+        /*var script = document.createElement('script');
+        script.id = 'script_google_maps';
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?v=3' +
+            '&language=' + document.documentElement.lang.split("-")[1].toLowerCase() +
+            '&callback=initialize';
+        //$("#script_google_maps").remove();
+        setTimeout(function(){
+            document.body.appendChild (script);
+        }, 100);*/
     });
 
 

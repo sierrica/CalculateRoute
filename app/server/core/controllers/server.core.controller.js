@@ -1,6 +1,22 @@
+var detectBrowser = function() {
+    var useragent = navigator.userAgent;
+    var mapdiv = document.getElementById("map");
+
+    if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+        mapdiv.style.width = '100%';
+        mapdiv.style.height = '100%';
+    } else {
+        mapdiv.style.width = '600px';
+        mapdiv.style.height = '800px';
+    }
+}
+
+
 
 exports.renderIndex = function(req, res) {
     //console.log ("user-agent: " + req.headers["user-agent"]);
+
+
     if (req.headers["accept-language"]) {
         console.log ("user-agent: " + req.headers["accept-language"])
         var language_prefered = req.headers["accept-language"].split(",")[0];
@@ -22,6 +38,7 @@ exports.renderIndex = function(req, res) {
     console.log ("LANG-DEF: " + lang + "-" + region)
 
     res.render ('index', {
+        country: lang,
         lang: lang + "-" + region
     });
 };

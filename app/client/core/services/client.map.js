@@ -70,6 +70,8 @@ app.factory ('Map', function($http, $translate) {
                          .replace(/verlorene ladung/i, '<b>' + $translate.instant ('lane closure') + '</b>')
                          .replace(/Fahrbahnerneuerung/i, '<b>' + $translate.instant ('road renovation') + '</b>')
                          .replace(/Sicherheitsvorfall/i, '<b>' + $translate.instant ('security incident') + '</b>');
+
+            //return description;
             }
     });
 
@@ -236,6 +238,9 @@ app.factory ('Map', function($http, $translate) {
             var ptv_maps_fg = new L.NonTiledLayer.WMS ('https://ajaxfg-eu-n-test.cloud.ptvgroup.com/WMS/WMS?xtok=' + token, {
                 minZoom: 3, opacity: 1.0, layers: 'xmap-ajaxfg', format: 'image/png', transparent: true, attribution: false, zIndex: 100, pane: map.getPanes().tilePane
             });
+
+
+
             var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
 
             var base_layers = {
@@ -254,6 +259,8 @@ app.factory ('Map', function($http, $translate) {
             };
 
             L.control.layers (base_layers, overlays).addTo (map);
+
+
         },
         saveMapHtml: function() {
             map_html = map.getContainer();
