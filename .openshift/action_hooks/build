@@ -24,9 +24,9 @@ fi
 
 
 #  Do npm install with the new npm binary.
-if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
-   echo "  - Installing dependencies w/ new version of npm ... "
-   echo
-   (cd "${OPENSHIFT_REPO_DIR}"; export TMPDIR="/tmp"; npm install >> "$OPENSHIFT_LOG_DIR/npm.log")
-fi
+#if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
+#   echo "  - Installing dependencies w/ new version of npm ... "
+#   echo
+#   (cd "${OPENSHIFT_REPO_DIR}"; export TMPDIR="/tmp"; npm install >> "$OPENSHIFT_LOG_DIR/npm.log")
+#fi
 
