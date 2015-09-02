@@ -1,6 +1,7 @@
-app.factory ('Ptv', function(Map) {
+app.factory ('Ptv', function($resource, Map) {
 
-    var options = {
+    var options = {};
+    /*
         details: {
             manoeuvres: true
         },
@@ -14,6 +15,7 @@ app.factory ('Ptv', function(Map) {
             highways: 2300
         }
     };
+*/
 
     var results = {
         polygon: [],
@@ -22,6 +24,9 @@ app.factory ('Ptv', function(Map) {
     };
 
     return {
+        myoptions: $resource ('myoptions', {}, {
+            'update': { method: 'PUT' }
+        }),
         getOptions: function (type) {
             return options;
         },

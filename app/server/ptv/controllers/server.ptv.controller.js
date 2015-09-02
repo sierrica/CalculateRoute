@@ -1,4 +1,6 @@
-var request = require ('request'),
+var path            = require ('path'),
+    Ptv     = require (path.resolve('./app/server/ptv/models/server.ptv.model')),
+    request = require ('request'),
     btoa    = require ('btoa');
 
 
@@ -203,8 +205,18 @@ exports.calculateroute = function(req, res) {
             console.log (error)
             res.json (error);
         }
-        console.log ("EXITO");
-        console.log (body)
-        res.json (body);
+
+        Ptv.findById (req.user._id, function (err, options) {
+            if (err)
+                return res.status(400).send ( err );
+            options.vehicle = req.body.options.vehicle;
+            options.trayect = req.body.options.trayect;
+            options.details = req.body.options.details;
+            options.save (function (err) {
+                if (err)
+                    return res.status(400).send ( err );
+                res.json (body);
+            });
+        });
     });
 };

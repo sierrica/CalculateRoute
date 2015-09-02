@@ -117,8 +117,8 @@ var app = angular.module('calculateRoute', [
         return (h + ' h, ' + m + ' m, ' + s + ' s');
     }
 })
-.run (['$rootScope', 'tmhDynamicLocale', '$translate', '$auth', '$state', '$location', 'User', 'SatellizerShared', 'Map',
-function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User, shared, Map) {
+.run (['$rootScope', 'tmhDynamicLocale', '$translate', '$auth', '$state', '$location', 'User', 'SatellizerShared', 'Map', 'Ptv',
+function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, User, shared, Map, Ptv) {
 
     if (localStorage["calculateroute_token"])
         shared.setStorageType ("localStorage");
@@ -133,6 +133,11 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             User.setUser (user);
             User.change_lang (response.user.lang);
             $rootScope.$broadcast ('login');
+            Ptv.myoptions.get().$promise
+                .then (function(response) {
+                Ptv.setOptions (response.options);
+                $rootScope.$emit ('myoptions');
+            });
         });
     }
     else {

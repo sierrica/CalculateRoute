@@ -10,5 +10,5 @@ module.exports = function(app) {
         .get (user.isAuthenticated, user.me)
         .put (user.isAuthenticated, user.update);
 
-
+    app.route ('/myoptions').get (user.isAuthenticated, user.myoptions);
 };

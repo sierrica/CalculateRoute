@@ -1,11 +1,12 @@
-var _           = require ('lodash'),
-    path        = require ('path'),
-    token       = require (path.resolve('./app/server/user/config/server.user.token')),
-    User        = require (path.resolve('./app/server/user/models/server.user.model')),
-    logger      = require (path.resolve('./config/logger')),
-    nodemailer  = require ('nodemailer'),
-    sgTransport = require ('nodemailer-sendgrid-transport'),
-    randomstring = require ("randomstring");
+var _               = require ('lodash'),
+    path            = require ('path'),
+    token           = require (path.resolve('./app/server/user/config/server.user.token')),
+    User            = require (path.resolve('./app/server/user/models/server.user.model')),
+    Ptv             = require (path.resolve('./app/server/ptv/models/server.ptv.model')),
+    logger          = require (path.resolve('./config/logger')),
+    nodemailer      = require ('nodemailer'),
+    sgTransport     = require ('nodemailer-sendgrid-transport'),
+    randomstring    = require ("randomstring");
 
 
 
@@ -23,7 +24,10 @@ function signup (req, res) {
             rol: 'user'
         });
         user.save (function() {
-            res.status(201).json ({ message: 'properly registered' });
+            var ptv_defaults = new Ptv ({ _id: user._id });
+            ptv_defaults.save (function (err) {
+                res.status(201).json ({ message: 'properly registered' });
+            });
         }.bind(null, res));
     });
 };
@@ -111,10 +115,20 @@ function isAuthenticated(req, res, next) {
 
 
 function me (req, res) {
-    console.log ("ME");
-    console.log (req.user);
+    //console.log ("ME");
+    //console.log (req.user);
     res.status(200).json ({ user: req.user });
 };
+
+function myoptions (req, res) {
+    Ptv.findById (req.user._id, function (err, options) {
+        if (err)
+            return res.status(400).send ( err );
+        res.status(200).json ({ options: options });
+    });
+};
+
+
 
 function update(req, res, next) {
     User.findById (req.user._id, function (err, user) {
@@ -144,5 +158,6 @@ module.exports = {
     forgot: forgot,
     isAuthenticated: isAuthenticated,
     me: me,
+    myoptions: myoptions,
     update: update
 };
