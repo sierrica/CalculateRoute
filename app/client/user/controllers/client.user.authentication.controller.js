@@ -1,4 +1,4 @@
-app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'SatellizerShared', '$auth', '$location', 'tmhDynamicLocale', '$translate', 'User', '$state', function($rootScope, $scope, $http, shared, $auth, $location, tmhDynamicLocale, $translate, User, $state) {
+app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'SatellizerShared', '$auth', '$location', 'tmhDynamicLocale', '$translate', 'User', '$state', 'Ptv', function($rootScope, $scope, $http, shared, $auth, $location, tmhDynamicLocale, $translate, User, $state, Ptv) {
 
 	console.log ("DENTRO AUTHENTICATION CONTROLLER");
 
@@ -107,6 +107,12 @@ app.controller ('AuthenticationController', ['$rootScope', '$scope', '$http', 'S
                 $rootScope.$broadcast ('login');
                 if (response.user.lang != document.documentElement.lang)
                     User.change_lang (response.user.lang);
+                Ptv.myoptions.get().$promise
+                    .then (function(response) {
+                        Ptv.setOptions (response.options);
+                    //$rootScope.$emit ('myoptions');
+                });
+
                 $state.transitionTo ("home");
             });
         }).catch (function(response) {

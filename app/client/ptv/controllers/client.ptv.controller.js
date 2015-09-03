@@ -1,4 +1,4 @@
-app.controller ('PtvController', function ($rootScope, $scope, $location, $auth, $http, User, $translate) {
+app.controller ('PtvController', function ($rootScope, $scope, $location, $auth, $http, User, $translate, Ptv) {
 
     console.log ("DENTRO PTV CONTROLLER");
 
@@ -26,19 +26,42 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         console.log ("TOLLTIP")
     }
 
-        $scope.dinamic_route = options.trayect.dinamic_route;
-        $scope.tollroads = parseInt (options.trayect.tollroads);
-        $scope.highways = parseInt (options.trayect.highways);
+        console.log ("OPCIONES AL COMIENZO");
+        console.log (options)
+
+        if ( ! _.isEmpty(options)) {
+            $scope.dinamic_route = options.trayect.dinamic_route;
+            $scope.tollroads = parseInt (options.trayect.tollroads);
+            $('input[for=tollroads]').val($scope.tollroads).change();
+
+            $scope.highways = parseInt (options.trayect.highways);
+            $('input[for=highways]').val($scope.highways).change();
+
+            $scope.height = parseInt (options.vehicle.height);
+            $scope.width = parseInt (options.vehicle.width);
+
+            $scope.manoeuvres = options.details.manoeuvres;
+        }
+
+        $rootScope.$on ('myoptions', function (event) {
+            var options_update = Ptv.getOptions ();
+
+            $scope.dinamic_route = options_update.trayect.dinamic_route;
+            $scope.tollroads = parseInt (options_update.trayect.tollroads);
+            $('input[for=tollroads]').val($scope.tollroads).change();
+            $scope.highways = parseInt (options_update.trayect.highways);
+            $('input[for=highways]').val($scope.highways).change();
+
+            $scope.height = parseInt (options_update.vehicle.height);
+            $scope.width = parseInt (options_update.vehicle.width);
+
+            $scope.manoeuvres = options_update.details.manoeuvres;
+        });
 
 
-        $scope.height = parseInt (options.vehicle.height);
-        $scope.width = parseInt (options.vehicle.width);
 
-        $scope.manoeuvres = options.details.manoeuvres;
-
-
-        console.log ("scope.width: " + $scope.width)
-        console.log ("dinamic route: " + options.trayect.dinamic_route)
+        //console.log ("scope.width: " + $scope.width)
+        //console.log ("dinamic route: " + options.trayect.dinamic_route)
 
 
     var format_extremes = function (identifier, value) {
@@ -61,14 +84,6 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
     };
 
     $scope.rangeSlider = function(id) {
-        /*var id_escaped = id.replace(/(:|\.|\[|\])/g, "\\$1");
-        var type_option = id.split(".")[0];
-        var option = id.split(".")[1];
-        var scope_type_option = $scope[type_option];
-        var scope_option_value = scope_type_option[option];
-        $('input[for="' + id_escaped + '"]').val (scope_option_value);*/
-        $('input[for="' + id + '"]').val ($scope[id]);
-        console.log ("SCOPE ID: " + $scope[id])
         var range_slider = $('input[for="' + id + '"]').rangeslider ({
             polyfill: false,            // Deactivate the feature detection
             update: true,
@@ -77,14 +92,12 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
                 format_extremes (this.identifier, this.value);
                 var slider = this;
                 $('#' + id).on ('input', function(ev) {
-                    console.log ("DENTRO EVENTO")
                     var value = $(ev.currentTarget).val();
                     slider.value = value;
                     slider.update();
                     format_background (slider.identifier, slider.value);
                     format_extremes (slider.identifier, slider.value);
                 });
-                /*setTimeout(function(){ $('#' + id_escaped).trigger('input'); }, 50);*/
             },
             onSlide: function (position, value) {
                 format_background (this.identifier, this.value);

@@ -135,6 +135,7 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             $rootScope.$broadcast ('login');
             Ptv.myoptions.get().$promise
                 .then (function(response) {
+                console.log ("RESPONSE MYOPTIONS")
                 Ptv.setOptions (response.options);
                 $rootScope.$emit ('myoptions');
             });
