@@ -40,7 +40,6 @@ function login (req, res) {
             if (!isMatch) {
                 return res.status(401).send({ message: 'wrong email and/or password' });
             }
-            console.log (user);
             token.createToken (user, function(res, err, token) {
                 if (err) {
                     logger.error (err.message);
@@ -98,8 +97,8 @@ function forgot (req, res) {
 
 
 function isAuthenticated(req, res, next) {
-    console.log ("HEADERS");
-    console.log (req.headers);
+    //console.log ("HEADERS");
+    //console.log (req.headers);
 
     console.log ("FIN HEADERS");
     token.verifyToken(req.headers, function(next, err, data) {

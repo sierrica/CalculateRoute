@@ -1,21 +1,6 @@
 app.factory ('Ptv', function($resource, Map) {
 
     var options = {};
-    /*
-        details: {
-            manoeuvres: true
-        },
-        vehicle: {
-          height: 145,
-          width: 200
-        },
-        trayect: {
-            dinamic_route: false,
-            tollroads: -15,
-            highways: 2300
-        }
-    };
-*/
 
     var results = {
         polygon: [],

@@ -122,6 +122,7 @@ exports.findlocation = function (req, res) {
         callerContext: callerContext
     };
 
+
     var options = {
         url: 'https://xlocate-eu-n-test.cloud.ptvgroup.com/xlocate/rs/XLocate/findLocation',
         headers: headers,
@@ -192,6 +193,18 @@ exports.calculateroute = function(req, res) {
     }, {
         parameter: 'AVOID_HIGHWAYS',
         value: req.body.options.trayect.highways
+    }, {
+        parameter: 'AVOID_URBAN_AREAS',
+        value: req.body.options.trayect.urban
+    }, {
+        parameter: 'AVOID_RESIDENTS_ONLY',
+        value: req.body.options.trayect.residential
+    }, {
+        parameter: 'AVOID_RAMPS',
+        value: req.body.options.trayect.ramps
+    }, {
+        parameter: 'AVOID_LOW_EMISSION_ZONES',
+        value: req.body.options.trayect.emission
     }];
 
     var deliveryBasicDataRules = '', deliveryLegalCondition = '';
@@ -199,12 +212,13 @@ exports.calculateroute = function(req, res) {
         deliveryBasicDataRules = '<BasicDataRules><VehicleSpecific><DeliveryVehicles segmentMalus="2500"/></VehicleSpecific></BasicDataRules>';
         deliveryLegalCondition = '<Legal><LegalCondition isAuthorized="true" isDelivery="true"/></Legal>';
     }
-    //var weight = '<Weight emptyWeight="' + document.getElementById("weight").value + '"/>';
+
+    var weight = '<Weight emptyWeight="' + req.body.options.vehicle.weight + '"/>';
     var dimension = '<Dimension height="' + req.body.options.vehicle.height + '" width="' + req.body.options.vehicle.width + '" />';
 
     var snippet ='<Profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><FeatureLayer majorVersion="1" minorVersion="0"><GlobalSettings enableVehicleDependency="true"/><Themes><Theme id="PTV_TruckAttributes" enabled="true"></Theme></Themes></FeatureLayer><Routing majorVersion="2" minorVersion="0">'
         + '<Course>' + deliveryBasicDataRules + '<AdditionalDataRules enabled="true"><VehicleSpecific enabled="false"/></AdditionalDataRules></Course>'
-        + '<Vehicle><Physical>' + dimension + '</Physical>' + deliveryLegalCondition + '</Vehicle></Routing></Profile>';
+        + '<Vehicle><Physical>' + weight + dimension + '</Physical>' + deliveryLegalCondition + '</Vehicle></Routing></Profile>';
 
     var callerContext_truck = {
         properties: [{
@@ -232,6 +246,9 @@ exports.calculateroute = function(req, res) {
 
 
     peticion.exceptionPaths = [];
+
+    console.log ("PETICION A PTV");
+    console.log (peticion);
 
     var options = {
         url: 'https://xroute-eu-n-test.cloud.ptvgroup.com/xroute/rs/XRoute/calculateRoute',

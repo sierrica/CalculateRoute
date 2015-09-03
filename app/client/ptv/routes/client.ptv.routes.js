@@ -9,12 +9,16 @@ app.config (['$stateProvider', function ($stateProvider) {
             },
             onExit: function (Ptv) {
                 console.log ("SALIENDO TRAYECT");
-                //tollroads: $("#" + "trayect.tollroads".replace(/(:|\.|\[|\])/g, "\\$1")).val(),
                 Ptv.setOptions ({
                     trayect: {
+                        optimization: $(optimization).val(),
                         dinamic_route: $(dinamic_route).prop("checked"),
                         tollroads: $(tollroads).val(),
-                        highways: $(highways).val()
+                        highways: $(highways).val(),
+                        urban: $(urban).val(),
+                        residential: $(residential).val(),
+                        ramps: $(ramps).val(),
+                        emission: $(emission).val()
                     }
                 });
             }
@@ -32,7 +36,8 @@ app.config (['$stateProvider', function ($stateProvider) {
             Ptv.setOptions ({
                 vehicle: {
                     height: $(height).val(),
-                    width: $(width).val()
+                    width: $(width).val(),
+                    weight: $(weight).val()
                 }
             });
         }

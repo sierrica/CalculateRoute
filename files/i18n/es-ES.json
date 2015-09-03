@@ -123,6 +123,11 @@
   "danger of animals on the road": "peligro de animales en la carretera",
   "danger from defective vehicle": "peligro de vehiculo defectuoso",
   "blocked middle lane": "carril central bloqueado",
-  "accident": "accidente"
+  "accident": "accidente",
+
+  "shortest": "mas corta",
+  "short": "corta",
+  "fast": "rapida",
+  "fastest": "mas rapida"
 
 }

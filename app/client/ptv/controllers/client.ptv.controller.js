@@ -23,22 +23,34 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             offsetX: 0,
             offsetY: -5
         });
-        console.log ("TOLLTIP")
-    }
+    };
 
         console.log ("OPCIONES AL COMIENZO");
         console.log (options)
 
         if ( ! _.isEmpty(options)) {
-            $scope.dinamic_route = options.trayect.dinamic_route;
-            $scope.tollroads = parseInt (options.trayect.tollroads);
-            $('input[for=tollroads]').val($scope.tollroads).change();
-
-            $scope.highways = parseInt (options.trayect.highways);
-            $('input[for=highways]').val($scope.highways).change();
-
             $scope.height = parseInt (options.vehicle.height);
             $scope.width = parseInt (options.vehicle.width);
+            $scope.weight = parseInt (options.vehicle.weight);
+
+            $scope.optimization = options.trayect.optimization;
+            $('#optimization').val($scope.optimization).change();
+            $scope.dinamic_route = options.trayect.dinamic_route;
+
+            $scope.tollroads = parseInt (options.trayect.tollroads);
+            $('input[for=tollroads]').val($scope.tollroads).change();
+            $scope.highways = parseInt (options.trayect.highways);
+            $('input[for=highways]').val($scope.highways).change();
+            $scope.urban = parseInt (options.trayect.urban);
+            $('input[for=urban]').val($scope.urban).change();
+            $scope.residential = parseInt (options.trayect.residential);
+            $('input[for=residential]').val($scope.residential).change();
+            $scope.ramps = parseInt (options.trayect.ramps);
+            $('input[for=ramps]').val($scope.ramps).change();
+            $scope.emission = parseInt (options.trayect.emission);
+            $('input[for=emission]').val($scope.emission).change();
+
+
 
             $scope.manoeuvres = options.details.manoeuvres;
         }
@@ -46,14 +58,28 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         $rootScope.$on ('myoptions', function (event) {
             var options = Ptv.getOptions ();
 
+            $scope.height = parseInt (options.vehicle.height);
+            $scope.width = parseInt (options.vehicle.width);
+            $scope.weight = parseInt (options.vehicle.weight);
+
+
+            $scope.optimization = options.trayect.optimization;
+            $('#optimization').val($scope.optimization).change();
             $scope.dinamic_route = options.trayect.dinamic_route;
+
             $scope.tollroads = parseInt (options.trayect.tollroads);
             $('input[for=tollroads]').val($scope.tollroads).change();
             $scope.highways = parseInt (options.trayect.highways);
             $('input[for=highways]').val($scope.highways).change();
+            $scope.urban = parseInt (options.trayect.urban);
+            $('input[for=urban]').val($scope.urban).change();
+            $scope.residential = parseInt (options.trayect.residential);
+            $('input[for=residential]').val($scope.residential).change();
+            $scope.ramps = parseInt (options.trayect.ramps);
+            $('input[for=ramps]').val($scope.ramps).change();
+            $scope.emission = parseInt (options.trayect.emission);
+            $('input[for=emission]').val($scope.emission).change();
 
-            $scope.height = parseInt (options.vehicle.height);
-            $scope.width = parseInt (options.vehicle.width);
 
             $scope.manoeuvres = options.details.manoeuvres;
         });
@@ -71,9 +97,33 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         else $("#" + identifier).css ("background", "#D2D3CB");
     };
 
-    $scope.rangeSlider = function(id) {
+    var format_optimization = function (identifier, value) {
+        if (value <= 30) $("#" + identifier).parent().prev().text($translate.instant('shortest')).css('opacity', '1');
+        else if (value > 30 && value < 50) $("#" + identifier).parent().prev().text($translate.instant('short')).css('opacity', '0.5');
+        else if (value == 50) $("#" + identifier).parent().prev().css('opacity', '0');
+        else if (value > 50 && value <90) $("#" + identifier).parent().prev().text($translate.instant('fast')).css('opacity', '0.5');
+        else $("#" + identifier).parent().prev().text($translate.instant('fastest')).css('opacity', '1');
+
+    };
+
+    $scope.rangeSliderOptimization = function(id) {
+        var range_slider = $('#' + id).rangeslider ({
+            polyfill: false,
+            update: true,
+            onInit: function() {
+                format_optimization (this.identifier, this.value);
+            },
+            onSlide: function (position, value) {
+                format_optimization (this.identifier, this.value);
+            },
+            onSlideEnd: function (position, value) { }
+        });
+    };
+
+
+    $scope.rangeSliderBonus = function(id) {
         var range_slider = $('input[for="' + id + '"]').rangeslider ({
-            polyfill: false,            // Deactivate the feature detection
+            polyfill: false,
             update: true,
             onInit: function() {
                 format_background (this.identifier, this.value);
