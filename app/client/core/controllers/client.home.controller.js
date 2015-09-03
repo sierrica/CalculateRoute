@@ -92,6 +92,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
             }).addTo (that.map);
             that.results.info = response.info;
             that.results.manoeuvres = Ptv.parseManoeuvres(response.manoeuvres, response.stations, response.segments);
+            console.log ("RESPUESTA CALCULATEROUTE");
+            console.log (response);
             Ptv.setResults({
                 polygon: that.results.polygon,
                 info: that.results.info,
@@ -107,7 +109,6 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
 
 
     $scope.addOrigin = function (ev) {
-        console.log (ev);
         $scope.add (ev, 0);
     };
     $scope.addDestine = function (ev) {

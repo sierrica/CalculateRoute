@@ -77,8 +77,8 @@ app.factory ('Ptv', function($resource, Map) {
                     time: stations[i].accTime
                 });
             }
-            console.log ("PARSED MANOUVRES")
-            console.log (parsed_manoeuvres);
+            //console.log ("PARSED MANOUVRES")
+            //console.log (parsed_manoeuvres);
             return parsed_manoeuvres;
         }
     }

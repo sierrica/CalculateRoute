@@ -135,7 +135,6 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
             $rootScope.$broadcast ('login');
             Ptv.myoptions.get().$promise
                 .then (function(response) {
-                console.log ("RESPONSE MYOPTIONS")
                 Ptv.setOptions (response.options);
                 $rootScope.$emit ('myoptions');
             });
@@ -148,7 +147,6 @@ function ($rootScope, tmhDynamicLocale, $translate, $auth, $state, $location, Us
     }
 
     $rootScope.$on ('change_lang', function (event) {
-        console.log ("CHANGE LANG")
         var breadcumb = $location.url().split("/")[1];
         if (breadcumb) {                             // No estamos en el home con el logo y por tanto hy ue traducir
             setTimeout (function() {

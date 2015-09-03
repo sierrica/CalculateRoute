@@ -1,7 +1,8 @@
 var path            = require ('path'),
     Ptv     = require (path.resolve('./app/server/ptv/models/server.ptv.model')),
     request = require ('request'),
-    btoa    = require ('btoa');
+    btoa    = require ('btoa')
+    moment  = require ('moment');
 
 
 var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
@@ -176,6 +177,49 @@ exports.calculateroute = function(req, res) {
             linkType: 'NEXT_SEGMENT'
         });
     }
+    console.log ("FECHA: " + moment.utc().format());
+
+
+    peticion.options= [{
+        parameter: 'ROUTE_LANGUAGE',
+        value: req.user.lang.split('-')[0].toUpperCase()
+    }, {
+        parameter: 'START_TIME',
+        value: moment.utc().format()
+    }, {
+        parameter: 'AVOID_TOLLROADS',
+        value: req.body.options.trayect.tollroads
+    }, {
+        parameter: 'AVOID_HIGHWAYS',
+        value: req.body.options.trayect.highways
+    }];
+
+    var deliveryBasicDataRules = '', deliveryLegalCondition = '';
+    if (req.body.options.vehicle.isDelivery) {
+        deliveryBasicDataRules = '<BasicDataRules><VehicleSpecific><DeliveryVehicles segmentMalus="2500"/></VehicleSpecific></BasicDataRules>';
+        deliveryLegalCondition = '<Legal><LegalCondition isAuthorized="true" isDelivery="true"/></Legal>';
+    }
+    //var weight = '<Weight emptyWeight="' + document.getElementById("weight").value + '"/>';
+    var dimension = '<Dimension height="' + req.body.options.vehicle.height + '" width="' + req.body.options.vehicle.width + '" />';
+
+    var snippet ='<Profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><FeatureLayer majorVersion="1" minorVersion="0"><GlobalSettings enableVehicleDependency="true"/><Themes><Theme id="PTV_TruckAttributes" enabled="true"></Theme></Themes></FeatureLayer><Routing majorVersion="2" minorVersion="0">'
+        + '<Course>' + deliveryBasicDataRules + '<AdditionalDataRules enabled="true"><VehicleSpecific enabled="false"/></AdditionalDataRules></Course>'
+        + '<Vehicle><Physical>' + dimension + '</Physical>' + deliveryLegalCondition + '</Vehicle></Routing></Profile>';
+
+    var callerContext_truck = {
+        properties: [{
+            key: "Profile",
+            value: "truckfast"
+        },{
+            key: "ProfileXMLSnippet",
+            value: snippet
+        }, {
+            "key": "CoordFormat",
+            "value": "OG_GEODECIMAL"
+        }]
+    };
+    peticion.callerContext = callerContext_truck;
+
 
     peticion.details = req.body.options.details;
     //peticion.details.manoeuvreAttributes = true,
@@ -184,12 +228,9 @@ exports.calculateroute = function(req, res) {
     peticion.details.polygon = true;
     peticion.details.segments = true;
 
-    peticion.options= [{
-        parameter: 'ROUTE_LANGUAGE',
-        value: req.user.lang.split('-')[0].toUpperCase()
-    }];
 
-    peticion.callerContext = callerContext;
+
+
     peticion.exceptionPaths = [];
 
     var options = {
