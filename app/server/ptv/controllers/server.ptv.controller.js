@@ -168,6 +168,8 @@ exports.calculateroute = function(req, res) {
 
     peticion.waypoints = [];
     for (i=0; i<req.body.waypoints.length; i++) {
+
+
         peticion.waypoints.push ({
             coords: [{
                 point: {
@@ -178,6 +180,23 @@ exports.calculateroute = function(req, res) {
             linkType: 'NEXT_SEGMENT'
         });
     }
+/*  var vehicleOptions = [
+     { parameter: 'TYPE', value: 'TRL' },
+     { parameter: 'TOTAL_WEIGHT', value: '40000' },
+     { parameter: 'TRAILER_WEIGHT', value: '20000' },
+     { parameter: 'AXLE_WEIGHT', value: '13000' },
+     { parameter: 'NUMBER_OF_AXLES', value: '4' },
+     { parameter: 'EMISSION_CLASS', value: '1.5' },
+     { parameter: 'HEIGHT', value: '400' },
+     { parameter: 'WIDTH', value: '250' },
+     { parameter: 'LENGTH', value: '2000' },
+     { parameter: 'NUMBER_OF_PASSENGERS', value: '1' }
+     ];
+    for (i=0; i<(req.body.waypoints.length - 1); i++)
+        peticion.waypoints[i].vehicleOptions = vehicleOptions;*/
+
+
+
     console.log ("FECHA: " + moment.utc().format());
 
 
@@ -189,10 +208,10 @@ exports.calculateroute = function(req, res) {
         value: moment.utc().format()
     }, {
         parameter: 'AVOID_TOLLROADS',
-        value: req.body.options.trayect.tollroads
+        value: req.body.options.trayect.motorway
     }, {
         parameter: 'AVOID_HIGHWAYS',
-        value: req.body.options.trayect.highways
+        value: req.body.options.trayect.highway
     }, {
         parameter: 'AVOID_URBAN_AREAS',
         value: req.body.options.trayect.urban
@@ -203,27 +222,53 @@ exports.calculateroute = function(req, res) {
         parameter: 'AVOID_RAMPS',
         value: req.body.options.trayect.ramps
     }, {
-        parameter: 'AVOID_LOW_EMISSION_ZONES',
-        value: req.body.options.trayect.emission
+        parameter: 'AVOID_FERRIES',
+        value: req.body.options.trayect.ferry
     }];
+
+
+
 
     var deliveryBasicDataRules = '', deliveryLegalCondition = '';
     if (req.body.options.vehicle.isDelivery) {
-        deliveryBasicDataRules = '<BasicDataRules><VehicleSpecific><DeliveryVehicles segmentMalus="2500"/></VehicleSpecific></BasicDataRules>';
+        deliveryBasicDataRules = '<VehicleSpecific><DeliveryVehicles segmentMalus="2500"/></VehicleSpecific>';
         deliveryLegalCondition = '<Legal><LegalCondition isAuthorized="true" isDelivery="true"/></Legal>';
     }
 
+    var Network = '';
+    /*var Network = '<Network rampMalus="' + req.body.options.trayect.ramps + '">' +
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.motorway + '"/>' +
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.highway + '"/>' +
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.national + '"/>' +
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.provincial + '"/>' +
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.county + '"/>' +
+                        '<MalusByNetworkClass malus="0"/>' +
+                        '<MalusByNetworkClass malus="0"/>' +
+                        '<MalusByNetworkClass malus="0"/>' +
+                  '</Network>';*/
+
+    var Toll = '';
+    //var Toll =  '<Toll tollMalus="' + req.body.options.trayect.tollroad + '"/>';
+    var SpecialAreas = '';
+    //var SpecialAreas =  '<SpecialAreas residentialMalus="' + req.body.options.trayect.residential + '" urbanMalus="' + req.body.options.trayect.urban + '"/>';
+    var CombinedTransport = '';
+    //var CombinedTransport = '<CombinedTransport ferryMalus="' + req.body.options.trayect.ferry + '"/>';
+    var BasicDataRules = '<BasicDataRules>' + Network + Toll + SpecialAreas + CombinedTransport + deliveryBasicDataRules + '</BasicDataRules>';
+
     var weight = '<Weight emptyWeight="' + req.body.options.vehicle.weight + '"/>';
-    var dimension = '<Dimension height="' + req.body.options.vehicle.height + '" width="' + req.body.options.vehicle.width + '" />';
+    var dimension = '<Dimension height="' + req.body.options.vehicle.height + '" width="' + req.body.options.vehicle.width + '" length="' + req.body.options.vehicle.length + '"/>';
+
+    var fuel = '<Drive driveType="MOTORIZED"><Engine fuelType="' + req.body.options.vehicle.fueltype + '" fuelConsumption="' + req.body.options.vehicle.fuelconsumption + '"/></Drive>';
+
 
     var snippet ='<Profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><FeatureLayer majorVersion="1" minorVersion="0"><GlobalSettings enableVehicleDependency="true"/><Themes><Theme id="PTV_TruckAttributes" enabled="true"></Theme></Themes></FeatureLayer><Routing majorVersion="2" minorVersion="0">'
-        + '<Course>' + deliveryBasicDataRules + '<AdditionalDataRules enabled="true"><VehicleSpecific enabled="false"/></AdditionalDataRules></Course>'
-        + '<Vehicle><Physical>' + weight + dimension + '</Physical>' + deliveryLegalCondition + '</Vehicle></Routing></Profile>';
+        + '<Course>' + BasicDataRules + '<AdditionalDataRules enabled="true"><VehicleSpecific enabled="false"/></AdditionalDataRules></Course>'
+        + '<Vehicle><Physical>' + fuel + weight + dimension + '</Physical>' + deliveryLegalCondition + '</Vehicle></Routing></Profile>';
 
     var callerContext_truck = {
         properties: [{
             key: "Profile",
-            value: "truckfast"
+            value: "default"
         },{
             key: "ProfileXMLSnippet",
             value: snippet
@@ -235,23 +280,34 @@ exports.calculateroute = function(req, res) {
     peticion.callerContext = callerContext_truck;
 
 
+    peticion.exceptionPaths = [];
+
+
     peticion.details = req.body.options.details;
     //peticion.details.manoeuvreAttributes = true,
-
     peticion.details.detailLevel = 'STANDARD';
     peticion.details.polygon = true;
     peticion.details.segments = true;
 
+    peticion.countryInfoOptions = {
+        allEuro: true,
+        tollTotals: true,
+        namedToll: true,
+        currencyDescription: true,
+        detailedTollCosts: false
+    }
 
 
 
-    peticion.exceptionPaths = [];
 
     console.log ("PETICION A PTV");
-    console.log (peticion);
+    console.log (JSON.stringify(peticion));
+    console.log ("PERFIL A PTV");
+    console.log (snippet);
 
     var options = {
-        url: 'https://xroute-eu-n-test.cloud.ptvgroup.com/xroute/rs/XRoute/calculateRoute',
+        //url: 'https://xroute-eu-n-test.cloud.ptvgroup.com/xroute/rs/XRoute/calculateRoute',
+        url: 'https://xroute-eu-n-test.cloud.ptvgroup.com/xroute/rs/XRoute/calculateExtendedRoute',
         headers: headers,
         json: true,
         body: peticion

@@ -49,11 +49,13 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         var that = $scope;
         $http.post ('/ptv/calculateroute', request)
         .success (function(response) {
+            console.log ("RESPUESTA CALCULATEROUTE");
+            console.log (response);
             var points = [];
-            for (i=0; i<response.polygon.lineString.points.length; i++) {
+            for (i=0; i<response.route.polygon.lineString.points.length; i++) {
                 points.push({
-                    lat: response.polygon.lineString.points[i].y,
-                    lng: response.polygon.lineString.points[i].x,
+                    lat: response.route.polygon.lineString.points[i].y,
+                    lng: response.route.polygon.lineString.points[i].x,
                 })
             }
             if (that.results.polygon)
@@ -90,10 +92,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 }]
 
             }).addTo (that.map);
-            that.results.info = response.info;
-            that.results.manoeuvres = Ptv.parseManoeuvres(response.manoeuvres, response.stations, response.segments);
-            console.log ("RESPUESTA CALCULATEROUTE");
-            console.log (response);
+            that.results.info = response.route.info;
+            that.results.manoeuvres = Ptv.parseManoeuvres(response.route.manoeuvres, response.route.stations, response.route.segments);
             Ptv.setResults({
                 polygon: that.results.polygon,
                 info: that.results.info,

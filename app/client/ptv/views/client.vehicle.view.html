@@ -1,5 +1,21 @@
 <div class="container" ng-controller="PtvController">
-    <div class="header_section">vehicle<li class="divider"></li></div>
+
+
+    <div class="row">
+        <div class="col s12 m4 l3 offset-l1 truncate" class="tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('type')" style="font-size:25px; padding-top:5px;">
+            Tipo <i class="tiny material-icons" style="vertical-align:top">help</i>
+        </div>
+        <div class="input-field col s12 offset-m1 m4 offset-l1 l3 right-align truncate" style="margin-top:0px; padding:0px">
+            <select class="browser-default" id="type" name="type" ng-model="type">
+                <option value="default">Eurosuper</option>
+                <option value="DIESEL">Diesel</option>
+                <option value="COMPRESSED_NATURAL_GAS">Gas natural comprimido</option>
+                <option value="LIQUEFIED_PETROLEUM_GAS">Gas mezcla Petroleo</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="header_section">Dimensiones<li class="divider"></li></div>
     <div class="row">
         <div class="col s6 m5 l3 offset-l1 truncate" class="tooltip" title="This is my div's tooltip!" ng-init="toolTipster('height')" style="font-size:25px; padding-top:5px;">
             Altura <i class="tiny material-icons" style="vertical-align:top;">help</i>
@@ -19,6 +35,15 @@
         <div class="col s1 right-left" style="padding-left:0px"><i><b style="font-size:20px">cm</b></i></div>
     </div>
     <div class="row">
+        <div class="col s6 m5 l3 offset-l1 truncate" class="tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('length')" style="font-size:25px; padding-top:5px;">
+            Largura <i class="tiny material-icons" style="vertical-align:top">help</i>
+        </div>
+        <div class="col s5 m2 l2 right-align truncate">
+            <input type="number" ng-min="0" ng-max="10000" step="1" class="output_input" id="length" name="length" ng-model="length"/>
+        </div>
+        <div class="col s1 right-left" style="padding-left:0px"><i><b style="font-size:20px">cm</b></i></div>
+    </div>
+    <div class="row">
         <div class="col s6 m5 l3 offset-l1 truncate" class="tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('weight')" style="font-size:25px; padding-top:5px;">
             Peso <i class="tiny material-icons" style="vertical-align:top">help</i>
         </div>
@@ -26,5 +51,28 @@
             <input type="number" ng-min="0" ng-max="50000" step="20" class="output_input" id="weight" name="weight" ng-model="weight"/>
         </div>
         <div class="col s1 right-left" style="padding-left:0px"><i><b style="font-size:20px">Kg</b></i></div>
+    </div>
+    <div class="header_section" style="margin-top:40px;">Combustible<li class="divider"></li></div>
+    <div class="row">
+        <div class="col s12 m4 l3 offset-l1 truncate" class="tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('fueltype')" style="font-size:25px; padding-top:5px;">
+            Tipo <i class="tiny material-icons" style="vertical-align:top">help</i>
+        </div>
+        <div class="input-field col s12 offset-m1 m4 offset-l1 l3 right-align truncate" style="margin-top:0px; padding:0px">
+            <select class="browser-default" id="fueltype" name="fueltype" ng-model="fueltype">
+                <option value="EUROSUPER">Eurosuper</option>
+                <option value="DIESEL">Diesel</option>
+                <option value="COMPRESSED_NATURAL_GAS">Gas natural comprimido</option>
+                <option value="LIQUEFIED_PETROLEUM_GAS">Gas mezcla Petroleo</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 m5 l3 offset-l1 truncate" class="tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('fuelconsumption')" style="font-size:25px; padding-top:5px;">
+            Consumo <i class="tiny material-icons" style="vertical-align:top">help</i>
+        </div>
+        <div class="col s5 m2 l2 right-align truncate">
+            <input type="number" ng-min="0" ng-max="200" step="0.5" class="output_input" id="fuelconsumption" name="fuelconsumption" ng-model="fuelconsumption"/>
+        </div>
+        <div class="col s1 right-left" style="padding-left:0px"><i><b style="font-size:20px">Lt/Kg</b></i></div>
     </div>
 </div>

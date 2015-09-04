@@ -13,12 +13,18 @@ app.config (['$stateProvider', function ($stateProvider) {
                     trayect: {
                         optimization: $(optimization).val(),
                         dinamic_route: $(dinamic_route).prop("checked"),
-                        tollroads: $(tollroads).val(),
-                        highways: $(highways).val(),
-                        urban: $(urban).val(),
+
+                        motorway: $(motorway).val(),
+                        highway: $(highway).val(),
+                        national: $(national).val(),
+                        provincial: $(provincial).val(),
+                        county: $(county).val(),
                         residential: $(residential).val(),
+                        urban: $(urban).val(),
+
+                        tollroad: $(tollroad).val(),
                         ramps: $(ramps).val(),
-                        emission: $(emission).val()
+                        ferry: $(ferry).val()
                     }
                 });
             }
@@ -37,7 +43,10 @@ app.config (['$stateProvider', function ($stateProvider) {
                 vehicle: {
                     height: $(height).val(),
                     width: $(width).val(),
-                    weight: $(weight).val()
+                    length: $(length).val(),
+                    weight: $(weight).val(),
+                    fueltype: $(fueltype).val(),
+                    fuelconsumption: $(fuelconsumption).val()
                 }
             });
         }

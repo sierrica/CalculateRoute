@@ -12,10 +12,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s9 m5 l5 truncate tooltip" title="This is my div's tooltip!" ng-init="toolTipster('dinamic_route')" style="font-size:20px; padding-top:5px;">
+        <div class="col s9 m7 l7 truncate tooltip" title="This is my div's tooltip!" ng-init="toolTipster('dinamic_route')" style="font-size:20px; padding-top:5px;">
             Ruta Dinamica <i class="tiny material-icons" style="vertical-align:top;">help</i>
         </div>
-        <div class="col s3 m2 l2 right-align truncate">
+        <div class="col s3 m2 l2 truncate">
             <label class="label-switch" style="margin-top:4px;">
                 <input type="checkbox" id="dinamic_route" ng-model="dinamic_route"/>
                 <div class="checkbox"></div>
@@ -23,38 +23,61 @@
         </div>
     </div>
 
+    <!-- VIAS -->
     <div class="header_section" style="margin-top:40px">Vias<li class="divider"></li></div>
     <div class="row">
         <div class="col s8 m5 l5 truncate" style="font-size:20px; padding-top:5px;">
-            Autopistas <i class="tiny material-icons tooltip" title="This is my div's tooltip messagessssdsd d sd sd sds dsds dsd sd sd d!" ng-init="toolTipster('tollroads')">help</i>
+            Autopistas <i class="tiny material-icons tooltip" title="This is my div's tooltip " ng-init="toolTipster('motorway')">help</i>
         </div>
         <div class="col s4 m2 l2 right-align">
-                <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="tollroads" name="tollroads" ng-model="tollroads"/>
+                <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="motorway" name="motorway" ng-model="motorway"/>
         </div>
         <div class="col s12 m5 l5">
-            <input type="range" for="tollroads" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('tollroads')" ng-model="tollroads">
+            <input type="range" for="motorway" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('motorway')" ng-model="motorway">
         </div>
     </div>
     <div class="row">
         <div class="col s8 m5 l5" style="font-size:20px; padding-top:5px;">
-            Autovias <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('highways')">help</i>
+            Autovias <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('highway')">help</i>
         </div>
         <div class="col s4 m2 l2 right-align">
-            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="highways" name="highways" ng-model="highways"/>
+            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="highway" name="highway" ng-model="highway"/>
         </div>
         <div class="col s12 m5 l5">
-            <input type="range" for="highways" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('highways')" ng-model="highways">
+            <input type="range" for="highway" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('highway')" ng-model="highway">
         </div>
     </div>
     <div class="row">
         <div class="col s8 m5 l5" style="font-size:20px; padding-top:5px;">
-            Urbanas <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('urban')">help</i>
+            Nacionales <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('national')">help</i>
         </div>
         <div class="col s4 m2 l2 right-align">
-            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="urban" name="urban" ng-model="urban"/>
+            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="national" name="national" ng-model="national"/>
         </div>
         <div class="col s12 m5 l5">
-            <input type="range" for="urban" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('urban')" ng-model="urban">
+            <input type="range" for="national" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('national')" ng-model="national">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s8 m5 l5" style="font-size:20px; padding-top:5px;">
+            Autonomicas <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('provincial')">help</i>
+        </div>
+        <div class="col s4 m2 l2 right-align">
+            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="provincial" name="provincial" ng-model="provincial"/>
+        </div>
+        <div class="col s12 m5 l5">
+            <input type="range" for="provincial" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('provincial')" ng-model="provincial">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s8 m5 l5" style="font-size:20px; padding-top:5px;">
+            Comarcales <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('county')">help</i>
+        </div>
+        <div class="col s4 m2 l2 right-align">
+            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="county" name="county" ng-model="county"/>
+        </div>
+        <div class="col s12 m5 l5">
+            <input type="range" for="county" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('county')" ng-model="county">
         </div>
     </div>
     <div class="row">
@@ -65,12 +88,37 @@
             <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="residential" name="residential" ng-model="residential"/>
         </div>
         <div class="col s12 m5 l5">
-            <input type="range" for="urban" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('residential')" ng-model="residential">
+            <input type="range" for="residential" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('residential')" ng-model="residential">
         </div>
     </div>
     <div class="row">
         <div class="col s8 m5 l5" style="font-size:20px; padding-top:5px;">
-            Rampas <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('ramps')">help</i>
+            Intraurbanas <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('urban')">help</i>
+        </div>
+        <div class="col s4 m2 l2 right-align">
+            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="urban" name="urban" ng-model="urban"/>
+        </div>
+        <div class="col s12 m5 l5">
+            <input type="range" for="urban" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('urban')" ng-model="urban">
+        </div>
+    </div>
+
+    <!-- OTRAS -->
+    <div class="header_section" style="margin-top:40px">Otras Vias<li class="divider"></li></div>
+    <div class="row">
+        <div class="col s8 m5 l5 truncate" style="font-size:20px; padding-top:5px;">
+            Peajes <i class="tiny material-icons tooltip" title="This is my div's tooltip messagessssdsd d sd sd sds dsds dsd sd sd d!" ng-init="toolTipster('tollroad')">help</i>
+        </div>
+        <div class="col s4 m2 l2 right-align">
+            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="tollroad" name="tollroad" ng-model="tollroad"/>
+        </div>
+        <div class="col s12 m5 l5">
+            <input type="range" for="tollroad" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('tollroad')" ng-model="tollroad">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s8 m5 l5" style="font-size:20px; padding-top:5px;">
+            Puertos <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('ramps')">help</i>
         </div>
         <div class="col s4 m2 l2 right-align">
             <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="ramps" name="ramps" ng-model="ramps"/>
@@ -81,13 +129,13 @@
     </div>
     <div class="row">
         <div class="col s8 m5 l5" style="font-size:20px; padding-top:5px;">
-            Bajas emisiones <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('emission')">help</i>
+            Ferris <i class="tiny material-icons tooltip" title="This is my div's tooltip message!" ng-init="toolTipster('ferry')">help</i>
         </div>
         <div class="col s4 m2 l2 right-align">
-            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="emission" name="emission" ng-model="emission"/>
+            <input type="number" ng-min="-99" ng-max="2501" step="1" class="output_input" id="ferry" name="ferry" ng-model="ferry"/>
         </div>
         <div class="col s12 m5 l5">
-            <input type="range" for="ramps" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('emission')" ng-model="emission">
+            <input type="range" for="ferry" min="-99" max="2501" step="1" data-rangeslider range-parser ng-init="rangeSliderBonus('ferry')" ng-model="ferry">
         </div>
     </div>
     <li class="divider"></li>
