@@ -92,7 +92,12 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 }]
 
             }).addTo (that.map);
+
             that.results.info = response.route.info;
+            that.results.info.cost = 0;
+            for (i=0; i<response.countryInfos.length; i++)
+                that.results.info.cost += parseInt(response.countryInfos[i].tollTotals.cost);
+
             that.results.manoeuvres = Ptv.parseManoeuvres(response.route.manoeuvres, response.route.stations, response.route.segments);
             Ptv.setResults({
                 polygon: that.results.polygon,

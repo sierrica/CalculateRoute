@@ -32,7 +32,7 @@
                     <tr>
                         <td>{{ results.info.distance | distanceParser }}</td>
                         <td>{{ results.info.time | timeParser }}</b></td>
-                        <td>{{ results.info.cost }}</td>
+                        <td>{{ results.info.cost | moneyParser }} &euro;</td>
                     </tr>
                 </tbody>
             </table>

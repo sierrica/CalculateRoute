@@ -196,89 +196,74 @@ exports.calculateroute = function(req, res) {
         peticion.waypoints[i].vehicleOptions = vehicleOptions;*/
 
 
+    peticion.options = [
+        { parameter: 'START_TIME', value: moment.utc().format() }/*,
+        { parameter: 'ROUTE_LANGUAGE', value: req.user.lang.split('-')[0].toUpperCase() },
+        { parameter: 'AVOID_TOLLROADS', value: req.body.options.trayect.motorway },
+        { parameter: 'AVOID_HIGHWAYS', value: req.body.options.trayect.highway },
+        { parameter: 'AVOID_URBAN_AREAS', value: req.body.options.trayect.urban },
+        { parameter: 'AVOID_RESIDENTS_ONLY', value: req.body.options.trayect.residential },
+        { parameter: 'AVOID_RAMPS', value: req.body.options.trayect.ramps }, { parameter: 'AVOID_FERRIES', value: req.body.options.trayect.ferry }*/
+    ];
 
-    console.log ("FECHA: " + moment.utc().format());
+    // COMMON
+    var Common = '<Common majorVersion="1" minorVersion="0" language="' + req.user.lang.split('-')[0].toLowerCase() + '" coordinateFormat="OG_GEODECIMAL"/>'
 
+    // FEATURE LAYER
+    var GlobalSettings = '<GlobalSettings enableVehicleDependency="true"/>';
+    var Themes = '<Themes>' +
+                    '<Theme id="PTV_TruckAttributes" enabled="true"></Theme>' +
+                 '</Themes>';
+    var FeatureLayer = '<FeatureLayer majorVersion="1" minorVersion="0"> + GlobalSettings + Themes + </FeatureLayer>';
 
-    peticion.options= [{
-        parameter: 'ROUTE_LANGUAGE',
-        value: req.user.lang.split('-')[0].toUpperCase()
-    }, {
-        parameter: 'START_TIME',
-        value: moment.utc().format()
-    }, {
-        parameter: 'AVOID_TOLLROADS',
-        value: req.body.options.trayect.motorway
-    }, {
-        parameter: 'AVOID_HIGHWAYS',
-        value: req.body.options.trayect.highway
-    }, {
-        parameter: 'AVOID_URBAN_AREAS',
-        value: req.body.options.trayect.urban
-    }, {
-        parameter: 'AVOID_RESIDENTS_ONLY',
-        value: req.body.options.trayect.residential
-    }, {
-        parameter: 'AVOID_RAMPS',
-        value: req.body.options.trayect.ramps
-    }, {
-        parameter: 'AVOID_FERRIES',
-        value: req.body.options.trayect.ferry
-    }];
-
-
-
+    // VEHICLE
+    var Engine = '<Engine cylinderCapacity="' + req.body.options.vehicle.cylinder + '" fuelType="' + req.body.options.vehicle.fueltype + '" fuelConsumption="' + req.body.options.vehicle.fuelconsumption + '"/>';
+    var Drive = '<Drive driveType="MOTORIZED"> + Engine + </Drive>';
+    var Axle = '<Axle axleLoad="' + req.body.options.vehicle.axleload + '" numberOfAxles="' + req.body.options.vehicle.axlenumber + '"/>'
+    var Weight = '<Weight emptyWeight="' + req.body.options.vehicle.emptyweight + '" totalPermittedWeight="' + req.body.options.vehicle.totalweight + '" loadWeight="' + req.body.options.vehicle.loadweight + '"/>';
+    var Load = '<Load hazardousGoodsType="NONE" loadType="PASSENGER"/>'
+    var Trailer = '<Trailer emptyWeight="' + req.body.options.vehicle.trailerweight + '"/>';
+    var Passenger = '<Passenger maximumPermittedNumberOfPassengers="' + req.body.options.vehicle.maximumpassengers + '"/>';
+    var Dimension = '<Dimension height="' + req.body.options.vehicle.height + '" width="' + req.body.options.vehicle.width + '" length="' + req.body.options.vehicle.lengt + '"/>';
+    var Physical = '<Physical>' + Drive + Axle + Weight + Trailer + Dimension + Passenger + '</Physical>';
 
     var deliveryBasicDataRules = '', deliveryLegalCondition = '';
     if (req.body.options.vehicle.isDelivery) {
         deliveryBasicDataRules = '<VehicleSpecific><DeliveryVehicles segmentMalus="2500"/></VehicleSpecific>';
-        deliveryLegalCondition = '<Legal><LegalCondition isAuthorized="true" isDelivery="true"/></Legal>';
+        deliveryLegalCondition = '<Legal yearOfManufacture="' + req.body.options.vehicle.yearmanufacturer + '"><LegalCondition isAuthorized="true" isDelivery="true"/></Legal>';
     }
 
-    var Network = '';
-    /*var Network = '<Network rampMalus="' + req.body.options.trayect.ramps + '">' +
-                        '<MalusByNetworkClass malus="' + req.body.options.trayect.motorway + '"/>' +
-                        '<MalusByNetworkClass malus="' + req.body.options.trayect.highway + '"/>' +
-                        '<MalusByNetworkClass malus="' + req.body.options.trayect.national + '"/>' +
-                        '<MalusByNetworkClass malus="' + req.body.options.trayect.provincial + '"/>' +
-                        '<MalusByNetworkClass malus="' + req.body.options.trayect.county + '"/>' +
-                        '<MalusByNetworkClass malus="0"/>' +
-                        '<MalusByNetworkClass malus="0"/>' +
-                        '<MalusByNetworkClass malus="0"/>' +
-                  '</Network>';*/
 
-    var Toll = '';
-    //var Toll =  '<Toll tollMalus="' + req.body.options.trayect.tollroad + '"/>';
-    var SpecialAreas = '';
-    //var SpecialAreas =  '<SpecialAreas residentialMalus="' + req.body.options.trayect.residential + '" urbanMalus="' + req.body.options.trayect.urban + '"/>';
-    var CombinedTransport = '';
-    //var CombinedTransport = '<CombinedTransport ferryMalus="' + req.body.options.trayect.ferry + '"/>';
+    var Network = '<Network rampMalus="' + req.body.options.trayect.ramps + '">' +                              // RAMP
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.motorway + '"/>' +            // MOTORWAY
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.highway + '"/>' +             // HIGHWAY
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.national + '"/>' +            // TRUNK_ROAD
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.regional + '"/>' +          // COUNTRY_ROAD
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.county + '"/>' +              // CITY ROAD
+                        '<MalusByNetworkClass malus="50"/>' +                                                   // RESIDENTIAL_ROAD
+                        '<MalusByNetworkClass malus="100"/>' +                                                  // SPECIAL_ROAD
+                        '<MalusByNetworkClass malus="100"/>' +                                                  // CYCLE_AND_WALKWAY
+                  '</Network>';
+    var Toll = '<Toll tollMalus="' + req.body.options.trayect.tollroad + '"/>';
+    var SpecialAreas = '<SpecialAreas residentialMalus="' + req.body.options.trayect.residential + '" urbanMalus="' + req.body.options.trayect.urban + '"/>';
+    var CombinedTransport = '<CombinedTransport ferryMalus="' + req.body.options.trayect.ferry + '"/>';
     var BasicDataRules = '<BasicDataRules>' + Network + Toll + SpecialAreas + CombinedTransport + deliveryBasicDataRules + '</BasicDataRules>';
+    var AdditionalDataRules = '<AdditionalDataRules enabled="true"><VehicleSpecific enabled="false"/></AdditionalDataRules>';
 
-    var weight = '<Weight emptyWeight="' + req.body.options.vehicle.weight + '"/>';
-    var dimension = '<Dimension height="' + req.body.options.vehicle.height + '" width="' + req.body.options.vehicle.width + '" length="' + req.body.options.vehicle.length + '"/>';
+    var Routing = '<Routing majorVersion="2" minorVersion="0">' +
+                        '<Vehicle>' + Physical + deliveryLegalCondition + '</Vehicle>' +
+                        '<Course>' + BasicDataRules + AdditionalDataRules + '</Course>' +
+                  '</Routing>';
 
-    var fuel = '<Drive driveType="MOTORIZED"><Engine fuelType="' + req.body.options.vehicle.fueltype + '" fuelConsumption="' + req.body.options.vehicle.fuelconsumption + '"/></Drive>';
+    var snippet = '<Profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' + Common + FeatureLayer + Routing + '</Profile>';
 
-
-    var snippet ='<Profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><FeatureLayer majorVersion="1" minorVersion="0"><GlobalSettings enableVehicleDependency="true"/><Themes><Theme id="PTV_TruckAttributes" enabled="true"></Theme></Themes></FeatureLayer><Routing majorVersion="2" minorVersion="0">'
-        + '<Course>' + BasicDataRules + '<AdditionalDataRules enabled="true"><VehicleSpecific enabled="false"/></AdditionalDataRules></Course>'
-        + '<Vehicle><Physical>' + fuel + weight + dimension + '</Physical>' + deliveryLegalCondition + '</Vehicle></Routing></Profile>';
-
-    var callerContext_truck = {
-        properties: [{
-            key: "Profile",
-            value: "default"
-        },{
-            key: "ProfileXMLSnippet",
-            value: snippet
-        }, {
-            "key": "CoordFormat",
-            "value": "OG_GEODECIMAL"
-        }]
+    peticion.callerContext = {
+        properties: [
+            { key: 'Profile', value: req.body.options.vehicle.vehicletype },
+            { key: 'ProfileXMLSnippet', value: snippet },
+            { key: 'CoordFormat', value: 'OG_GEODECIMAL' }
+        ]
     };
-    peticion.callerContext = callerContext_truck;
-
 
     peticion.exceptionPaths = [];
 

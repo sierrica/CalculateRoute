@@ -107,6 +107,11 @@ var app = angular.module('calculateRoute', [
         return (input/1000).toFixed(0) + ' km, ' + input % 1000 + ' m';
     }
 })
+.filter('moneyParser', function () {
+    return function (input) {
+        return (input/100).toFixed(2);
+    }
+})
 .filter('timeParser', function () {
     return function (input) {
         var h = Math.floor(input / (60 * 60));

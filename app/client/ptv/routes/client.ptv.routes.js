@@ -17,13 +17,13 @@ app.config (['$stateProvider', function ($stateProvider) {
                         motorway: $(motorway).val(),
                         highway: $(highway).val(),
                         national: $(national).val(),
-                        provincial: $(provincial).val(),
+                        regional: $(regional).val(),
                         county: $(county).val(),
-                        residential: $(residential).val(),
                         urban: $(urban).val(),
+                        residential: $(residential).val(),
 
                         tollroad: $(tollroad).val(),
-                        ramps: $(ramps).val(),
+                        ramp: $(ramp).val(),
                         ferry: $(ferry).val()
                     }
                 });
@@ -41,12 +41,30 @@ app.config (['$stateProvider', function ($stateProvider) {
             //tollroads: $("#" + "trayect.tollroads".replace(/(:|\.|\[|\])/g, "\\$1")).val(),
             Ptv.setOptions ({
                 vehicle: {
+                    vehicletype: $(vehicletype).val(),
+
                     height: $(height).val(),
                     width: $(width).val(),
-                    length: $(length).val(),
-                    weight: $(weight).val(),
+                    lengt: $(lengt).val(),
+
+                    emptyweight: $(emptyweight).val(),
+                    totalweight: $(totalweight).val(),
+                    trailerweight: $(trailerweight).val(),
+
+                    loadtype: $(loadtype).val(),
+                    hazardousgoodtype: $(hazardousgoodtype).val(),
+                    loadweight: $(loadweight).val(),
+                    maximumpassengers: $(maximumpassengers).val(),
+
+                    axleload: $(axleload).val(),
+                    axlenumber: $(axlenumber).val(),
+
+                    cylinder: $(cylinder).val(),
                     fueltype: $(fueltype).val(),
-                    fuelconsumption: $(fuelconsumption).val()
+                    fuelconsumption: $(fuelconsumption).val(),
+
+                    yearmanufacturer: $(yearmanufacturer).val(),
+                    delivery: $(delivery).val()
                 }
             });
         }
