@@ -31,6 +31,7 @@
     "ng-grid": "3.0.5",
     "angular-ui-grid": "3.0.5",
     "leaflet-plugins": "1.3.10",
-    "satellizer": "0.12.4"
+    "satellizer": "0.12.4",
+    "flag-icon-css": "0.8.2"
   }
 }
