@@ -15,7 +15,6 @@
     "angular-translate-loader-static-files": "2.7.2",
     "angular-translate-handler-log": "2.7.2",
     "angular-dynamic-locale": "0.1.27",
-    "flag-icon-css": "0.7.1",
     "select2": "4.0.0",
     "fuse": "1.2.2",
     "underscore": "1.8.3",
