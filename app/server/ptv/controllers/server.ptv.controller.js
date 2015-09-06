@@ -217,6 +217,7 @@ exports.calculateroute = function(req, res) {
     var FeatureLayer = '<FeatureLayer majorVersion="1" minorVersion="0"> + GlobalSettings + Themes + </FeatureLayer>';
 
     // VEHICLE
+    var Emissions = '<Emissions emissionClass="' + req.body.options.vehicle.emmissionclass + '">'
     var Engine = '<Engine cylinderCapacity="' + req.body.options.vehicle.cylinder + '" fuelType="' + req.body.options.vehicle.fueltype + '" fuelConsumption="' + req.body.options.vehicle.fuelconsumption + '"/>';
     var Drive = '<Drive driveType="MOTORIZED"> + Engine + </Drive>';
     var Axle = '<Axle axleLoad="' + req.body.options.vehicle.axleload + '" numberOfAxles="' + req.body.options.vehicle.axlenumber + '"/>'
@@ -260,6 +261,7 @@ exports.calculateroute = function(req, res) {
     peticion.callerContext = {
         properties: [
             { key: 'Profile', value: req.body.options.vehicle.vehicletype },
+            //{ key: 'Profile', value: 'default' },
             { key: 'ProfileXMLSnippet', value: snippet },
             { key: 'CoordFormat', value: 'OG_GEODECIMAL' }
         ]

@@ -26,6 +26,7 @@ var PtvSchema = new mongoose.Schema ({
         cylinder: { type: Number, default: 1600 },
         fueltype: {type: String, default: 'EUROSUPER' },
         fuelconsumption: { type: Number, default: 4.5 },
+        emmissionclass: { type: String, default: 'EURO_5'},
 
         yearmanufacturer: {type: Number, default: 2005 },
         delivery: {type: Boolean, default: false }

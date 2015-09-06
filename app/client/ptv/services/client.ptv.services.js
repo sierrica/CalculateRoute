@@ -1,5 +1,74 @@
 app.factory ('Ptv', function($resource, Map) {
 
+    var car_profile = {
+        vehicle: {
+            lengt: 420, width: 176, height: 151,
+            emptyweight: 1400, totalweight: 1770,
+            axlenumber: 2, axleload: 890, axleheight: 100,
+            cylinder: 2200, typefuel: 'DIESEL',
+            emmissionclass: 'EURO5'
+        }
+    };
+
+    var default_profile = car_profile;
+
+    var van_profile = {
+        vehicle: {
+            lengt: 600, width: 200, height: 255,
+            emptyweight: 2100, totalweight: 3500,
+            axlenumber: 2, axleload: 1800, axleheight: 140,
+            cylinder: 2200, typefuel: 'DIESEL',
+            emmissionclass: 'EURO5'
+        }
+    };
+    var truck_75_profile = {
+        vehicle: {
+            lengt: 720, width: 250, height: 340,
+            emptyweight: 4000, totalweight: 7500,
+            axlenumber: 2, axleload: 2200, axleheight: 340,
+            cylinder: 1600, typefuel: 'DIESEL',
+            emmissionclass: 'EURO5'
+        }
+    };
+    var truck_1199_profile = {
+        vehicle: {
+            lengt: 1000, width: 255, height: 380,
+            emptyweight: 6900, totalweight: 11990,
+            axlenumber: 2, axleload: 8100, axleheight: 380,
+            cylinder: 1600, typefuel: 'DIESEL',
+            emmissionclass: 'EURO5'
+        }
+    };
+    var truck_40_profile = {
+        vehicle: {
+            lengt: 1000, width: 255, height: 380,
+            emptyweight: 6900, totalweight: 11990,
+            axlenumber: 2, axleload: 8100, axleheight: 380,
+            cylinder: 1600, typefuel: 'DIESEL',
+            emmissionclass: 'EURO5'
+        }
+    };
+    var trailer_truck_profile = {
+        vehicle: {
+            lengt: 1000, width: 255, height: 380,
+            emptyweight: 6900, totalweight: 11990,
+            axlenumber: 2, axleload: 8100, axleheight: 380,
+            cylinder: 1600, typefuel: 'DIESEL',
+            emmissionclass: 'EURO5'
+        }
+    };
+    var transporter_profile = {
+        vehicle: {
+            lengt: 1000, width: 255, height: 380,
+            emptyweight: 6900, totalweight: 11990,
+            axlenumber: 2, axleload: 8100, axleheight: 380,
+            cylinder: 1600, typefuel: 'DIESEL',
+            emmissionclass: 'EURO5'
+        }
+    };
+
+
+
     var options = {};
 
     var results = {
@@ -12,6 +81,16 @@ app.factory ('Ptv', function($resource, Map) {
         myoptions: $resource ('myoptions', {}, {
             'update': { method: 'PUT' }
         }),
+        getOptionsDefault: function(type) {
+            return (type=='default') ? angular.extend (options, default_profile) :
+                   (type=='car') ? angular.extend (options, car_profile) :
+                   (type=='van') ? angular.extend (options, van_profile) :
+                   (type=='truck-7.5t') ? angular.extend (options, truck_75_profile) :
+                   (type=='truck-11.99t') ? angular.extend (options, truck_1199_profile) :
+                   (type=='truck-40t') ? angular.extend (options, truck_40_profile) :
+                   (type=='trailer-truck') ? angular.extend (options, trailer_truck_profile) :
+                   angular.extend (options, transporter_profile);
+        },
         getOptions: function (type) {
             return options;
         },

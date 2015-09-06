@@ -2,8 +2,74 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
 
     console.log ("DENTRO PTV CONTROLLER");
 
-    var that = $scope;
 
+    $scope.loadOptions = function() {
+
+        $scope.vehicletype = options.vehicle.vehicletype;
+
+
+        $scope.height = parseInt (options.vehicle.height);
+        $scope.width = parseInt (options.vehicle.width);
+        $scope.lengt = parseInt (options.vehicle.lengt);
+
+        $scope.emptyweight = parseInt (options.vehicle.emptyweight);
+        $scope.totalweight = parseInt (options.vehicle.totalweight);
+        $scope.trailerweight = parseInt (options.vehicle.trailerweight);
+
+        $scope.loadtype = options.vehicle.loadtype;
+        $scope.hazardousgoodtype = options.vehicle.hazardousgoodtype;
+        $scope.loadweight = parseInt (options.vehicle.loadweight);
+        $scope.maximumpassengers = parseInt (options.vehicle.maximumpassengers);
+
+        $scope.axleload = parseInt (options.vehicle.axleload);
+        $scope.axlenumber = parseInt (options.vehicle.axlenumber);
+
+        $scope.cylinder = parseInt (options.vehicle.cylinder);
+        $scope.fueltype = options.vehicle.fueltype;
+        $scope.fuelconsumption = parseInt (options.vehicle.fuelconsumption);
+        $scope.emmissionclass = options.vehicle.emmissionclass;
+
+        $scope.yearmanufacturer = parseInt (options.vehicle.yearmanufacturer);
+        $scope.delivery = options.vehicle.delivery;
+
+
+        $scope.optimization = options.trayect.optimization;
+        $('#optimization').val($scope.optimization).change();
+        $scope.dinamic_route = options.trayect.dinamic_route;
+
+        $scope.motorway = parseInt (options.trayect.motorway);
+        $('input[for=motorway]').val($scope.motorway).change();
+        $scope.highway = parseInt (options.trayect.highway);
+        $('input[for=highway]').val($scope.highway).change();
+        $scope.national = parseInt (options.trayect.national);
+        $('input[for=national]').val($scope.national).change();
+        $scope.regional = parseInt (options.trayect.regional);
+        $('input[for=regional]').val($scope.regional).change();
+        $scope.county = parseInt (options.trayect.county);
+        $('input[for=county]').val($scope.county).change();
+        $scope.urban = parseInt (options.trayect.urban);
+        $('input[for=urban]').val($scope.urban).change();
+        $scope.residential = parseInt (options.trayect.residential);
+        $('input[for=residential]').val($scope.residential).change();
+
+
+        $scope.tollroad = parseInt (options.trayect.tollroad);
+        $('input[for=tollroad]').val($scope.tollroad).change();
+        $scope.ramp = parseInt (options.trayect.ramp);
+        $('input[for=ramp]').val($scope.ramp).change();
+        $scope.ferry = parseInt (options.trayect.ferry);
+        $('input[for=ferry]').val($scope.ferry).change();
+
+        $scope.manoeuvres = options.details.manoeuvres;
+    };
+    if ( ! _.isEmpty(options)) {
+        $scope.loadOptions();
+    }
+    $rootScope.$on ('myoptions', function (event) {
+        var options = Ptv.getOptions ();
+        $scope.loadOptions();
+        $scope.selectVehicleType();
+    });
 
 
 
@@ -25,130 +91,6 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         });
     };
 
-        console.log ("OPCIONES AL COMIENZO");
-        console.log (options)
-
-        if ( ! _.isEmpty(options)) {
-
-            $scope.vehicletype = options.vehicle.vehicletype;
-
-            $scope.height = parseInt (options.vehicle.height);
-            $scope.width = parseInt (options.vehicle.width);
-            $scope.lengt = parseInt (options.vehicle.lengt);
-
-            $scope.emptyweight = parseInt (options.vehicle.emptyweight);
-            $scope.totalweight = parseInt (options.vehicle.totalweight);
-            $scope.trailerweight = parseInt (options.vehicle.trailerweight);
-
-            $scope.loadtype = options.vehicle.loadtype;
-            $scope.hazardousgoodtype = options.vehicle.hazardousgoodtype;
-            $scope.loadweight = parseInt (options.vehicle.loadweight);
-            $scope.maximumpassengers = parseInt (options.vehicle.maximumpassengers);
-
-            $scope.axleload = parseInt (options.vehicle.axleload);
-            $scope.axlenumber = parseInt (options.vehicle.axlenumber);
-
-            $scope.cylinder = parseInt (options.vehicle.cylinder);
-            $scope.fueltype = options.vehicle.fueltype;
-            $scope.fuelconsumption = parseInt (options.vehicle.fuelconsumption);
-
-            $scope.yearmanufacturer = parseInt (options.vehicle.yearmanufacturer);
-            $scope.delivery = options.vehicle.delivery;
-
-
-            $scope.optimization = options.trayect.optimization;
-            $('#optimization').val($scope.optimization).change();
-            $scope.dinamic_route = options.trayect.dinamic_route;
-
-            $scope.motorway = parseInt (options.trayect.motorway);
-            $('input[for=motorway]').val($scope.motorway).change();
-            $scope.highway = parseInt (options.trayect.highway);
-            $('input[for=highway]').val($scope.highway).change();
-            $scope.national = parseInt (options.trayect.national);
-            $('input[for=national]').val($scope.national).change();
-            $scope.regional = parseInt (options.trayect.regional);
-            $('input[for=regional]').val($scope.regional).change();
-            $scope.county = parseInt (options.trayect.county);
-            $('input[for=county]').val($scope.county).change();
-            $scope.urban = parseInt (options.trayect.urban);
-            $('input[for=urban]').val($scope.urban).change();
-            $scope.residential = parseInt (options.trayect.residential);
-            $('input[for=residential]').val($scope.residential).change();
-
-
-            $scope.tollroad = parseInt (options.trayect.tollroad);
-            $('input[for=tollroad]').val($scope.tollroad).change();
-            $scope.ramp = parseInt (options.trayect.ramp);
-            $('input[for=ramp]').val($scope.ramp).change();
-            $scope.ferry = parseInt (options.trayect.ferry);
-            $('input[for=ferry]').val($scope.ferry).change();
-
-
-
-            $scope.manoeuvres = options.details.manoeuvres;
-        }
-
-        $rootScope.$on ('myoptions', function (event) {
-            var options = Ptv.getOptions ();
-
-            $scope.vehicletype = options.vehicle.vehicletype;
-            $scope.selectVehicleType();
-
-            $scope.height = parseInt (options.vehicle.height);
-            $scope.width = parseInt (options.vehicle.width);
-            $scope.lengt = parseInt (options.vehicle.lengt);
-
-            $scope.emptyweight = parseInt (options.vehicle.emptyweight);
-            $scope.totalweight = parseInt (options.vehicle.totalweight);
-            $scope.trailerweight = parseInt (options.vehicle.trailerweight);
-
-            $scope.loadtype = options.vehicle.loadtype;
-            $scope.hazardousgoodtype = options.vehicle.hazardousgoodtype;
-            $scope.loadweight = parseInt (options.vehicle.loadweight);
-            $scope.maximumpassengers = parseInt (options.vehicle.maximumpassengers);
-
-            $scope.axleload = parseInt (options.vehicle.axleload);
-            $scope.axlenumber = parseInt (options.vehicle.axlenumber);
-
-            $scope.cylinder = parseInt (options.vehicle.cylinder);
-            $scope.fueltype = options.vehicle.fueltype;
-            $scope.fuelconsumption = parseInt (options.vehicle.fuelconsumption);
-
-            $scope.yearmanufacturer = parseInt (options.vehicle.yearmanufacturer);
-            $scope.delivery = options.vehicle.delivery;
-
-
-            $scope.optimization = options.trayect.optimization;
-            $('#optimization').val($scope.optimization).change();
-            $scope.dinamic_route = options.trayect.dinamic_route;
-
-            $scope.motorway = parseInt (options.trayect.motorway);
-            $('input[for=motorway]').val($scope.motorway).change();
-            $scope.highway = parseInt (options.trayect.highway);
-            $('input[for=highway]').val($scope.highway).change();
-            $scope.national = parseInt (options.trayect.national);
-            $('input[for=national]').val($scope.national).change();
-            $scope.regional = parseInt (options.trayect.regional);
-            $('input[for=regional]').val($scope.regional).change();
-            $scope.county = parseInt (options.trayect.county);
-            $('input[for=county]').val($scope.county).change();
-            $scope.urban = parseInt (options.trayect.urban);
-            $('input[for=urban]').val($scope.urban).change();
-            $scope.residential = parseInt (options.trayect.residential);
-            $('input[for=residential]').val($scope.residential).change();
-
-
-            $scope.tollroad = parseInt (options.trayect.tollroad);
-            $('input[for=tollroad]').val($scope.tollroad).change();
-            $scope.ramp = parseInt (options.trayect.ramp);
-            $('input[for=ramp]').val($scope.ramp).change();
-            $scope.ferry = parseInt (options.trayect.ferry);
-            $('input[for=ferry]').val($scope.ferry).change();
-
-
-            $scope.manoeuvres = options.details.manoeuvres;
-        });
-
 
 
     $scope.selectVehicleType = function() {
@@ -156,17 +98,17 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             if (!TypeVehicle.id)
                 return TypeVehicle.text;
             var valor = TypeVehicle.element.value;
-            if (valor == 'mg-car')
+            if (valor == 'car')
                 return $('<img src="images/car.png" height="20" width="35" style="position:relative; top:4px;"><span style="white-space:pre">       ' + TypeVehicle.text + '</span>');
-            else if (valor == 'smt-van')
+            else if (valor == 'van')
                 return $('<img src="images/van.png" height="20" width="35" style="position:relative; top:4px;"><span style="white-space:pre">       ' + TypeVehicle.text + '</span>');
-            else if (valor == 'mg-truck-7.5t' || valor=='mg-truck-11.99t')
+            else if (valor=='truck-7.5t' || valor=='truck-11.99t')
                 return $('<img src="images/truck_small.png" height="20" width="35" style="position:relative; top:4px;"><span style="white-space:pre">       ' + TypeVehicle.text + '</span>');
-            else if (valor == 'mg-truck-40t')
+            else if (valor=='truck-40t')
                 return $('<img src="images/truck_big.png" height="20" width="55" style="position:relative; top:4px;"><span style="white-space:pre">  ' + TypeVehicle.text + '</span>');
-            else if (valor == 'mg-trailer-truck')
+            else if (valor=='trailer-truck')
                 return $('<img src="images/truck_trailer.png" height="20" width="55" style="position:relative; top:4px;"><span style="white-space:pre">  ' + TypeVehicle.text + '</span>');
-            else if (valor == 'mg-transporter')
+            else if (valor=='transporter')
                 return $('<img src="images/bus.png" height="20" width="55" style="position:relative; top:4px;"><span style="white-space:pre">  ' + TypeVehicle.text + '</span>');
             else
                 return $('</span> ' + TypeVehicle.text + '</span>');
@@ -176,10 +118,49 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             minimumResultsForSearch: Infinity,
             templateResult: formatTypeVehicle,
             templateSelection: formatTypeVehicle
+            //val: that.vehicletype || 'default'
         });
         var that = $scope;
-        setTimeout (function() { $("#vehicletype").select2 ("val", that.vehicletype); }, 50);
+        setTimeout (function() { $("#vehicletype").select2 ("val", that.vehicletype);   }, 50);
     };
+
+
+    $scope.changeVehicleType = function() {
+        //Ptv.getOptionsDefault($scope.vehicletype);
+        //options = Ptv.getOptions ();
+        console.log ("OPCIONES DESPUES CHANGE");
+        console.log (options);
+        //$scope.loadOptions();
+
+        if ($scope.vehicletype == 'default') {
+
+        }
+        else if ($scope.vehicletype == 'mg-car') {
+
+        }
+        else if ($scope.vehicletype == 'smt-van') {
+
+        }
+        else if ($scope.vehicletype == 'mg-truck-7.5') {
+
+        }
+        else if ($scope.vehicletype == 'mg-truck-11.99t') {
+
+        }
+        else if ($scope.vehicletype == 'mg-truck-40t') {
+
+        }
+        else if ($scope.vehicletype == 'mg-trailer-truck') {
+
+        }
+        else if ($scope.vehicletype == 'mg-transporter') {
+
+        }
+
+        console.log ("CAMBIADO A: " + $scope.vehicletype);
+    };
+
+
 
 
 

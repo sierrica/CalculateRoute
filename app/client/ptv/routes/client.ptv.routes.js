@@ -62,6 +62,7 @@ app.config (['$stateProvider', function ($stateProvider) {
                     cylinder: $(cylinder).val(),
                     fueltype: $(fueltype).val(),
                     fuelconsumption: $(fuelconsumption).val(),
+                    emmissionclass: $(emmissionclass).val(),
 
                     yearmanufacturer: $(yearmanufacturer).val(),
                     delivery: $(delivery).val()
