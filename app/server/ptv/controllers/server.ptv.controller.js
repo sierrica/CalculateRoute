@@ -214,7 +214,7 @@ exports.calculateroute = function(req, res) {
     var Themes = '<Themes>' +
                     '<Theme id="PTV_TruckAttributes" enabled="true"></Theme>' +
                  '</Themes>';
-    var FeatureLayer = '<FeatureLayer majorVersion="1" minorVersion="0"> + GlobalSettings + Themes + </FeatureLayer>';
+    var FeatureLayer = '<FeatureLayer majorVersion="1" minorVersion="0">' + GlobalSettings + Themes + '</FeatureLayer>';
 
     // VEHICLE
     var Emissions = '<Emissions emissionClass="' + req.body.options.vehicle.emmissionclass + '">'
@@ -228,6 +228,7 @@ exports.calculateroute = function(req, res) {
     var Dimension = '<Dimension height="' + req.body.options.vehicle.height + '" width="' + req.body.options.vehicle.width + '" length="' + req.body.options.vehicle.lengt + '"/>';
     var Physical = '<Physical>' + Drive + Axle + Weight + Trailer + Dimension + Passenger + '</Physical>';
 
+
     var deliveryBasicDataRules = '', deliveryLegalCondition = '';
     if (req.body.options.vehicle.isDelivery) {
         deliveryBasicDataRules = '<VehicleSpecific><DeliveryVehicles segmentMalus="2500"/></VehicleSpecific>';
@@ -239,7 +240,7 @@ exports.calculateroute = function(req, res) {
                         '<MalusByNetworkClass malus="' + req.body.options.trayect.motorway + '"/>' +            // MOTORWAY
                         '<MalusByNetworkClass malus="' + req.body.options.trayect.highway + '"/>' +             // HIGHWAY
                         '<MalusByNetworkClass malus="' + req.body.options.trayect.national + '"/>' +            // TRUNK_ROAD
-                        '<MalusByNetworkClass malus="' + req.body.options.trayect.regional + '"/>' +          // COUNTRY_ROAD
+                        '<MalusByNetworkClass malus="' + req.body.options.trayect.regional + '"/>' +            // COUNTRY_ROAD
                         '<MalusByNetworkClass malus="' + req.body.options.trayect.county + '"/>' +              // CITY ROAD
                         '<MalusByNetworkClass malus="50"/>' +                                                   // RESIDENTIAL_ROAD
                         '<MalusByNetworkClass malus="100"/>' +                                                  // SPECIAL_ROAD
@@ -261,7 +262,7 @@ exports.calculateroute = function(req, res) {
     peticion.callerContext = {
         properties: [
             { key: 'Profile', value: req.body.options.vehicle.vehicletype },
-            //{ key: 'Profile', value: 'default' },
+            //{ key: 'Profile', value: 'truckfast' },
             { key: 'ProfileXMLSnippet', value: snippet },
             { key: 'CoordFormat', value: 'OG_GEODECIMAL' }
         ]
