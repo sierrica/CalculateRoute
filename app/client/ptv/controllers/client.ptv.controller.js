@@ -2,6 +2,23 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
 
     console.log ("DENTRO PTV CONTROLLER");
 
+    var that = $scope;
+    if ($(window).width() <= 600)
+        that.mobile = true;
+    else
+        that.mobile = false;
+    setTimeout (function(){ that.$apply() }, 100);
+    console.log ("VALOR MOBILE: " + $scope.mobile);
+
+    window.onresize = function() {
+        if ($(window).width() <= 600)
+            that.mobile = true;
+        else
+            that.mobile = false;
+        console.log ("VALOR MOBILE: " + that.mobile);
+        setTimeout (function(){ that.$apply() }, 100);
+    };
+
 
     $scope.loadOptions = function() {
 
@@ -121,42 +138,47 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
             //val: that.vehicletype || 'default'
         });
         var that = $scope;
-        setTimeout (function() { $("#vehicletype").select2 ("val", that.vehicletype);   }, 50);
+        setTimeout (function() { $("#vehicletype").select2 ("val", that.vehicletype); that.changeFirstType = false;  }, 50);
     };
 
+    $scope.changeFirstType = true;
+    $scope.changeVehicleType = function () {
+        if ( ! $scope.changeFirstType) {
 
-    $scope.changeVehicleType = function() {
-        //Ptv.getOptionsDefault($scope.vehicletype);
-        //options = Ptv.getOptions ();
-        console.log ("OPCIONES DESPUES CHANGE");
-        console.log (options);
-        //$scope.loadOptions();
+            //Ptv.getOptionsDefault($scope.vehicletype);
+            var options_default = Ptv.getOptionsDefault ($scope.vehicletype);
+            console.log ("OPCIONES DESPUES CHANGE");
+            console.log (options_default);
+            $scope.height = parseInt (options_default.vehicle.height);
+            $scope.width = parseInt (options_default.vehicle.width);
+            $scope.lengt = parseInt (options_default.vehicle.lengt);
 
-        if ($scope.vehicletype == 'default') {
+            $scope.emptyweight = parseInt (options_default.vehicle.emptyweight);
+            $scope.totalweight = parseInt (options_default.vehicle.totalweight);
+            $scope.trailerweight = parseInt (options_default.vehicle.trailerweight);
+            $scope.loadweight = parseInt (options_default.vehicle.loadweight);
+            $scope.loadtype = options_default.vehicle.loadtype;
+            $('#loadtype').val ($scope.loadtype);
+            $('#loadtype').closest ('.input-field').find('.caret').first().remove();
+            $('#loadtype').material_select();
+            $scope.maximumpassengers = options_default.vehicle.maximumpassengers;
+
+            $scope.axlenumber = parseInt (options_default.vehicle.axlenumber);
+            $scope.axleload = parseInt (options_default.vehicle.axleload);
+            $scope.axleheight = parseInt (options_default.vehicle.axleheight);
+
+            $scope.cylinder = parseInt (options_default.vehicle.cylinder);
+            $scope.typefuel = options_default.vehicle.typefuel;
+            $('#typefuel').val ($scope.typefuel);
+            $('#typefuel').closest ('.input-field').find('.caret').first().remove();
+            $('#typefuel').material_select();
+            $scope.emmissionclass = options_default.vehicle.emmissionclass;
+            $('#emmissionclass').val ($scope.emmissionclass);
+            $('#emmissionclass').closest ('.input-field').find('.caret').first().remove();
+            $('#emmissionclass').material_select();
+
 
         }
-        else if ($scope.vehicletype == 'mg-car') {
-
-        }
-        else if ($scope.vehicletype == 'smt-van') {
-
-        }
-        else if ($scope.vehicletype == 'mg-truck-7.5') {
-
-        }
-        else if ($scope.vehicletype == 'mg-truck-11.99t') {
-
-        }
-        else if ($scope.vehicletype == 'mg-truck-40t') {
-
-        }
-        else if ($scope.vehicletype == 'mg-trailer-truck') {
-
-        }
-        else if ($scope.vehicletype == 'mg-transporter') {
-
-        }
-
         console.log ("CAMBIADO A: " + $scope.vehicletype);
     };
 

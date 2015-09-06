@@ -704,3 +704,31 @@ i.material-icons.tooltip {
 
 
 
+
+.label_option {
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+.label_option_responsive {
+    font-size: 20px;
+    padding-top: 5px;
+    margin-top: 5px;
+}
+@media only screen and (max-width: 600px) {
+    .margin_label {
+        margin-top: -8px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .select-wrapper input.select-dropdown {
+        width: 90%;
+        left: 5%;
+    }
+    .select-wrapper span.caret {
+        right: 20px;
+    }
+}
+
+

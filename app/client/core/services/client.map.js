@@ -59,6 +59,10 @@ app.factory ('Map', function($http, $translate) {
                          .replace(/Unfall mit LKW/i, '<b>' + $translate.instant ('accident with truck') + '</b>')
                          .replace(/Unfall/i, '<b>' + $translate.instant ('accident') + '</b>')
                          .replace(/Ausfahrt gesperrt/i, '<b>' + $translate.instant ('exit locked') + '</b>')
+
+            //Weinstraße gesperrt
+            //Anschlußstelle gesperrt
+
                 .replace(/Pannenstreifen gesperrt/i, '<b>' + $translate.instant ('hard shoulder blocked') + '</b>')
                 .replace(/Einfahrt gesperrt/i, '<b>' + $translate.instant ('driveway blocked') + '</b>')
                 .replace(/Einfahrt gesperrt/i, '<b>' + $translate.instant ('junction blocked') + '</b>')
