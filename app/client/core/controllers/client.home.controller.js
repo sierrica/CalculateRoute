@@ -51,59 +51,61 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
         .success (function(response) {
             console.log ("RESPUESTA CALCULATEROUTE");
             console.log (response);
-            var points = [];
-            for (i=0; i<response.route.polygon.lineString.points.length; i++) {
-                points.push({
-                    lat: response.route.polygon.lineString.points[i].y,
-                    lng: response.route.polygon.lineString.points[i].x,
-                })
+            if (response.route.polygon) {
+                var points = [];
+                for (i=0; i<response.route.polygon.lineString.points.length; i++) {
+                    points.push({
+                        lat: response.route.polygon.lineString.points[i].y,
+                        lng: response.route.polygon.lineString.points[i].x,
+                    })
+                }
+                if (that.results.polygon)
+                    that.map.removeLayer (that.results.polygon);
+                $scope.results.polygon = L.polyline (points, {
+                    stroke: true,
+                    color: 'red',
+                    weight: 15,
+                    opacity: 0.4,
+                    fill: false,
+                    fillColor: 'red',
+                    fillOpacity: 0.2,
+                    fillRule: 'evenodd',
+                    dashArray: null,
+                    lineCap: null,
+                    lineJoin: null,
+                    clickable: true,
+                    pointerEvents: null,
+                    className: 'carretera',                 // custom class
+                    smoothFactor: 1.0,
+                    noClip: false,
+                    contextmenu: true,
+                    contextmenuInheritItems: false,
+                    contextmenuItems: [{
+                        index: 3,
+                        //icon: 'images/cross_red.png',
+                        text: 'Info General',
+                        callback: that.showInfo
+                    }, {
+                        index: 4,
+                        //icon: 'images/cross_red.png',
+                        text: 'Maniobras',
+                        callback: that.showManoeuvres
+                    }]
+
+                }).addTo (that.map);
+
+                that.results.info = response.route.info;
+                that.results.info.cost = 0;
+                for (i=0; i<response.countryInfos.length; i++)
+                    that.results.info.cost += parseInt(response.countryInfos[i].tollTotals.cost);
+
+                that.results.manoeuvres = Ptv.parseManoeuvres(response.route.manoeuvres, response.route.stations, response.route.segments);
+                Ptv.setResults({
+                    polygon: that.results.polygon,
+                    info: that.results.info,
+                    manoeuvres: that.results.manoeuvres
+                });
             }
-            if (that.results.polygon)
-                that.map.removeLayer (that.results.polygon);
-            $scope.results.polygon = L.polyline (points, {
-                stroke: true,
-                color: 'red',
-                weight: 15,
-                opacity: 0.4,
-                fill: false,
-                fillColor: 'red',
-                fillOpacity: 0.2,
-                fillRule: 'evenodd',
-                dashArray: null,
-                lineCap: null,
-                lineJoin: null,
-                clickable: true,
-                pointerEvents: null,
-                className: 'carretera',                 // custom class
-                smoothFactor: 1.0,
-                noClip: false,
-                contextmenu: true,
-                contextmenuInheritItems: false,
-                contextmenuItems: [{
-                    index: 3,
-                    //icon: 'images/cross_red.png',
-                    text: 'Info General',
-                    callback: that.showInfo
-                }, {
-                    index: 4,
-                    //icon: 'images/cross_red.png',
-                    text: 'Maniobras',
-                    callback: that.showManoeuvres
-                }]
-
-            }).addTo (that.map);
-
-            that.results.info = response.route.info;
-            that.results.info.cost = 0;
-            for (i=0; i<response.countryInfos.length; i++)
-                that.results.info.cost += parseInt(response.countryInfos[i].tollTotals.cost);
-
-            that.results.manoeuvres = Ptv.parseManoeuvres(response.route.manoeuvres, response.route.stations, response.route.segments);
-            Ptv.setResults({
-                polygon: that.results.polygon,
-                info: that.results.info,
-                manoeuvres: that.results.manoeuvres
-            });
         })
         .error (function(response, status) {
             console.log ("ERROR CALCULATEROUTE");
@@ -204,6 +206,8 @@ app.controller ('HomeController', function ($rootScope, $scope, $location, $auth
                 marker.setIcon (new L.NumberedDivIcon ({ letter: Map.Letters[i] }));
                 Map.setMarkerStation (marker, i);
             }
+
+            that.last_marker = marker;
             if (Map.lengthMarkerStations() >= 2)
                 that.calculateroute();
         })

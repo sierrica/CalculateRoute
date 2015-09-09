@@ -48,7 +48,7 @@
     "helmet": "0.10.0",
     "jsonwebtoken": "5.0.5",
     "lodash": "3.10.1",
-    "mongoose": "4.1.5",
+    "mongoose": "4.1.6",
     "morgan": "1.6.1",
     "multer": "1.0.3",
     "pm2": "0.14.7",
@@ -59,6 +59,10 @@
     "uglifycss": "0.0.18",
     "winston": "1.0.1",
     "winston-papertrail": "1.0.1",
+    "winston-rollbar": "0.2.0",
+    "winston-logentries-transport": "0.0.1",
+    "winston-log4stuff": "0.1.2",
+    "winston-graylog2": "0.2.3",
     "request": "2.61.0",
     "btoa": "1.1.2",
     "nodemailer": "1.4.0",
@@ -67,7 +71,7 @@
     "moment": "2.10.6"
   },
   "devDependencies": {
-    "cordova": "5.2.0",
+    "cordova": "5.3.1",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
     "grunt-cordovacli": "0.8.2",
