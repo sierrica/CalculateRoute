@@ -5,6 +5,10 @@ module.exports = {
         keywords: 'rutas, camiones'
     },
     environment: process.env.NODE_ENV || 'development',
+    token: {
+        secret: process.env.TOKEN_SECRET || 'tauste',
+        ttl: process.env.TOKEN_EXPIRATION || 60*60*24                   //24 hours
+    },
     server: {
         ip: process.env.OPENSHIFT_NODEJS_IP ||"0.0.0.0",
         port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT  || 80
@@ -20,17 +24,6 @@ module.exports = {
         ip: process.env.OPENSHIFT_REDIS_HOST || "pub-redis-18884.us-east-1-2.4.ec2.garantiadata.com",
         port: process.env.OPENSHIFT_REDIS_PORT || "18884"
     },
-    token: {
-        secret: process.env.TOKEN_SECRET || 'tauste',
-        ttl: process.env.TOKEN_EXPIRATION || 60*60*24                   //24 hours
-    },
-    ip_node: process.env.OPENSHIFT_NODEJS_IP ||"0.0.0.0",
-    port_node: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT  || 80,
-    url_mongo: (process.env.PLATFORM == "heroku") ? "mongodb://sierrica:taustemix8888@ds033400.mongolab.com:33400/calculateroute" :
-               (process.env.PLATFORM == "openshift") ? "mongodb://calculateroute:tauste@" + process.env.OPENSHIFT_MONGODB_IP + ":27017/calculateroute" :
-               (process.env.PLATFORM == "raspbian") ? "raspbian" :
-               (process.env.PLATFORM == "windows") ? "mongodb://calculateroute:tauste@127.0.0.1:27017/calculateroute" :
-               "mongodb://calculateroute:tauste@127.0.0.1:27017/calculateroute",
     assets: {
         client: {
             views: ['app/client/*/views/**/*.html'],
