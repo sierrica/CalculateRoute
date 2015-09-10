@@ -217,9 +217,9 @@ exports.calculateroute = function(req, res) {
     var FeatureLayer = '<FeatureLayer majorVersion="1" minorVersion="0">' + GlobalSettings + Themes + '</FeatureLayer>';
 
     // VEHICLE
-    var Emissions = '<Emissions emissionClass="' + req.body.options.vehicle.emmissionclass + '">'
+    var Emissions = '<Emissions emissionClass="' + req.body.options.vehicle.emmissionclass + '"/>'
     var Engine = '<Engine cylinderCapacity="' + req.body.options.vehicle.cylinder + '" fuelType="' + req.body.options.vehicle.fueltype + '" fuelConsumption="' + req.body.options.vehicle.fuelconsumption + '"/>';
-    var Drive = '<Drive driveType="MOTORIZED"> + Engine + </Drive>';
+    var Drive = '<Drive driveType="MOTORIZED">' + Emissions + Engine + '</Drive>';
     var Axle = '<Axle axleLoad="' + req.body.options.vehicle.axleload + '" numberOfAxles="' + req.body.options.vehicle.axlenumber + '"/>'
     var Weight = '<Weight emptyWeight="' + req.body.options.vehicle.emptyweight + '" totalPermittedWeight="' + req.body.options.vehicle.totalweight + '" loadWeight="' + req.body.options.vehicle.loadweight + '"/>';
     var Load = '<Load hazardousGoodsType="NONE" loadType="PASSENGER"/>'
