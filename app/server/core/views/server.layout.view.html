@@ -14,50 +14,29 @@
     <meta name="fragment" content="!" />
     <base href="/"/>
 
-    <!--  CUIDADO CON ESTA ETIQUETA-->
-    <!--<meta http-equiv="Cache-Control" content="no-cache"> -->
-    <!--<meta http-equiv="Expires" content="tue, 20 Jun 2016 19:45:00 GMT"> -->
-
     <!-- Responsive META -->
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-
-
 
     <!--Application CSS Files-->
     {% for cssFile in cssFiles %}
         <link rel="stylesheet" href="{{cssFile}}">
     {% endfor %}
 
-
     <!--  Google Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-
-
-
-    <!--<script type="text/javascript" src="https://ajaxmaps-eu-n-test.cloud.ptvgroup.com/ajaxmaps/.qxrpc"></script>-->
-
+    <!-- Google Maps-->
     <script id="script_google_maps" src="https://maps.google.com/maps/api/js?v=3&sensor=false&language={{country}}"></script>
 
     <!--Application JavaScript Files-->
     {% for jsFile in jsFiles %}
         <script type="text/javascript" src="{{jsFile}}"></script>
     {% endfor %}
-
 </head>
-<!--
-<div id="loader-wrapper">
-    <div id="loader"></div>
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
-</div>
--->
+
 <div id="loader-wrapper">
     <div id="loader"></div>
     <div class="loader-section section-left"></div>

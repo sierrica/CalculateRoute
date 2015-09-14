@@ -7,3 +7,4 @@ module.exports = function(app) {
     app.route ('/ptv/findlocation').post (user.isAuthenticated, ptv.findlocation);
     app.route ('/ptv/calculateroute').post (user.isAuthenticated, ptv.calculateroute);
 };
+

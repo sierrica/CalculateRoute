@@ -5,9 +5,6 @@ var config      = require ('./config/config'),
     redis       = require ('./config/redis');
     //seed        = require('./config/seed');
 
-
-
-
 mongoose.createMongooseConnection(function () {
     var app = express.init();
     app.listen(config.server.port, config.server.ip, function () {

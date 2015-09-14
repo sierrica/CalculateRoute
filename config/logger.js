@@ -13,10 +13,6 @@ logger.exitOnError = true;
 /* BORRAR EL TRANSPORT Console QUE EXISTE POR DEFECTO */
 logger.remove (logger.transports.Console);
 
-
-//console.log (process.env);
-
-
 /* TRANSPORT Console*/
 logger.add (logger.transports.Console, {
     level: "debug",
@@ -24,6 +20,24 @@ logger.add (logger.transports.Console, {
     label: process.env.PM2_EXEC_TYPE == 'js'  ?  'calculateroute-' + process.env.pm_id  :  '',
     handleExceptions: false
 });
+
+if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
+    logger.add (logger.transports.Papertrail, {
+        level: 'info',
+        json: true,
+        hostname: process.env.PLATFORM,
+        program: 'calculateroute-' + process.env.pm_id,
+        host: 'logs3.papertrailapp.com',
+        port: 15605,
+        colorize: true,
+        handleExceptions: false
+    });
+}
+
+
+
+
+//console.log (process.env);
 
 /* SOLO EN DESARROLLO O RASPBIAN */
 /*
@@ -51,19 +65,7 @@ logger.add (logger.transports.Loggly, {
     handleExceptions: true
 });
  */
-if (process.env.PLATFORM == 'openshift'  ||  process.env.PLATFORM == 'heroku') {
-    logger.add (logger.transports.Papertrail, {
-        level: 'info',
-        json: true,
-        hostname: process.env.PLATFORM,
-        program: 'calculateroute-' + process.env.pm_id,
-        host: 'logs3.papertrailapp.com',
-        port: 15605,
-        colorize: true,
-        handleExceptions: false
-    });
 
-}
 
 
 
