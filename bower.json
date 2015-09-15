@@ -31,7 +31,7 @@
     "leaflet-plugins": "1.3.10",
     "flag-icon-css": "0.8.2",
     "satellizer": "0.12.5",
-    "materialize": "0.97.1",
+    "materialize": "0.97.0",
     "rangeslider.js": "2.0.2"
   }
 }

@@ -9,15 +9,12 @@ var app = angular.module('calculateRoute', [
     'ui.grid'
 ])
 .config(function ($urlRouterProvider, $locationProvider) {
-    // Redirect to home view when route not found
-    $urlRouterProvider.otherwise ('/');
-
+    $urlRouterProvider.otherwise ('/'); // Redirect to home view when route not found
     $locationProvider.html5Mode (true);
 })
 
 .config(['$translateProvider', function ($translateProvider) {
         //$translateProvider.useMissingTranslationHandlerLog();
-
         $translateProvider.usePostCompiling (true);     // Importante para el instant
         $translateProvider.useMissingTranslationHandler('myCustomHandlerFactory');
         $translateProvider.useSanitizeValueStrategy ('escaped');

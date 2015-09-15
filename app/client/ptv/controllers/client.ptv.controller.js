@@ -85,7 +85,8 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
     $rootScope.$on ('myoptions', function (event) {
         var options = Ptv.getOptions ();
         $scope.loadOptions();
-        $scope.selectVehicleType();
+        if ($location.url() == 'vehicle')
+            $scope.selectVehicleType();
     });
 
 
