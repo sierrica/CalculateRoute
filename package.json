@@ -63,7 +63,7 @@
     "winston-logentries-transport": "0.0.1",
     "winston-log4stuff": "0.1.2",
     "winston-graylog2": "0.2.3",
-    "request": "2.61.0",
+    "request": "2.62.0",
     "btoa": "1.1.2",
     "nodemailer": "1.4.0",
     "nodemailer-sendgrid-transport": "0.2.0",
