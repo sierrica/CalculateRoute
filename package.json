@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "bcryptjs": "2.2.1",
-    "body-parser": "1.13.3",
+    "body-parser": "1.14.0",
     "bower": "1.5.2",
     "chalk": "1.1.1",
     "colors": "1.1.2",

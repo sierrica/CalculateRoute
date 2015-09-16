@@ -1,13 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="calculateroute.sierrica.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>calculateroute</name>
+<widget id="calculateroute-old.sierrica.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>calculateroute-old</name>
     <description>
-        Calculador de Rutas.
+        Calculador y planificador de rutas.
     </description>
-    <author email="sierrica@hotmail.com" href="http://sierrica.com">
-        Hnos Sierra
+    <author email="sierrica@hotmail.com" href="http://ptv.sierrica.com">
+        Javier Sierra Martinez
     </author>
     <content src="http://ptv.sierrica.com" />
+    <icon src="www/img/logo.png" />
     <plugin name="cordova-plugin-whitelist" version="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -23,4 +24,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <preference name="xwalkVersion" value="14+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
 </widget>

@@ -268,14 +268,6 @@ app.factory ('Map', function($http, $translate) {
                 "ROAD": open_maps_road
             };
 
-            var ptv_maps = L.layerGroup ([ptv_maps_bg, ptv_maps_fg]);
-            var base_layers = {
-                "GOOGLE": google_maps,
-                "PTV": ptv_maps,
-                "MAPNIK": open_maps_mapnik,
-                "ROAD": open_maps_road
-            };
-
             L.control.layers (base_layers, overlays).addTo (map);
 
 
