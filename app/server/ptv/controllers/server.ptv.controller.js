@@ -168,8 +168,6 @@ exports.calculateroute = function(req, res) {
 
     peticion.waypoints = [];
     for (i=0; i<req.body.waypoints.length; i++) {
-
-
         peticion.waypoints.push ({
             coords: [{
                 point: {

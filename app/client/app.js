@@ -5,7 +5,6 @@ var app = angular.module('calculateRoute', [
     'satellizer',
     'pascalprecht.translate',
     'tmh.dynamicLocale',
-    'contenteditable',
     'ui.grid'
 ])
 .config(function ($urlRouterProvider, $locationProvider) {

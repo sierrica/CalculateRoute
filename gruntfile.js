@@ -17,10 +17,10 @@ module.exports = function(grunt) {
 		copy: {
 			main: {
 				files: [
-					//{src: ['cordova/platforms/android/build/outputs/apk/android-debug.apk'], dest: 'C:\\Users\\Javier\\Desktop\\Shared_Folder\\calculateRoute.apk'},
-                    {src: ['cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk'], dest: 'C:\\Users\\Javier\\Desktop\\Shared_Folder\\calculateRoute.apk'},
-                    //{src: ['cordova/platforms/android/build/outputs/apk/android-debug.apk'], dest: 'C:\\Users\\Javier\\Dropbox\\calculateRoute.apk'}
-                    {src: ['cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk'], dest: 'C:\\Users\\Javier\\Dropbox\\calculateRoute.apk'}
+					{src: ['cordova/platforms/android/build/outputs/apk/android-debug.apk'], dest: 'C:\\Users\\Javier\\Desktop\\Shared_Folder\\calculateRoute.apk'},
+                    //{src: ['cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk'], dest: 'C:\\Users\\Javier\\Desktop\\Shared_Folder\\calculateRoute.apk'},
+                    {src: ['cordova/platforms/android/build/outputs/apk/android-debug.apk'], dest: 'C:\\Users\\Javier\\Dropbox\\calculateRoute.apk'}
+                    //{src: ['cordova/platforms/android/build/outputs/apk/android-armv7-debug.apk'], dest: 'C:\\Users\\Javier\\Dropbox\\calculateRoute.apk'}
 				],
 			},
 		}
