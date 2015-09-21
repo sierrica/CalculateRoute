@@ -33,7 +33,7 @@
     "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f"
   },
   "dependencies": {
-    "bcryptjs": "2.2.1",
+    "bcryptjs": "2.2.2",
     "body-parser": "1.14.0",
     "bower": "1.5.2",
     "chalk": "1.1.1",
@@ -45,12 +45,12 @@
     "express": "4.13.3",
     "fs-extra": "0.24.0",
     "glob": "5.0.14",
-    "helmet": "0.10.0",
+    "helmet": "0.11.0",
     "jsonwebtoken": "5.0.5",
     "lodash": "3.10.1",
     "mongoose": "4.1.7",
     "morgan": "1.6.1",
-    "multer": "1.0.3",
+    "multer": "1.0.5",
     "pm2": "0.14.7",
     "redis": "1.0.0",
     "serve-favicon": "2.3.0",
