@@ -1,7 +1,7 @@
 app.controller ('PtvController', function ($rootScope, $scope, $location, $auth, $http, User, $translate, Ptv) {
 
     console.log ("DENTRO PTV CONTROLLER");
-
+    /*
     var that = $scope;
     if ($(window).width() <= 600)
         that.mobile = true;
@@ -18,7 +18,7 @@ app.controller ('PtvController', function ($rootScope, $scope, $location, $auth,
         console.log ("VALOR MOBILE: " + that.mobile);
         setTimeout (function(){ that.$apply() }, 100);
     };
-
+*/
 
     $scope.loadOptions = function() {
 
