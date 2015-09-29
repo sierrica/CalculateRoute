@@ -5,6 +5,8 @@ app.factory ('Sidenav', function($rootScope) {
             $(".button-collapse i").text("menu");
             $('.drag-target').css ("width", "10px");
             $("#search").parent().css ("z-index", "0").css ("opacity", "1");
+            while($("#sidenav-overlay")[0] )
+                $("#sidenav-overlay").remove();
         }
     });
 
@@ -25,7 +27,9 @@ app.factory ('Sidenav', function($rootScope) {
                         $(".button-collapse i").text("menu");
                         $('.drag-target').css ("width", "10px");
                         $("#search").parent().css ("z-index", "0").css ("opacity", "1");
-                    }, 350);
+                        while($("#sidenav-overlay")[0] )
+                            $("#sidenav-overlay").remove();
+                    }, 150);
                 }
                 else {
                     // Error por el que pretas en la izquierda del todo y se cierra
@@ -40,13 +44,15 @@ app.factory ('Sidenav', function($rootScope) {
                         $(".button-collapse i").text("menu");
                         $('.drag-target').css ("width", "10px");
                         $("#search").parent().css ("z-index", "0").css ("opacity", "1");
+                        while($("#sidenav-overlay")[0] )
+                            $("#sidenav-overlay").remove();
                     }
                     else {
                         $(".button-collapse i").text("arrow_back");
                         $('.drag-target').css ("width", "calc(100% - 300px)");
                         $("#search").parent().css ("z-index", "-1").css ("opacity", "0");
                     }
-                }, 350);
+                }, 150);
             });
 
         },

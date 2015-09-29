@@ -17,15 +17,15 @@ exports.renderIndex = function(req, res) {
     //console.log ("user-agent: " + req.headers["user-agent"]);
 
     if (req.headers["accept-language"]) {
-        console.log ("user-agent: " + req.headers["accept-language"])
+        console.log ("user-agent: " + req.headers["accept-language"]);
         var language_prefered = req.headers["accept-language"].split(",")[0];
         var lang = language_prefered.split("-")[0];
         var region = language_prefered.split("-")[1];
-        if (lang == "es"  &&  (region=="undefined" || region != "ES"))
+        if (lang == "es")
             region = "ES";
-        else if (lang == "en"  &&  (region=="undefined" || region != "GB"))
+        else if (lang == "en")
             region = "GB";
-        else if (lang == "de"  &&  (region=="undefined" || region != "DE"))
+        else if (lang == "de")
             region = "DE";
         else {
             lang = "es";
@@ -36,7 +36,7 @@ exports.renderIndex = function(req, res) {
         lang = "es";
         region = "ES";
     }
-    console.log ("LANG-DEF: " + lang + "-" + region)
+    console.log ("LANG-DEF: " + lang + "-" + region);
 
     res.render ('index', {
         country: lang,
