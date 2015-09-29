@@ -10,14 +10,16 @@ app.factory ('Sidenav', function($rootScope) {
 
     return {
         init: function() {                                                           // Inicializar Sidenav <- Document.Ready
+
             $('.button-collapse').sideNav({                                         // SideNav Materialize
                 menuWidth: 300,
                 closeOnClick: false
             });
+
             $('.dropdown-button').dropdown({ belowOrigin: true });                  // SideNav Dropdown Materialize
             Ps.initialize (document.getElementById('slide-out'));                   // Perfect Scrollbar
             // Eventos para cambiar el icono al cerrar el menu sin pulsar en el boton
-            $('.drag-target').on('click', function() {
+               $('.drag-target').on('click', function() {
                 if (window.innerWidth <= 992) {
                     setTimeout (function() {
                         $(".button-collapse i").text("menu");
@@ -46,6 +48,7 @@ app.factory ('Sidenav', function($rootScope) {
                     }
                 }, 350);
             });
+
         },
         close_sidenav: function($event) {                                       // Cerrar el menu si estamos en ventana Desktop
             setTimeout (function() {

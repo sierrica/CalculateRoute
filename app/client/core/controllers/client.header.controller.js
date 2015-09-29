@@ -14,6 +14,24 @@ app.controller ('HeaderController', function($rootScope, $scope, $http, $transla
 
     $scope.collapsing = false;
     $scope.button_collapse = function () {
+         var anchura_menu_inicial = parseFloat ($("#slide-out").css("left"));
+         setTimeout (function() {
+             var anchura_menu_actual = parseFloat ($("#slide-out").css("left"));
+             if (anchura_menu_inicial < anchura_menu_actual) {
+                 $(".button-collapse i").text ("arrow_back");
+                 $("#search").parent().css ("z-index", "-1");
+                 $("#search").parent().css ("opacity", "0");
+             }
+             else {
+                 $(".button-collapse i").text ("menu");
+                 $("#search").parent().css ("z-index", "0");
+                 $("#search").parent().css ("opacity", "1");
+                 while($("#sidenav-overlay")[0] )
+                     $("#sidenav-overlay").remove();
+
+             }
+        }, 350);
+/*
         if (! $scope.collapsing) {
             $scope.collapsing = true;
             var anchura_menu_inicial = parseFloat ($("#slide-out").css("left"));
@@ -36,7 +54,9 @@ app.controller ('HeaderController', function($rootScope, $scope, $http, $transla
                 that.$apply();
             }, 350);
         }
+        */
     };
+
 
 
 
