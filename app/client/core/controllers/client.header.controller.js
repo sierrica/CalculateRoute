@@ -30,7 +30,7 @@ app.controller ('HeaderController', function($rootScope, $scope, $http, $transla
                      $("#sidenav-overlay").remove();
 
              }
-        }, 350);
+        }, 150);
 /*
         if (! $scope.collapsing) {
             $scope.collapsing = true;
