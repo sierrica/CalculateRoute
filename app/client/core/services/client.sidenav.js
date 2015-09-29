@@ -52,7 +52,7 @@ app.factory ('Sidenav', function($rootScope) {
                         $('.drag-target').css ("width", "calc(100% - 300px)");
                         $("#search").parent().css ("z-index", "-1").css ("opacity", "0");
                     }
-                }, 150);
+                }, 350);
             });
 
         },
