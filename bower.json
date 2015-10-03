@@ -16,7 +16,6 @@
     "select2": "4.0.0",
     "underscore": "1.8.3",
     "tooltipster": "3.3.0",
-    "perfect-scrollbar": "0.6.5",
     "paper-switch": "*",
     "leaflet": "0.7.3",
     "Leaflet.awesome-markers": "2.0.2",
@@ -27,6 +26,7 @@
     "satellizer": "0.12.5",
     "materialize": "0.97.0",
     "rangeslider.js": "2.0.2",
-    "angular-ui-grid": "3.0.6"
+    "angular-ui-grid": "3.0.6",
+    "perfect-scrollbar": "0.6.7"
   }
 }

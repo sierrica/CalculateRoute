@@ -50,7 +50,7 @@
     "lodash": "3.10.1",
     "mongoose": "4.1.9",
     "morgan": "1.6.1",
-    "multer": "1.0.5",
+    "multer": "1.0.6",
     "pm2": "0.15.7",
     "redis": "2.1.0",
     "serve-favicon": "2.3.0",

@@ -1,7 +1,5 @@
 {
-
   "or": "or",
-
   "home": "home",
   "unknown": "unknown",
   "email is already taken": "email is already taken",
@@ -10,11 +8,9 @@
   "properly entered": "properly entered",
   "user": "user",
 
-
   "email": "email",
   "password": "password",
   "language": "language",
-
   "Spanish - (ES)": "Spanish - (ES)",
   "English - (GB)": "English - (GB)",
 
@@ -32,19 +28,19 @@
 
   "correct format": "correct format",
   "incorrect format": "incorrect format",
-  "6 characters minimum": "6 characters min",
+  "6 characters minimum": "6 characters minimum",
 
-  "passwords dont match!": "passwords don't match!",
+  "passwords dont match!": "passwords dont match!",
   "match": "match",
-
 
   "remember username": "remember username",
   "I accept the terms of use": "I accept the terms of use",
-
   "forgot your password?": "forgot your password?",
+
 
   "changes successfully": "changes successfully",
   "changes unsuccessfully": "changes unsuccessfully",
+
 
 
   "profile": "profile",
@@ -52,10 +48,9 @@
 
   "new password": "new password",
 
-
   "map": "map",
   "vehicle": "vehicle",
-  "trayect": "trayect",
+  "course": "course",
   "details": "details",
 
 
@@ -63,12 +58,10 @@
 
   "erase": "erase",
 
+
   "origin": "origin",
   "destine": "destine",
   "intermediate": "intermediate",
-
-
-
 
 
 
@@ -86,12 +79,12 @@
   "maintenance work": "maintenance work",
   "bridge demolition": "bridge demolition",
   "risk of road damage": "risk of road damage",
+  "petrol station and rest area": "petrol station and rest area",
   "petrol station closed": "petrol station closed",
   "traffic obstruction by undermining the roadway": "traffic obstruction by undermining the roadway",
   "changed traffic light control": "changed traffic light control",
   "lane closure": "lane closure",
   "lost cargo": "lost cargo",
-  "petrol station and rest area": "petrol station and rest area",
   "accident involving several vehicles": "accident involving several vehicles",
   "road renovation": "road renovation",
   "narrowed roadway on a lane": "narrowed roadway on a lane",
@@ -130,14 +123,11 @@
   "danger of animals on the road": "danger of animals on the road",
   "danger from defective vehicle": "danger from defective vehicle",
   "blocked middle lane": "blocked middle lane",
-  "accident": "accident"
-
+  "accident": "accident",
 
   "shortest": "shortest",
   "short": "short",
   "fast": "fast",
   "fastest": "fastest"
-
-
 
 }

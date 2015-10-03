@@ -195,7 +195,8 @@ exports.calculateroute = function(req, res) {
 
 
     peticion.options = [
-        { parameter: 'START_TIME', value: moment.utc().format() }/*,
+        { parameter: 'START_TIME', value: moment.utc().format() }
+        /*{ parameter: 'GEODATASOURCE_LAYER', value: 'default.traffic' },
         { parameter: 'ROUTE_LANGUAGE', value: req.user.lang.split('-')[0].toUpperCase() },
         { parameter: 'AVOID_TOLLROADS', value: req.body.options.trayect.motorway },
         { parameter: 'AVOID_HIGHWAYS', value: req.body.options.trayect.highway },
