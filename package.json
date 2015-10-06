@@ -65,7 +65,7 @@
     "winston-graylog2": "0.2.3",
     "request": "2.64.0",
     "btoa": "1.1.2",
-    "nodemailer": "1.6.0",
+    "nodemailer": "1.7.0",
     "nodemailer-sendgrid-transport": "0.2.0",
     "randomstring": "1.1.0",
     "moment": "2.10.6"
