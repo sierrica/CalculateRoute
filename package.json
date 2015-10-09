@@ -57,7 +57,7 @@
     "swig": "1.4.2",
     "uglify-js": "2.4.24",
     "uglifycss": "0.0.18",
-    "winston": "1.0.2",
+    "winston": "1.1.0",
     "winston-papertrail": "1.0.1",
     "winston-rollbar": "0.2.0",
     "winston-logentries-transport": "0.0.1",
