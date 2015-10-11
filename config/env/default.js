@@ -58,6 +58,7 @@ module.exports = {
 
                     'files/lib/angular-ui-grid/ui-grid.css'
 
+
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
