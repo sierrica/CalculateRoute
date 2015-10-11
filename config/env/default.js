@@ -56,7 +56,9 @@ module.exports = {
                     'files/lib/tooltipster/css/themes/tooltipster-shadow.css',
                     'files/lib/paper-switch/paper-switch.css',
 
-                    'files/lib/angular-ui-grid/ui-grid.css'
+                    'files/lib/angular-ui-grid/ui-grid.css',
+                    'files/lib/Ionicons/css/ionicons.css'
+
                 ],
                 js: [
                     'files/lib/jquery/dist/jquery.js',
