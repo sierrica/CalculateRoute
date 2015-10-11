@@ -74,7 +74,9 @@
     "moment": "2.10.6"
 
 
-
+    "karma": "0.13.10",
+    "jasmine-core": "2.3.4",
+    "karma-jasmine": "0.3.6"
 
 
 
@@ -92,9 +94,7 @@
     "phantomjs": "1.9.18",
 
     "frisby": "0.8.5",
-    "karma": "0.13.10",
-    "jasmine-core": "2.3.4",
-    "karma-jasmine": "0.3.6",
+
     "mocha": "2.3.3",
     "qunit": "0.7.7"
   }
