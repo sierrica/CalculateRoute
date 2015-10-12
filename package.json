@@ -70,6 +70,7 @@
     "request": "2.65.0",
     "btoa": "1.1.2",
 
+
     "mailgun-js": "0.7.2",
     "nodemailer": "1.8.0",
     "nodemailer-sendgrid-transport": "0.2.0",
