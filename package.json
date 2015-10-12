@@ -63,6 +63,7 @@
 
     "winston": "1.1.0",
     "winston-mongodb": "1.1.2",
+    "karma-winston-reporter": "0.0.3",
     "winston-mailgun": "0.2.1",
     "winston-papertrail": "1.0.1",
     "winston-rollbar": "0.2.0",
