@@ -60,13 +60,17 @@
     "swig": "1.4.2",
     "uglify-js": "2.5.0",
     "uglifycss": "0.0.18",
+
     "winston": "1.1.0",
+    "winston-mongodb": "1.1.2",
+    "winston-mailgun": "0.2.1",
     "winston-papertrail": "1.0.1",
     "winston-rollbar": "0.2.0",
     "winston-logentries-transport": "0.0.1",
     "winston-log4stuff": "0.1.2",
     "winston-graylog2": "0.2.3",
-    "winston-mailgun": "0.2.1",
+
+
     "request": "2.65.0",
     "btoa": "1.1.2",
 
