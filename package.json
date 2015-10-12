@@ -66,10 +66,16 @@
     "winston-logentries-transport": "0.0.1",
     "winston-log4stuff": "0.1.2",
     "winston-graylog2": "0.2.3",
+    "winston-mailgun": "0.2.1",
     "request": "2.65.0",
     "btoa": "1.1.2",
+
+    "mailgun-js": "0.7.2",
     "nodemailer": "1.8.0",
     "nodemailer-sendgrid-transport": "0.2.0",
+    "nodemailer-mailgun-transport": "1.0.1",
+
+
     "randomstring": "1.1.0",
     "moment": "2.10.6",
 
@@ -77,6 +83,8 @@
     "karma": "0.13.10",
     "jasmine-core": "2.3.4",
     "karma-jasmine": "0.3.6"
+
+
 
 
 
