@@ -34,11 +34,11 @@
   },
   "dependencies": {
 
-    "node-pre-gyp": "0.6.12",
+    "node-pre-gyp": "0.6.13",
 
     "bcryptjs": "2.3.0",
     "body-parser": "1.14.1",
-    "bower": "1.5.3",
+    "bower": "1.6.3",
     "chalk": "1.1.1",
     "colors": "1.1.2",
     "compression": "1.6.0",
@@ -51,11 +51,11 @@
     "helmet": "0.12.0",
     "jsonwebtoken": "5.4.0",
     "lodash": "3.10.1",
-    "mongoose": "4.1.10",
+    "mongoose": "4.1.11",
     "morgan": "1.6.1",
     "multer": "1.0.6",
     "pm2": "0.15.7",
-    "redis": "2.1.0",
+    "redis": "2.2.3",
     "serve-favicon": "2.3.0",
     "swig": "1.4.2",
     "uglify-js": "2.5.0",
@@ -86,7 +86,7 @@
     "moment": "2.10.6",
 
 
-    "karma": "0.13.10",
+    "karma": "0.13.11",
     "jasmine-core": "2.3.4",
     "karma-jasmine": "0.3.6"
 
