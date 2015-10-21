@@ -135,12 +135,11 @@ app.factory ('Map', function($http, $translate) {
 
 
 
-    var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
+    var token = '2aae51c7-a403-4118-8749-f41045e36f40';
     var cluster = 'eu-n-test';
     var xMapUrl = 'https://xmap-' + cluster + '.cloud.ptvgroup.com';
 
 
-    var token = 'c2b345bf-ae76-4f41-8467-6307423b1bf4';
 
 
 
