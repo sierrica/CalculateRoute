@@ -38,7 +38,7 @@
 
     "bcryptjs": "2.3.0",
     "body-parser": "1.14.1",
-    "bower": "1.6.3",
+    "bower": "1.6.5",
     "chalk": "1.1.1",
     "colors": "1.1.2",
     "compression": "1.6.0",
@@ -46,14 +46,14 @@
     "cors": "2.7.1",
     "errorhandler": "1.4.2",
     "express": "4.13.3",
-    "fs-extra": "0.24.0",
+    "fs-extra": "0.25.0",
     "glob": "5.0.15",
-    "helmet": "0.12.0",
+    "helmet": "0.13.0",
     "jsonwebtoken": "5.4.0",
     "lodash": "3.10.1",
-    "mongoose": "4.1.12",
+    "mongoose": "4.2.2",
     "morgan": "1.6.1",
-    "multer": "1.0.6",
+    "multer": "1.1.0",
     "pm2": "0.15.7",
     "redis": "2.2.5",
     "serve-favicon": "2.3.0",
@@ -86,7 +86,7 @@
     "moment": "2.10.6",
 
 
-    "karma": "0.13.11",
+    "karma": "0.13.14",
     "jasmine-core": "2.3.4",
     "karma-jasmine": "0.3.6"
 
