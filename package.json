@@ -46,10 +46,10 @@
     "cors": "2.7.1",
     "errorhandler": "1.4.2",
     "express": "4.13.3",
-    "fs-extra": "0.25.0",
+    "fs-extra": "0.26.0",
     "glob": "5.0.15",
     "helmet": "0.13.0",
-    "jsonwebtoken": "5.4.0",
+    "jsonwebtoken": "5.4.1",
     "lodash": "3.10.1",
     "mongoose": "4.2.2",
     "morgan": "1.6.1",
@@ -76,7 +76,7 @@
     "btoa": "1.1.2",
 
 
-    "mailgun-js": "0.7.2",
+    "mailgun-js": "0.7.3",
     "nodemailer": "1.8.0",
     "nodemailer-sendgrid-transport": "0.2.0",
     "nodemailer-mailgun-transport": "1.0.1",
