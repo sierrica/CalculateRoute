@@ -51,11 +51,11 @@
     "helmet": "0.13.0",
     "jsonwebtoken": "5.4.1",
     "lodash": "3.10.1",
-    "mongoose": "4.2.2",
+    "mongoose": "4.2.3",
     "morgan": "1.6.1",
     "multer": "1.1.0",
-    "pm2": "0.15.7",
-    "redis": "2.2.5",
+    "pm2": "0.15.8",
+    "redis": "2.3.0",
     "serve-favicon": "2.3.0",
     "swig": "1.4.2",
     "uglify-js": "2.5.0",
@@ -76,7 +76,7 @@
     "btoa": "1.1.2",
 
 
-    "mailgun-js": "0.7.3",
+    "mailgun-js": "0.7.4",
     "nodemailer": "1.8.0",
     "nodemailer-sendgrid-transport": "0.2.0",
     "nodemailer-mailgun-transport": "1.0.1",
