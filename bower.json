@@ -12,7 +12,6 @@
     "angular-translate": "2.8.1",
     "angular-translate-loader-static-files": "2.8.1",
     "angular-translate-handler-log": "2.8.1",
-    "angular-dynamic-locale": "0.1.27",
     "select2": "4.0.0",
     "underscore": "1.8.3",
     "tooltipster": "3.3.0",
@@ -21,13 +20,14 @@
     "Leaflet.awesome-markers": "2.0.2",
     "Leaflet.contextmenu": "*",
     "leaflet.markercluster": "0.4.0",
-    "satellizer": "0.12.5",
     "rangeslider.js": "2.0.2",
     "perfect-scrollbar": "0.6.7",
     "angular-ui-grid": "3.0.7",
-    "leaflet-plugins": "1.3.11",
     "angular-socket-io": "0.7.0",
     "materialize": "0.97.0",
-    "flag-icon-css": "0.8.4"
+    "flag-icon-css": "0.8.4",
+    "satellizer": "0.13.0",
+    "leaflet-plugins": "1.3.12",
+    "angular-dynamic-locale": "0.1.28"
   }
 }
