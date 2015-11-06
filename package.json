@@ -61,7 +61,7 @@
     "uglify-js": "2.5.0",
     "uglifycss": "0.0.18",
 
-    "winston": "2.1.0",
+    "winston": "1.1.2",
     "winston-mongodb": "1.2.0",
     "karma-winston-reporter": "0.0.3",
     "winston-mailgun": "0.2.1",
