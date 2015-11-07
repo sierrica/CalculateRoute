@@ -23,8 +23,8 @@
       "email": "elena_lb1990@hotmail.com"
   }],
   "engines": {
-    "node": "4.1.2",
-    "npm": "2.14.4"
+    "node": "5.0.0",
+    "npm": "3.3.6"
   },
   "main": "server.js --color",
   "scripts": {
