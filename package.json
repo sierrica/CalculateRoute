@@ -97,7 +97,7 @@
 
   },
   "devDependencies": {
-    "cordova": "5.3.3",
+    "cordova": "5.4.0",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
     "grunt-cordovacli": "0.8.2",
