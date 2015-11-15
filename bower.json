@@ -19,15 +19,15 @@
     "Leaflet.awesome-markers": "2.0.2",
     "Leaflet.contextmenu": "*",
     "leaflet.markercluster": "0.4.0",
-    "rangeslider.js": "2.0.2",
     "perfect-scrollbar": "0.6.7",
     "angular-ui-grid": "3.0.7",
     "angular-socket-io": "0.7.0",
-    "flag-icon-css": "0.8.4",
     "satellizer": "0.13.0",
     "leaflet-plugins": "1.3.12",
     "angular-dynamic-locale": "0.1.28",
     "select2": "4.0.0",
-    "materialize": "0.97.2"
+    "materialize": "0.97.2",
+    "rangeslider.js": "2.0.3",
+    "flag-icon-css": "0.8.5"
   }
 }
