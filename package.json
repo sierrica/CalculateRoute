@@ -51,7 +51,7 @@
     "helmet": "0.14.0",
     "jsonwebtoken": "5.4.1",
     "lodash": "3.10.1",
-    "mongoose": "4.2.6",
+    "mongoose": "4.2.7",
     "morgan": "1.6.1",
     "multer": "1.1.0",
     "pm2": "0.15.10",
@@ -72,7 +72,7 @@
     "winston-graylog2": "0.2.3",
 
 
-    "request": "2.65.0",
+    "request": "2.67.0",
     "btoa": "1.1.2",
 
 
