@@ -32,6 +32,10 @@ if [ -d "${OPENSHIFT_REPO_DIR}.bower" ]; then
 fi
 
 if [ -d "${OPENSHIFT_HOMEDIR}app-deployments/by-id" ]; then
-   (echo "BORRANDO APP-DEPLOYMENT............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_HOMEDIR}"; rm -r app-deployments/*; echo "APP-DEPLOYMENT BORRADO" >> "$OPENSHIFT_LOG_DIR/npm.log"; npm ls --depth=0 >> "$OPENSHIFT_LOG_DIR/npm.log")
+   (echo "BORRANDO APP-DEPLOYMENT............" >> "$OPENSHIFT_LOG_DIR/npm.log"; cd "${OPENSHIFT_HOMEDIR}"; rm -r app-deployments/*; echo "APP-DEPLOYMENT BORRADO" >> "$OPENSHIFT_LOG_DIR/npm.log")
 fi
 
+echo "LISTA NODE_MODULES:"
+cd "$OPENSHIFT_REPO_DIR"
+npm ls --dept=0 >> "$OPENSHIFT_LOG_DIR/npm.log"
+cd "$OPENSHIFT_HOMEDIR"
