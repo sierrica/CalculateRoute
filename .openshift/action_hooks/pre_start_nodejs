@@ -36,4 +36,5 @@ if [ -d "${OPENSHIFT_HOMEDIR}app-deployments/by-id" ]; then
 fi
 
 echo "LISTA NODE_MODULES:";
+cd "${OPENSHIFT_REPO_DIR}";
 npm ls --depth=0 >> "$OPENSHIFT_LOG_DIR/npm.log";
