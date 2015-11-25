@@ -51,7 +51,7 @@
     "helmet": "0.14.0",
     "jsonwebtoken": "5.4.1",
     "lodash": "3.10.1",
-    "mongoose": "4.2.7",
+    "mongoose": "4.2.8",
     "morgan": "1.6.1",
     "multer": "1.1.0",
     "pm2": "0.15.10",
@@ -97,7 +97,7 @@
 
   },
   "devDependencies": {
-    "cordova": "5.4.0",
+    "cordova": "5.4.1",
     "grunt": "0.4.5",
     "grunt-cli": "0.1.13",
     "grunt-cordovacli": "0.8.2",
