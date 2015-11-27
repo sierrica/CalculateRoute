@@ -29,7 +29,7 @@
   "main": "server.js --color",
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install",
-    "prestart": "node ./config/prestart.js; npm ls --dept=0",
+    "prestart": "node ./config/prestart.js",
     "start": "./node_modules/.bin/pm2 start cluster.json --no-daemon -f"
   },
   "dependencies": {
