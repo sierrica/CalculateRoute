@@ -28,6 +28,6 @@
     "angular-dynamic-locale": "0.1.29",
     "select2": "4.0.1",
     "rangeslider.js": "2.0.5",
-    "leaflet-plugins": "1.3.13"
+    "leaflet-plugins": "1.4.0"
   }
 }

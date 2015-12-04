@@ -23,8 +23,8 @@
       "email": "elena_lb1990@hotmail.com"
   }],
   "engines": {
-    "node": "4.2.2",
-    "npm": "2.14.7"
+    "node": "5.1.1",
+    "npm": "3.13.12"
   },
   "main": "server.js --color",
   "scripts": {
@@ -87,7 +87,7 @@
 
 
     "karma": "0.13.15",
-    "jasmine-core": "2.3.4",
+    "jasmine-core": "2.4.1",
     "karma-jasmine": "0.3.6"
 
 
