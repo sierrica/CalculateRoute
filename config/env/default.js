@@ -18,7 +18,8 @@ module.exports = {
              (process.env.PLATFORM == "openshift") ? "mongodb://calculateroute:tauste@" + process.env.OPENSHIFT_MONGODB_IP + ":27017/calculateroute" :
              (process.env.PLATFORM == "raspbian") ? "raspbian" :
              (process.env.PLATFORM == "windows") ? "mongodb://calculateroute:tauste@127.0.0.1:27017/calculateroute" :
-             "mongodb://calculateroute:tauste@127.0.0.1:27017/calculateroute"
+             //"mongodb://calculateroute:tauste@127.0.0.1:27017/calculateroute"
+             "mongodb://sierrica:taustemix8888@ds033400.mongolab.com:33400/calculateroute"
     },
     redis: {
         ip: process.env.OPENSHIFT_REDIS_HOST || "pub-redis-18884.us-east-1-2.4.ec2.garantiadata.com",

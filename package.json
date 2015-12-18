@@ -34,11 +34,11 @@
   },
   "dependencies": {
 
-    "node-pre-gyp": "0.6.17",
+    "node-pre-gyp": "0.6.18",
 
     "bcryptjs": "2.3.0",
-    "body-parser": "1.14.1",
-    "bower": "1.6.8",
+    "body-parser": "1.14.2",
+    "bower": "1.7.1",
     "chalk": "1.1.1",
     "colors": "1.1.2",
     "compression": "1.6.0",
@@ -46,12 +46,12 @@
     "cors": "2.7.1",
     "errorhandler": "1.4.2",
     "express": "4.13.3",
-    "fs-extra": "0.26.2",
+    "fs-extra": "0.26.3",
     "glob": "6.0.1",
     "helmet": "0.15.0",
     "jsonwebtoken": "5.4.1",
     "lodash": "3.10.1",
-    "mongoose": "4.2.9",
+    "mongoose": "4.3.3",
     "morgan": "1.6.1",
     "multer": "1.1.0",
     "pm2": "0.15.10",
@@ -63,13 +63,9 @@
 
     "winston": "1.1.2",
     "winston-mongodb": "1.2.0",
-    "karma-winston-reporter": "0.0.3",
     "winston-mailgun": "0.2.1",
     "winston-papertrail": "1.0.2",
-    "winston-rollbar": "0.2.0",
-    "winston-logentries-transport": "0.0.1",
-    "winston-log4stuff": "0.1.2",
-    "winston-graylog2": "0.2.3",
+    "winston-graylog2": "0.3.1",
 
 
     "request": "2.67.0",
