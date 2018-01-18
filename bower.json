@@ -18,16 +18,17 @@
     "leaflet": "0.7.3",
     "Leaflet.awesome-markers": "2.0.2",
     "Leaflet.contextmenu": "*",
-    "leaflet.markercluster": "0.4.0",
     "angular-ui-grid": "3.0.7",
     "angular-socket-io": "0.7.0",
-    "flag-icon-css": "0.8.5",
-    "materialize": "0.97.3",
     "angular-dynamic-locale": "0.1.29",
     "select2": "4.0.1",
     "rangeslider.js": "2.0.5",
     "leaflet-plugins": "1.4.2",
     "perfect-scrollbar": "0.6.8",
-    "satellizer": "0.13.2"
+    "flag-icon-css": "1.0.0",
+    "leaflet.markercluster": "0.4.0",
+    "satellizer": "0.13.3",
+    "Materialize": "materialize#0.97.5",
+    "iconate": "*"
   }
 }

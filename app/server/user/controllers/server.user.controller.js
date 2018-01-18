@@ -61,14 +61,13 @@ function forgot (req, res) {
                if (err)
                    return res.status(400).send (err);
                 // tengo que crear un addon en heroku para que me deje instalar el module nodemailer, pero como solo puedo tener en sendgrid un dominio, utilizo el mismo en todos lados
-                // { auth: { api_key: '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' } };
-                // 'sierrica@ptv_email_heroku.sierrica.com'
-                var options =   process.env.PLATFORM == 'openshift'  ? { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } } :
-                                process.env.PLATFORM == 'heroku'     ? { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } } :     // utilizo el mismo
-                                                                       { auth: { api_user: 'sierrica', api_key: 'taustemix8888' } };       //heroku addon
-                var from =  process.env.PLATFORM == 'openshift'  ?  'sierrica@ptv_email.sierrica.com' :
-                            process.env.PLATFORM == 'heroku'     ?  'sierrica@ptv_email.sierrica.com' :         // utilizo el mismo
-                                                                    'sierrica@ptv_email.sierrica.com';
+
+                var options =   process.env.PLATFORM == 'openshift'  ? { auth: { api_user: 'XXXXX', api_key: 'XXXXXXX' } } :
+                                process.env.PLATFORM == 'heroku'     ? { auth: { api_user: 'XXXXX', api_key: 'XXXXXXX' } } :     // utilizo el mismo
+                                                                       { auth: { api_user: 'XXXXXX', api_key: 'XXXXXXXX' } };       //heroku addon
+                var from =  process.env.PLATFORM == 'openshift'  ?  'XXXXXXXX' :
+                            process.env.PLATFORM == 'heroku'     ?  'XXXXXXX' :         // utilizo el mismo
+                                                                    'XXXXXXXXX';
                 var subject =   existingUser.lang == 'es-ES'  ?  'Contraseña perdida Calculateroute' :
                                 existingUser.lang == 'en-GB'  ?  'Forgot password Calculateroute' :
                                                                  'Forgot password Calculateroute';

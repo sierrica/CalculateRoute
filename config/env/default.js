@@ -6,7 +6,7 @@ module.exports = {
     },
     environment: process.env.NODE_ENV || 'development',
     token: {
-        secret: process.env.TOKEN_SECRET || 'tauste',
+        secret: process.env.TOKEN_SECRET || 'XXXXXX',
         ttl: process.env.TOKEN_EXPIRATION || 60*60*24                   //24 hours
     },
     server: {
@@ -14,16 +14,15 @@ module.exports = {
         port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT  || 80
     },
     mongodb: {
-        url: (process.env.PLATFORM == "heroku") ? "mongodb://sierrica:taustemix8888@ds033400.mongolab.com:33400/calculateroute" :
-             (process.env.PLATFORM == "openshift") ? "mongodb://calculateroute:tauste@" + process.env.OPENSHIFT_MONGODB_IP + ":27017/calculateroute" :
+        url: (process.env.PLATFORM == "heroku") ? "mongodb://XXXXXXXX" :
+             (process.env.PLATFORM == "openshift") ? "mongodb://XXXXXXXX" :
              (process.env.PLATFORM == "raspbian") ? "raspbian" :
-             (process.env.PLATFORM == "windows") ? "mongodb://calculateroute:tauste@127.0.0.1:27017/calculateroute" :
-             //"mongodb://calculateroute:tauste@127.0.0.1:27017/calculateroute"
-             "mongodb://sierrica:taustemix8888@ds033400.mongolab.com:33400/calculateroute"
+             (process.env.PLATFORM == "windows") ? "mongodb://XXXXXXXXX" :
+             "XXXXXXX"
     },
     redis: {
-        ip: process.env.OPENSHIFT_REDIS_HOST || "pub-redis-18884.us-east-1-2.4.ec2.garantiadata.com",
-        port: process.env.OPENSHIFT_REDIS_PORT || "18884"
+        ip: process.env.OPENSHIFT_REDIS_HOST || "XXXXXXXXXXXXXXXX",
+        port: process.env.OPENSHIFT_REDIS_PORT || "XXXXX"
     },
     assets: {
         client: {
