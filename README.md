@@ -4,6 +4,7 @@ App for precalculate routes using PTV Web Services with special attributes for t
 # Technologies Used
 - MEAN (Mongo, Express, AngularJS, Node)
 - Redis & JsonWebToken
+- Git & GitHub
 - Npm, Bower
 - Grunt & Gulp
 - karma + jasmine
